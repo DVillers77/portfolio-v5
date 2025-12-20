@@ -12,12 +12,12 @@ codebase (DRY principle).
 The design of this portfolio is guided by four core principles to communicate
 the desired brand identity of a highly effective UX Engineer.
 
-| Principle            | Supporting Design Element                                                                                                                                        |
-| :------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **PROFESSIONAL**     | Utilizes high **WCAG AA** contrast ratios and a clean, legible typography scale (Inter).                                                                         |
-| **SUCCESS**          | Primary accent color (`--color-primary-green`) is reserved for Call-to-Action (CTA) elements, signaling positive engagement.                                     |
-| **CREATIVE**         | Secondary accent color (`--color-accent-violet`) is used for unique decorative elements (e.g., hover glows, shadows) to demonstrate imaginative problem-solving. |
-| **FORWARD-THINKING** | Built on a modern **Design System architecture** using **CSS variables** for global scalability and future Dark Mode implementation.                             |
+| Principle            | Supporting Design Element                                                                                                                                     |
+| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **PROFESSIONAL**     | Utilizes high **WCAG AA** contrast ratios and a clean, legible typography scale (Inter).                                                                      |
+| **SUCCESS**          | Primary accent color (`--sys-color-primary`) is reserved for Call-to-Action (CTA) elements, signaling positive engagement.                                    |
+| **CREATIVE**         | Secondary accent color (`--sys-color-accent`) is used for unique decorative elements (e.g., hover glows, shadows) to demonstrate imaginative problem-solving. |
+| **FORWARD-THINKING** | Built on a modern **Design System architecture** using **CSS variables** for global scalability and future Dark Mode implementation.                          |
 
 ---
 
@@ -54,18 +54,18 @@ are defined as CSS Variables.
 
 | Color Role               | CSS Variable                  | Hex Value | Usage / Where Used                                                                                 |
 | :----------------------- | :---------------------------- | :-------- | :------------------------------------------------------------------------------------------------- |
-| **Primary Accent**       | `--color-primary-green`       | `#3cb371` | **Success Color:** Main CTA buttons, link hover states, blockquote borders, active slideshow dots. |
-| **Secondary Accent**     | `--color-accent-violet`       | `#ff00ff` | **Brand Accent:** Navbar inset shadows, hover glows, modal close icon hover.                       |
-| **Primary Background**   | `--color-background-lightest` | `#f0fff4` | Main page background (odd rows), active navbar link background, form background.                   |
-| **Secondary Background** | `--color-neutral-white`       | `#ffffff` | Content panels (even rows), modal background.                                                      |
+| **Primary Accent**       | `--sys-color-primary`         | `#3cb371` | **Success Color:** Main CTA buttons, link hover states, blockquote borders, active slideshow dots. |
+| **Secondary Accent**     | `--sys-color-accent`          | `#ff00ff` | **Brand Accent:** Navbar inset shadows, hover glows, modal close icon hover.                       |
+| **Primary Background**   | `--sys-color-surface-variant` | `#f0fff4` | Main page background (odd rows), active navbar link background, form background.                   |
+| **Secondary Background** | `--sys-color-surface`         | `#ffffff` | Content panels (even rows), modal background.                                                      |
 
 ### Font Color Usage
 
-| Text Role        | CSS Variable            | Hex Value | Contrast Ratio (on `#f0fff4`) | Usage / Where Used                                  |
-| :--------------- | :---------------------- | :-------- | :---------------------------- | :-------------------------------------------------- |
-| **Headlines**    | `--color-text-black`    | `#0a0a0a` | **17.8:1 (AAA Pass)**         | H1-H6 headings, prominent titles.                   |
-| **Body Text**    | `--color-text-dark`     | `#333333` | **12.6:1 (AAA Pass)**         | Paragraphs, labels, general UI text.                |
-| **Inverse Text** | `--color-neutral-white` | `#ffffff` | 4.5:1 (AA Pass on `#3cb371`)  | Text on primary buttons and within the dark navbar. |
+| Text Role        | CSS Variable                      | Hex Value | Contrast Ratio (on `#f0fff4`) | Usage / Where Used                                  |
+| :--------------- | :-------------------------------- | :-------- | :---------------------------- | :-------------------------------------------------- |
+| **Headlines**    | `--sys-color-on-surface-emphasis` | `#0a0a0a` | **17.8:1 (AAA Pass)**         | H1-H6 headings, prominent titles.                   |
+| **Body Text**    | `--sys-color-on-surface`          | `#333333` | **12.6:1 (AAA Pass)**         | Paragraphs, labels, general UI text.                |
+| **Inverse Text** | `--sys-color-surface`             | `#ffffff` | 4.5:1 (AA Pass on `#3cb371`)  | Text on primary buttons and within the dark navbar. |
 
 ---
 

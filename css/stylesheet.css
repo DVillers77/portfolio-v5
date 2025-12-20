@@ -2,48 +2,47 @@
 /* === 1. GLOBAL COLOR PALETTE & EFFECTS (CSS Variables) === */
 /* ================================================= */
 :root {
-  /* PRIMARY COLORS */
-  --color-primary-green: #3cb371; /* Medium Sea Green (Main accent/Success color) */
-  --color-link-accent: #007bff; /* Standard Link Blue (Used for slideshow link hover) */
-  --color-accent-violet: #ff00ff; /* Fuchsia/Violet (The main brand accent color) */
-  --color-button-success: #4caf50; /* Contact modal submit button background */
+  /* --- 1. BRAND CHANNELS (Raw Ingredients) --- */
+  --sys-color-primary-rgb: 1, 98, 75; /* Dark Pine Green */
+  --sys-color-accent-rgb: 255, 0, 255; /* Magenta */
+  --sys-color-surface-rgb: 255, 255, 255; /* White */
+  --sys-color-on-surface-rgb: 51, 51, 51; /* Charcoal #333333 */
 
-  /* BACKGROUNDS & NEUTRALS */
-  --color-background-lightest: #f0fff4; /* Lightest Background/Active State (E.g., odd rows, active nav link) */
-  --color-neutral-white: #ffffff; /* Pure White (E.g., even rows, modal background) */
-  --color-text-dark: #333333; /* Dark Gray (Main body text, Navbar background) */
-  --color-text-black: #0a0a0a; /* Near Black */
-  --color-border-light: #ccc; /* Light Gray for form borders */
-  --color-border-medium: #888; /* Medium Gray for modal border */
+  /* --- 2. SEMANTIC ROLES (The Theme Engine) --- */
+  --sys-color-primary: rgb(var(--sys-color-primary-rgb));
+  --sys-color-accent: rgb(var(--sys-color-accent-rgb));
 
-  /* OVERLAYS & TRANSPARENT COLORS */
+  --sys-color-surface: rgb(var(--sys-color-surface-rgb));
+  --sys-color-surface-variant: #f0f7f5; /* Light Pine background tint */
 
-  /* New Medium Overlay (0.5 opacity) - For default states */
-  --color-overlay-medium: rgba(0, 0, 0, 0.5);
+  /* Tonal Containers (For Secondary Buttons/Nav Hover) */
+  --sys-color-primary-container: rgba(var(--sys-color-primary-rgb), 0.12);
+  --sys-color-on-primary-container: var(--sys-color-primary);
 
-  /* New Dark Overlay (0.8 opacity) - For hover, focus, or high-contrast backdrops */
-  --color-overlay-dark: rgba(0, 0, 0, 0.8);
+  /* Typography Hierarchy */
+  --sys-color-on-surface: rgb(var(--sys-color-on-surface-rgb));
+  --sys-color-on-surface-emphasis: #0a0a0a;
+  --sys-color-on-primary: var(--sys-color-surface);
 
-  /* Low-opacity variant of primary green used for seamless nav bracket hover blending */
-  --color-primary-green-low-opacity: rgba(60, 179, 113, 0.1);
+  /* Interaction & UI */
+  --sys-color-outline: #555555;
+  --sys-color-focus-halo: rgba(var(--sys-color-primary-rgb), 0.4);
+  --sys-color-error: #b00020;
 
-  /* SHADOWS & EFFECTS */
-  --shadow-subtle: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); /* General purpose soft shadow for depth */
-  --shadow-form-focus-inset: 0 0 0.3125rem var(--color-primary-green) inset; /* Green inset glow for form focus */
-  --shadow-form: 0 0 0.25rem var(--color-primary-green); /* Green glow for forms */
-  --shadow-navbar-top-inset: 0 -0.75rem 0.75rem -0.85rem
-    var(--color-accent-violet) inset; /* Violet inset shadow at the top of the navbar */
-  --shadow-navbar-bottom-inset: 0 0.75rem 0.75rem -0.85rem var(
-      --color-accent-violet
-    ) inset; /* Violet inset shadow at the bottom of the navbar */
+  /* --- 3. DEPTH & EFFECTS (Shadows & Glows) --- */
+  --sys-shadow-navbar-accent: inset 0 -4px 6px -4px var(--sys-color-accent);
+
+  --glow-primary: 0 0 0.3125rem var(--sys-color-primary);
+  --glow-accent-strong: 0 0 10px 0 var(--sys-color-accent);
+  --glow-accent-subtle: 0 0 10px 0 rgba(var(--sys-color-accent-rgb), 0.4);
+
+  --sys-glow-accent-inset: inset 0 0 10px 0
+    rgba(var(--sys-color-accent-rgb), 0.4);
+  --sys-glow-primary-inset: inset 0 0 0.3125rem var(--sys-color-primary);
+
+  --shadow-subtle: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
   --shadow-modal: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-    0 6px 20px 0 rgba(0, 0, 0, 0.19); /* Standard modal window shadow */
-
-  /* VIOLET GLOW VARIABLES (Semantic replacements for hardcoded rgba box-shadows) */
-  --shadow-violet-glow-strong: 0 0 10px 0 rgba(255, 0, 255, 0.6); /* Stronger violet glow for interactive elements (hover state) */
-  --shadow-violet-glow-strong-inset: inset 0 0 10px 0 rgba(255, 0, 255, 0.6); /* Stronger violet inset glow for buttons/nav hover */
-  --shadow-violet-glow-subtle: 0 0 10px 0 rgba(255, 0, 255, 0.4); /* Subtle violet glow for images/forms (general style) */
-  --shadow-violet-glow-subtle-inset: inset 0 0 5px 0 rgba(255, 0, 255, 0.2); /* NEW: Very subtle violet inset glow for blockquotes/less prominent elements */
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
   /* --- NEW: Global Fonts (Added based on Style Guide) --- */
   --font-display: "Poppins", sans-serif;
   --font-body: "Inter", sans-serif;
@@ -67,7 +66,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--font-size-base);
   color: var(
-    --color-text-dark
+    --sys-color-on-surface
   ); /* Ensure accessibility by defaulting to the dark color */
   margin: 0;
   padding: 0;
@@ -87,7 +86,7 @@ h5,
 h6 {
   font-family: var(--font-display);
   /* Ensure the darkest color is used for highest contrast */
-  color: var(--color-text-black);
+  color: var(--sys-color-on-surface-emphasis);
 }
 
 /* Mobile base font sizes */
@@ -147,11 +146,11 @@ h3 {
 .navbar {
   width: 100%;
   background-color: var(
-    --color-text-dark
+    --sys-color-on-surface
   ); /* Dark background for navigation bar */
   overflow: auto;
   box-shadow: var(
-    --shadow-navbar-top-inset
+    --sys-shadow-navbar-accent
   ); /* Violet inset shadow for top edge style */
   z-index: 1000; /* Ensures the navbar sits above page content */
 
@@ -162,7 +161,7 @@ h3 {
 
 .navbar__link {
   padding: 1rem;
-  color: var(--color-neutral-white);
+  color: var(--sys-color-surface);
   text-decoration: none;
   font-size: 1.125rem;
   /* CRITICAL: Establishes a stacking context and layer (z-index 1001) for the link
@@ -172,14 +171,14 @@ h3 {
 }
 
 .navbar__link:hover {
-  background-color: var(--color-primary-green);
-  color: var(--color-text-black);
+  background-color: var(--sys-color-primary);
+  color: var(--sys-color-on-primary);
   /* Violet inset glow for interactive feedback on hover */
-  box-shadow: var(--shadow-violet-glow-strong-inset);
+  box-shadow: var(--glow-accent-strong-inset);
 }
 
 .navbar__link.active:hover {
-  background-color: var(--color-background-lightest);
+  background-color: var(--sys-color-surface);
   cursor: default;
   /* Active link hover is a passive state, so shadows are removed */
   box-shadow: none;
@@ -200,17 +199,17 @@ h3 {
 
 /* Applies the violet glow to the back-to-top button hover state (only in the bottom nav) */
 .navbar.bottom .navbar__link.active:hover {
-  background-color: var(--color-primary-green);
+  background-color: var(--sys-color-primary);
   cursor: pointer;
-  box-shadow: var(--shadow-violet-glow-strong-inset);
+  box-shadow: var(--glow-accent-strong-inset);
 }
 
 /* Style for the currently active link in the TOP navbar only */
 .navbar:not(.bottom) .navbar__link.active {
   background-color: var(
-    --color-background-lightest
+    --sys-color-surface-variant
   ); /* Light background to visually separate */
-  color: var(--color-text-black);
+  color: var(--sys-color-on-surface-emphasis);
 
   /* Sets the approved 6px top radius */
   border-radius: 6px 6px 0 0;
@@ -238,8 +237,8 @@ h3 {
   bottom: -13px;
   right: 0px;
 
-  background-color: var(--color-text-dark);
-  box-shadow: 5px 5px 0 5px var(--color-background-lightest);
+  background-color: var(--sys-color-on-surface);
+  box-shadow: 5px 5px 0 5px var(--sys-color-surface-variant);
 
   z-index: 1000;
 }
@@ -247,7 +246,7 @@ h3 {
 /* The spacer's pseudo-element should only appear if the link NEXT to it is active */
 .navbar__spacer-right + .navbar__link--bracket-right.active::after {
   /* This rule is now REQUIRED to activate the spacer's pseudo-element only for the Home page */
-  box-shadow: 5px 5px 0 5px var(--color-background-lightest);
+  box-shadow: 5px 5px 0 5px var(--sys-color-surface-variant);
   /* The color is set by the active link's background, which is .navbar a.active */
 }
 
@@ -266,10 +265,10 @@ h3 {
   right: 0px;
 
   /* The element itself is the dark nav color (to cover the dark nav bar) */
-  background-color: var(--color-text-dark);
+  background-color: var(--sys-color-on-surface);
 
   /* The box-shadow is the light active background color, creating the 'cut-out' illusion */
-  box-shadow: 5px 5px 0 5px var(--color-background-lightest);
+  box-shadow: 5px 5px 0 5px var(--sys-color-surface-variant);
 
   z-index: 1000; /* Sits below the link's text/content (z-index 1001), but above the main dark nav bar */
 }
@@ -278,10 +277,10 @@ h3 {
 .navbar .navbar__link.navbar__link--bracket-left:hover::after {
   /* Background uses low opacity green to create a subtle blend over the adjacent light active link corner. 
      This resolves the light corner "leak" issue during the hover transition. */
-  background-color: var(--color-primary-green-low-opacity);
+  background-color: var(--sys-color-primary-low-opacity);
 
   /* Box-shadow remains the light color to maintain the illusion of the cut-out corner. */
-  box-shadow: 5px 5px 0 5px var(--color-background-lightest);
+  box-shadow: 5px 5px 0 5px var(--sys-color-surface-variant);
 }
 
 /* Style the Link to the RIGHT of the active tab (e.g., "GitHub" for "Projects") */
@@ -298,10 +297,10 @@ h3 {
   left: 0px;
 
   /* The element itself is the dark nav color (to cover the dark nav bar) */
-  background-color: var(--color-text-dark);
+  background-color: var(--sys-color-on-surface);
 
   /* The box-shadow is the light active background color, creating the 'cut-out' illusion */
-  box-shadow: -5px 5px 0 5px var(--color-background-lightest);
+  box-shadow: -5px 5px 0 5px var(--sys-color-surface-variant);
 
   z-index: 1000;
 }
@@ -309,10 +308,10 @@ h3 {
 /* FIX: Seamless Hover Transition for Right Bracket */
 .navbar .navbar__link.navbar__link--bracket-right:hover::after {
   /* Background uses low opacity green to create a subtle blend over the adjacent light active link corner. */
-  background-color: var(--color-primary-green-low-opacity);
+  background-color: var(--sys-color-primary-low-opacity);
 
   /* Box-shadow remains the light color to maintain the illusion of the cut-out corner. */
-  box-shadow: -5px 5px 0 5px var(--color-background-lightest);
+  box-shadow: -5px 5px 0 5px var(--sys-color-surface-variant);
 }
 /* ================================================= */
 /* === 4. HERO PITCH STYLING === */
@@ -322,7 +321,7 @@ h3 {
   display: flex;
   justify-content: center;
   padding: 3.75rem 1.25rem;
-  background-color: var(--color-background-lightest);
+  background-color: var(--sys-color-surface-variant);
 }
 
 .hero-pitch__text {
@@ -339,48 +338,68 @@ h3 {
 /* === 5. BUTTON STYLING (Used on Home/Projects) === */
 /* ================================================= */
 
-/* Block: Defines the base style for ALL buttons */
+/* --- 1. BASE BUTTON CLASS (Ensures Consistency) --- */
 .button {
-  /* Basic button look */
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  margin: 0.5rem;
-  text-decoration: none;
-  text-align: center;
-  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.6rem;
+
+  /* Standardizing the Corner Radius */
+  border-radius: 0.5rem;
+
+  font-family: inherit;
+  font-weight: 600;
   font-size: 1rem;
-  font-weight: 700;
-  transition: all 0.3s ease; /* For smooth hover effects */
+  text-decoration: none;
+  border: none;
   cursor: pointer;
-  border: 2px solid transparent; /* Placeholder for solid border on secondary */
+
+  /* Premium Motion Logic */
+  transition: background-color 200ms ease-in-out, transform 150ms ease-in-out,
+    box-shadow 200ms ease-in-out, opacity 250ms ease;
 }
 
-/* Modifier: The main Call-to-Action button */
+/* --- 2. PRIMARY ACTION (Send Message / Portfolio) --- */
 .button--primary {
-  background-color: var(--color-primary-green);
-  color: var(--color-neutral-white);
-  box-shadow: var(--shadow-subtle), var(--shadow-violet-glow-subtle);
+  background-color: var(--sys-color-primary);
+  color: var(--sys-color-on-primary);
 }
 
-.button--primary:hover {
-  background-color: var(--color-primary-green);
-  color: var(--color-text-dark);
-  /* Violet inset glow for interactive feedback on hover */
-  box-shadow: var(--shadow-violet-glow-strong-inset);
+/* PRIMARY: The Brand Glow */
+.button--primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background-color: var(--sys-color-primary);
+  /* Replacing the grey shadow with a magenta 'brand glow' */
+  /* Using the RGB variable for the glow allows for a soft, professional spread */
+  box-shadow: 0 4px 15px rgba(var(--sys-color-accent-rgb), 0.4);
 }
 
-/* Modifier: The secondary/outline button */
-.button--secondary {
-  background-color: transparent;
-  color: var(--color-text-dark);
-  border-color: var(--color-text-dark); /* Use dark text color for the border */
-  box-shadow: var(--shadow-subtle), var(--shadow-violet-glow-subtle);
+/* --- 3. TONAL ACTION (Secondary / Case Studies) --- */
+.button--tonal {
+  background-color: var(--sys-color-primary-container);
+  color: var(--sys-color-on-primary-container);
 }
 
-.button--secondary:hover {
-  background-color: var(--color-text-dark);
-  color: var(--color-neutral-white);
-  box-shadow: var(--shadow-violet-glow-strong-inset);
+.button--tonal:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background-color: rgba(var(--sys-color-primary-rgb), 0.2);
+}
+
+/* --- 4. THE "PRO" DISABLED STATE --- */
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none; /* Prevents hover/click logic */
+  filter: grayscale(0.4); /* Mutes the brand color slightly */
+  transform: none; /* Ensures it doesn't "lift" on hover */
+}
+
+/* --- 5. ACCESSIBILITY: THE FOCUS HALO --- */
+.button:focus-visible {
+  outline: 2px solid var(--sys-color-primary);
+  outline-offset: 2px;
+  box-shadow: var(--sys-color-focus-halo);
 }
 
 /* Style the button grouping container */
@@ -421,11 +440,11 @@ h3 {
 
 /* Alternating row backgrounds for visual separation */
 .project-row:nth-of-type(odd) {
-  background-color: var(--color-background-lightest);
+  background-color: var(--sys-color-surface-variant);
 }
 
 .project-row:nth-of-type(even) {
-  background-color: var(--color-neutral-white);
+  background-color: var(--sys-color-surface);
 }
 
 /* Styling for the image column */
@@ -442,7 +461,7 @@ h3 {
   height: auto;
   border-radius: 0.5rem;
   /* Applies subtle shadow and the brand-specific violet accent glow */
-  box-shadow: var(--shadow-subtle), var(--shadow-violet-glow-subtle);
+  box-shadow: var(--shadow-subtle), var(--glow-accent-subtle);
 }
 
 /* Styling for the text column */
@@ -479,21 +498,21 @@ h2 {
   font-weight: 500;
   font-style: italic;
   font-size: 1.25em;
-  color: var(--color-text-dark);
-  border-left: solid 0.1rem var(--color-primary-green);
-  background-color: var(--color-neutral-white);
+  color: var(--sys-color-on-surface);
+  border-left: solid 0.1rem var(--sys-color-accent);
+  background-color: var(--sys-color-primary-container);
   padding: 1.5rem;
   border-radius: 0.5rem;
   margin: 1.5rem 0;
   max-width: 400px;
   /* Applies subtle shadow and the newly added subtle violet inset glow for style */
-  box-shadow: var(--shadow-subtle), var(--shadow-violet-glow-subtle-inset);
+  box-shadow: var(--shadow-subtle), var(--glow-accent-subtle-inset);
 }
 
 .project-row__text figcaption {
   font-size: 1em;
   text-align: right;
-  color: var(--color-primary-green);
+  color: var(--sys-color-primary);
   margin-top: 0.5em;
   margin-right: 1rem;
 }
@@ -531,7 +550,7 @@ h2 {
   object-fit: contain;
   display: block;
   border-radius: 8px;
-  box-shadow: var(--shadow-subtle), var(--shadow-violet-glow-subtle);
+  box-shadow: var(--shadow-subtle), var(--glow-accent-subtle);
 }
 
 /* Styling for the previous/next slideshow controls */
@@ -544,7 +563,7 @@ h2 {
   transform: translateY(-50%);
   width: auto;
   padding: 1rem;
-  color: var(--color-neutral-white);
+  color: var(--sys-color-surface);
   font-weight: bold;
   font-size: 1.5rem;
   transition: 0.3s ease;
@@ -569,7 +588,7 @@ h2 {
 .slideshow__control--next:hover {
   background-color: var(--color-overlay-dark);
   /* Adds a strong violet glow on hover for interactive feedback */
-  box-shadow: var(--shadow-violet-glow-strong);
+  box-shadow: var(--glow-accent-strong);
 }
 
 #slideshow-container {
@@ -581,7 +600,7 @@ h2 {
 .slideshow-title-box {
   text-align: center;
   padding: 1rem 0 2rem 0;
-  color: var(--color-text-dark);
+  color: var(--sys-color-on-surface);
 }
 
 #slide-title-link {
@@ -600,9 +619,9 @@ h2 {
 
 /* Changes the color and adds an underline on hover */
 #slide-title-link:hover #slide-title {
-  color: var(--color-primary-green);
+  color: var(--sys-color-primary);
   text-decoration: underline;
-  text-decoration-color: var(--color-primary-green);
+  text-decoration-color: var(--sys-color-primary);
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
 }
@@ -619,7 +638,7 @@ h2 {
   height: 15px;
   width: 15px;
   margin: 0 5px;
-  background-color: var(--color-border-light); /* Light gray background */
+  background-color: var(--sys-color-outline); /* Light gray background */
   border-radius: 50%; /* Makes it a circle */
 
   /* Layout and Interaction */
@@ -630,12 +649,12 @@ h2 {
 
 /* Active State: The dot corresponding to the current slide */
 .slideshow__dot.active {
-  background-color: var(--color-primary-green); /* Use your primary color */
+  background-color: var(--sys-color-primary); /* Use your primary color */
 }
 
 /* Hover State: Provides feedback when mousing over an inactive dot */
 .slideshow__dot:hover:not(.active) {
-  background-color: var(--color-border-medium);
+  background-color: var(--sys-color-outline);
 }
 
 /* ================================================= */
@@ -653,83 +672,88 @@ h2 {
 
 form {
   border-radius: 0.3125rem;
-  background-color: var(--color-background-lightest);
+  background-color: var(--sys-color-surface-variant);
   padding: 0.625rem;
   /* Applies general subtle shadow and violet accent glow to the form container */
-  box-shadow: var(--shadow-subtle), var(--shadow-violet-glow-subtle);
+  box-shadow: var(--shadow-subtle), var(--glow-accent-subtle);
   max-width: 90vw;
   margin: 0 auto;
 }
 
+/* --- FORM INPUTS --- */
 input[type="text"],
 input[type="email"],
 textarea {
   width: 100%;
   padding: 0.75rem;
-  /* Uses green border for primary contrast */
-  border: 1px solid var(--color-primary-green);
-  border-radius: 0.25rem;
+  border: 1px solid var(--sys-color-outline); /* Use outline for default */
+  border-radius: 0.5rem; /* Standardized radius */
   box-sizing: border-box;
   margin-top: 0.375rem;
   margin-bottom: 1rem;
-  font-family: var(--font-body);
+  font-family: inherit;
   font-size: 1rem;
+  background-color: var(--sys-color-surface);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Applies a strong violet glow on hover/focus for clear user interaction feedback */
-input[type="text"]:hover,
-input[type="email"]:hover,
-textarea:hover,
+/* Focused State: Swaps outline for Brand Glow */
 input[type="text"]:focus,
 input[type="email"]:focus,
 textarea:focus {
-  box-shadow: var(--shadow-violet-glow-strong);
-  outline: none; /* Removes default browser focus outline */
+  border-color: var(--sys-color-primary);
+  box-shadow: var(--glow-primary);
+  outline: none;
 }
 
-input[type="submit"] {
-  background-color: var(--color-primary-green);
-  color: var(--color-text-dark);
-  font-weight: bold;
-  padding: 0.75rem 1.25rem;
-  border: none;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 1rem;
+/* --- THE MODAL SUBMIT BUTTON --- */
+/* We use the specific class ONLY for layout/width, letting .button handle the looks */
+.contact-modal__button--submit {
+  width: 100%;
+  margin-top: 1rem;
+  /* All other styles (color, radius, hover) come from .button and .button--primary */
 }
 
-/* Applies a strong violet inset glow to the submit button on hover */
-input[type="submit"]:hover {
-  box-shadow: var(--shadow-violet-glow-strong-inset);
+/* Ensure the disabled state works specifically for this button */
+.contact-modal__button--submit:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+  filter: grayscale(0.4);
 }
 
 .contact-modal {
-  display: block;
+  /* This creates the dark overlay */
+  display: flex; /* Changed from 'block' to 'flex' */
+  align-items: center; /* Vertical centering */
+  justify-content: center; /* Horizontal centering */
+
   position: fixed;
-  z-index: 2000; /* High z-index to overlay all content */
+  z-index: 2000;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: var(--color-overlay-dark);
-  padding-top: 50px;
+
+  /* Use your system-variable overlay or a semi-transparent black */
+  background-color: rgba(0, 0, 0, 0.7);
+
+  /* Ensure scrolling happens inside the modal if it's too tall */
+  overflow-y: auto;
 }
 
+/* --- MODAL CONTAINER REFINEMENT --- */
 .contact-modal__content {
   position: relative;
-  background-color: var(--color-neutral-white);
+  background-color: var(--sys-color-surface);
   margin: 5% auto;
-  padding: 20px;
-  /* Uses a medium gray border variable for consistency */
-  border: 1px solid var(--color-border-medium);
-  width: 80%;
+  padding: 2rem;
+  border-radius: 0.8rem; /* Slightly softer corners for the modal */
+  border: 1px solid var(--sys-color-outline);
+  width: 90%;
+  max-width: 500px; /* Prevents modal from getting too wide on desktop */
   box-shadow: var(--shadow-modal);
-  animation-name: modal-open-anim;
-  animation-duration: 0.4s;
+  animation: modal-open-anim 0.4s ease-out;
 }
 
 /* Keyframes for the modal open animation (slide down and fade in) */
@@ -744,31 +768,20 @@ input[type="submit"]:hover {
   }
 }
 
-.contact-modal__form .contact-modal__button--submit {
-  background-color: var(--color-button-success);
-  color: var(--color-neutral-white);
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-}
-
 /* Applies a strong violet inset glow to modal buttons on hover */
 .contact-modal__form .contact-modal__button--submit:hover {
-  box-shadow: var(--shadow-violet-glow-strong-inset);
+  box-shadow: var(--glow-accent-strong-inset);
 }
 
 /* Close Contact modal Icon Styles */
 .contact-modal__close-icon {
   position: absolute;
-  top: 20px; /* Adjust vertical position */
-  right: 23px; /* Adjust horizontal position */
+  top: 5px; /* Adjust vertical position */
+  right: 5px; /* Adjust horizontal position */
   background: none;
   border: none;
   font-size: 22px; /* Larger size for better tap target */
-  color: var(--color-text-dark);
+  color: var(--sys-color-on-surface);
   cursor: pointer;
   padding: 5px;
   line-height: 1;
@@ -779,7 +792,7 @@ input[type="submit"]:hover {
 
 .contact-modal__close-icon:hover {
   /* Clear hover feedback: change to accent violet */
-  color: var(--color-accent-violet);
+  color: var(--sys-color-accent);
   /* Removed: transform: scale(1.1); */
 }
 
@@ -807,8 +820,8 @@ input[type="submit"]:hover {
     z-index: -1;
     background-image: radial-gradient(
       circle,
-      var(--color-primary-green) 0%,
-      var(--color-background-lightest) 70%
+      var(--sys-color-primary) 0%,
+      var(--sys-color-surface-variant) 70%
     );
   }
 }
@@ -870,7 +883,7 @@ input[type="submit"]:hover {
   .navbar .navbar__toggle {
     display: block;
     padding: 1rem;
-    color: var(--color-accent-violet);
+    color: var(--sys-color-accent);
     float: right;
     order: 2;
     z-index: 1100;
@@ -883,7 +896,7 @@ input[type="submit"]:hover {
   /* Styles the active page name which floats left, opposite the icon */
   .navbar:not(.responsive) .active-page-name {
     display: block;
-    color: var(--color-neutral-white);
+    color: var(--sys-color-surface);
     font-weight: bold;
     padding: 1rem;
     float: left;
@@ -921,7 +934,7 @@ input[type="submit"]:hover {
     /* No heavy background change, no scrollbars */
     background-color: transparent;
     /* Change icon color to white for high contrast on the dark background */
-    color: var(--color-neutral-white);
+    color: var(--sys-color-surface);
     /* Removed: transform: scale(1.1); */
     box-shadow: none;
     text-decoration: none;
@@ -931,7 +944,7 @@ input[type="submit"]:hover {
   .navbar.responsive .navbar__toggle::before {
     content: "\f00d"; /* Font Awesome unicode for fa-times (X) */
     font-family: "FontAwesome";
-    color: var(--color-accent-violet);
+    color: var(--sys-color-accent);
     font-size: 1.125rem;
     text-decoration: none;
     cursor: pointer;
@@ -941,18 +954,18 @@ input[type="submit"]:hover {
 
   /* NEW: Apply the hover color directly to the visible 'X' pseudo-element */
   .navbar.responsive .navbar__toggle:hover::before {
-    color: var(--color-neutral-white);
+    color: var(--sys-color-surface);
   }
 
   /* Generic active link styling for mobile, no corner radius required */
   .navbar__link.active {
-    background-color: var(--color-text-dark);
-    color: var(--color-background-lightest);
+    background-color: var(--sys-color-on-surface);
+    color: var(--sys-color-surface-variant);
   }
 
   .navbar.responsive .navbar__link.active {
-    background-color: var(--color-text-dark);
-    color: var(--color-background-lightest);
+    background-color: var(--sys-color-on-surface);
+    color: var(--sys-color-surface-variant);
   }
 
   /* Hides the current page title when the full menu is open to simplify the top bar */
@@ -993,7 +1006,8 @@ input[type="submit"]:hover {
      It overrides the border-left set in the base style to create the zig-zag border effect. */
   .project-row.reverse .project-row__text blockquote {
     border-left: none;
-    border-right: solid 0.1rem var(--color-primary-green);
+    border-right: solid 0.1rem var(--sys-color-accent);
+    background-color: var(--sys-color-surface);
   }
 
   /* Desktop font sizes for H1 and H2 */

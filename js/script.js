@@ -174,44 +174,54 @@ document.addEventListener("DOMContentLoaded", (event) => {
     function openModal(e) {
       e.preventDefault();
 
-      // 1. Clone the content and inject it into the body
+      // 1. Clone and inject the modal
       const modalWrapper =
         modalTemplate.content.cloneNode(true).firstElementChild;
       document.body.appendChild(modalWrapper);
 
-      // 2. CRITICAL FIX: Override the CSS 'display: none;' rule using the preferred 'block' style.
-      modalWrapper.style.display = "block";
-
-      // 3. CRITICAL FIX: Lock the body scroll (Best Practice for Modals)
+      modalWrapper.style.display = "flex";
       document.body.style.overflow = "hidden";
 
-      // Setup Focus Trapping and close handlers
-      const focusableElements = getFocusableElements(modalWrapper);
-      const firstFocusable = focusableElements[0];
-      const lastFocusable = focusableElements[focusableElements.length - 1];
+      // 2. DECLARE ALL VARIABLES ONCE
+      const contactForm = modalWrapper.querySelector(".contact-modal__form");
+      const submitBtn = modalWrapper.querySelector(
+        ".contact-modal__button--submit"
+      );
       const closeModalButton = modalWrapper.querySelector(
         ".contact-modal__close-icon"
       );
-      const contactForm = modalWrapper.querySelector(".contact-modal__form");
+
+      // 3. VALIDATION LOGIC
+      function toggleButtonState() {
+        // Check if the form meets all 'required' and 'type' constraints
+        const isValid = contactForm.checkValidity();
+        submitBtn.disabled = !isValid;
+      }
+
+      // Set initial state (disabled) and listen for input
+      toggleButtonState();
+      contactForm.addEventListener("input", toggleButtonState);
+
+      // 4. ACCESSIBILITY & FOCUS TRAPPING
+      const focusableElements = getFocusableElements(modalWrapper);
+      const firstFocusable = focusableElements[0];
+      const lastFocusable = focusableElements[focusableElements.length - 1];
 
       if (closeModalButton) {
-        // Focus the close button on open for accessibility
         closeModalButton.focus();
         closeModalButton.addEventListener("click", closeModal);
       }
 
-      // Focus trapping logic
       modalWrapper.addEventListener("keydown", function (e) {
         if (e.key === "Tab") {
-          // Tab key is pressed
           if (e.shiftKey) {
-            // Shift + Tab: trap focus at the start
+            // Shift + Tab
             if (document.activeElement === firstFocusable) {
               lastFocusable.focus();
               e.preventDefault();
             }
           } else {
-            // Tab only: trap focus at the end
+            // Tab only
             if (document.activeElement === lastFocusable) {
               firstFocusable.focus();
               e.preventDefault();
@@ -220,9 +230,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
       });
 
+      // 5. SUBMIT & CLICK-AWAY HANDLERS
       contactForm.addEventListener("submit", handleFormSubmission);
 
-      // Close modal when clicking the dark backdrop
       modalWrapper.addEventListener("click", function (e) {
         if (e.target === modalWrapper) {
           closeModal();
