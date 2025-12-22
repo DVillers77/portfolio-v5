@@ -83,132 +83,189 @@
     </header>
     <!-- MAIN PORTFOLIO CONTENT -->
     <main class="project-container">
-      <section class="hero-pitch">
-        <div class="hero-pitch__text">
-          <h1>UX Designer & Front-End Developer</h1>
-
+      <section class="hero">
+        <div class="hero__content">
+          <h1>Dave's Portfolio</h1>
           <p>
-            Hello, I am Dave welcome to my portfolio page. I am a designer
-            rooted in **human-centered service**, leveraging two decades of
-            professional empathy to solve digital problems. I combine this
-            insight with proficiency in **Vanilla JavaScript**, **A11y**, and
-            modern CSS architecture to deliver accessible and high-quality web
-            applications.
-          </p>
-          <p>
-            My portfolio includes my story, some projects, a link to my entire
-            github collection and a form to contact me.
+            I’m a UX Designer & Front-End Developer dedicated to making the
+            digital world more inclusive, accessible, and beautiful.
           </p>
         </div>
       </section>
       <!-- ROW 1 (Image Left, Text Right) -->
-      <section class="project-row first-project-row">
-        <div class="project-row__image">
-          <img
-            src="images/under-construction-magic-md.png"
-            alt="Illustration of a fantasy castle with an 'UNDER CONSTRUCTION' sign, symbolizing both an upcoming homepage and a portfolio in progress."
-          />
-        </div>
-        <div class="project-row__text">
-          <h2>
-            Crafting Intuitive Experiences Backed by Deep Empathy and Technical
-            Mastery.
-          </h2>
-          <p>
-            This section highlights my design ethos with some of my favorite UX
-            Design quotes and custom imagery I created with the assistance of
-            AI. Enjoy the creative and inspirational art and quotes.
-          </p>
-          <h3>Jump to section:</h3>
-          <div class="button-group">
-            <a href="projects.html" class="button button--primary"
-              >View Projects</a
-            >
-            <a href="about.html" class="button button--tonal">My Story</a>
+      <section class="feature-block feature-block--first" id="intro">
+        <div class="project-container">
+          <div class="feature-block__grid">
+            <div class="feature-block__media">
+              <img
+                src="images/under-construction-magic-md.png"
+                alt="Illustration of a fantasy castle with an 'UNDER CONSTRUCTION' sign, symbolizing both an upcoming homepage and a portfolio in progress."
+                class="feature-block__image"
+              />
+            </div>
+
+            <div class="feature-block__content">
+              <h2 class="feature-block__title--column">
+                Crafting Intuitive Experiences Backed by Deep Empathy and
+                Technical Mastery.
+              </h2>
+
+              <p class="feature-block__intro-text">
+                This section highlights my design ethos with some of my favorite
+                UX Design quotes and custom imagery I created with the
+                assistance of AI. Enjoy the creative and inspirational quotes
+                enhanced by art tylored to each quote.
+              </p>
+
+              <h3 class="feature-block__jump-link">Jump to section:</h3>
+
+              <div class="button-group">
+                <a href="projects.html" class="button button--primary"
+                  >View Projects</a
+                >
+                <a href="about.html" class="button button--tonal">My Story</a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- ROW 2 (Image Right, Text Left) -->
-      <section class="project-row reverse">
-        <div class="project-row__image">
-          <img
-            src="images/flying-steam-engine-md.png"
-            alt='A fantastical
-      steampunk flying train with prominent wings and smoking chimneys soars
-      through sunlit clouds above a detailed, elaborate cityscape at golden
-      hour, embodying "Curiosity is the engine of achievement."'
-          />
-        </div>
-        <div class="project-row__text">
-          <h2>The importance of Curiosity</h2>
-          <figure>
-            <blockquote>
-              <p>“Curiosity is the engine of achievement.”</p>
-            </blockquote>
-            <figcaption>—&nbsp; Ken Robinson</figcaption>
-          </figure>
+      <section class="feature-block feature-block--alt" id="ken-robinson">
+        <div class="project-container">
+          <div class="feature-block__grid feature-block__grid--reverse">
+            <div class="feature-block__media">
+              <a href="images/flying-steam-engine-md.png">
+                <img
+                  src="images/flying-steam-engine-md.png"
+                  alt='A fantastical steampunk flying train with prominent wings and smoking chimneys soars through sunlit clouds above a detailed, elaborate cityscape at golden hour, embodying "Curiosity is the engine of achievement."'
+                  class="feature-block__image"
+                />
+              </a>
+            </div>
+
+            <div class="feature-block__content">
+              <h2 class="feature-block__title--column">
+                The Importance of Curiosity
+              </h2>
+              <div class="feature-block__quote-container">
+                <blockquote
+                  class="feature-block__quote-box feature-block__quote-box--on-alt"
+                >
+                  “Curiosity is the engine of achievement.”
+                </blockquote>
+
+                <figcaption class="feature-block__author">
+                  — Sir Ken Robinson
+                </figcaption>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       <!-- Row 3 (Image Left, Text Right) -->
-      <section class="project-row">
-        <div class="project-row__image">
-          <img
-            src="images/sketchplanations-the-curb-cut-effect-md.png"
-            alt="Curb-Cut Effect illustration: A sidewalk ramp benefits a diverse group including a person in a wheelchair, parents with strollers, travelers with luggage, delivery persons, and cyclists. Text reads: 'WHEN WE DESIGN FOR DISABILITIES ... WE MAKE THINGS BETTER FOR EVERYONE. Sketchplanations.'"
-          />
-        </div>
-        <div class="project-row__text">
-          <h2>The Power of Inclusive Design</h2>
-          <figure>
-            <blockquote>
-              <p>"Opportunity doesn't trickle down; it cascades out and up"</p>
-            </blockquote>
-            <figcaption>—&nbsp; Angela Glover Blackwell</figcaption>
-          </figure>
+      <section class="feature-block" id="inclusive-design">
+        <div class="project-container">
+          <div class="feature-block__grid">
+            <div class="feature-block__media">
+              <a href="images/sketchplanations-the-curb-cut-effect-md.png">
+                <img
+                  src="images/sketchplanations-the-curb-cut-effect-md.png"
+                  alt="Curb-Cut Effect"
+                  class="feature-block__image"
+                />
+              </a>
+            </div>
+
+            <div class="feature-block__content">
+              <h2 class="feature-block__title--column">
+                The Power of Inclusive Design
+              </h2>
+
+              <div class="feature-block__quote-container">
+                <blockquote class="feature-block__quote-box">
+                  “When we design for disabilities, we make things better for
+                  everyone.”
+                </blockquote>
+
+                <figcaption class="feature-block__author">
+                  — Angela Glover Blackwell
+                </figcaption>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       <!-- Row 4(Image Right, Text Left) -->
-      <section class="project-row reverse">
-        <div class="project-row__image">
-          <img
-            src="images/designing-for-people-md.png"
-            alt="Conceptual image depicting a human mind integrated with mechanical gears, illustrating the importance of understanding human cognition when designing technology."
-          />
-        </div>
-        <div class="project-row__text">
-          <h2>Designing for people, not technology</h2>
-          <figure>
-            <blockquote>
-              <p>
-                "Usability is about people and how they understand and use
-                things, not technology"
-              </p>
-            </blockquote>
-            <figcaption>—&nbsp; Steve Krug</figcaption>
-          </figure>
+      <section
+        class="feature-block feature-block--alt"
+        id="designing-for-people"
+      >
+        <div class="project-container">
+          <div class="feature-block__grid feature-block__grid--reverse">
+            <div class="feature-block__media">
+              <a href="images/designing-for-people-md.png">
+                <img
+                  src="images/designing-for-people-md.png"
+                  alt="Conceptual image depicting a human mind integrated with mechanical gears, illustrating the importance of understanding human cognition when designing technology."
+                  class="feature-block__image"
+                />
+              </a>
+            </div>
+
+            <div class="feature-block__content">
+              <h2 class="feature-block__title--column">
+                Designing for people, not technology
+              </h2>
+
+              <div class="feature-block__quote-container">
+                <blockquote
+                  class="feature-block__quote-box feature-block__quote-box--on-alt"
+                >
+                  “Usability is about people and how they understand and use
+                  things, not technology.”
+                </blockquote>
+
+                <figcaption class="feature-block__author">
+                  — Steve Krug
+                </figcaption>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       <!-- Row 3 (Image Left, Text Right) -->
-      <section class="project-row">
-        <div class="project-row__image">
-          <img
-            src="images/dain-miller-sadle-reigns-quote-md.png"
-            alt="A conceptual digital illustration depicting a silhouetted figure confidently riding a glowing wireframe horse, its form made of digital elements and geometric, luminous UI-like saddle, stirrups, and reins. The overall scene is enveloped in a radiant, swirling aura of abstract colors, symbolizing the positive user experience (UX) derived from intuitive user interface (UI). This imagery visually represents Dain Miller's quote: 'UI is the saddle, the stirrups, & the reins. UX is the feeling you get from being able to ride the horse'."
-          />
-        </div>
-        <div class="project-row__text">
-          <h2>From Interface to Intuition: The UX Journey</h2>
-          <figure>
-            <blockquote>
-              <p>
-                "UI is the saddle, the stirrups, & the reigns. UX is the feeling
-                you get from being able to ride the horse"
-              </p>
-            </blockquote>
-            <figcaption>—&nbsp; Dain Miller</figcaption>
-          </figure>
+      <section class="feature-block" id="interface-to-intuition">
+        <div class="project-container">
+          <div class="feature-block__grid">
+            <div class="feature-block__media">
+              <a href="images/dain-miller-sadle-reigns-quote-md.png">
+                <img
+                  src="images/dain-miller-sadle-reigns-quote-md.png"
+                  alt="A conceptual digital illustration depicting a silhouetted figure confidently riding a glowing wireframe horse..."
+                  class="feature-block__image"
+                />
+              </a>
+            </div>
+
+            <div class="feature-block__content">
+              <h2 class="feature-block__title--column">
+                From Interface to Intuition: The UX Journey
+              </h2>
+
+              <div class="feature-block__quote-container">
+                <blockquote class="feature-block__quote-box">
+                  “UI is the saddle, the stirrups, & the reins. UX is the
+                  feeling you get from being able to ride the horse.”
+                </blockquote>
+
+                <figcaption class="feature-block__author">
+                  — Dain Miller
+                </figcaption>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>

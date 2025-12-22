@@ -72,326 +72,246 @@
     </header>
 
     <main class="project-container">
-      <section id="slideshow-container" class="project-row">
-        <div
-          class="slideshow"
-          role="region"
-          aria-roledescription="Project Carousel"
-          aria-label="Project Slideshow"
-        >
-          <div id="slide-announcer" aria-live="polite" class="sr-only"></div>
+      <section id="slideshow-container" class="hero hero--slideshow">
+        <div class="hero__content">
+          <h1>Project Gallery</h1>
+          <p>
+            A collection of UX-driven solutions ranging from interactive games
+            to functional web applications.
+          </p>
 
           <div
-            class="slideshow__slide"
-            data-title="Modern Tic-Tac-Toe Game"
-            role="group"
-            aria-label="Slide 1 of 4: Modern Tic-Tac-Toe Game"
+            class="slideshow"
+            role="region"
+            aria-roledescription="Project Carousel"
+            aria-label="Project Slideshow"
           >
-            <img
-              src="images/modern-tic-tac-toe-500h.jpg"
-              class="slideshow__image"
-              data-target="#tic-tac-toe-details"
-              alt="Screenshot of modern Tic-Tac-Toe game"
-            />
+            <div id="slide-announcer" aria-live="polite" class="sr-only"></div>
+
+            <div
+              class="slideshow__slide"
+              data-title="Modern Tic-Tac-Toe Game"
+              role="group"
+              aria-label="Slide 1 of 4: Modern Tic-Tac-Toe Game"
+            >
+              <img
+                src="images/modern-tic-tac-toe-500h.jpg"
+                class="slideshow__image"
+                data-target="#tic-tac-toe-details"
+                alt="Screenshot of modern Tic-Tac-Toe game"
+              />
+            </div>
+
+            <div
+              class="slideshow__slide"
+              data-title="Interactive To-Do App"
+              role="group"
+              aria-label="Slide 2 of 4: Interactive To-Do App"
+            >
+              <img
+                src="images/to-do-app-500h.jpg"
+                class="slideshow__image"
+                data-target="#to-do-app-details"
+                alt="Screenshot of Task Master to-do app version 1."
+              />
+            </div>
+
+            <div
+              class="slideshow__slide"
+              data-title="Portfolio: A Meta-Project"
+              role="group"
+              aria-label="Slide 3 of 4: Portfolio: A Meta-Project"
+            >
+              <img
+                src="images/portfolio-screenshot-01.jpg"
+                class="slideshow__image"
+                data-target="#portfolio-details"
+                alt="Screenshot of the portfolio website."
+              />
+            </div>
+
+            <div
+              class="slideshow__slide"
+              data-title="API Fun Center"
+              role="group"
+              aria-label="Slide 4 of 4: API Fun Center"
+            >
+              <img
+                src="images/api-fun-center.jpg"
+                class="slideshow__image"
+                data-target="#api-fun-center-details"
+                alt="Screenshot of API Fun Center data integration project."
+              />
+            </div>
           </div>
 
-          <div
-            class="slideshow__slide"
-            data-title="Interactive To-Do App"
-            role="group"
-            aria-label="Slide 2 of 4: Interactive To-Do App"
-          >
-            <img
-              src="images/to-do-app-500h.jpg"
-              class="slideshow__image"
-              data-target="#to-do-app-details"
-              alt="Screenshot of Task Master to-do app version 1."
-            />
+          <div>
+            <a
+              class="slideshow__control--prev"
+              id="prev-slide"
+              role="button"
+              aria-controls="slideshow-container"
+              >&#10094;</a
+            >
+            <a
+              class="slideshow__control--next"
+              id="next-slide"
+              role="button"
+              aria-controls="slideshow-container"
+              >&#10095;</a
+            >
           </div>
 
-          <div
-            class="slideshow__slide"
-            data-title="Portfolio: A Meta-Project"
-            role="group"
-            aria-label="Slide 3 of 4: Portfolio: A Meta-Project"
-          >
-            <img
-              src="images/portfolio-screenshot-01.jpg"
-              class="slideshow__image"
-              data-target="#portfolio-details"
-              alt="Screenshot of the portfolio website."
-            />
+          <div class="slideshow-title-box">
+            <a id="slide-title-link" href="#">
+              <h3 id="slide-title">
+                Project Title Placeholder
+                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+              </h3>
+            </a>
           </div>
 
-          <div
-            class="slideshow__slide"
-            data-title="API Fun Center"
-            role="group"
-            aria-label="Slide 4 of 4: API Fun Center"
-          >
-            <img
-              src="images/api-fun-center.jpg"
-              class="slideshow__image"
-              data-target="#api-fun-center-details"
-              alt="Screenshot of API Fun Center data integration project."
-            />
+          <div class="slideshow__dots">
+            <span class="slideshow__dot" data-slide-index="1"></span>
+            <span class="slideshow__dot" data-slide-index="2"></span>
+            <span class="slideshow__dot" data-slide-index="3"></span>
+            <span class="slideshow__dot" data-slide-index="4"></span>
           </div>
-        </div>
-        <div>
-          <a
-            class="slideshow__control--prev"
-            id="prev-slide"
-            role="button"
-            aria-controls="slideshow-container"
-            >&#10094;</a
-          >
-          <a
-            class="slideshow__control--next"
-            id="next-slide"
-            role="button"
-            aria-controls="slideshow-container"
-            >&#10095;</a
-          >
-        </div>
-        <div class="slideshow-title-box">
-          <a id="slide-title-link" href="#">
-            <h3 id="slide-title">Project Title Placeholder</h3>
-          </a>
-        </div>
-        <div class="slideshow__dots">
-          <span class="slideshow__dot" data-slide-index="1"></span>
-          <span class="slideshow__dot" data-slide-index="2"></span>
-          <span class="slideshow__dot" data-slide-index="3"></span>
-          <span class="slideshow__dot" data-slide-index="4"></span>
         </div>
       </section>
       <!-- MAIN PORTFOLIO ZIGZAG CONTENT -->
       <!-- ROW 1 (Image Left, Text Right) -->
-      <section class="project-row first-project-row">
-        <div class="project-row__image">
-          <img
-            src="images/dain-miller-sadle-reigns-quote-md.png"
-            alt="A conceptual digital illustration depicting a silhouetted figure confidently riding a glowing wireframe horse, its form made of digital elements and geometric, luminous UI-like saddle, stirrups, and reins. The overall scene is enveloped in a radiant, swirling aura of abstract colors, symbolizing the positive user experience (UX) derived from intuitive user interface (UI). This imagery visually represents Dain Miller's quote: 'UI is the saddle, the stirrups, & the reins. UX is the feeling you get from being able to ride the horse'."
-          />
-        </div>
-        <div class="project-row__text">
-          <h1>Projects: UX-Driven Design Backed by Technical Proficiency</h1>
-          <p>
-            Welcome to my project showcase! These applications demonstrate my
-            commitment to **user-centric design** and rigorous **Accessibility
-            (A11y)** standards. I build intuitive, inclusive experiences that
-            solve real-world problems.
-          </p>
-          <p>
-            You'll find concrete examples of this philosophy in the **persistent
-            Dark Mode** and **Undo functionality** (TaskMaster) and a focus on
-            **keyboard control** and clean, themeable design (CSS Custom
-            Properties).
-          </p>
-          <p>
-            My added value lies in executing these designs with robust
-            engineering: projects showcase advanced JavaScript concepts like the
-            **Minimax AI algorithm** for complex logic, efficient state
-            management, and the use of **WAI-ARIA** for a stable, accessible
-            application core.
-          </p>
-          <p>
-            Explore the live demos below to interact with the applications, and
-            view the well-structured code on GitHub to see my full development
-            methodology.
-          </p>
+      <section class="feature-block feature-block--first" id="project-intro">
+        <div class="project-container">
+          <div class="feature-block__grid">
+            <div class="feature-block__media">
+              <img
+                src="images/dain-miller-sadle-reigns-quote-md.png"
+                alt="Diverse group"
+                class="feature-block__image"
+              />
+            </div>
+            <div class="feature-block__content">
+              <h2 class="feature-block__title--column">Project Showcase</h2>
+              <p class="feature-block__intro-text">
+                Welcome to my project showcase. Here you'll find a selection of
+                my work across UX design and front-end development...
+              </p>
+            </div>
+          </div>
         </div>
       </section>
       <!-- ROW 2 (Image Right, Text Left) -->
       <section
         id="tic-tac-toe-details"
-        class="project-row reverse"
+        class="feature-block feature-block--alt"
         tabindex="-1"
       >
-        <div class="project-row__image">
-          <img
-            src="images/modern-tic-tac-toe-500h.jpg"
-            alt="Screenshot of modern Tic-Tac-Toe game"
-          />
-        </div>
-        <div class="project-row__text">
-          <h2>Modernized Tic-Tac-Toe: AI Logic</h2>
-          <p>
-            This project showcases my ability to implement complex algorithms
-            and manage game state in a responsive, high-contrast environment. It
-            successfully transforms a simple game into a demonstration of
-            computational logic.
-          </p>
-
-          <blockquote>
-            **Technical Highlight:** The "Hard" difficulty level is driven by
-            the **Minimax AI algorithm**, a core recursive concept in game
-            theory, resulting in an unbeatable computer opponent. Game state is
-            efficiently managed via a simple array.
-            <figcaption>Implementation of the Minimax Algorithm</figcaption>
-          </blockquote>
-
-          <p>
-            The game also features persistent score tracking using
-            **localStorage** across browser sessions and includes smooth visual
-            feedback, like the animated win line, implemented using the
-            performance-friendly `requestAnimationFrame`.
-          </p>
-          <div class="button-group">
-            <a
-              href="[INSERT TIC-TAC-TOE LIVE DEMO URL HERE]"
-              target="_blank"
-              class="button button--primary"
-              >LIVE DEMO</a
-            >
-            <a
-              href="[INSERT TIC-TAC-TOE GITHUB URL HERE]"
-              target="_blank"
-              class="button button--tonal"
-              >VIEW CODE</a
-            >
+        <div class="project-container">
+          <div class="feature-block__grid feature-block__grid--reverse">
+            <div class="feature-block__media">
+              <img
+                src="images/modern-tic-tac-toe-500h.jpg"
+                alt="Tic-Tac-Toe"
+                class="feature-block__image"
+              />
+            </div>
+            <div class="feature-block__content">
+              <h2 class="feature-block__title--column">Modern Tic-Tac-Toe</h2>
+              <p class="feature-block__intro-text">
+                An interactive browser game focused on logic and clean UI.
+              </p>
+              <div class="button-group">
+                <a href="#" class="button button--primary">View Live Demo</a>
+                <a href="#" class="button button--tonal">View Code</a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
       <!-- ROW 3 (Text Right, Image Left) -->
-      <section id="to-do-app-details" class="project-row" tabindex="-1">
-        <div class="project-row__image">
-          <img
-            src="images/to-do-app-500h.jpg"
-            alt="Screenshot of Task Master to-do app version 1."
-          />
-        </div>
-        <div class="project-row__text">
-          <h2>TaskMaster: Accessible To-Do App</h2>
-          <p>
-            This application was built to demonstrate proficiency in
-            **user-centric design** and **application state management**. My
-            primary focus was on creating a fluid, accessible experience that
-            maintains data integrity.
-          </p>
-
-          <blockquote>
-            **Key UX/A11y Features:** Includes persistent **Light/Dark Mode**
-            settings and a crucial **Undo functionality** to prevent data loss.
-            The entire app is keyboard-controllable, meeting **A11y standards**
-            by utilizing `aria-label` attributes and the Enter key for
-            submission.
-            <figcaption>UX driven, fully accessible application</figcaption>
-          </blockquote>
-
-          <p>
-            The technical foundation relies on **Vanilla JavaScript** to manage
-            core CRUD (Create, Read, Update, Delete) operations and efficiently
-            handle data persistence using **localStorage**. The UI uses **CSS
-            Custom Properties** for quick, maintainable theme switching.
-          </p>
-          <div class="button-group">
-            <a
-              href="[INSERT TASKMASTER LIVE DEMO URL HERE]"
-              target="_blank"
-              class="button button--primary"
-              >LIVE DEMO</a
-            >
-            <a
-              href="[INSERT TASKMASTER GITHUB URL HERE]"
-              target="_blank"
-              class="button button--tonal"
-              >VIEW CODE</a
-            >
+      <section id="to-do-app-details" class="feature-block" tabindex="-1">
+        <div class="project-container">
+          <div class="feature-block__grid">
+            <div class="feature-block__media">
+              <img
+                src="images/to-do-app-500h.jpg"
+                alt="To-Do App"
+                class="feature-block__image"
+              />
+            </div>
+            <div class="feature-block__content">
+              <h2 class="feature-block__title--column">
+                Interactive To-Do App
+              </h2>
+              <p class="feature-block__intro-text">
+                A productivity tool designed for task management and persistent
+                data.
+              </p>
+              <div class="button-group">
+                <a href="#" class="button button--primary">View Live Demo</a>
+                <a href="#" class="button button--tonal">View Code</a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
       <!-- ROW 4 (Image Right, Text Left) -->
-      <section id="portfolio-details" class="project-row reverse" tabindex="-1">
-        <div class="project-row__image">
-          <img
-            src="images/portfolio-screenshot-01.jpg"
-            alt="Placeholder image for Project 3"
-          />
-        </div>
-        <div class="project-row__text">
-          <h2>Portfolio: A Meta-Project in Front-End Architecture</h2>
-          <p>
-            This portfolio is a live demonstration of my ability to design and
-            build a **robust, production-ready web application** from the ground
-            up. It serves as the ultimate showcase of my front-end methodology
-            and organizational standards.
-          </p>
-
-          <blockquote>
-            **Architectural Highlights:** Structured using the **BEM
-            methodology** for clean component naming and the **Single
-            Responsibility Principle (SRP)**. The entire site uses **CSS Custom
-            Properties (Variables)** for centralized, maintainable themes and
-            styles.
-            <figcaption>
-              Modular, scalable, and fully documented codebase.
-            </figcaption>
-          </blockquote>
-
-          <p>
-            The core JavaScript logic features a custom, highly accessible
-            Contact Modal with a full **Focus Trap** implementation, ensuring
-            compliance with **WAI-ARIA standards** for screen readers and
-            keyboard users. Performance is maintained through **DRY (Don't
-            Repeat Yourself)** principles, including conditional script loading.
-          </p>
-          <div class="button-group">
-            <a
-              href="[INSERT PORTFOLIO GITHUB URL HERE]"
-              target="_blank"
-              class="button button--tonal"
-              >VIEW CODE</a
-            >
+      <section
+        id="portfolio-details"
+        class="feature-block feature-block--alt"
+        tabindex="-1"
+      >
+        <div class="project-container">
+          <div class="feature-block__grid feature-block__grid--reverse">
+            <div class="feature-block__media">
+              <img
+                src="images/portfolio-screenshot-01.jpg"
+                alt="Portfolio Case Study"
+                class="feature-block__image"
+              />
+            </div>
+            <div class="feature-block__content">
+              <h2 class="feature-block__title--column">
+                Portfolio: A Meta-Project
+              </h2>
+              <p class="feature-block__intro-text">
+                The UX architecture and front-end development of this portfolio
+                site.
+              </p>
+              <div class="button-group">
+                <a
+                  href="casestudy-portfolio.html"
+                  class="button button--primary"
+                  >Full Case Study</a
+                >
+                <a href="#" class="button button--tonal">View Code</a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
       <!-- ROW 5 (Text Right, Image Left) -->
-      <section id="api-fun-center-details" class="project-row" tabindex="-1">
-        <div class="project-row__image">
-          <img
-            src="images/api-fun-center.jpg"
-            alt="Placeholder image for Project 4"
-          />
-        </div>
-        <div class="project-row__text">
-          <h2>API Fun Center: External Data Integration</h2>
-          <p>
-            This project serves as a focused demonstration of **Asynchronous
-            JavaScript** and my ability to successfully integrate with multiple
-            third-party APIs across various domains (data, images, and
-            translation services).
-          </p>
-
-          <blockquote>
-            **Core Technical Skill:** The application uses the modern **`fetch`
-            API** to handle all external requests. It includes proper promise
-            chaining (`.then()`) for sequential data handling and robust **error
-            handling** (`.catch()`) for unstable API services.
-            <figcaption>
-              Proof of proficiency in Asynchronous JavaScript
-            </figcaption>
-          </blockquote>
-
-          <p>
-            The inclusion of the Yoda Translator demonstrates how to properly
-            **encode user input (`encodeURIComponent`)** before transmitting
-            data via a URL, which is a critical security and functionality
-            requirement for interacting with live servers.
-          </p>
-          <div class="button-group">
-            <a
-              href="[INSERT API FUN CENTER LIVE DEMO URL HERE]"
-              target="_blank"
-              class="button button--primary"
-              >LIVE DEMO</a
-            >
-            <a
-              href="[INSERT API FUN CENTER GITHUB URL HERE]"
-              target="_blank"
-              class="button button--tonal"
-              >VIEW CODE</a
-            >
+      <section id="api-fun-center-details" class="feature-block" tabindex="-1">
+        <div class="project-container">
+          <div class="feature-block__grid">
+            <div class="feature-block__media">
+              <img
+                src="images/api-fun-center.jpg"
+                alt="API Fun Center"
+                class="feature-block__image"
+              />
+            </div>
+            <div class="feature-block__content">
+              <h2 class="feature-block__title--column">API Fun Center</h2>
+              <p class="feature-block__intro-text">
+                An exploration of data fetching and asynchronous UI updates.
+              </p>
+              <div class="button-group">
+                <a href="#" class="button button--primary">Live Demo</a>
+                <a href="#" class="button button--tonal">View Code</a>
+              </div>
+            </div>
           </div>
         </div>
       </section>

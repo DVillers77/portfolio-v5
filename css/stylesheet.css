@@ -207,9 +207,9 @@ h3 {
 /* Style for the currently active link in the TOP navbar only */
 .navbar:not(.bottom) .navbar__link.active {
   background-color: var(
-    --sys-color-surface-variant
+    --sys-color-primary
   ); /* Light background to visually separate */
-  color: var(--sys-color-on-surface-emphasis);
+  color: var(--sys-color-on-primary);
 
   /* Sets the approved 6px top radius */
   border-radius: 6px 6px 0 0;
@@ -238,7 +238,7 @@ h3 {
   right: 0px;
 
   background-color: var(--sys-color-on-surface);
-  box-shadow: 5px 5px 0 5px var(--sys-color-surface-variant);
+  box-shadow: 5px 5px 0 5px var(--sys-color-primary);
 
   z-index: 1000;
 }
@@ -268,7 +268,7 @@ h3 {
   background-color: var(--sys-color-on-surface);
 
   /* The box-shadow is the light active background color, creating the 'cut-out' illusion */
-  box-shadow: 5px 5px 0 5px var(--sys-color-surface-variant);
+  box-shadow: 5px 5px 0 5px var(--sys-color-primary);
 
   z-index: 1000; /* Sits below the link's text/content (z-index 1001), but above the main dark nav bar */
 }
@@ -280,7 +280,7 @@ h3 {
   background-color: var(--sys-color-primary-low-opacity);
 
   /* Box-shadow remains the light color to maintain the illusion of the cut-out corner. */
-  box-shadow: 5px 5px 0 5px var(--sys-color-surface-variant);
+  box-shadow: 5px 5px 0 5px var(--sys-color-primary);
 }
 
 /* Style the Link to the RIGHT of the active tab (e.g., "GitHub" for "Projects") */
@@ -300,7 +300,7 @@ h3 {
   background-color: var(--sys-color-on-surface);
 
   /* The box-shadow is the light active background color, creating the 'cut-out' illusion */
-  box-shadow: -5px 5px 0 5px var(--sys-color-surface-variant);
+  box-shadow: -5px 5px 0 5px var(--sys-color-primary);
 
   z-index: 1000;
 }
@@ -311,28 +311,11 @@ h3 {
   background-color: var(--sys-color-primary-low-opacity);
 
   /* Box-shadow remains the light color to maintain the illusion of the cut-out corner. */
-  box-shadow: -5px 5px 0 5px var(--sys-color-surface-variant);
+  box-shadow: -5px 5px 0 5px var(--sys-color-primary);
 }
 /* ================================================= */
 /* === 4. HERO PITCH STYLING === */
 /* ================================================= */
-
-.hero-pitch {
-  display: flex;
-  justify-content: center;
-  padding: 3.75rem 1.25rem;
-  background-color: var(--sys-color-surface-variant);
-}
-
-.hero-pitch__text {
-  text-align: center;
-  margin: 1.5rem;
-  max-width: 50rem;
-}
-
-.hero-pitch__text h1 {
-  margin-bottom: 1rem;
-}
 
 /* ================================================= */
 /* === 5. BUTTON STYLING (Used on Home/Projects) === */
@@ -522,12 +505,9 @@ h2 {
 /* ================================================= */
 
 .slideshow {
-  max-width: 900px; /* Maintains responsiveness */
-  position: relative;
+  max-width: 500px; /* As requested */
   margin: 0 auto;
-  /* Use the tallest image height for fixed container size */
-  height: 500px;
-  overflow: hidden;
+  position: relative;
 }
 
 .slideshow__slide {
@@ -542,15 +522,20 @@ h2 {
   opacity: 1;
 }
 
+/* 2. Standard Corner Radius for Slideshow Images */
 .slideshow__image {
   width: 100%;
-  /* CRITICAL FIX: Ensure image fills the fixed container height */
-  height: 500px;
-  /* Use 'cover' for clean, consistent previews (will crop the top/bottom if image is too wide) */
-  object-fit: contain;
-  display: block;
-  border-radius: 8px;
-  box-shadow: var(--shadow-subtle), var(--glow-accent-subtle);
+  height: auto;
+  max-height: 500px;
+  object-fit: contain; /* Prevents clipping; shows the whole image */
+  border-radius: 28px; /* All four corners now rounded */
+  box-shadow: var(--sys-shadow-2);
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.05
+  ); /* Soft backdrop if image doesn't fill 500x500 */
 }
 
 /* Styling for the previous/next slideshow controls */
@@ -654,7 +639,10 @@ h2 {
 
 /* Hover State: Provides feedback when mousing over an inactive dot */
 .slideshow__dot:hover:not(.active) {
-  background-color: var(--sys-color-outline);
+  background-color: #9c27b0; /* Your Violet Accent */
+  cursor: pointer;
+  transform: scale(1.2);
+  transition: all 0.2s ease;
 }
 
 /* ================================================= */
@@ -811,18 +799,20 @@ textarea:focus {
   /* Creates a subtle radial gradient background effect for large screens */
   .project-container::before {
     content: "";
-    position: absolute;
+    position: fixed; /* FIXED: Keeps it from stretching/tiling as you scroll */
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
     width: 100vw;
-    height: 100%;
+    height: 100vh;
     z-index: -1;
     background-image: radial-gradient(
-      circle,
+      ellipse at 50% 30%,
       var(--sys-color-primary) 0%,
-      var(--sys-color-surface-variant) 70%
+      var(--sys-color-primary) 45%,
+      var(--sys-color-surface-variant) 100%
     );
+    background-repeat: no-repeat;
+    background-size: cover; /* Ensures it fills the screen without repeating */
   }
 }
 
@@ -1032,4 +1022,305 @@ textarea:focus {
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+/* refactor v2 */
+
+/* --- FEATURE BLOCK SKELETON (FINAL POLISH) --- */
+
+/* --- HERO REFINEMENT --- */
+/* --- NEW HERO SYSTEM --- */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh; /* Gives the Hero some vertical breathing room */
+  padding: 5rem 1.25rem 2rem 1.25rem; /* Extra top padding for the fixed Navbar */
+  text-align: center;
+}
+
+.hero__content {
+  max-width: 60ch; /* Optimal reading width */
+}
+
+.hero h1 {
+  font-size: 3.25rem; /* Premium scale */
+  color: var(
+    --sys-color-on-primary
+  ); /* White/Off-white on the green gradient */
+  margin-bottom: 1.5rem;
+  font-family: var(--font-display);
+}
+
+.hero p {
+  font-size: 1.25rem; /* 20px - The dominant body text */
+  color: var(--sys-color-on-primary);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* 1. Breathing room under Hero Text */
+.hero--slideshow p {
+  margin-bottom: 2.5rem; /* Pushes the slideshow away from the intro text */
+}
+
+/* About Page Specific H1 Adjustment */
+#about-intro h1 {
+  font-size: 3.25rem;
+  color: var(--sys-color-on-surface);
+  margin-bottom: 1rem;
+}
+
+.slideshow {
+  max-width: 500px; /* Constrain width */
+  margin: 0 auto;
+  position: relative;
+}
+
+.slideshow__image {
+  width: 100%;
+  height: auto;
+  object-fit: contain; /* Shows full screenshot without clipping */
+  border-radius: 28px; /* Rounded on all four corners */
+  box-shadow: var(--sys-shadow-1);
+  display: block;
+}
+
+/* 1. The Title Box: Making it look like a floating "M3" Badge */
+/* 3. Title Box: Violet Affordance */
+.slideshow-title-box {
+  margin-top: 2rem;
+  background-color: var(--sys-color-surface);
+  padding: 0.75rem 1.5rem;
+  border-radius: 100px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  /* The "Violet Energy" logic */
+  box-shadow: 0 4px 15px rgba(156, 39, 176, 0.2);
+  transition: all 0.3s ease;
+}
+
+.slideshow-title-box:hover {
+  /* Stronger Violet glow on hover to signal interactivity */
+  box-shadow: 0 6px 20px rgba(156, 39, 176, 0.4);
+  transform: translateY(-2px);
+}
+
+#slide-title {
+  color: var(--sys-color-primary); /* Dark Pine Green */
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+}
+
+/* 2. Navigation Controls: Making them visible over the gradient */
+.slideshow__control--prev,
+.slideshow__control--next {
+  position: absolute;
+  top: 50%; /* Center relative to the 500px container */
+  transform: translateY(-50%);
+  z-index: 10;
+  cursor: pointer;
+  /* Visual styling */
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+/* The Chevron Signifier */
+.slideshow-title-box .fa-chevron-right {
+  color: #9c27b0; /* Violet accent */
+  font-size: 0.9rem;
+}
+
+/* Position arrows outside the 500px box for air */
+.slideshow__control--prev {
+  left: -60px;
+}
+.slideshow__control--next {
+  right: -60px;
+}
+
+.slideshow__control--prev:hover,
+.slideshow__control--next:hover {
+  background-color: var(--sys-color-surface);
+  color: var(--sys-color-primary);
+}
+
+/* 3. The Dots: Material 3 Active State */
+.slideshow__dot {
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 12px;
+  height: 12px;
+}
+
+.slideshow__dot.active {
+  background-color: white;
+  width: 24px; /* Pill shape for active dot */
+  border-radius: 6px;
+}
+
+/* --- ROW 01 SPECIFIC BONES --- */
+
+/* The 'Bridge' to the Hero */
+.feature-block--first {
+  margin-top: 18px; /* Matches your 'Sweet Spot' gutter */
+  border-radius: 2rem 2rem 0 0; /* Rounded shoulders */
+}
+
+/* Intro Paragraph Styling */
+.feature-block__intro-text {
+  font-size: 1.125rem; /* 18px to match quote size */
+  line-height: 1.6;
+  color: var(--sys-color-on-surface);
+  max-width: 45ch; /* Comfortable reading width for paragraphs */
+  margin-bottom: 1.5rem;
+}
+
+/* Sub-header for the buttons */
+.feature-block__jump-link {
+  font-size: 1.25rem;
+  color: var(--sys-color-primary); /* Dark Pine Green */
+  margin-bottom: 1rem;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Ensure the button group stays centered in the column */
+.button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.feature-block {
+  background-color: var(--sys-color-surface);
+  padding: 4rem 1.25rem;
+  margin-bottom: 18px; /* Tighter 32px Gutter Splash */
+}
+
+.feature-block__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center; /* Center for mobile */
+}
+
+/* 1. IMAGE: Forced 500x500 Square */
+.feature-block__image {
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.3); /* Violet Glow */
+}
+
+/* --- ROW 2 COLOR SWAP & BORDER LOGIC --- */
+
+.feature-block--alt {
+  background-color: var(
+    --sys-color-surface-variant
+  ) !important; /* Forces the Light Pine */
+}
+
+/* Swaps Quote to White background when on Light Pine sections */
+.feature-block__quote-box--on-alt {
+  background-color: var(--sys-color-surface) !important;
+  border-left: none !important;
+  border-right: 2px solid var(--sys-color-accent); /* Border closest to image */
+}
+
+/* Ensure Author is ALWAYS right-aligned to the 400px container */
+.feature-block__author {
+  text-align: right !important;
+  width: 100%;
+}
+
+/* 2. TITLE: Refined Scale and Color */
+.feature-block__title--column {
+  font-size: 1.8rem; /* 28.8px */
+  max-width: 26ch; /* Typographic comfort width */
+  color: var(--sys-color-on-surface); /* Near Black / Charcoal */
+  margin-bottom: 2rem;
+  font-family: "Poppins", sans-serif;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* Center the content vertically against the image */
+.feature-block__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertical Center */
+  align-items: center; /* Horizontal Center */
+}
+
+/* 3. QUOTE CONTAINER: Forced 400px Composition */
+.feature-block__quote-container {
+  width: 400px;
+  max-width: 100%;
+}
+
+.feature-block__quote-box {
+  background-color: var(--sys-color-surface-variant);
+  padding: 1.5rem; /* Restored to 24px */
+  border-left: 2px solid var(--sys-color-accent);
+  border-radius: 8px;
+  font-size: 1.125rem; /* 18px */
+  font-style: italic;
+  margin: 0;
+  width: 100%;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+/* 4. AUTHOR: Aligned to 400px edge */
+.feature-block__author {
+  text-align: right;
+  margin-top: 1rem; /* M3 Standard Margin */
+  font-size: 1rem; /* 16px */
+  color: var(--sys-color-primary); /* Dark Pine Green */
+  font-weight: 400;
+}
+
+/* DESKTOP PIVOT */
+@media screen and (min-width: 1025px) {
+  .feature-block__grid {
+    flex-direction: row;
+    justify-content: center;
+    gap: 5rem; /* Increased gap to balance the 500px image */
+  }
+}
+
+/* MOBILE RESPONSIVENESS */
+@media screen and (max-width: 600px) {
+  .feature-block__image {
+    width: 320px; /* Scale down for mobile while keeping square */
+    height: 320px;
+  }
+  .feature-block__quote-container {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .feature-block__grid {
+    flex-direction: row;
+    justify-content: center;
+    gap: 5rem;
+  }
+
+  /* ADD THIS LINE HERE: */
+  .feature-block__grid--reverse {
+    flex-direction: row-reverse;
+  }
 }
