@@ -326,4 +326,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
       }
     }
   });
+  // --- MOBILE NAV OFF-CLICK CLOSE ---
+  // Listens for clicks on the body to close the mobile menu if the user clicks away
+  document.addEventListener("click", function (event) {
+    const navBar = document.getElementById("myNavbar");
+    const navToggleButton = document.querySelector(".navbar__toggle");
+
+    // Only run if the menu is currently open (has the 'responsive' class)
+    if (navBar.classList.contains("responsive")) {
+      // If the click was NOT inside the navbar AND NOT on the toggle button itself
+      if (
+        !navBar.contains(event.target) &&
+        !navToggleButton.contains(event.target)
+      ) {
+        toggleMobileNav(); // Reuse your existing function to close it properly
+      }
+    }
+  });
 });
