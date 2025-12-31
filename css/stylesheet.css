@@ -57,6 +57,10 @@ html {
   --shadow-modal: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
     0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
+  /* --- FLUID GRADIENT CONTROL --- */
+  --nav-gradient-stop: 45vw;
+  --navbar-shelf-height: 15px;
+
   /* --- GLOBAL FONTS --- */
   --font-display: "Poppins", sans-serif;
   --font-body: "Inter", sans-serif;
@@ -76,45 +80,24 @@ body::before {
   width: 100vw;
   height: 100vh;
   z-index: -1;
-  /* DESKTOP DEFAULT */
   background-image: radial-gradient(
-    ellipse at 50% 30%,
-    var(--sys-color-primary) 0%,
-    var(--sys-color-primary) 45%,
-    var(--sys-color-surface-variant) 100%
+    circle at 50% 30%,
+    var(--sys-color-primary) 0,
+    var(--sys-color-primary) var(--nav-gradient-stop),
+    var(--sys-color-surface-variant) 85%
   );
   background-repeat: no-repeat;
   background-size: cover;
   transition: background-image 0.3s ease; /* Smooth transition when resizing */
 }
 
-/* TABLET ADJUSTMENT (Below 1070px) */
-@media screen and (max-width: 1070px) {
-  body::before {
-    /* We "stretch" the solid green core to 65% to protect the centered links/brackets */
-    background-image: radial-gradient(
-      ellipse at 50% 30%,
-      var(--sys-color-primary) 0%,
-      var(--sys-color-primary) 60%,
-      var(--sys-color-surface-variant) 100%
-    );
+/* For smaller screens, update the gradient stop to provide a minimum size 
+   for the solid color area, preventing it from becoming too small. */
+@media screen and (max-width: 809px) {
+  :root {
+    --nav-gradient-stop: calc(180px + 15vw);
   }
 }
-
-/* MOBILE ADJUSTMENT (Below 768px) */
-@media screen and (max-width: 768px) {
-  body::before {
-    /* In mobile, the content is narrow but long. 
-       We make the gradient almost entirely solid to maintain legibility. */
-    background-image: radial-gradient(
-      ellipse at 50% 35%,
-      var(--sys-color-primary) 0%,
-      var(--sys-color-primary) 60%,
-      var(--sys-color-surface-variant) 100%
-    );
-  }
-}
-
 /* The 'Spine' of the site */
 .container {
   max-width: 1200px;
@@ -128,14 +111,34 @@ body::before {
 /* ================================================= */
 
 .navbar {
-  background-color: var(--sys-color-on-surface); /* Charcoal */
+  background-color: var(--sys-color-on-surface); /* Charcoal stays */
   display: flex;
   align-items: center;
   position: sticky;
   top: 0;
   z-index: 1000;
-  /* Height is now driven by the link padding for stability */
-  box-shadow: var(--sys-shadow-navbar-accent);
+  box-shadow: var(--sys-shadow-navbar-accent); /* Violet line stays */
+}
+
+.navbar::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: var(--navbar-shelf-height);
+
+  /* This creates a solid block for the first 12px, 
+     then fades out over the last 6px */
+  background: linear-gradient(
+    to bottom,
+    var(--sys-color-primary) 0%,
+    var(--sys-color-primary) 12px,
+    transparent 100%
+  );
+
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* 1. THE TOGGLE (Hamburger - HIDDEN BY DEFAULT) */
@@ -178,7 +181,11 @@ body::before {
 /* Base Link Style: The "Hit-Box" */
 .navbar__link {
   font-family: var(--font-body);
-  font-size: 17px;
+  /* Use clamp for fluid typography: 
+     Min: 14px, Preferred: 1.1vw, Max: 17px */
+  font-size: clamp(14px, 1.1vw, 17px);
+  /* Reduce horizontal padding on tablets to keep the bar narrow */
+  padding: 14px clamp(12px, 1.5vw, 24px);
   font-weight: 400;
   color: var(--sys-color-surface);
   text-decoration: none;
@@ -318,12 +325,17 @@ body::before {
 }
 
 /* --- 3. MEDIA (Image Styling) --- */
+/* --- UNIFIED MEDIA STYLING --- */
 .feature-block__image {
-  width: 500px;
-  height: 500px;
-  object-fit: cover;
+  width: 100%;
+  max-width: 500px; /* Limits size on desktop */
+  aspect-ratio: 1 / 1; /* Forces the 1:1 ratio */
+  object-fit: cover; /* Ensures image fills the square without stretching */
   border-radius: 8px;
-  box-shadow: 0 0 15px rgba(255, 0, 255, 0.3); /* Violet Glow */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3),
+    /* 1. Dark "lift" shadow */ 0 0 20px rgba(255, 0, 255, 0.5); /* 2. Vibrant "glow" (increased to 50%) */
+  display: block;
+  margin: 0 auto; /* Centers image if it's smaller than the container */
 }
 
 /* --- 4. CONTENT (Text & Typography) --- */
@@ -391,9 +403,33 @@ body::before {
 
 /* --- 6. RESPONSIVE ENGINE --- */
 
-/* Mobile Stack Flip */
-.feature-block__grid--reverse {
-  flex-direction: column-reverse;
+/* UNIFIED MOBILE STACKING (1024px and below) */
+@media screen and (max-width: 1024px) {
+  .feature-block__grid,
+  .feature-block__grid--reverse {
+    flex-direction: column;
+    align-items: center; /* Ensures content is centered in the column */
+  }
+
+  /* Allow content children to be ordered by the grid */
+  .feature-block__content {
+    display: contents;
+  }
+
+  /* Enforce strict stacking order */
+  .feature-block__title--column {
+    order: 1;
+  }
+  .feature-block__image,
+  .feature-block__quote-container {
+    order: 2;
+  }
+  .feature-block__intro-text {
+    order: 3;
+  }
+  .button-group {
+    order: 4;
+  }
 }
 
 /* Desktop Pivot (1025px+) */
@@ -404,17 +440,23 @@ body::before {
     gap: 5rem;
   }
 
-  /* Fixed: Nested inside media query to override Desktop Row */
   .feature-block__grid--reverse {
     flex-direction: row-reverse;
+  }
+
+  /* On desktop, restore the content block's own flex context */
+  .feature-block__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }
 
 /* Mobile Adjustments (600px-) */
 @media screen and (max-width: 600px) {
   .feature-block__image {
-    width: 320px;
-    height: 320px;
+    width: 100%;
   }
 }
 
@@ -433,6 +475,7 @@ body::before {
 }
 
 .hero__content {
+  position: relative; /* Secondary anchor */
   max-width: 65ch; /* Optimized for readability */
   margin: 0 auto;
 }
@@ -450,7 +493,12 @@ body::before {
   font-family: var(--font-body);
   font-size: 1.25rem;
   color: var(--sys-color-on-primary);
+  max-width: 65ch; /* Restoring the readability limit */
   line-height: 1.5;
+  margin-left: auto; /* Centering within the flex container */
+  margin-right: auto;
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
 /* 2. ACCESSIBILITY */
@@ -467,167 +515,210 @@ body::before {
 }
 
 /* ================================================= */
-/* === [V3] SLIDESHOW BONES                      === */
+/* === [V4] REFACTORED: SLIDESHOW SYSTEM (BEM)   === */
 /* ================================================= */
 
 .slideshow {
-  max-width: 500px;
-  height: 400px; /* The "No-Jump" Anchor */
-  margin: 0 auto;
   position: relative;
+  width: 100%;
+  max-width: 500px; /* Restores your standardized desktop width */
+  margin: 0 auto;
+  display: flex; /* Use flexbox for clean vertical stacking on mobile */
+  flex-direction: column;
+  align-items: center;
+}
+
+/* THE NEW ANCHOR */
+.slideshow__positioner {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* 2. THE VIEWPORT: Forces the 500x500 standard */
+.slideshow__viewport {
+  position: relative; /* BECOMES THE ANCHOR for the controls */
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Keeps it square */
+  /* overflow: hidden; */ /* MOVED to the slide itself to unclip buttons */
+  border-radius: 8px;
+  background-color: #000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3),
+    /* 1. Dark "lift" shadow */ 0 0 20px rgba(255, 0, 255, 0.5); /* 2. Vibrant "glow" (increased to 50%) */
+  margin-bottom: 1.5rem;
 }
 
 .slideshow__slide {
-  display: none;
+  width: 100%;
   height: 100%;
+  display: none;
+  overflow: hidden; /* CLIPS the image content, not the controls */
+  border-radius: 8px;
 }
 
-.slideshow__slide.active {
+.slideshow__slide--active {
   display: block;
 }
 
 .slideshow__image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  border-radius: 28px;
-  box-shadow: var(--sys-shadow-1);
+  object-fit: cover;
+  display: block;
 }
 
-/* --- 3. CONTROLS & FEEDBACK --- */
-.slideshow__control--prev,
-.slideshow__control--next {
+/* --- 3. THE CONTROLS: Fluid & Universal --- */
+.slideshow__control {
   position: absolute;
-  top: 55%; /* Nudged for visual center */
-  z-index: 10;
-  cursor: pointer;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(4px);
+  /* 50% of the WIDTH of a square is the vertical center */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 54px;
+  height: 54px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
   border-radius: 50%;
-  width: 48px;
-  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  transition: all 0.3s ease;
+  font-size: 1.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
+/* Base position: Safe inside the image area */
 .slideshow__control--prev {
-  left: -80px;
+  left: -27px;
 }
 .slideshow__control--next {
-  right: -80px;
+  right: -27px;
 }
 
-/* Magenta "Energy" feedback */
-.slideshow__control--prev:hover,
-.slideshow__control--next:hover {
+.slideshow__control:hover {
+  background-color: #444;
+  color: var(--sys-color-accent);
+}
+
+.slideshow__control:active {
+  transform: translateY(-50%) scale(0.85);
   background-color: var(--sys-color-accent);
-  transform: scale(1.1);
 }
 
+/* 4. THE PILL: Styling moved from ID to BEM Class */
+.slideshow__pill {
+  margin-bottom: 1.5rem;
+  z-index: 20;
+}
+
+.slideshow__pill-link {
+  display: inline-block;
+  background-color: var(--sys-color-primary);
+  color: white;
+  padding: 0.8rem 1.6rem;
+  border-radius: 100px;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  /* Restored your specific transition */
+  transition: all 300ms ease;
+}
+
+/* Restored your specific hover effects */
+.slideshow__pill-link:hover {
+  background-color: #444;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(var(--sys-color-accent-rgb), 0.4);
+}
+
+/* 5. THE DOTS */
 .slideshow__dots {
-  text-align: center;
-  padding: 1.5rem 0;
+  display: flex;
+  justify-content: center; /* THIS CENTERS THE DOTS GLOBALLY */
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 5rem;
+  padding: 0;
+  list-style: none;
 }
 
 .slideshow__dot {
-  background-color: rgba(255, 255, 255, 0.3);
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.4);
   border-radius: 50%;
-  display: inline-block;
-  margin: 0 6px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-/* Hover: Magenta Energy indicator */
-.slideshow__dot:hover {
-  background-color: var(--sys-color-accent);
-}
-
-/* Active: White Pill for high contrast on Pine */
 .slideshow__dot.active {
-  background-color: white;
+  background-color: var(--sys-color-accent);
   width: 24px;
-  border-radius: 6px;
+  border-radius: 10px;
 }
 
 /* ================================================= */
-/* === [V3] REFACTORED: BUTTONS & ACTIONS        === */
+/* === [V3] REFACTORED: BUTTONS (MUSCLE PASS)    === */
 /* ================================================= */
 
-/* 1. THE BLOCK (Base Style) */
+/* 1. THE BLOCK (Base Style & Muscle) */
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.8rem 1.6rem;
+  padding: 0.9rem 1.8rem;
   border-radius: 0.5rem;
-  font-family: inherit;
+  font-family: var(--font-body);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.1rem;
   text-decoration: none;
   border: none;
   cursor: pointer;
-  gap: 8px; /* Space for icons like LinkedIn/Hand */
+  gap: 10px;
 
-  /* Premium Motion Engine */
-  transition: background-color 200ms ease-in-out, transform 150ms ease-in-out,
-    box-shadow 200ms ease-in-out, opacity 250ms ease;
+  /* 300ms transition to reduce "noise" */
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 2. MODIFIER: PRIMARY (Brand Action) */
+/* 2. MODIFIER: PRIMARY */
 .button--primary {
   background-color: var(--sys-color-primary);
   color: var(--sys-color-on-primary);
 }
 
 .button--primary:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(var(--sys-color-accent-rgb), 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(var(--sys-color-accent-rgb), 0.4);
 }
 
-/* 3. MODIFIER: TONAL (Secondary Action) */
+/* 3. MODIFIER: TONAL */
 .button--tonal {
   background-color: var(--sys-color-primary-container);
   color: var(--sys-color-on-primary-container);
 }
 
 .button--tonal:hover:not(:disabled) {
-  transform: translateY(-2px);
-  background-color: rgba(var(--sys-color-primary-rgb), 0.2);
+  transform: translateY(-3px);
+  background-color: rgba(var(--sys-color-primary-rgb), 0.18);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Grey Shadow */
 }
 
-/* 4. MODIFIER: CLOSE / ICON BUTTON (For Modals/Nav) */
-.button--close {
-  background: transparent;
-  color: var(--sys-color-on-p);
-  padding: 0.5rem;
-  font-size: 1.5rem;
-  line-height: 1;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
+/* 4. THE MOBILE SOLUTION: ACTIVE STATE */
+.button:active:not(:disabled) {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  filter: brightness(0.9);
 }
 
-.button--close:hover {
-  background-color: rgba(var(--sys-color-on-surface-rgb), 0.1);
-  color: var(--sys-color-accent); /* Magenta feedback on close */
-}
-
-/* 5. THE BUTTON GROUP (Layout Wrapper) */
+/* 5. THE BUTTON GROUP (Layout Wrapper) - KEEPING FROM BONES */
 .button-group {
   margin-top: 2rem;
   display: flex;
   justify-content: center;
   gap: 1rem;
-  flex-wrap: wrap; /* Prevents overflow on tiny screens */
+  flex-wrap: wrap;
 }
 
-/* RESPONSIVE: Stack buttons on small screens */
+/* RESPONSIVE: Stack buttons on small screens - KEEPING FROM BONES */
 @media screen and (max-width: 600px) {
   .button-group {
     flex-direction: column;
@@ -635,7 +726,7 @@ body::before {
   }
 
   .button-group .button {
-    width: 100%; /* Full-width mobile buttons */
+    width: 100%;
   }
 }
 
@@ -755,9 +846,12 @@ body::before {
 /* ================================================= */
 /* === [V3] TABLET TRANSITION (1070px to 769px)   === */
 /* ================================================= */
-@media screen and (max-width: 1070px) and (min-width: 769px) {
+@media screen and (max-width: 1070px) and (min-width: 810px) {
   .navbar__links {
-    justify-content: center; /* Stop the slide-left; keep it safe in the center */
+    /* Constrain the menu and center it to pull brackets from the edge */
+    max-width: 800px;
+    margin: 0 auto;
+    justify-content: center;
     padding-right: 0;
   }
 
@@ -771,104 +865,82 @@ body::before {
 }
 
 /* ================================================= */
-/* === [V3] UNIFIED RESPONSIVE ENGINE (809px)    === */
+/* === [V18] GRID ARCHITECTURAL RESET (809px)    === */
 /* ================================================= */
 
 @media screen and (max-width: 809px) {
-  /* --- A. NAVBAR MOBILE --- */
+  /* --- 1. NAVBAR MOBILE --- */
   .navbar {
-    display: block; /* Allows float logic for toggle/name if needed */
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    overflow: hidden;
   }
-
-  /* Hamburger Icon Styling */
   .navbar__toggle {
     display: block;
-    float: right; /* Puts hamburger on the right */
-    color: var(--sys-color-accent);
     padding: 1rem;
-    font-size: 1.5rem;
-    transition: color 0.2s ease;
   }
-
   .navbar__links {
-    display: none; /* Hidden by default on mobile */
+    display: none;
     flex-direction: column;
     width: 100%;
-    padding-right: 0;
-    clear: both; /* Ensures links stack below the header row */
   }
-
-  /* State triggered by toggleMobileNav() in script.js */
   .navbar.responsive .navbar__links {
     display: flex;
   }
-
-  /* SWITCH TO "X" ICON: Using your FontAwesome Unicode */
-  .navbar.responsive .navbar__toggle i::before {
-    content: "\f00d"; /* fa-times (X) */
-    color: var(--sys-color-accent);
-  }
-
-  .navbar__link {
-    width: 100%;
-    padding: 1rem 1.5rem;
-    border-radius: 0 !important;
-    margin-bottom: 0 !important;
-    text-align: left;
-    pointer-events: auto; /* Ensure links are clickable in mobile menu */
-  }
-
-  /* Remove 'Chrome Tab' brackets for vertical mobile stack */
   .navbar__link.active::before,
   .navbar__link.active::after {
     display: none;
   }
 
-  /* --- B. SLIDESHOW MOBILE --- */
-  .slideshow {
-    height: 300px;
-    max-width: 100%;
-  }
-
-  .slideshow__control--prev,
-  .slideshow__control--next {
-    top: 50%;
-    transform: translateY(-50%);
-    width: 44px; /* Larger tap target for fingers */
-    height: 44px;
-  }
-
+  /* --- 2. SLIDESHOW MOBILE --- */
+  /* The global styles now correctly handle centering. 
+     We only need to adjust the 'straddle' amount for the smaller screen. */
   .slideshow__control--prev {
-    left: 5px;
+    left: -18px; /* Pulled in slightly for mobile */
   }
   .slideshow__control--next {
-    right: 5px;
+    right: -18px; /* Pulled in slightly for mobile */
   }
 
-  /* --- C. FEATURE BLOCKS MOBILE --- */
-  .feature-block__grid {
-    grid-template-columns: 1fr; /* Stack images and text */
-    gap: 2rem;
+  /* Centering the dots for mobile */
+  .slideshow__dots {
+    justify-content: center;
+    margin-bottom: 2rem;
   }
 
+
+}
+
+@media screen and (max-width: 1024px) {
+  /* Ensure the grid container is a column for all mobile/tablet sizes */
+  .feature-block__grid, 
+  .feature-block__grid--reverse {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* 1. TITLE FIRST */
+  .feature-block__title--column {
+    order: 1 !important; 
+    text-align: center;
+  }
+
+  /* 2. IMAGE SECOND */
   .feature-block__media {
-    order: -1; /* Image always appears above text on mobile */
+    order: 2 !important;
+    margin-bottom: 1.5rem;
   }
 
-  /* --- D. TYPOGRAPHY & BUTTONS MOBILE --- */
-  .hero__title {
-    font-size: 2.5rem;
+  /* 3. TEXT THIRD */
+  .feature-block__intro-text {
+    order: 3 !important;
+    text-align: center;
   }
 
+  /* 4. BUTTONS LAST */
   .button-group {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .button-group .button {
-    width: 100%;
+    order: 4 !important;
+    justify-content: center;
   }
 }

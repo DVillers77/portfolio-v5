@@ -37,111 +37,101 @@ function closeModal() {
 document.addEventListener("DOMContentLoaded", (event) => {
   // NOTE: Scroll restoration is now handled by the browser default for consistency.
 
-  // ===========================================
-  // === A. FUNCTION DEFINITIONS ===
-  // ===========================================
-
-  // NOTE: initSlideshow function body is included for file completeness.
   function initSlideshow() {
-    const slides = document.getElementsByClassName("slideshow__slide");
-    const dots = document.getElementsByClassName("slideshow__dot");
+    // We use querySelector to match your new BEM class names
+    const slideshowContainer = document.getElementById("slideshow-container"); // Target for touch events
+    const slides = document.querySelectorAll(".slideshow__slide");
+    const dots = document.querySelectorAll(".slideshow__dot");
     const slideTitleElement = document.getElementById("slide-title");
-    const prevButton = document.querySelector(".slideshow__control--prev");
-    const nextButton = document.querySelector(".slideshow__control--next");
     const slideTitleLink = document.getElementById("slide-title-link");
+    const prevButton = document.getElementById("prev-slide");
+    const nextButton = document.getElementById("next-slide");
+
     let slideIndex = 1;
-    const announcer = document.getElementById("slide-announcer");
+    let touchstartX = 0;
+    let touchendX = 0;
 
     function showSlides(n) {
-      let i;
       if (n > slides.length) {
         slideIndex = 1;
       }
       if (n < 1) {
         slideIndex = slides.length;
       }
-      const totalSlides = slides.length;
 
-      // 1. Loop to HIDE all slides (by removing the 'active' class)
-      for (i = 0; i < slides.length; i++) {
-        // CRITICAL FIX: Remove 'active' class (CSS sets opacity: 0, z-index: 0)
-        slides[i].classList.remove("active");
-
-        // Remove old style.display line if it exists
-        // slides[i].style.display = "none";
-
-        slides[i].removeAttribute("aria-current");
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove("slideshow__slide--active");
+        slides[i].setAttribute("aria-hidden", "true");
       }
-
-      for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].classList.remove("active");
+        dots[i].removeAttribute("aria-current");
       }
 
       const currentSlide = slides[slideIndex - 1];
+      currentSlide.classList.add("slideshow__slide--active");
+      currentSlide.setAttribute("aria-hidden", "false");
 
-      // 2. ACTIVATE the current slide (by adding the 'active' class)
-      currentSlide.classList.add("active");
-
-      // Remove old style.display line if it exists
-      // currentSlide.style.display = "block";
-
-      // ACTIVATE the dot
-      dots[slideIndex - 1].className += " active";
-
-      // Update ARIA attributes
-      currentSlide.setAttribute("aria-current", "true");
-      currentSlide.setAttribute(
-        "aria-label",
-        `Slide ${slideIndex} of ${totalSlides}: ${currentSlide.getAttribute(
-          "data-title"
-        )}`
-      );
-
-      if (announcer) {
-        announcer.textContent = `${currentSlide.getAttribute(
-          "data-title"
-        )}, slide ${slideIndex} of ${totalSlides}`;
-      }
+      dots[slideIndex - 1].classList.add("active");
+      dots[slideIndex - 1].setAttribute("aria-current", "true");
 
       if (slideTitleElement && slideTitleLink) {
         const currentTitle = currentSlide.getAttribute("data-title");
         const currentImage = currentSlide.querySelector(".slideshow__image");
+
+        // CRITICAL FIX: Ensure we are grabbing a clean ID (e.g., #tic-tac-toe-details)
         const currentTarget = currentImage
           ? currentImage.getAttribute("data-target")
           : "#";
+
         slideTitleElement.textContent = currentTitle;
-        slideTitleLink.href = currentTarget;
+
+        // Use setAttribute to ensure the DOM updates immediately so the click listener sees it
+        slideTitleLink.setAttribute("href", currentTarget);
       }
-    }
-    function plusSlides(n) {
-      showSlides((slideIndex += n));
-    }
-    function currentSlide(n) {
-      showSlides((slideIndex = n));
     }
 
-    if (slides.length > 0) {
-      showSlides(slideIndex);
-    }
-    if (prevButton) {
-      prevButton.addEventListener("click", () => plusSlides(-1));
-    }
-    if (nextButton) {
-      nextButton.addEventListener("click", () => plusSlides(1));
-    }
+    // Your original event listeners
+    if (prevButton)
+      prevButton.addEventListener("click", () => showSlides((slideIndex -= 1)));
+    if (nextButton)
+      nextButton.addEventListener("click", () => showSlides((slideIndex += 1)));
+
     for (let i = 0; i < dots.length; i++) {
-      dots[i].addEventListener("click", () => currentSlide(i + 1));
+      dots[i].addEventListener("click", () => showSlides((slideIndex = i + 1)));
     }
+
+    // NEW: Touch Swipe Listeners
+    if (slideshowContainer) {
+      slideshowContainer.addEventListener("touchstart", (event) => {
+        touchstartX = event.changedTouches[0].screenX;
+      });
+
+      slideshowContainer.addEventListener("touchend", (event) => {
+        touchendX = event.changedTouches[0].screenX;
+        handleSwipe();
+      });
+    }
+
+    function handleSwipe() {
+      const swipeThreshold = 50; // Minimum distance for a swipe
+      // Swipe Left
+      if (touchstartX - touchendX > swipeThreshold) {
+        showSlides((slideIndex += 1));
+      }
+      // Swipe Right
+      if (touchendX - touchstartX > swipeThreshold) {
+        showSlides((slideIndex -= 1));
+      }
+    }
+
+    // Your original keyboard navigation
     window.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-        event.preventDefault();
-      }
-      if (event.key === "ArrowLeft") {
-        plusSlides(-1);
-      } else if (event.key === "ArrowRight") {
-        plusSlides(1);
-      }
+      if (event.key === "ArrowLeft") showSlides((slideIndex -= 1));
+      else if (event.key === "ArrowRight") showSlides((slideIndex += 1));
     });
+
+    if (slides.length > 0) showSlides(slideIndex);
   }
 
   function initContactModal() {
@@ -265,35 +255,41 @@ document.addEventListener("DOMContentLoaded", (event) => {
    */
 
   function setupAnchorHandler() {
-    // Selects all links whose href attribute starts with a '#'
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener("click", function (e) {
-        const targetId = this.getAttribute("href");
-        const targetElement = document.querySelector(targetId);
+    document.addEventListener("click", function (e) {
+      // 1. Find the link - we look for the attribute specifically to ensure it's a hash link
+      const anchor = e.target.closest("a");
+      if (!anchor) return;
 
-        // Check that a target exists AND it is NOT the contact modal link
-        if (
-          targetElement &&
-          !this.classList.contains("navbar__link--contact-trigger")
-        ) {
-          // 1. CRITICAL FIX: Prevent the default browser action (URL hash update).
-          // This eliminates all refresh/history corruption problems.
+      const href = anchor.getAttribute("href");
+
+      // 2. Filter: Only internal links, excluding the contact modal
+      if (
+        href &&
+        href.startsWith("#") &&
+        !anchor.classList.contains("navbar__link--contact-trigger")
+      ) {
+        const targetElement = document.querySelector(href);
+
+        if (targetElement) {
+          // 3. THE FIX: Stop the instant jump immediately
           e.preventDefault();
 
-          // 2. Manually implement smooth scroll (to replace the canceled native scroll)
+          // 4. Your fine-tuned smooth scroll
           targetElement.scrollIntoView({
             behavior: "smooth",
             block: "start",
           });
 
-          // 3. FINAL FIX: Use setTimeout(0) to ensure the focus is applied as a new
-          // microtask AFTER the scroll has started. This prevents the flicker/jump.
+          // 5. Your fine-tuned focus management (prevents the flicker)
           setTimeout(() => {
             targetElement.setAttribute("tabindex", "-1");
-            targetElement.focus();
+            targetElement.focus({ preventScroll: true }); // Adding preventScroll ensures the focus doesn't cause a jump
           }, 0);
+
+          // Update URL bar without jumping
+          history.pushState(null, null, href);
         }
-      });
+      }
     });
   }
 

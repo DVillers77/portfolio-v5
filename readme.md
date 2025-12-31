@@ -1,3 +1,12 @@
+## 🔄 System Migration & Refactor (Dec 2025 - Jan 2026)
+
+Currently undergoing a major architectural refactor to transition from a
+localized "Fix-and-Patch" workflow to a **Semantic Design System**.
+
+- **Goal:** Implement Material 3 (M3) logic and Tokenized CSS.
+- **Status:** Moving to Agentic IDE (Antigravity) to preserve structural
+  integrity and eliminate AI regressions.
+
 # Portfolio: UX-Driven Front-End Development
 
 A professional portfolio showcasing skills in HTML5, CSS3, and Vanilla

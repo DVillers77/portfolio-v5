@@ -80,102 +80,85 @@
             to functional web applications.
           </p>
 
-          <div
-            class="slideshow"
-            role="region"
-            aria-roledescription="Project Carousel"
-            aria-label="Project Slideshow"
-          >
-            <div id="slide-announcer" aria-live="polite" class="sr-only"></div>
+          <div class="slideshow" role="region" aria-label="Project Slideshow">
+            <div class="slideshow__positioner">
+              <div class="slideshow__viewport">
+                <div
+                  id="slide-announcer"
+                  aria-live="polite"
+                  class="sr-only"
+                ></div>
 
-            <div
-              class="slideshow__slide"
-              data-title="Modern Tic-Tac-Toe Game"
-              role="group"
-              aria-label="Slide 1 of 4: Modern Tic-Tac-Toe Game"
-            >
-              <img
-                src="images/modern-tic-tac-toe-500h.jpg"
-                class="slideshow__image"
-                data-target="#tic-tac-toe-details"
-                alt="Screenshot of modern Tic-Tac-Toe game"
-              />
+                <div
+                  class="slideshow__slide slideshow__slide--active"
+                  data-title="Modern Tic-Tac-Toe Game"
+                >
+                  <img
+                    src="images/modern-tic-tac-toe-500h.jpg"
+                    class="slideshow__image"
+                    alt="Tic-Tac-Toe"
+                    data-target="#tic-tac-toe-details"
+                  />
+                </div>
+                <div
+                  class="slideshow__slide"
+                  data-title="Interactive To-Do App"
+                >
+                  <img
+                    src="images/to-do-app-500h.jpg"
+                    class="slideshow__image"
+                    alt="To-Do App"
+                    data-target="#to-do-app-details"
+                  />
+                </div>
+                <div
+                  class="slideshow__slide"
+                  data-title="Portfolio: A Meta-Project"
+                >
+                  <img
+                    src="images/portfolio-screenshot-01.jpg"
+                    class="slideshow__image"
+                    alt="Portfolio"
+                    data-target="#portfolio-details"
+                  />
+                </div>
+                <div class="slideshow__slide" data-title="API Fun Center">
+                  <img
+                    src="images/api-fun-center.jpg"
+                    class="slideshow__image"
+                    alt="API Fun Center"
+                    data-target="#api-fun-center-details"
+                  />
+                </div>
+
+                <a
+                  class="slideshow__control slideshow__control--prev"
+                  id="prev-slide"
+                  role="button"
+                  aria-label="Previous slide"
+                  >&#10094;</a
+                >
+                <a
+                  class="slideshow__control slideshow__control--next"
+                  id="next-slide"
+                  role="button"
+                  aria-label="Next slide"
+                  >&#10095;</a
+                >
+              </div>
+            </div>
+            <div class="slideshow__pill">
+              <a id="slide-title-link" href="#" class="slideshow__pill-link">
+                <h3 id="slide-title">Modern Tic-Tac-Toe Game</h3>
+              </a>
             </div>
 
-            <div
-              class="slideshow__slide"
-              data-title="Interactive To-Do App"
-              role="group"
-              aria-label="Slide 2 of 4: Interactive To-Do App"
-            >
-              <img
-                src="images/to-do-app-500h.jpg"
-                class="slideshow__image"
-                data-target="#to-do-app-details"
-                alt="Screenshot of Task Master to-do app version 1."
-              />
+            <div class="slideshow__dots">
+              <span class="slideshow__dot active" data-slide-index="0" aria-label="Go to slide 1" aria-current="true"></span>
+              <span class="slideshow__dot" data-slide-index="1" aria-label="Go to slide 2"></span>
+              <span class="slideshow__dot" data-slide-index="2" aria-label="Go to slide 3"></span>
+              <span class="slideshow__dot" data-slide-index="3" aria-label="Go to slide 4"></span>
             </div>
-
-            <div
-              class="slideshow__slide"
-              data-title="Portfolio: A Meta-Project"
-              role="group"
-              aria-label="Slide 3 of 4: Portfolio: A Meta-Project"
-            >
-              <img
-                src="images/portfolio-screenshot-01.jpg"
-                class="slideshow__image"
-                data-target="#portfolio-details"
-                alt="Screenshot of the portfolio website."
-              />
-            </div>
-
-            <div
-              class="slideshow__slide"
-              data-title="API Fun Center"
-              role="group"
-              aria-label="Slide 4 of 4: API Fun Center"
-            >
-              <img
-                src="images/api-fun-center.jpg"
-                class="slideshow__image"
-                data-target="#api-fun-center-details"
-                alt="Screenshot of API Fun Center data integration project."
-              />
-            </div>
-          </div>
-
-          <div>
-            <a
-              class="slideshow__control--prev"
-              id="prev-slide"
-              role="button"
-              aria-controls="slideshow-container"
-              >&#10094;</a
-            >
-            <a
-              class="slideshow__control--next"
-              id="next-slide"
-              role="button"
-              aria-controls="slideshow-container"
-              >&#10095;</a
-            >
-          </div>
-
-          <div class="slideshow-title-box">
-            <a id="slide-title-link" href="#">
-              <h3 id="slide-title">
-                Project Title Placeholder
-                <i class="fa fa-chevron-right" aria-hidden="true"></i>
-              </h3>
-            </a>
-          </div>
-
-          <div class="slideshow__dots">
-            <span class="slideshow__dot" data-slide-index="1"></span>
-            <span class="slideshow__dot" data-slide-index="2"></span>
-            <span class="slideshow__dot" data-slide-index="3"></span>
-            <span class="slideshow__dot" data-slide-index="4"></span>
           </div>
         </div>
       </section>
