@@ -389,6 +389,7 @@ header > .navbar::after {
 }
 
 /* --- 2. THE GRID (Flex Layout) --- */
+/* --- 2. THE GRID (Flex Layout - Mobile First Stack) --- */
 .feature-block__grid {
   display: flex;
   flex-direction: column; /* Mobile stack by default */
@@ -409,6 +410,8 @@ header > .navbar::after {
   box-shadow: var(--sys-shadow-halo-standard);
   display: block;
   margin: 0 auto; /* Centers image if it's smaller than the container */
+  order: 2; /* Image Second on Mobile */
+  margin-bottom: 1.5rem;
 }
 
 /* Override for Alt Block (Light Pine) */
@@ -417,11 +420,10 @@ header > .navbar::after {
 }
 
 /* --- 4. CONTENT (Text & Typography) --- */
+/* --- 4. CONTENT (Text & Typography) --- */
+/* MOBILE DEFAULT: 'display: contents' allows children to interleave with the image via order */
 .feature-block__content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: contents;
 }
 
 .feature-block__title--column {
@@ -432,6 +434,7 @@ header > .navbar::after {
   font-family: "Poppins", sans-serif;
   line-height: 1.3;
   text-align: center;
+  order: 1; /* Title First on Mobile */
 }
 
 .feature-block__intro-text {
@@ -440,6 +443,8 @@ header > .navbar::after {
   line-height: 1.6;
   max-width: 45ch;
   margin-bottom: 1.5rem;
+  order: 3; /* Text Third on Mobile */
+  text-align: center;
 }
 
 .feature-block__jump-link {
@@ -457,18 +462,20 @@ header > .navbar::after {
 .feature-block__quote-box {
   background-color: var(--sys-color-surface-variant);
   padding: 1.5rem;
-  border-left: 2px solid var(--sys-color-secondary);
+  border-left: 4px solid var(--sys-color-secondary); /* Global Mobile Default */
+  border-right: none;
   border-radius: 8px;
   font-size: 1.125rem;
   font-style: italic;
   width: 100%;
   text-align: center;
+  order: 2; /* With Image */
 }
 
 .feature-block__quote-box--on-alt {
   background-color: var(--sys-color-surface) !important;
-  border-left: none !important;
-  border-right: 2px solid var(--sys-color-secondary);
+  /* Retain border-left: 4px from base class on mobile */
+  border-right: none;
 }
 
 .feature-block__author {
@@ -482,54 +489,7 @@ header > .navbar::after {
 /* --- 6. RESPONSIVE ENGINE --- */
 
 /* UNIFIED MOBILE STACKING (1024px and below) */
-@media screen and (max-width: 1024px) {
-  .feature-block__grid,
-  .feature-block__grid--reverse {
-    flex-direction: column;
-    align-items: center; /* Ensures content is centered in the column */
-  }
 
-  /* Allow content children to be ordered by the grid */
-  .feature-block__content {
-    display: contents;
-  }
-
-  /* Enforce strict stacking order */
-  .feature-block__title--column {
-    order: 1;
-  }
-  .feature-block__image,
-  .feature-block__quote-container {
-    order: 2;
-  }
-  .feature-block__intro-text {
-    order: 3;
-  }
-  .button-group {
-    order: 4;
-  }
-}
-
-/* Desktop Pivot (1025px+) */
-@media screen and (min-width: 1025px) {
-  .feature-block__grid {
-    flex-direction: row;
-    justify-content: center;
-    gap: 5rem;
-  }
-
-  .feature-block__grid--reverse {
-    flex-direction: row-reverse;
-  }
-
-  /* On desktop, restore the content block's own flex context */
-  .feature-block__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-}
 
 /* Mobile Adjustments (600px-) */
 @media screen and (max-width: 600px) {
@@ -809,6 +769,49 @@ header > .navbar::after {
   }
 }
 
+.button-group {
+  order: 4; /* Buttons Last on Mobile */
+  justify-content: center;
+}
+
+/* --- 6. RESPONSIVE ENGINE (DESKTOP ENHANCEMENT 810px+) --- */
+@media screen and (min-width: 810px) {
+  /* 1. RESTORE GRID */
+  .feature-block__grid {
+    flex-direction: row;
+    justify-content: center;
+    gap: 5rem;
+  }
+
+  .feature-block__grid--reverse {
+    flex-direction: row-reverse;
+  }
+
+  /* 2. RESTORE CONTENT FLEX (Kill display: contents) */
+  .feature-block__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Reset Orders (Flex container ignores child order relative to separate flex items) */
+  /* But strictly, cleaner to reset if they leak? Flex items (Image vs Content) order matches source or row-reverse. */
+  
+  /* 3. DESKTOP QUOTE LOGIC (Alt faces right) */
+  .feature-block--alt .feature-block__quote-box {
+    border-left: none;
+    border-right: 4px solid var(--sys-color-secondary);
+  }
+  
+  /* Reset Text Align */
+  .feature-block__title--column,
+  .feature-block__intro-text,
+  .feature-block__quote-box {
+    text-align: left; /* Or center? User didn't specify, but usually Side-by-Side implies left align. keeping center for now as "safe" unless requested. User style guide implies center for these blocks usually. */
+  }
+}
+
 /* ================================================= */
 /* === [V3] REFACTORED: CONTACT MODAL & FORM      === */
 /* ================================================= */
@@ -990,39 +993,7 @@ header > .navbar::after {
 
 }
 
-@media screen and (max-width: 1024px) {
-  /* Ensure the grid container is a column for all mobile/tablet sizes */
-  .feature-block__grid, 
-  .feature-block__grid--reverse {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-  }
 
-  /* 1. TITLE FIRST */
-  .feature-block__title--column {
-    order: 1 !important; 
-    text-align: center;
-  }
-
-  /* 2. IMAGE SECOND */
-  .feature-block__media {
-    order: 2 !important;
-    margin-bottom: 1.5rem;
-  }
-
-  /* 3. TEXT THIRD */
-  .feature-block__intro-text {
-    order: 3 !important;
-    text-align: center;
-  }
-
-  /* 4. BUTTONS LAST */
-  .button-group {
-    order: 4 !important;
-    justify-content: center;
-  }
-}
 
 /* ================================================= */
 /* === [V19] SEMANTIC FOOTER REFACTOR            === */
