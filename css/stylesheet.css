@@ -158,6 +158,11 @@ body::before {
   /* Switched to Pseudo-Element for cleaner stacking */
   border: none !important;
   overflow: visible; /* Ensure pseudo-elements aren't clipped */
+  
+  /* MOBILE DEFAULT */
+  flex-flow: row wrap; /* Allows Toggle to sit right of logo, links to break below */
+  justify-content: space-between; /* Reserves space for Logo (Left) and Toggle (Right) */
+  align-items: center;
 }
 
 /* THE ACCENT LINE (Top Nav) */
@@ -194,9 +199,9 @@ header > .navbar::after {
   pointer-events: none;
 }
 
-/* 1. THE TOGGLE (Hamburger - HIDDEN BY DEFAULT) */
+/* 1. THE TOGGLE (Hamburger - VISIBLE BY DEFAULT) */
 .navbar__toggle {
-  display: none;
+  display: block; /* Mobile Default */
   float: right;
   color: var(--sys-color-tertiary);
   padding: 14px 24px; /* Matches the vertical height of desktop links */
@@ -205,6 +210,10 @@ header > .navbar::after {
   text-decoration: none;
   position: relative; /* Necessary for the magenta underline */
   transition: background-color 0.2s ease, color 0.2s ease;
+  /* align-self: flex-end; */ /* Handled by justify-content: space-between in row layout */
+  /* FORCE RIGHT ALIGNMENT in Flex Wrap Row */
+  margin-left: auto;
+  order: 2; /* Ensure it sits after the logo (order 0) */
 }
 
 /* Mimic the Desktop Navlink Hover */
@@ -223,12 +232,18 @@ header > .navbar::after {
   border-bottom: 3px solid var(--sys-color-tertiary); /* Magenta Signal */
 }
 
-/* 2. THE LINKS CONTAINER (Pushed to the Right) */
+/* 2. THE LINKS CONTAINER (Mobile: Collapsed/Hidden) */
 .navbar__links {
-  display: flex;
-  justify-content: flex-end; /* RIGHT ALIGNED */
+  display: none; /* Hidden by default */
+  flex-direction: column;
   width: 100%;
-  padding-right: 20px; /* Room for the bracket */
+  padding-right: 0;
+  order: 3; /* Ensures it breaks to the next line in the wrapped row */
+}
+
+/* OPEN STATE (JS toggles .responsive class on navbar) */
+.navbar.responsive .navbar__links {
+  display: flex;
 }
 
 /* Base Link Style: The "Hit-Box" */
@@ -238,16 +253,17 @@ header > .navbar::after {
      Min: 14px, Preferred: 1.1vw, Max: 17px */
   font-size: clamp(14px, 1.1vw, 17px);
   /* Reduce horizontal padding on tablets to keep the bar narrow */
-  padding: 14px clamp(12px, 1.5vw, 24px);
   font-weight: 400;
   color: var(--sys-color-surface);
   text-decoration: none;
 
-  /* RESTORED: Padding creates the clickable area and tab width */
+  /* MOBILE DEFAULT */
+  width: 100%;
   padding: 14px 24px;
-  display: inline-block; /* Essential for the bracket positioning */
+  display: block;
   transition: all 0.2s ease;
   position: relative;
+  /* border-radius: 0; */
 }
 
 /* THE HOVER: Tonal shift + Magenta Pathway */
@@ -268,28 +284,11 @@ header > .navbar::after {
   z-index: 1002; /* Above the 1001 accent line */
 }
 
-/* Contact Button 'Call to Action' (1070px+) - Ghost Button 
-   SCOPED to header to prevent footer leakage */
-@media screen and (min-width: 1025px) {
-  header .navbar__link[href*='contact'], 
-  header .navbar__link--contact-trigger {
-    border: 1px solid rgba(var(--sys-color-tertiary-rgb), 0.4);
-    /* BRAND SHAPE: Chrome Tab Radius */
-    border-radius: 12px 12px 0 0;
-    padding: 10px 20px; /* Adjusted to not hit edges */
-    margin-left: 10px; /* Spacing from neighbors */
-    align-self: center; /* Center vertically within the stretched navbar */
-    /* THE SIT: Flush against the 4px accent line */
-    margin-bottom: -4px;
-    z-index: 1002; /* Ensure it sits on top of the accent line visually if needed */
-  }
-}
-
 /* THE ACTIVE TAB: The 'Bridge' */
 .navbar__link.active {
   background-color: var(--sys-color-primary); /* Dark Pine */
   color: white;
-  border-radius: 12px 12px 0 0;
+  border-radius: 0; /* Mobile Square */
   z-index: 1001;
   /* This margin-bottom pulls the tab down to cover the rail */
   margin-bottom: -3px;
@@ -299,7 +298,7 @@ header > .navbar::after {
   pointer-events: none;
 }
 
-/* THE BRACKETS: Fixed Positioning */
+/* THE BRACKETS: Fixed Positioning (HIDDEN ON MOBILE) */
 .navbar__link.active::before,
 .navbar__link.active::after {
   content: "";
@@ -310,6 +309,7 @@ header > .navbar::after {
   background-color: transparent;
   box-shadow: 0 10px 0 0 var(--sys-color-primary);
   pointer-events: none; /* Prevents brackets from being clickable */
+  display: none; /* Mobile Default */
 }
 
 .navbar__link.active::before {
@@ -322,45 +322,96 @@ header > .navbar::after {
   border-bottom-left-radius: 19px;
 }
 
-/* 6. RESPONSIVE ENGINE (Breakpoint: 768px) */
-@media screen and (max-width: 768px) {
+
+/* --- DESKTOP ENHANCEMENT (810px+) --- */
+@media screen and (min-width: 810px) {
   .navbar {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
   }
 
   .navbar__toggle {
-    display: block; /* Hamburger only appears on Mobile */
+    display: none;
   }
 
   .navbar__links {
-    display: none; /* Links hidden until toggled */
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-right: 0;
-  }
-
-  /* State triggered by toggleMobileNav() in script.js */
-  .navbar.responsive .navbar__links {
     display: flex;
+    flex-direction: row;
+    justify-content: flex-end; /* RIGHT ALIGNED */
     width: 100%;
+    padding-right: 20px; /* Room for the bracket */
   }
 
   .navbar__link {
-    width: 100%;
-    margin-bottom: 0;
-    border-radius: 0;
+    width: auto;
+    display: inline-block;
+    padding: 14px clamp(12px, 1.5vw, 24px);
   }
 
+  /* Desktop Active State (With Tabs & Brackets) */
   .navbar__link.active {
-    /* Restore pointer-events for mobile menu accessibility if needed, 
-       otherwise keep none to prevent refresh */
-    pointer-events: none;
+    border-radius: 12px 12px 0 0;
   }
 
   .navbar__link.active::before,
   .navbar__link.active::after {
-    display: none; /* Brackets disabled for vertical stack */
+    display: block;
+  }
+}
+
+/* --- PRO DESKTOP ENHANCEMENT (1070px+) --- */
+/* The "Ghost Button" Anchor */
+@media screen and (min-width: 1070px) {
+  header .navbar__link[href*='contact'], 
+  header .navbar__link--contact-trigger {
+    border: 2px solid var(--sys-color-secondary); /* Violet Border */
+    border-radius: 0.5rem; /* Standard Button Shape */
+    padding: 6px 20px; /* SLEEK PADDING */
+    margin-left: 20px;
+    align-self: center; /* Center in nav bar */
+    margin-bottom: 0; /* Reset tab sit */
+    z-index: 1002;
+    transition: all 0.2s ease-in-out; /* Smooth transition */
+    box-sizing: border-box; /* STABILITY FIX */
+  }
+
+  /* REPURPOSE ::after for HIT AREA (Invisible Overlay) */
+  header .navbar__link[href*='contact']::after,
+  header .navbar__link--contact-trigger::after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: -10px;    /* Expands hit area up */
+    bottom: -10px; /* ...and down to meet ~44px target */
+    left: 0;
+    right: 0;
+    background-color: transparent; /* Invisible */
+    height: auto; /* Override standard 4px height */
+    width: auto; /* Override standard width */
+    animation: none; /* Kill slideIn */
+  }
+
+  /* Solid Fill & Electric Glow on Hover - RESET DEFAULTS */
+  header .navbar__link[href*='contact']:hover, 
+  header .navbar__link--contact-trigger:hover {
+    background-color: var(--sys-color-secondary);
+    color: white; /* On-Secondary */
+    box-shadow: 0 0 20px rgba(var(--sys-color-secondary-rgb), 0.6);
+    text-decoration: none !important;
+    border: 2px solid var(--sys-color-secondary); /* STABLE BORDER */
+    /* border-bottom: none !important; REMOVED to prevent jump */
+    /* border-top: 2px solid var(--sys-color-secondary); REMOVED to prevent jump */
+  }
+  
+  /* Prevent Magenta Line OR Overline on Hover */
+  header .navbar__link[href*='contact']:hover::after,
+  header .navbar__link--contact-trigger:hover::after {
+    display: block; /* Keep Hit Area active */
+    background-color: transparent !important; /* No Magenta */
+    height: auto; /* Maintain hit area height */
+    bottom: -10px; /* Maintain hit area position */
+    animation: none;
   }
 }
 
@@ -950,48 +1001,7 @@ header > .navbar::after {
 /* === [V18] GRID ARCHITECTURAL RESET (809px)    === */
 /* ================================================= */
 
-@media screen and (max-width: 809px) {
-  /* --- 1. NAVBAR MOBILE --- */
-  .navbar {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .navbar__toggle {
-    display: block;
-    padding: 1rem;
-  }
-  .navbar__links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-  }
-  .navbar.responsive .navbar__links {
-    display: flex;
-  }
-  .navbar__link.active::before,
-  .navbar__link.active::after {
-    display: none;
-  }
 
-  /* --- 2. SLIDESHOW MOBILE --- */
-  /* The global styles now correctly handle centering. 
-     We only need to adjust the 'straddle' amount for the smaller screen. */
-  .slideshow__control--prev {
-    left: -18px; /* Pulled in slightly for mobile */
-  }
-  .slideshow__control--next {
-    right: -18px; /* Pulled in slightly for mobile */
-  }
-
-  /* Centering the dots for mobile */
-  .slideshow__dots {
-    justify-content: center;
-    margin-bottom: 2rem;
-  }
-
-
-}
 
 
 
