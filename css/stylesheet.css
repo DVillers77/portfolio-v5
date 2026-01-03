@@ -488,16 +488,21 @@ header > .navbar::after {
 
 /* --- 3. MEDIA (Image Styling) --- */
 /* --- UNIFIED MEDIA STYLING --- */
+.feature-block__media {
+  display: contents; /* Allows image to participate in Grid Order */
+}
+
 .feature-block__image {
   width: 100%;
   max-width: 500px; /* Limits size on desktop */
-  aspect-ratio: 1 / 1; /* Forces the 1:1 ratio */
-  object-fit: cover; /* Ensures image fills the square without stretching */
-  border-radius: 8px;
+  height: auto; /* FLUID SCALING */
+  /* aspect-ratio: 1 / 1; REMOVED per fluid request */
+  object-fit: cover;
+  border-radius: 0.5rem; /* Explicit 0.5rem per global rule */
   box-shadow: var(--sys-shadow-halo-standard);
   display: block;
   margin: 0 auto; /* Centers image if it's smaller than the container */
-  order: 2; /* Image Second on Mobile */
+  order: -1; /* Image First on Mobile (Global Rule) */
   margin-bottom: 1.5rem;
 }
 
@@ -521,7 +526,7 @@ header > .navbar::after {
   font-family: "Poppins", sans-serif;
   line-height: 1.3;
   text-align: center;
-  order: 1; /* Title First on Mobile */
+  order: 0; /* Title Second (Natural Flow) */
 }
 
 .feature-block__intro-text {
@@ -530,7 +535,7 @@ header > .navbar::after {
   line-height: 1.6;
   max-width: 45ch;
   margin-bottom: 1.5rem;
-  order: 3; /* Text Third on Mobile */
+  order: 0; /* Text Third (Natural Flow) */
   text-align: center;
 }
 
@@ -555,8 +560,9 @@ header > .navbar::after {
   font-size: 1.125rem;
   font-style: italic;
   width: 100%;
+  width: 100%;
   text-align: center;
-  order: 2; /* With Image */
+  order: 0; /* Quote Follows Title (Natural Flow) */
 }
 
 .feature-block__quote-box--on-alt {
@@ -692,7 +698,7 @@ header > .navbar::after {
 .slideshow__image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Ensures 4:3 images fill 1:1 box */
   display: block;
 }
 
@@ -888,21 +894,89 @@ header > .navbar::after {
 @media screen and (min-width: 810px) {
   /* 1. RESTORE GRID */
   .feature-block__grid {
+    display: flex; /* Confirming flex */
     flex-direction: row;
     justify-content: center;
-    gap: 5rem;
+    align-items: stretch; /* FORCES columns to match height */
+    gap: 2rem; /* Tightened Gap */
   }
 
   .feature-block__grid--reverse {
     flex-direction: row-reverse;
   }
 
-  /* 2. RESTORE CONTENT FLEX (Kill display: contents) */
+  /* 2. RESTORE CONTENT FLEX (Kill display: contents from mobile) */
+  .feature-block__media {
+    display: flex;  /* Forces image container to be flex */
+    flex: 1 1 50%;  /* Strictly lock to 50% */
+    min-width: 0;   /* Prevents flex blowout */
+    height: 100%;   /* Fill grid height */
+  }
+
+  /* Force image to fill the locked column height */
+  .feature-block__media .feature-block__image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+  }
+
   .feature-block__content {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start !important; /* FORCED LEFT-ALIGN */
+    flex: 1 1 50%;
+    min-width: 0;
+  }
+
+  .feature-block__title--column {
+    order: 0;
+    margin-bottom: 1rem;
+    text-align: left !important;
+    margin-left: 0;
+  }
+
+  .feature-block__intro-text {
+    order: 0;
+    margin-bottom: 1rem;
+    text-align: left !important;
+    margin-left: 0;
+  }
+
+  .feature-block__quote-box {
+    order: 0;
+    margin-bottom: 1.5rem;
+    text-align: left !important;
+    margin-left: 0;
+  }
+
+  /* SUBTLE SEPARATOR: For 'Jump to' section on desktop */
+  .feature-block__jump-link {
+    border-top: 1px solid rgba(var(--sys-color-primary-rgb), 0.1);
+    padding-top: 1rem;
+    margin-top: 1rem;
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+
+  /* ENSURE BUTTON ROW STABILITY */
+  .button-group {
+    flex-direction: row;
+    justify-content: flex-start !important; /* FORCED LEFT-ALIGN */
+    gap: 0.75rem; /* Tightened per request */
+    flex-wrap: nowrap; /* Prevent stacking */
+    width: 100%;
+  }
+
+  /* FLUID BUTTONS: Specifically for mid-size desktop (810px - 950px) */
+  @media screen and (max-width: 950px) {
+    .button-group .button {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      white-space: nowrap;
+    }
   }
   
   /* Reset Orders (Flex container ignores child order relative to separate flex items) */
@@ -914,12 +988,7 @@ header > .navbar::after {
     border-right: 4px solid var(--sys-color-secondary);
   }
   
-  /* Reset Text Align */
-  .feature-block__title--column,
-  .feature-block__intro-text,
-  .feature-block__quote-box {
-    text-align: left; /* Or center? User didn't specify, but usually Side-by-Side implies left align. keeping center for now as "safe" unless requested. User style guide implies center for these blocks usually. */
-  }
+
 }
 
 /* ================================================= */
