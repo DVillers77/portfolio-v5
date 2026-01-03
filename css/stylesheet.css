@@ -313,13 +313,13 @@ header > .navbar::after {
 }
 
 .navbar__link.active::before {
-  left: -19px;
-  border-bottom-right-radius: 19px;
+  left: -1.1875rem; /* 19px -> 1.1875rem */
+  border-bottom-right-radius: 1.1875rem;
 }
 
 .navbar__link.active::after {
-  right: -19px;
-  border-bottom-left-radius: 19px;
+  right: -1.1875rem; /* 19px -> 1.1875rem */
+  border-bottom-left-radius: 1.1875rem;
 }
 
 
@@ -351,12 +351,47 @@ header > .navbar::after {
 
   /* Desktop Active State (With Tabs & Brackets) */
   .navbar__link.active {
-    border-radius: 12px 12px 0 0;
+    border-radius: 0.75rem 0.75rem 0 0; /* 12px -> 0.75rem */
   }
 
   .navbar__link.active::before,
   .navbar__link.active::after {
     display: block;
+  }
+
+  /* --- HERO & SLIDESHOW ENHANCEMENTS (810px+) --- */
+  .hero__title {
+    font-size: 3.75rem; /* PRO SCALE */
+    /* ELECTRIC GLOW: Intense Violet Layers */
+    text-shadow: 
+      0 0 10px rgba(var(--sys-color-secondary-rgb), 0.5),
+      0 0 20px rgba(var(--sys-color-secondary-rgb), 0.3),
+      0 2px 4px rgba(0,0,0,0.5);
+  }
+
+  .hero__subtitle {
+    font-size: 1.25rem;
+  }
+
+  .button-group {
+    flex-direction: row; /* Horizontal Buttons */
+  }
+
+  /* --- HERO & SLIDESHOW ENHANCEMENTS (810px+) --- */
+  /* --- HERO & SLIDESHOW ENHANCEMENTS (810px+) --- */
+  body .hero .hero__title {
+    font-size: 4.5rem; /* PRO SCALE: RESTORED IMPACT (High Specificity) */
+    margin-bottom: 2rem; /* INCREASED BREATHING ROOM */
+    /* ELECTRIC GLOW: THINNED FOR LEGIBILITY */
+    text-shadow: 
+      0 0 20px rgba(var(--sys-color-secondary-rgb), 0.6), /* Reduced from 0.8 */
+      0 0 40px rgba(var(--sys-color-tertiary-rgb), 0.3), /* Reduced from 0.6 */
+      /* 80px Layer REMOVED */
+      0 2px 4px rgba(0,0,0,0.5);
+  }
+
+  .hero__subtitle {
+    font-size: 1.25rem;
   }
 }
 
@@ -365,7 +400,7 @@ header > .navbar::after {
 @media screen and (min-width: 1070px) {
   header .navbar__link[href*='contact'], 
   header .navbar__link--contact-trigger {
-    border: 2px solid var(--sys-color-secondary); /* Violet Border */
+    border: 2px solid var(--sys-color-tertiary); /* MAGENTA BORDER (Primary Action) */
     border-radius: 0.5rem; /* Standard Button Shape */
     padding: 6px 20px; /* SLEEK PADDING */
     margin-left: 20px;
@@ -395,11 +430,11 @@ header > .navbar::after {
   /* Solid Fill & Electric Glow on Hover - RESET DEFAULTS */
   header .navbar__link[href*='contact']:hover, 
   header .navbar__link--contact-trigger:hover {
-    background-color: var(--sys-color-secondary);
+    background-color: var(--sys-color-tertiary); /* MAGENTA FILL */
     color: white; /* On-Secondary */
-    box-shadow: 0 0 20px rgba(var(--sys-color-secondary-rgb), 0.6);
+    box-shadow: 0 0 20px rgba(var(--sys-color-tertiary-rgb), 0.6); /* MAGENTA GLOW */
     text-decoration: none !important;
-    border: 2px solid var(--sys-color-secondary); /* STABLE BORDER */
+    border: 2px solid var(--sys-color-tertiary); /* MAGENTA BORDER */
     /* border-bottom: none !important; REMOVED to prevent jump */
     /* border-top: 2px solid var(--sys-color-secondary); REMOVED to prevent jump */
   }
@@ -414,6 +449,7 @@ header > .navbar::after {
     animation: none;
   }
 }
+
 
 /* ================================================= */
 /* === [V3] REFACTORED: FEATURE BLOCK (ZIG-ZAG)  === */
@@ -571,9 +607,13 @@ header > .navbar::after {
 
 .hero__title {
   font-family: var(--font-display);
-  font-size: var(--font-size-display);
+  font-size: 3.25rem; /* MOBILE DEFAULT: Brand Impact */
   color: var(--sys-color-surface);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Optional: Adds a bit of 'pop' against the green */
+  /* PERSISTENT GLOW: Violet Core for Mobile Identity (Boosted) */
+  text-shadow: 
+    0 0 10px rgba(var(--sys-color-secondary-rgb), 0.8), /* TIGHT CORE */
+    0 0 20px rgba(var(--sys-color-secondary-rgb), 0.7), /* BOOSTED BLOOM */
+    0 2px 4px rgba(0, 0, 0, 0.5);
   margin-bottom: 1rem;
   line-height: 1.1;
   font-weight: 700;
@@ -581,7 +621,7 @@ header > .navbar::after {
 
 .hero__subtitle {
   font-family: var(--font-body);
-  font-size: 1.25rem;
+  font-size: 1.125rem; /* MOBILE DEFAULT */
   color: rgba(var(--sys-color-surface-rgb), 0.9); /* Makes the subtitle soft white */
   max-width: 65ch; /* Restoring the readability limit */
   line-height: 1.5;
@@ -689,9 +729,25 @@ header > .navbar::after {
   color: var(--sys-color-tertiary);
 }
 
+/* 4a. NAV CHEVRONS (Protection: Layout Unchanged) */
+.slideshow__control {
+  /* ... positioning remains from above ... */
+  /* Update Colors: RESET TO DARK CIRCLE */
+  background-color: rgba(0, 0, 0, 0.6); 
+  border: none; /* Removed borders */
+}
+.slideshow__control:hover {
+  background-color: var(--sys-color-secondary); /* Violet Hover */
+  color: white;
+}
+.slideshow__control:hover {
+  background-color: var(--sys-color-secondary); /* Violet Hover */
+  color: white;
+  border-color: var(--sys-color-secondary);
+}
 .slideshow__control:active {
-  transform: translateY(-50%) scale(0.85);
-  background-color: var(--sys-color-tertiary);
+  background-color: var(--sys-color-tertiary); /* Magenta Active */
+  color: white;
 }
 
 /* 4. THE PILL: Styling moved from ID to BEM Class */
@@ -702,7 +758,9 @@ header > .navbar::after {
 
 .slideshow__pill-link {
   display: inline-block;
-  background-color: var(--sys-color-primary);
+  background-color: rgba(0, 0, 0, 0.5); /* IDLE: DARK HUD BG */
+  backdrop-filter: blur(10px); /* FROSTED GLASS */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* IDLE: NEUTRAL SILVER */
   color: white;
   padding: 0.8rem 1.6rem;
   border-radius: 100px;
@@ -710,13 +768,15 @@ header > .navbar::after {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   /* Restored your specific transition */
   transition: all 300ms ease;
+  font-family: var(--font-body); /* BRAND SANS-SERIF */
 }
 
 /* Restored your specific hover effects */
 .slideshow__pill-link:hover {
-  background-color: #444;
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(var(--sys-color-tertiary-rgb), 0.4);
+  background-color: rgba(255, 255, 255, 0.1); /* HOVER: LIGHT HUD TINT */
+  transform: none; /* HOVER: STABLE POSITION */
+  border-color: var(--sys-color-tertiary); /* HOVER: MAGENTA BORDER */
+  box-shadow: 0 0 15px rgba(var(--sys-color-tertiary-rgb), 0.5); /* HOVER: MAGENTA BLOOM */
 }
 
 /* 5. THE DOTS */
@@ -740,7 +800,7 @@ header > .navbar::after {
 }
 
 .slideshow__dot.active {
-  background-color: var(--sys-color-tertiary);
+  background-color: var(--sys-color-tertiary); /* MAGENTA ACTIVE */
   width: 24px;
   border-radius: 10px;
   box-shadow: 0 0 0 2px var(--sys-color-surface); /* Stabilizer Ring */
@@ -801,29 +861,28 @@ header > .navbar::after {
 
 /* 5. THE BUTTON GROUP (Layout Wrapper) - KEEPING FROM BONES */
 .button-group {
+  /* GLOBAL: Horizontal Row */
+  order: 4; 
+  justify-content: center;
+  flex-direction: row; /* FORCE ROW */
   margin-top: 2rem;
   display: flex;
-  justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
 }
 
-/* RESPONSIVE: Stack buttons on small screens - KEEPING FROM BONES */
-@media screen and (max-width: 600px) {
-  .button-group {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
+/* RESPONSIVE: Stack buttons on small screens (< 600px only if needed, but user asked for ROW globally) */
+/* User requested: "On mobile (< 810px), scale the button padding down slightly... to ensure they stay on one line" */
+@media screen and (max-width: 810px) {
   .button-group .button {
-    width: 100%;
+    padding: 10px 20px; /* Reduced padding for mobile row fit */
   }
 }
 
-.button-group {
-  order: 4; /* Buttons Last on Mobile */
-  justify-content: center;
-}
+/* RESPONSIVE: Stack buttons on small screens - KEEPING FROM BONES */
+
+
+
 
 /* --- 6. RESPONSIVE ENGINE (DESKTOP ENHANCEMENT 810px+) --- */
 @media screen and (min-width: 810px) {
@@ -940,6 +999,7 @@ header > .navbar::after {
 .contact-modal__button--submit {
   width: 100%;
   margin-top: 1rem;
+  border-radius: 0.5rem; /* Global Standard */
 }
 
 /* Restoring your specific hover glow for the submit button */
