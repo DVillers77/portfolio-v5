@@ -9,7 +9,7 @@
 
     <!-- The actual stylesheet link for the font -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@1,400;1,700&family=Poppins:wght@700;800&display=swap"
       rel="stylesheet"
     />
 
@@ -118,13 +118,33 @@
                 repo.
               </p>
               <div class="button-group">
-                <a href="#" class="button button--primary">Live Demo</a>
-                <a href="#" class="button button--tonal">Source Code</a>
+                <a href="#" class="button button--primary" aria-label="Live Demo for this project">Live Demo</a>
+                <a href="#" class="button button--tonal" aria-label="Source Code for this project">Source Code</a>
               </div>
             </div>
           </div>
         </div>
       </section>
     </main>
+    <!-- FOOTER NAVBAR -->
+    <footer class="footer">
+      <nav class="footer__nav" aria-label="Footer navigation">
+        <a href="#top" class="footer__link"
+          ><i class="fa fa-fw fa-arrow-up"></i> Top</a
+        >
+        <a href="./index.html" class="footer__link"
+          ><i class="fa fa-fw fa-fort-awesome"></i> Home</a
+        >
+        <a href="./about.html" class="footer__link"
+          ><i class="fa fa-fw fa-heartbeat"></i> About</a
+        >
+        <a href="./projects.html" class="footer__link"
+          ><i class="fa fa-fw fa-code"></i> Projects</a
+        >
+        <a class="navbar__link--contact-trigger footer__link" href="#"
+          ><i class="fa fa-fw fa-hand-o-right"></i> Contact</a
+        >
+      </nav>
+    </footer>
   </body>
 </html>

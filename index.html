@@ -11,7 +11,7 @@
     <!-- The actual stylesheet link for the font -->
     <!-- The actual stylesheet link for the font -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@1,400;1,700&family=Poppins:wght@700;800&display=swap"
       rel="stylesheet"
     />
 
@@ -42,7 +42,11 @@
           aria-controls="nav-links-menu"
           aria-expanded="false"
         >
-          <i class="fa fa-bars"></i>
+          <div class="navbar__toggle-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </a>
 
         <!-- Menu links container -->
@@ -51,6 +55,7 @@
             href="#"
             class="active active-page-name navbar__link"
             aria-current="page"
+            tabindex="-1"
             ><i class="fa fa-fw fa-fort-awesome"></i> Home</a
           >
           <a
@@ -121,25 +126,23 @@
 
             <div class="button-group">
               <a href="projects.html" class="button button--primary"
-                >Projects</a
+                aria-label="View my full portfolio of UX and development projects">Projects</a
               >
-              <a href="about.html" class="button button--tonal">My Story</a>
+              <a href="about.html" class="button button--tonal" aria-label="Learn more about my background and design journey on the About page">My Story</a>
             </div>
           </div>
         </div>
       </section>
 
       <!-- ROW 2 (Image Right, Text Left) -->
-      <section class="feature-block feature-block--alt" id="ken-robinson">
+      <section class="feature-block feature-block--alt feature-block--storyteller" id="ken-robinson">
         <div class="feature-block__grid feature-block__grid--reverse">
           <div class="feature-block__media">
-            <a href="images/flying-steam-engine-md.png">
-              <img
-                src="images/flying-steam-engine-md.png"
-                alt='A fantastical steampunk flying train with prominent wings and smoking chimneys soars through sunlit clouds above a detailed, elaborate cityscape at golden hour, embodying "Curiosity is the engine of achievement."'
-                class="feature-block__image"
-              />
-            </a>
+            <img
+              src="images/flying-steam-engine-md.png"
+              alt='A fantastical steampunk flying train with prominent wings and smoking chimneys soars through sunlit clouds above a detailed, elaborate cityscape at golden hour, embodying "Curiosity is the engine of achievement."'
+              class="feature-block__image"
+            />
           </div>
 
           <div class="feature-block__content">
@@ -162,16 +165,14 @@
       </section>
 
       <!-- Row 3 (Image Left, Text Right) -->
-      <section class="feature-block" id="inclusive-design">
+      <section class="feature-block feature-block--storyteller" id="inclusive-design">
         <div class="feature-block__grid">
           <div class="feature-block__media">
-            <a href="images/sketchplanations-the-curb-cut-effect-md.png">
-              <img
-                src="images/sketchplanations-the-curb-cut-effect-md.png"
-                alt="Curb-Cut Effect"
-                class="feature-block__image"
-              />
-            </a>
+            <img
+              src="images/sketchplanations-the-curb-cut-effect-md.png"
+              alt="Curb-Cut Effect"
+              class="feature-block__image"
+            />
           </div>
 
           <div class="feature-block__content">
@@ -194,18 +195,16 @@
       </section>
       <!-- Row 4(Image Right, Text Left) -->
       <section
-        class="feature-block feature-block--alt"
+        class="feature-block feature-block--alt feature-block--storyteller"
         id="designing-for-people"
       >
         <div class="feature-block__grid feature-block__grid--reverse">
           <div class="feature-block__media">
-            <a href="images/designing-for-people-md.png">
-              <img
-                src="images/designing-for-people-md.png"
-                alt="Conceptual image depicting a human mind integrated with mechanical gears, illustrating the importance of understanding human cognition when designing technology."
-                class="feature-block__image"
-              />
-            </a>
+            <img
+              src="images/designing-for-people-md.png"
+              alt="Conceptual image depicting a human mind integrated with mechanical gears, illustrating the importance of understanding human cognition when designing technology."
+              class="feature-block__image"
+            />
           </div>
 
           <div class="feature-block__content">
@@ -229,16 +228,14 @@
         </div>
       </section>
       <!-- Row 3 (Image Left, Text Right) -->
-      <section class="feature-block" id="interface-to-intuition">
+      <section class="feature-block feature-block--storyteller" id="interface-to-intuition">
         <div class="feature-block__grid">
           <div class="feature-block__media">
-            <a href="images/dain-miller-sadle-reigns-quote-md.png">
-              <img
-                src="images/dain-miller-sadle-reigns-quote-md.png"
-                alt="A conceptual digital illustration depicting a silhouetted figure confidently riding a glowing wireframe horse..."
-                class="feature-block__image"
-              />
-            </a>
+            <img
+              src="images/dain-miller-sadle-reigns-quote-md.png"
+              alt="A conceptual digital illustration depicting a silhouetted figure confidently riding a glowing wireframe horse..."
+              class="feature-block__image"
+            />
           </div>
 
           <div class="feature-block__content">
@@ -260,16 +257,16 @@
         </div>
       </section>
     </main>
-    <!-- FOOTER/ NAVBAR -->
-    <footer>
-      <nav class="navbar bottom" aria-label="Footer navigation">
-        <a href="#top" class="navbar__link"
+    <!-- FOOTER NAVBAR -->
+    <footer class="footer">
+      <nav class="footer__nav" aria-label="Footer navigation">
+        <a href="#top" class="footer__link"
           ><i class="fa fa-fw fa-arrow-up"></i> Top</a
         >
-        <a href="./about.html" class="navbar__link"
+        <a href="./about.html" class="footer__link"
           ><i class="fa fa-fw fa-heartbeat"></i> About</a
         >
-        <a href="./projects.html" class="navbar__link"
+        <a href="./projects.html" class="footer__link"
           ><i class="fa fa-fw fa-code"></i> Projects</a
         >
 
@@ -277,18 +274,18 @@
           href="https://github.com/DVillers77"
           target="_blank"
           rel="noopener noreferrer"
-          class="navbar__link"
+          class="footer__link"
           ><i class="fa fa-fw fa-github"></i> GitHub</a
         >
         <a
           href="https://www.linkedin.com/in/david-villers-6082963b/"
           target="_blank"
           rel="noopener noreferrer"
-          class="navbar__link"
+          class="footer__link"
           ><i class="fa fa-fw fa-linkedin"></i> LinkedIn</a
         >
 
-        <a class="navbar__link--contact-trigger navbar__link" href="#"
+        <a class="navbar__link--contact-trigger footer__link" href="#"
           ><i class="fa fa-fw fa-hand-o-right"></i> Contact</a
         >
       </nav>
@@ -302,7 +299,10 @@
             class="contact-modal__close-icon"
             aria-label="Close contact form"
           >
-            <i class="fa fa-close"></i>
+            <div class="contact-modal__close-icon-box">
+              <span></span>
+              <span></span>
+            </div>
           </button>
           <form
             action="https://formspree.io/f/xovnjzlr"

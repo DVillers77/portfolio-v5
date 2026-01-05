@@ -11,7 +11,7 @@
     <!-- The actual stylesheet link for the font -->
     <!-- The actual stylesheet link for the font -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@1,400;1,700&family=Poppins:wght@700;800&display=swap"
       rel="stylesheet"
     />
 
@@ -42,14 +42,18 @@
           aria-controls="nav-links-menu"
           aria-expanded="false"
         >
-          <i class="fa fa-bars"></i>
+          <div class="navbar__toggle-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </a>
         <!-- Menu links container -->
         <div class="navbar__links">
           <a href="./index.html" class="navbar__link--bracket-left navbar__link"
             ><i class="fa fa-fw fa-fort-awesome"></i> Home</a
           >
-          <a class="active active-page-name navbar__link" aria-current="page"
+          <a class="active active-page-name navbar__link" aria-current="page" tabindex="-1"
             ><i class="fa fa-fw fa-heartbeat"></i> About</a
           >
           <a
@@ -200,54 +204,58 @@
               apply my unique blend of human insight and technical proficiency.
             </p>
 
-            <div class="button-group">
-              <a
-                class="navbar__link--contact-trigger button button--primary"
-                href="#"
-              >
-                <i class="fa fa-fw fa-hand-o-right"></i> Contact Me
-              </a>
-              <a
-                href="https://www.linkedin.com/in/david-villers-6082963b/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="button button--tonal"
-              >
-                <i class="fa fa-linkedin"></i> LinkedIn
-              </a>
+            <div class="cta-group--contact">
+              <div class="button-group">
+                <a
+                  class="navbar__link--contact-trigger button button--primary"
+                  href="#"
+                  aria-label="Open contact form to send me a message"
+                >
+                  <i class="fa fa-fw fa-hand-o-right"></i> Contact Me
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/david-villers-6082963b/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="button button--tonal"
+                  aria-label="Visit my LinkedIn profile"
+                >
+                  <i class="fa fa-linkedin"></i> LinkedIn
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
     </main>
     <!-- FOOTER NAVBAR -->
-    <footer>
-      <nav class="navbar bottom" aria-label="Footer navigation">
-        <a href="#top" class="navbar__link"
+    <footer class="footer">
+      <nav class="footer__nav" aria-label="Footer navigation">
+        <a href="#top" class="footer__link"
           ><i class="fa fa-fw fa-arrow-up"></i> Top</a
         >
-        <a href="./index.html" class="navbar__link"
+        <a href="./index.html" class="footer__link"
           ><i class="fa fa-fw fa-fort-awesome"></i> Home</a
         >
 
-        <a href="./projects.html" class="navbar__link"
+        <a href="./projects.html" class="footer__link"
           ><i class="fa fa-fw fa-code"></i> Projects</a
         >
         <a
           href="https://github.com/DVillers77"
           target="_blank"
           rel="noopener noreferrer"
-          class="navbar__link"
+          class="footer__link"
           ><i class="fa fa-fw fa-github"></i> GitHub</a
         >
         <a
           href="https://www.linkedin.com/in/david-villers-6082963b/"
           target="_blank"
           rel="noopener noreferrer"
-          class="navbar__link"
+          class="footer__link"
           ><i class="fa fa-fw fa-linkedin"></i> LinkedIn</a
         >
-        <a class="navbar__link--contact-trigger navbar__link" href="#"
+        <a class="navbar__link--contact-trigger footer__link" href="#"
           ><i class="fa fa-fw fa-hand-o-right"></i> Contact</a
         >
       </nav>
@@ -261,7 +269,10 @@
             class="contact-modal__close-icon"
             aria-label="Close contact form"
           >
-            <i class="fa fa-close"></i>
+            <div class="contact-modal__close-icon-box">
+              <span></span>
+              <span></span>
+            </div>
           </button>
           <form
             action="https://formspree.io/f/xovnjzlr"

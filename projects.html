@@ -9,7 +9,7 @@
 
     <!-- The actual stylesheet link for the font -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@1,400;1,700&family=Poppins:wght@700;800&display=swap"
       rel="stylesheet"
     />
 
@@ -37,7 +37,11 @@
           aria-controls="nav-links-menu"
           aria-expanded="false"
         >
-          <i class="fa fa-bars"></i>
+          <div class="navbar__toggle-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </a>
         <!-- Menu links container -->
         <div class="navbar__links">
@@ -47,7 +51,7 @@
           <a href="./about.html" class="navbar__link--bracket-left navbar__link"
             ><i class="fa fa-fw fa-heartbeat"></i> About</a
           >
-          <a class="active active-page-name navbar__link" aria-current="page">
+          <a class="active active-page-name navbar__link" aria-current="page" tabindex="-1">
             <i class="fa fa-fw fa-code"></i> Projects</a
           >
           <a
@@ -201,9 +205,11 @@
             <p class="feature-block__intro-text">
               An interactive browser game focused on logic and clean UI.
             </p>
-            <div class="button-group">
-              <a href="#" class="button button--primary">Live Demo</a>
-              <a href="#" class="button button--tonal">Source Code</a>
+            <div class="cta-container--centered">
+              <div class="button-group">
+                <a href="#" class="button button--primary" aria-label="Live Demo for Modern Tic-Tac-Toe">Live Demo</a>
+                <a href="#" class="button button--tonal" aria-label="Source Code for Modern Tic-Tac-Toe">Source Code</a>
+              </div>
             </div>
           </div>
         </div>
@@ -224,9 +230,11 @@
               A productivity tool designed for task management and persistent
               data.
             </p>
-            <div class="button-group">
-              <a href="#" class="button button--primary">Live Demo</a>
-              <a href="#" class="button button--tonal">Source Code</a>
+            <div class="cta-container--centered">
+              <div class="button-group">
+                <a href="#" class="button button--primary" aria-label="Live Demo for Interactive To-Do App">Live Demo</a>
+                <a href="#" class="button button--tonal" aria-label="Source Code for Interactive To-Do App">Source Code</a>
+              </div>
             </div>
           </div>
         </div>
@@ -253,11 +261,11 @@
               The UX architecture and front-end development of this portfolio
               site.
             </p>
-            <div class="button-group">
-              <a href="casestudy-portfolio.html" class="button button--primary"
-                >Case Study</a
-              >
-              <a href="#" class="button button--tonal">Source Code</a>
+            <div class="cta-container--centered">
+              <div class="button-group">
+                <a href="casestudy-portfolio.html" class="button button--primary" aria-label="Case Study for Portfolio Meta-Project">Case Study</a>
+                <a href="#" class="button button--tonal" aria-label="Source Code for Portfolio Meta-Project">Source Code</a>
+              </div>
             </div>
           </div>
         </div>
@@ -277,41 +285,43 @@
             <p class="feature-block__intro-text">
               An exploration of data fetching and asynchronous UI updates.
             </p>
-            <div class="button-group">
-              <a href="#" class="button button--primary">Live Demo</a>
-              <a href="#" class="button button--tonal">Source Code</a>
+            <div class="cta-container--centered">
+              <div class="button-group">
+                <a href="#" class="button button--primary" aria-label="Live Demo for API Fun Center">Live Demo</a>
+                <a href="#" class="button button--tonal" aria-label="Source Code for API Fun Center">Source Code</a>
+              </div>
             </div>
           </div>
         </div>
       </section>
     </main>
     <!-- FOOTER NAVBAR -->
-    <footer>
-      <nav class="navbar bottom" aria-label="Footer navigation">
-        <a href="#top" class="navbar__link"
+    <footer class="footer">
+      <nav class="footer__nav" aria-label="Footer navigation">
+        <a href="#top" class="footer__link"
           ><i class="fa fa-fw fa-arrow-up"></i> Top</a
         >
-        <a href="./index.html" class="navbar__link"
+        <a href="./index.html" class="footer__link"
           ><i class="fa fa-fw fa-fort-awesome"></i> Home</a
         >
-        <a href="./about.html" class="navbar__link"
+        <a href="./about.html" class="footer__link"
           ><i class="fa fa-fw fa-heartbeat"></i> About</a
         >
         <a
           href="https://github.com/DVillers77"
           target="_blank"
           rel="noopener noreferrer"
-          class="navbar__link"
+          class="footer__link"
           ><i class="fa fa-fw fa-github"></i> GitHub</a
         >
         <a
           href="https://www.linkedin.com/in/david-villers-6082963b/"
           target="_blank"
           rel="noopener noreferrer"
-          class="navbar__link"
+          class="footer__link"
           ><i class="fa fa-fw fa-linkedin"></i> LinkedIn</a
         >
-        <a class="navbar__link--contact-trigger navbar__link" href="#"
+        <a class="navbar__link--contact-trigger footer__link" href="#"
           ><i class="fa fa-fw fa-hand-o-right"></i> Contact</a
         >
       </nav>
@@ -325,7 +335,10 @@
             class="contact-modal__close-icon"
             aria-label="Close contact form"
           >
-            <i class="fa fa-close"></i>
+            <div class="contact-modal__close-icon-box">
+              <span></span>
+              <span></span>
+            </div>
           </button>
           <form
             action="https://formspree.io/f/xovnjzlr"

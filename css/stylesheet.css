@@ -15,20 +15,45 @@ html {
   padding: 0;
 }
 
+/* 1.5 ACCESSIBILITY: Precision Focus Separation */
+.button:focus-visible {
+  outline: none !important;
+  /* The box-shadow MUST follow the border-radius */
+  box-shadow: 0 0 0 0.125rem white, 0 0 0 0.3125rem var(--sys-color-primary) !important;
+  /* Force the anchor tag to respect its original button curves */
+  border-radius: 0.5rem !important; 
+  position: relative;
+  z-index: 10;
+}
+
+.navbar__link:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 0.125rem white, 0 0 0 0.3125rem var(--sys-color-primary) !important;
+  border-radius: 0 !important; /* Keep nav links sharp */
+  position: relative;
+  z-index: 2002;
+}
+
+/* Fallback for other focusable elements */
+:focus-visible:not(.button):not(.navbar__link) {
+  outline: none !important;
+  box-shadow: 0 0 0 0.125rem white, 0 0 0 0.3125rem var(--sys-color-primary) !important;
+}
+
 :root {
-  /* --- 1. BASE PRIMITIVES (The Ingredients) --- */
-  --color-base-pine: 1, 98, 75;
-  --color-base-violet: 156, 39, 176;
-  --color-base-magenta: 255, 0, 255;
+  /* --- 1. BASE PRIMITIVES (M3 Tonal Palette) --- */
+  --sys-pine-rgb: 1, 98, 75;
+  --sys-violet-rgb: 156, 39, 176;
+  --sys-magenta-rgb: 255, 0, 255;
   --color-base-white: 255, 255, 255;
   --color-base-charcoal: 51, 51, 51;
   --color-base-black: 10, 10, 10;
   --color-base-error: 176, 0, 32;
 
   /* --- 2. SEMANTIC TOKENS (The Intent) --- */
-  --sys-color-primary-rgb: var(--color-base-pine);      /* Brand Core */
-  --sys-color-secondary-rgb: var(--color-base-violet);  /* Atmosphere/Feel */
-  --sys-color-tertiary-rgb: var(--color-base-magenta);  /* Interaction/Action */
+  --sys-color-primary-rgb: var(--sys-pine-rgb);      /* Brand Core */
+  --sys-color-secondary-rgb: var(--sys-violet-rgb);  /* Atmosphere/Feel */
+  --sys-color-tertiary-rgb: var(--sys-magenta-rgb);  /* Interaction/Action */
   --sys-color-surface-rgb: var(--color-base-white);
   --sys-color-on-surface-rgb: var(--color-base-charcoal);
 
@@ -44,7 +69,7 @@ html {
   /* Tonal Containers */
   --sys-color-primary-container: rgba(var(--sys-color-primary-rgb), 0.12);
   --sys-color-on-primary-container: var(--sys-color-primary);
-  --sys-color-surface-variant: #f0f7f5; /* Light Pine Tint - Exception for subtle variant */
+  --sys-color-surface-variant: #f0f7f5; /* Light Pine Tint */
 
   /* Text Colors */
   --sys-color-on-primary: var(--sys-color-surface);
@@ -54,54 +79,49 @@ html {
   --sys-color-focus-halo: rgba(var(--sys-color-primary-rgb), 0.4);
   --sys-color-error: rgb(var(--color-base-error));
 
-  /* --- 3. DEPTH & EFFECTS --- */
-  /* Re-mapped to maintain Violet/Magenta semantics if needed, or keep as is if strictly defined in old var names 
-     Old: --sys-shadow-navbar-accent: inset 0 -4px 6px -4px var(--sys-color-accent);
-     New Mapping: accent -> secondary (Violet) or tertiary (Magenta)? 
-     User said: "Interactive elements use --sys-color-tertiary." 
-     User said: "Violet (Secondary) to Magenta (Tertiary) on hover".
-     "Violet (Brand) to Magenta (Action)".
-     Let's map "accent" to tertiary (Magenta) for now as that was the old "accent".
-  */
-  --sys-shadow-navbar-accent: inset 0 -4px 6px -4px var(--sys-color-secondary); /* Navbar Line: Violet (Secondary) per "Violet (Brand)"? Or Magenta? 
-                                                                                   Detailed notes said "Violet line stays", so Secondary. */
+  /* --- 4. DEPTH & EFFECTS --- */
+  --sys-shadow-navbar-accent: inset 0 -0.25rem 0.375rem -0.25rem var(--sys-color-secondary);
 
   --glow-primary: 0 0 0.3125rem var(--sys-color-primary);
-  --glow-accent-strong: 0 0 10px 0 var(--sys-color-tertiary);      /* Magenta */
-  --glow-accent-subtle: 0 0 10px 0 rgba(var(--sys-color-secondary-rgb), 0.4); /* Violet subtle? Or Magenta? 
-                                                                              Old was accent (magenta). 
-                                                                              Let's use Secondary (Violet) for subtle atmosphere. */
+  --glow-accent-strong: 0 0 0.625rem 0 var(--sys-color-tertiary);
+  --glow-accent-subtle: 0 0 0.625rem 0 rgba(var(--sys-color-secondary-rgb), 0.4);
 
-  --sys-glow-accent-inset: inset 0 0 10px 0 rgba(var(--sys-color-tertiary-rgb), 0.4);
+  --sys-glow-accent-inset: inset 0 0 0.625rem 0 rgba(var(--sys-color-tertiary-rgb), 0.4);
   --sys-glow-primary-inset: inset 0 0 0.3125rem var(--sys-color-primary);
 
   --shadow-subtle: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
-  --shadow-modal: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  --shadow-modal: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.2),
+    0 0.375rem 1.25rem 0 rgba(0, 0, 0, 0.19);
 
-  /* New Environmental Halo System (Iteration 4 - Electric Core) */
-  /* 1. RIM: For images on dark backgrounds (Hero/Slideshow) - 1.5px White Rim (0.8 opacity) */
-  --sys-shadow-halo-rim: 0 0 0 1.5px rgba(255, 255, 255, 0.8), 0 4px 15px rgba(0, 0, 0, 0.5), 0 0 15px rgba(var(--sys-color-secondary-rgb), 0.75), 0 0 50px rgba(var(--sys-color-secondary-rgb), 0.3);
-
-  /* 2. STANDARD: For images on White Blocks - Lift focus */
-  --sys-shadow-halo-standard: 0 0 0 1.5px rgba(255, 255, 255, 0.8), 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 15px rgba(var(--sys-color-secondary-rgb), 0.7), 0 0 50px rgba(var(--sys-color-secondary-rgb), 0.2);
-
-  /* 3. ALT: For images on Pine Blocks - Tinted shadow for blending */
-  --sys-shadow-halo-alt: 0 0 0 1.5px rgba(255, 255, 255, 0.8), 0 10px 30px rgba(var(--sys-color-primary-rgb), 0.3), 0 0 15px rgba(var(--sys-color-secondary-rgb), 0.8), 0 0 50px rgba(var(--sys-color-secondary-rgb), 0.25);
+  /* Environmental Halo System */
+  --sys-shadow-halo-rim: 0 0 0 1.5px rgba(255, 255, 255, 0.8), 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.5), 0 0 0.9375rem rgba(var(--sys-color-secondary-rgb), 0.75), 0 0 3.125rem rgba(var(--sys-color-secondary-rgb), 0.3);
+  --sys-shadow-halo-standard: 0 0 0 1.5px rgba(255, 255, 255, 0.8), 0 0.625rem 1.875rem rgba(0, 0, 0, 0.15), 0 0 0.9375rem rgba(var(--sys-color-secondary-rgb), 0.7), 0 0 3.125rem rgba(var(--sys-color-secondary-rgb), 0.2);
+  --sys-shadow-halo-alt: 0 0 0 1.5px rgba(255, 255, 255, 0.8), 0 0.625rem 1.875rem rgba(var(--sys-color-primary-rgb), 0.3), 0 0 0.9375rem rgba(var(--sys-color-secondary-rgb), 0.8), 0 0 3.125rem rgba(var(--sys-color-secondary-rgb), 0.25);
 
   /* --- FLUID GRADIENT CONTROL --- */
   --nav-gradient-stop: 45vw;
-  --navbar-shelf-height: 15px;
+  --navbar-shelf-height: 0.9375rem;
 
   /* --- GLOBAL FONTS & TYPE SCALE (M3) --- */
   --font-display: "Poppins", sans-serif;
   --font-body: "Inter", sans-serif;
+  --font-quote: "Playfair Display", serif;
   
-  /* M3 Scale Variables */
+  /* M3 Scale Variables (rem-based) */
   --font-size-display: 3.5rem;   /* H1 */
   --font-size-headline: 1.75rem; /* H2 */
   --font-size-title: 1.125rem;   /* H3 */
   --font-size-body: 1rem;        /* Body */
+  --font-size-quote: 1.5rem;     /* Heroic Quote */
+
+  /* M3 Spacing & Rhythm Tokens */
+  --letter-spacing-display: -0.02em;
+  --letter-spacing-title: 0.01em;
+  --letter-spacing-body: 0.02em;
+  --line-height-display: 1.1;
+  --line-height-headline: 1.2;
+  --line-height-title: 1.4;
+  --line-height-body: 1.6;
 }
 
 /* ================================================= */
@@ -131,7 +151,7 @@ body::before {
    for the solid color area, preventing it from becoming too small. */
 @media screen and (max-width: 809px) {
   :root {
-    --nav-gradient-stop: calc(180px + 15vw);
+    --nav-gradient-stop: calc(11.25rem + 15vw);
   }
 }
 /* The 'Spine' of the site */
@@ -163,6 +183,7 @@ body::before {
   flex-flow: row wrap; /* Allows Toggle to sit right of logo, links to break below */
   justify-content: space-between; /* Reserves space for Logo (Left) and Toggle (Right) */
   align-items: center;
+  position: relative; /* Enable focus ring z-index */
 }
 
 /* THE ACCENT LINE (Top Nav) */
@@ -183,29 +204,35 @@ header > .navbar::after {
   top: 100%;
   left: 0;
   width: 100%;
-  height: var(--navbar-shelf-height);
-  z-index: -1; /* STACKING FIX: Ensure it sits behind the border */
+  height: 0.9375rem;
+  z-index: -1;
 
-  /* This creates a solid block for the first 12px, 
-     then fades out over the last 6px */
+  /* SAFE HARBOR: Only show shelf on desktop where brackets exist */
+  display: none; 
+
   background: linear-gradient(
     to bottom,
     var(--sys-color-primary) 0%,
-    var(--sys-color-primary) 12px,
+    var(--sys-color-primary) 0.75rem,
     transparent 100%
   );
-
-  z-index: -1;
   pointer-events: none;
+}
+
+@media screen and (min-width: 810px) {
+  header > .navbar::after {
+    display: block; /* Restore shelf for desktop brackets */
+  }
 }
 
 /* 1. THE TOGGLE (Hamburger - VISIBLE BY DEFAULT) */
 .navbar__toggle {
-  display: block; /* Mobile Default */
+  display: flex; /* Mobile Default */
+  align-items: center;
+  justify-content: center;
   float: right;
   color: var(--sys-color-tertiary);
-  padding: 14px 24px; /* Matches the vertical height of desktop links */
-  font-size: 1.5rem;
+  padding: 0.875rem 1.5rem; /* Matches the vertical height of desktop links */
   cursor: pointer;
   text-decoration: none;
   position: relative; /* Necessary for the magenta underline */
@@ -216,34 +243,62 @@ header > .navbar::after {
   order: 2; /* Ensure it sits after the logo (order 0) */
 }
 
-/* Mimic the Desktop Navlink Hover */
-.navbar__toggle:hover {
-  background-color: #444; /* Charcoal shift */
-  color: var(--sys-color-surface); /* Shifts icon to white for contrast */
+/* CUSTOM CSS HAMBURGER */
+.navbar__toggle-icon {
+  width: 1.5rem;
+  height: 1.125rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* The Magenta Line mimic */
-.navbar__toggle:hover::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
+.navbar__toggle-icon span {
+  display: block;
   width: 100%;
-  border-bottom: 3px solid var(--sys-color-tertiary); /* Magenta Signal */
+  height: 2px; /* Matches font thickness per user constraint */
+  background-color: currentColor;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 0.125rem;
+}
+
+/* Animation: Hamburger to X */
+.navbar.responsive .navbar__toggle-icon span:nth-child(1) {
+  transform: translateY(0.5rem) rotate(45deg);
+}
+
+.navbar.responsive .navbar__toggle-icon span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-1.25rem);
+}
+
+.navbar.responsive .navbar__toggle-icon span:nth-child(3) {
+  transform: translateY(-0.5rem) rotate(-45deg);
+}
+
+/* Mimic the Desktop Navlink Hover */
+.navbar__toggle:hover {
+  background-color: rgba(var(--sys-color-on-surface-rgb), 0.15); /* Tonal Charcoal shift */
+  color: var(--sys-color-surface); /* Shifts icon to white for contrast */
 }
 
 /* 2. THE LINKS CONTAINER (Mobile: Collapsed/Hidden) */
 .navbar__links {
-  display: none; /* Hidden by default */
+  display: flex; /* Always flex, control visibility with height */
   flex-direction: column;
   width: 100%;
   padding-right: 0;
   order: 3; /* Ensures it breaks to the next line in the wrapped row */
+  
+  /* MOMENTUM TRANSITION */
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* OPEN STATE (JS toggles .responsive class on navbar) */
 .navbar.responsive .navbar__links {
-  display: flex;
+  max-height: 500px; /* High enough for all links */
 }
 
 /* Base Link Style: The "Hit-Box" */
@@ -251,7 +306,8 @@ header > .navbar::after {
   font-family: var(--font-body);
   /* Use clamp for fluid typography: 
      Min: 14px, Preferred: 1.1vw, Max: 17px */
-  font-size: clamp(14px, 1.1vw, 17px);
+  font-size: clamp(0.875rem, 1.1vw, 1.0625rem);
+  letter-spacing: var(--letter-spacing-body);
   /* Reduce horizontal padding on tablets to keep the bar narrow */
   font-weight: 400;
   color: var(--sys-color-surface);
@@ -259,29 +315,28 @@ header > .navbar::after {
 
   /* MOBILE DEFAULT */
   width: 100%;
-  padding: 14px 24px;
+  padding: 0.875rem 1.5rem;
   display: block;
   transition: all 0.2s ease;
   position: relative;
   /* border-radius: 0; */
 }
 
-/* THE HOVER: Tonal shift + Magenta Pathway */
+/* THE HOVER: Tonal shift & Accent Line */
 .navbar__link:hover:not(.active) {
-  background-color: #444; /* Tonal highlight */
+  background-color: #444; 
 }
 
-/* SYNC MAGENTA HIGHLIGHT: 4px thick */
+/* THE ACCENT RAIL ON HOVER (Top Nav) */
 .navbar__link:hover:not(.active)::after {
   content: "";
   position: absolute;
-  bottom: 0px;
+  bottom: 0; /* SACRED: Bottom for Top Nav */
   left: 0;
   width: 100%;
-  height: 4px; /* Matched to Accent Lines */
-  background-color: var(--sys-color-tertiary);
-  animation: slideIn 0.3s ease-out forwards;
-  z-index: 1002; /* Above the 1001 accent line */
+  height: 0.25rem;
+  background-color: var(--sys-color-tertiary); /* Magenta */
+  z-index: 1005;
 }
 
 /* THE ACTIVE TAB: The 'Bridge' */
@@ -304,10 +359,10 @@ header > .navbar::after {
   content: "";
   position: absolute;
   bottom: 0;
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   background-color: transparent;
-  box-shadow: 0 10px 0 0 var(--sys-color-primary);
+  box-shadow: 0 0.625rem 0 0 var(--sys-color-primary);
   pointer-events: none; /* Prevents brackets from being clickable */
   display: none; /* Mobile Default */
 }
@@ -340,13 +395,15 @@ header > .navbar::after {
     flex-direction: row;
     justify-content: flex-end; /* RIGHT ALIGNED */
     width: 100%;
-    padding-right: 20px; /* Room for the bracket */
+    padding-right: 1.25rem; /* Room for the bracket */
+    max-height: none; /* Disable mobile collapse */
+    overflow: visible;
   }
 
   .navbar__link {
     width: auto;
     display: inline-block;
-    padding: 14px clamp(12px, 1.5vw, 24px);
+    padding: 0.875rem clamp(0.75rem, 1.5vw, 1.5rem);
   }
 
   /* Desktop Active State (With Tabs & Brackets) */
@@ -378,16 +435,13 @@ header > .navbar::after {
   }
 
   /* --- HERO & SLIDESHOW ENHANCEMENTS (810px+) --- */
-  /* --- HERO & SLIDESHOW ENHANCEMENTS (810px+) --- */
   body .hero .hero__title {
-    font-size: 4.5rem; /* PRO SCALE: RESTORED IMPACT (High Specificity) */
-    margin-bottom: 2rem; /* INCREASED BREATHING ROOM */
-    /* ELECTRIC GLOW: THINNED FOR LEGIBILITY */
+    font-size: 4.5rem; /* PRO SCALE: RESTORED IMPACT */
+    margin-bottom: 2rem;
     text-shadow: 
-      0 0 20px rgba(var(--sys-color-secondary-rgb), 0.6), /* Reduced from 0.8 */
-      0 0 40px rgba(var(--sys-color-tertiary-rgb), 0.3), /* Reduced from 0.6 */
-      /* 80px Layer REMOVED */
-      0 2px 4px rgba(0,0,0,0.5);
+      0 0 1.25rem rgba(var(--sys-color-secondary-rgb), 0.6),
+      0 0 2.5rem rgba(var(--sys-color-tertiary-rgb), 0.3),
+      0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
   }
 
   .hero__subtitle {
@@ -395,60 +449,6 @@ header > .navbar::after {
   }
 }
 
-/* --- PRO DESKTOP ENHANCEMENT (1070px+) --- */
-/* The "Ghost Button" Anchor */
-@media screen and (min-width: 1070px) {
-  header .navbar__link[href*='contact'], 
-  header .navbar__link--contact-trigger {
-    border: 2px solid var(--sys-color-tertiary); /* MAGENTA BORDER (Primary Action) */
-    border-radius: 0.5rem; /* Standard Button Shape */
-    padding: 6px 20px; /* SLEEK PADDING */
-    margin-left: 20px;
-    align-self: center; /* Center in nav bar */
-    margin-bottom: 0; /* Reset tab sit */
-    z-index: 1002;
-    transition: all 0.2s ease-in-out; /* Smooth transition */
-    box-sizing: border-box; /* STABILITY FIX */
-  }
-
-  /* REPURPOSE ::after for HIT AREA (Invisible Overlay) */
-  header .navbar__link[href*='contact']::after,
-  header .navbar__link--contact-trigger::after {
-    display: block;
-    content: "";
-    position: absolute;
-    top: -10px;    /* Expands hit area up */
-    bottom: -10px; /* ...and down to meet ~44px target */
-    left: 0;
-    right: 0;
-    background-color: transparent; /* Invisible */
-    height: auto; /* Override standard 4px height */
-    width: auto; /* Override standard width */
-    animation: none; /* Kill slideIn */
-  }
-
-  /* Solid Fill & Electric Glow on Hover - RESET DEFAULTS */
-  header .navbar__link[href*='contact']:hover, 
-  header .navbar__link--contact-trigger:hover {
-    background-color: var(--sys-color-tertiary); /* MAGENTA FILL */
-    color: white; /* On-Secondary */
-    box-shadow: 0 0 20px rgba(var(--sys-color-tertiary-rgb), 0.6); /* MAGENTA GLOW */
-    text-decoration: none !important;
-    border: 2px solid var(--sys-color-tertiary); /* MAGENTA BORDER */
-    /* border-bottom: none !important; REMOVED to prevent jump */
-    /* border-top: 2px solid var(--sys-color-secondary); REMOVED to prevent jump */
-  }
-  
-  /* Prevent Magenta Line OR Overline on Hover */
-  header .navbar__link[href*='contact']:hover::after,
-  header .navbar__link--contact-trigger:hover::after {
-    display: block; /* Keep Hit Area active */
-    background-color: transparent !important; /* No Magenta */
-    height: auto; /* Maintain hit area height */
-    bottom: -10px; /* Maintain hit area position */
-    animation: none;
-  }
-}
 
 
 /* ================================================= */
@@ -459,13 +459,13 @@ header > .navbar::after {
 .feature-block {
   background-color: var(--sys-color-surface);
   padding: 4rem 1.25rem;
-  margin-bottom: 18px; /* Tighter 18px Gutter Splash */
+  margin-bottom: 1.125rem; /* Tighter 18px Gutter Splash */
   width: 100%;
 }
 
 /* Modifiers for Block */
 .feature-block--first {
-  margin-top: 18px;
+  margin-top: 1.125rem;
   border-radius: 2rem 2rem 0 0; /* Rounded shoulders */
 }
 
@@ -481,9 +481,9 @@ header > .navbar::after {
   display: flex;
   flex-direction: column; /* Mobile stack by default */
   gap: 2rem;
-  max-width: 1200px;
+  max-width: 1200px; /* THE ANCHOR */
   margin: 0 auto;
-  align-items: center;
+  align-items: flex-start; /* Standard: Left-Aligned */
 }
 
 /* --- 3. MEDIA (Image Styling) --- */
@@ -518,65 +518,82 @@ header > .navbar::after {
   display: contents;
 }
 
+/* Modifiers for Content */
+.feature-block--storyteller .feature-block__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .feature-block__title--column {
   font-size: var(--font-size-headline);
+  letter-spacing: 0;
   max-width: 26ch;
   color: var(--sys-color-primary);
-  margin-bottom: 2rem;
-  font-family: "Poppins", sans-serif;
-  line-height: 1.3;
+  margin-bottom: 2.5rem; /* ELEVATED spacing for editorial rhythm */
+  font-family: var(--font-display);
+  line-height: var(--line-height-headline);
+  text-align: left; /* Standard: Left-Aligned */
+}
+
+/* Storyteller Override */
+.feature-block--storyteller .feature-block__title--column {
   text-align: center;
-  order: 0; /* Title Second (Natural Flow) */
 }
 
 .feature-block__intro-text {
   font-family: var(--font-body);
-  font-size: 1.125rem;
-  line-height: 1.6;
-  max-width: 45ch;
+  font-size: var(--font-size-body);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body);
+  max-width: 31.25rem; /* Constrained for readability */
   margin-bottom: 1.5rem;
-  order: 0; /* Text Third (Natural Flow) */
-  text-align: center;
+  text-align: left; /* Standard: Left-Aligned */
 }
 
 .feature-block__jump-link {
-  font-size: 1.25rem;
+  font-size: var(--font-size-title);
+  line-height: var(--line-height-title);
+  letter-spacing: var(--letter-spacing-title);
   color: var(--sys-color-primary);
   margin-bottom: 1rem;
+  order: 4; /* SACRED ORDER: Per Engineering Notes */
 }
 
 /* --- 5. QUOTES & AUTHORS --- */
 .feature-block__quote-container {
-  width: 400px;
+  width: 500px; /* Increased for better visual gravity balance */
   max-width: 100%;
 }
 
 .feature-block__quote-box {
   background-color: var(--sys-color-surface-variant);
-  padding: 1.5rem;
-  border-left: 4px solid var(--sys-color-secondary); /* Global Mobile Default */
+  padding: 2rem 2.5rem;
+  border-left: 0.25rem solid var(--sys-color-secondary);
   border-right: none;
-  border-radius: 8px;
-  font-size: 1.125rem;
+  border-radius: 0.5rem;
+  font-family: var(--font-quote);
+  font-size: var(--font-size-quote); /* HEROIC: 1.5rem */
   font-style: italic;
   width: 100%;
-  width: 100%;
-  text-align: center;
-  order: 0; /* Quote Follows Title (Natural Flow) */
+  text-align: left !important;
 }
 
 .feature-block__quote-box--on-alt {
   background-color: var(--sys-color-surface) !important;
-  /* Retain border-left: 4px from base class on mobile */
-  border-right: none;
 }
 
 .feature-block__author {
-  text-align: right;
+  font-family: var(--font-body);
+  text-align: right; /* Standard Signature Position */
   margin-top: 1rem;
-  font-size: 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: var(--sys-color-primary);
   width: 100%;
+  padding-right: 1rem !important; /* Optical Margin Signature */
 }
 
 /* --- 6. RESPONSIVE ENGINE --- */
@@ -613,15 +630,16 @@ header > .navbar::after {
 
 .hero__title {
   font-family: var(--font-display);
-  font-size: 3.25rem; /* MOBILE DEFAULT: Brand Impact */
+  font-size: var(--font-size-display); /* M3 Scale */
+  letter-spacing: var(--letter-spacing-display);
   color: var(--sys-color-surface);
   /* PERSISTENT GLOW: Violet Core for Mobile Identity (Boosted) */
   text-shadow: 
-    0 0 10px rgba(var(--sys-color-secondary-rgb), 0.8), /* TIGHT CORE */
-    0 0 20px rgba(var(--sys-color-secondary-rgb), 0.7), /* BOOSTED BLOOM */
-    0 2px 4px rgba(0, 0, 0, 0.5);
+    0 0 0.625rem rgba(var(--sys-color-secondary-rgb), 0.8), /* TIGHT CORE */
+    0 0 1.25rem rgba(var(--sys-color-secondary-rgb), 0.7), /* BOOSTED BLOOM */
+    0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
   margin-bottom: 1rem;
-  line-height: 1.1;
+  line-height: var(--line-height-display);
   font-weight: 700;
 }
 
@@ -677,7 +695,7 @@ header > .navbar::after {
   width: 100%;
   aspect-ratio: 1 / 1; /* Keeps it square */
   /* overflow: hidden; */ /* MOVED to the slide itself to unclip buttons */
-  border-radius: 8px;
+  border-radius: 0.5rem;
   background-color: #000;
   box-shadow: var(--sys-shadow-halo-rim);
   margin-bottom: 1.5rem;
@@ -688,7 +706,7 @@ header > .navbar::after {
   height: 100%;
   display: none;
   overflow: hidden; /* CLIPS the image content, not the controls */
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 
 .slideshow__slide--active {
@@ -709,8 +727,8 @@ header > .navbar::after {
   top: 50%;
   transform: translateY(-50%);
   z-index: 20;
-  width: 54px;
-  height: 54px;
+  width: 3.375rem;
+  height: 3.375rem;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   border-radius: 50%;
@@ -724,14 +742,23 @@ header > .navbar::after {
 
 /* Base position: Safe inside the image area */
 .slideshow__control--prev {
-  left: -27px;
+  left: -1.125rem; /* MOBILE STRADDLE: -18px (75% in / 25% out) */
 }
 .slideshow__control--next {
-  right: -27px;
+  right: -1.125rem;
+}
+
+@media screen and (min-width: 810px) {
+  .slideshow__control--prev {
+    left: -1.6875rem; /* DESKTOP STRADDLE: -27px (50/50) */
+  }
+  .slideshow__control--next {
+    right: -1.6875rem;
+  }
 }
 
 .slideshow__control:hover {
-  background-color: #444;
+  background-color: rgba(var(--sys-color-on-surface-rgb), 0.85);
   color: var(--sys-color-tertiary);
 }
 
@@ -789,7 +816,7 @@ header > .navbar::after {
 .slideshow__dots {
   display: flex;
   justify-content: center; /* THIS CENTERS THE DOTS GLOBALLY */
-  gap: 12px;
+  gap: 0.75rem;
   align-items: center;
   margin-bottom: 5rem;
   padding: 0;
@@ -797,8 +824,8 @@ header > .navbar::after {
 }
 
 .slideshow__dot {
-  width: 8px;
-  height: 8px;
+  width: 0.5rem;
+  height: 0.5rem;
   background-color: rgba(var(--sys-color-secondary-rgb), 0.85);
   border-radius: 50%;
   cursor: pointer;
@@ -807,9 +834,9 @@ header > .navbar::after {
 
 .slideshow__dot.active {
   background-color: var(--sys-color-tertiary); /* MAGENTA ACTIVE */
-  width: 24px;
-  border-radius: 10px;
-  box-shadow: 0 0 0 2px var(--sys-color-surface); /* Stabilizer Ring */
+  width: 1.5rem;
+  border-radius: 0.625rem;
+  box-shadow: 0 0 0 0.125rem var(--sys-color-surface); /* Stabilizer Ring */
 }
 
 /* ================================================= */
@@ -829,7 +856,8 @@ header > .navbar::after {
   text-decoration: none;
   border: none;
   cursor: pointer;
-  gap: 10px;
+  gap: 0.625rem;
+  white-space: nowrap; /* FORCE SINGLE LINE */
 
   /* 300ms transition to reduce "noise" */
   transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -842,8 +870,9 @@ header > .navbar::after {
 }
 
 .button--primary:hover:not(:disabled) {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(var(--sys-color-tertiary-rgb), 0.4);
+  transform: translateY(-0.1875rem);
+  background-color: var(--sys-color-tertiary); /* M3 Interaction: Pine to Magenta */
+  box-shadow: 0 0.375rem 0.9375rem rgba(var(--sys-color-tertiary-rgb), 0.4);
 }
 
 /* 3. MODIFIER: TONAL */
@@ -853,35 +882,107 @@ header > .navbar::after {
 }
 
 .button--tonal:hover:not(:disabled) {
-  transform: translateY(-3px);
-  background-color: rgba(var(--sys-color-primary-rgb), 0.18);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Grey Shadow */
+  transform: translateY(-0.1875rem);
+  background-color: rgba(var(--sys-color-secondary-rgb), 0.18); /* Tonal Violet Shift */
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
 }
 
 /* 4. THE MOBILE SOLUTION: ACTIVE STATE */
 .button:active:not(:disabled) {
-  transform: translateY(1px) scale(0.98);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(0.0625rem) scale(0.98);
+  box-shadow: inset 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
   filter: brightness(0.9);
 }
 
 /* 5. THE BUTTON GROUP (Layout Wrapper) - KEEPING FROM BONES */
 .button-group {
-  /* GLOBAL: Horizontal Row */
-  order: 4; 
-  justify-content: center;
-  flex-direction: row; /* FORCE ROW */
-  margin-top: 2rem;
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  order: 5; /* SACRED ORDER: Sits below H3 (order 4) */
 }
 
-/* RESPONSIVE: Stack buttons on small screens (< 600px only if needed, but user asked for ROW globally) */
-/* User requested: "On mobile (< 810px), scale the button padding down slightly... to ensure they stay on one line" */
+/* --- 6. CTA ALIGNMENT STRATEGY (V21) --- */
+.cta-container--centered {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.cta-group--contact {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+/* ================================================= */
+/* === [V20] MOBILE CALIBRATION & TOUCH SAFETY   === */
+/* ================================================= */
 @media screen and (max-width: 810px) {
+  /* 1. BUTTON SMASH PROTECTION (Mobile CTA Affordance) */
+  .button-group {
+    flex-direction: column !important; /* RESTORED: Vertical Stack */
+    gap: 1.25rem;
+    align-items: center !important;
+    width: 100% !important;
+  }
+  
   .button-group .button {
-    padding: 10px 20px; /* Reduced padding for mobile row fit */
+    min-width: 200px; /* RESTORED */
+    padding: 0.625rem 2.5rem; /* RESTORED SACRED: 2.5rem padding */
+    width: auto !important;
+    text-align: center;
+  }
+
+  /* 2. VERTICAL STACK STABILITY: ALL Blocks Center */
+  .feature-block__content {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100%;
+  }
+
+  /* Titles & Text align to center */
+  .feature-block__title--column,
+  .feature-block__intro-text,
+  .feature-block__jump-link {
+    text-align: center !important;
+  }
+
+  /* 3. OVERFLOW & PILLAR PROTECTION */
+  .feature-block__quote-container, 
+  .feature-block__quote-box {
+    max-width: 100% !important;
+    width: auto !important;
+  }
+
+  /* 4. FOOTER ALIGNMENT PROTECTION */
+  footer .navbar__links,
+  footer .navbar {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  footer .navbar__link {
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Contact Page Mobile Signature */
+  .cta-group--contact {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1.25rem;
+    width: 100% !important;
+  }
+
+  .cta-group--contact .button {
+    min-width: 200px;
+    padding: 0.625rem 2.5rem;
+    width: auto !important; /* DO NOT STRETCH */
   }
 }
 
@@ -890,8 +991,8 @@ header > .navbar::after {
 
 
 
-/* --- 6. RESPONSIVE ENGINE (DESKTOP ENHANCEMENT 810px+) --- */
-@media screen and (min-width: 810px) {
+/* --- 6. RESPONSIVE ENGINE (DESKTOP ENHANCEMENT 811px+) --- */
+@media screen and (min-width: 811px) {
   /* 1. RESTORE GRID */
   .feature-block__grid {
     display: flex; /* Confirming flex */
@@ -925,35 +1026,51 @@ header > .navbar::after {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start !important; /* FORCED LEFT-ALIGN */
-    flex: 1 1 50%;
-    min-width: 0;
+    width: 50%; /* Mandatory Split */
+    padding: 0 40px; /* Fixed Gutter */
+    align-items: flex-start; /* Standard: Strictly Left */
   }
 
-  .feature-block__title--column {
-    order: 0;
-    margin-bottom: 1rem;
-    text-align: left !important;
-    margin-left: 0;
+  /* Storyteller Center Override */
+  .feature-block--storyteller .feature-block__content {
+    align-items: center;
   }
 
-  .feature-block__intro-text {
-    order: 0;
-    margin-bottom: 1rem;
-    text-align: left !important;
-    margin-left: 0;
+  /* HUGGING LOGIC: Standard Blocks are strictly left-aligned */
+  .feature-block .feature-block__content {
+    align-items: flex-start;
+    text-align: left;
   }
 
-  .feature-block__quote-box {
-    order: 0;
-    margin-bottom: 1.5rem;
-    text-align: left !important;
+  .feature-block__title--column,
+  .feature-block__intro-text,
+  .feature-block__quote-container {
+    max-width: 500px; /* Mandatory Readability Constraint */
+    width: 100%;
     margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* STORYTELLER COMPONENT: Center Pillars */
+  .feature-block--storyteller .feature-block__title--column,
+  .feature-block--storyteller .feature-block__intro-text,
+  .feature-block--storyteller .feature-block__quote-container {
+    text-align: center;
+  }
+
+  .feature-block__media {
+    width: 50%;
+  }
+
+  /* ZIG-ZAG LOGIC (Desktop): Border always closest to image */
+  .feature-block:nth-of-type(odd) .feature-block__quote-box {
+    border-left: none;
+    border-right: 4px solid var(--sys-color-secondary);
   }
 
   /* SUBTLE SEPARATOR: For 'Jump to' section on desktop */
   .feature-block__jump-link {
-    border-top: 1px solid rgba(var(--sys-color-primary-rgb), 0.1);
+    border-top: 0.0625rem solid rgba(var(--sys-color-primary-rgb), 0.1);
     padding-top: 1rem;
     margin-top: 1rem;
     display: block;
@@ -961,32 +1078,40 @@ header > .navbar::after {
     text-align: left;
   }
 
-  /* ENSURE BUTTON ROW STABILITY */
+  /* ENSURE BUTTON ROW STABILITY (Action Islands) */
   .button-group {
     flex-direction: row;
-    justify-content: flex-start !important; /* FORCED LEFT-ALIGN */
-    gap: 0.75rem; /* Tightened per request */
-    flex-wrap: nowrap; /* Prevent stacking */
+    justify-content: center !important; /* SACRED: Centered Action Islands */
+    gap: 1.25rem; /* Slightly more breathe room for islands */
+    flex-wrap: nowrap;
     width: 100%;
   }
 
-  /* FLUID BUTTONS: Specifically for mid-size desktop (810px - 950px) */
-  @media screen and (max-width: 950px) {
+  /* CHUBBY FIX: (951px - 1008px) */
+  @media screen and (min-width: 951px) and (max-width: 1008px) {
+    .button-group .button {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      width: fit-content !important; 
+      flex: 0 1 auto; 
+    }
+  }
+
+  /* CHUBBY FIX: (811px - 950px) */
+  @media screen and (min-width: 811px) and (max-width: 950px) {
+    .button-group {
+      gap: 0.75rem;
+    }
     .button-group .button {
       padding-left: 1rem;
       padding-right: 1rem;
-      white-space: nowrap;
     }
   }
   
   /* Reset Orders (Flex container ignores child order relative to separate flex items) */
   /* But strictly, cleaner to reset if they leak? Flex items (Image vs Content) order matches source or row-reverse. */
   
-  /* 3. DESKTOP QUOTE LOGIC (Alt faces right) */
-  .feature-block--alt .feature-block__quote-box {
-    border-left: none;
-    border-right: 4px solid var(--sys-color-secondary);
-  }
+
   
 
 }
@@ -1014,7 +1139,7 @@ header > .navbar::after {
 .contact-modal__content {
   position: relative;
   background-color: var(--sys-color-surface);
-  padding: 1.5rem; /* Reduced padding to let the inner form shine */
+  padding: 3rem 2.5rem; /* SPATIAL EXPANSION */
   border-radius: 0.8rem;
   border: 1px solid var(--sys-color-outline);
   width: 90%;
@@ -1023,56 +1148,85 @@ header > .navbar::after {
   animation: modal-open-anim 0.4s ease-out;
 }
 
-/* 3. THE INNER FORM (Pine Green Backdrop) */
+/* 3. THE INNER FORM (Atmospheric Depth & Layered Neon) */
 .contact-modal__form {
   border-radius: 0.3125rem;
-  background-color: var(--sys-color-surface-variant); /* YOUR PINE BACKDROP */
+  background: linear-gradient(135deg, rgba(0, 45, 35, 1) 0%, rgba(18, 18, 18, 1) 100%); /* Layered Depth */
+  border: 2px solid var(--sys-color-primary); /* Pine Accent Rim */
   padding: 1.5rem;
-  /* Restoring the subtle violet accent glow to the form container */
-  box-shadow: var(--shadow-subtle), var(--glow-accent-subtle);
+  /* BOOSTED VIOLET GLOW (Hero Sync) */
+  box-shadow: 0 0 10px rgba(var(--sys-violet-rgb), 0.8), 
+              0 0 25px rgba(var(--sys-violet-rgb), 0.6), 
+              0 0 50px rgba(var(--sys-violet-rgb), 0.3);
+  font-family: var(--font-body); /* Force Sans-Serif */
 }
 
 .contact-modal__form h2 {
   max-width: 100%;
   text-align: center;
-  margin-bottom: 1.2rem;
-  color: white; /* Contrast against the Pine background */
+  margin-bottom: 0.5rem; /* Reduced for the rail */
+  color: var(--sys-color-surface); /* White */
+  font-family: var(--font-display); /* Poppins Sync */
+  position: relative;
 }
 
-/* 4. BRANDED INPUTS (Green Border + Violet Glow) */
+/* THE FULL-WIDTH SYSTEM RAIL (Mirror Logic) */
+.contact-modal__form h2::after {
+  content: "";
+  display: block;
+  margin: 0.75rem auto 1.5rem auto;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, transparent 5%, var(--sys-color-secondary) 15%, var(--sys-color-secondary) 85%, transparent 95%);
+}
+
+.contact-modal__form label {
+  text-align: left;
+  display: block;
+  margin-bottom: 0.25rem;
+  margin-top: 0.5rem;
+  font-family: var(--font-body); /* Inter Sync */
+  color: var(--sys-color-surface);
+  font-weight: 500;
+}
+
+/* 4. MODERN INPUTS (HUD Styling) */
 .contact-modal__form input[type="text"],
 .contact-modal__form input[type="email"],
 .contact-modal__form textarea {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid var(--sys-color-primary); /* PINE BORDER */
-  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+  border-radius: 0.5rem; /* ROUNDED GEOMETRY */
   margin-top: 0.375rem;
   margin-bottom: 1rem;
-  font-family: inherit;
+  font-family: var(--font-body); /* Inter Sync */
   font-size: 1rem;
-  background-color: var(--sys-color-surface);
+  background-color: rgba(255, 255, 255, 0.08); /* Transparent Ink */
+  color: var(--sys-color-surface); /* White Text */
   box-sizing: border-box;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
-/* FOCUS STATE: Magenta Energy Glow */
+/* FOCUS: CLEAN STATE (Removed focus line) */
 .contact-modal__form input:focus,
 .contact-modal__form textarea:focus {
-  border-color: var(--sys-color-tertiary); /* MAGENTA BORDER */
-  box-shadow: var(--glow-accent-subtle); /* VIOLET GLOW */
   outline: none;
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: var(--sys-color-primary); /* Subtle internal Pine sync */
+  box-shadow: none;
 }
 
-/* 5. THE SUBMIT BUTTON & DISABLED STATE */
+/* SUBMIT BUTTON: Sync with Interaction System */
 .contact-modal__button--submit {
   width: 100%;
   margin-top: 1rem;
-  border-radius: 0.5rem; /* Global Standard */
+  border-radius: 0.5rem;
+  font-family: var(--font-body);
 }
 
-/* Restoring your specific hover glow for the submit button */
 .contact-modal__form .contact-modal__button--submit:hover:not(:disabled) {
+  background-color: var(--sys-color-tertiary); /* Sync to interaction system */
   box-shadow: var(--glow-accent-strong-inset), var(--glow-accent-subtle);
 }
 
@@ -1085,24 +1239,53 @@ header > .navbar::after {
   transform: none;
 }
 
-/* 6. CLOSE ICON (With your requested rotation) */
+/* 6. FLOATING CLOSE TARGET (A11y Scale Optimized) */
 .contact-modal__close-icon {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 0.0625rem; /* 4px Adjustment inward */
+  right: 0.0625rem; /* 4px Adjustment inward */
+  width: 2.75rem; /* 44px Diameter Target */
+  height: 2.75rem;
   background: none;
   border: none;
-  font-size: 22px;
-  color: var(--sys-color-on-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  padding: 5px;
-  transition: color 0.2s ease, transform 0.3s ease;
-  z-index: 10;
+  transition: all 0.3s ease;
+  z-index: 100;
+  color: var(--sys-color-on-surface); /* Charcoal 'X' */
 }
 
 .contact-modal__close-icon:hover {
   color: var(--sys-color-tertiary);
   transform: rotate(90deg);
+}
+
+.contact-modal__close-icon-box {
+  width: 1.75rem;
+  height: 1.75rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-modal__close-icon-box span {
+  position: absolute;
+  display: block;
+  width: 1.4rem; /* Scaled up by 25% */
+  height: 4px; /* Heavy 4px weight */
+  background-color: currentColor;
+  border-radius: 0.125rem;
+}
+
+.contact-modal__close-icon-box span:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.contact-modal__close-icon-box span:nth-child(2) {
+  transform: rotate(-45deg);
 }
 
 /* ================================================= */
@@ -1135,24 +1318,23 @@ header > .navbar::after {
 
 
 /* ================================================= */
-/* === [V19] SEMANTIC FOOTER REFACTOR            === */
+/* === [V19] SEMANTIC FOOTER COMPONENT           === */
 /* ================================================= */
 
-footer {
+.footer {
   background-color: var(--sys-color-on-surface); /* Charcoal */
-  /* Switched to Pseudo-Element for cleaner stacking */
-  border: none;
-  position: relative; /* Anchor for ::before */
+  color: var(--sys-color-surface);
+  position: relative;
   overflow: visible;
-  padding: 0; /* Slim utility bar */
+  padding: 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   width: 100%;
 }
 
 /* THE ACCENT LINE (Footer) */
-footer::before {
+.footer::before {
   content: "";
   position: absolute;
   top: 0;
@@ -1163,121 +1345,62 @@ footer::before {
   z-index: 5;
 }
 
-/* Override existing navbar styles if they leak in via the 'navbar' class on nav */
-footer .navbar {
+.footer__nav {
   background-color: transparent;
-  box-shadow: none;
-  border: none; /* Ensure no double lines */
-  position: static;
-  /* SAFE HARBOR PADDING: Prevent edge crowding */
-  padding: 0 40px; 
-  /* height: 45px; Removed: Let padding on links drive "heft" */
-  flex-direction: row;
-  flex-wrap: nowrp; /* Prevent wrapping to stop disappearing links */
+  display: flex;
   justify-content: center;
-  align-items: stretch; /* Pixel-Perfect Hover Heights */
-  /* CELL LOGIC: Remove gap so padded links sit flush */
+  align-items: stretch;
   gap: 0;
-  height: auto; /* Let content/padding stick */ 
-  width: auto; /* Let it shrink/grow with content */
+  width: auto;
   max-width: 100%;
-  overflow-x: auto; /* Safety scroll for extreme tiny screens */
-  overflow: visible; /* Needed for the overlapping highlight line */
+  padding: 0 40px 5px 40px;
+  overflow: visible;
 }
 
-/* Explicitly kill the safety shelf in footer */
-footer .navbar::after {
-  content: none !important;
-  display: none !important;
-}
-
-/* Mobile override for footer nav - Conversion-First Stack */
-@media screen and (max-width: 768px) {
-  footer .navbar {
-    flex-direction: column; /* Stack vertically */
-    height: auto; /* Allow growth */
-    gap: 0; /* Remove gap, use padding/height on links */
-    width: 100%;
-    align-items: stretch; /* Full width */
-    padding: 0 0 1rem 0; /* Clear horizontal safe harbor, keep bottom space */
-  }
-
-  footer .navbar__link {
-    width: 100%;
-    justify-content: center; /* Center text */
-    /* top nav padding matching mobile heft */
-    padding: 14px 24px; 
-    margin: 0;
-    border-radius: 0;
-  }
-
-  /* Interaction Swap: Move Highlight to Bottom on Mobile */
-  footer .navbar__link:hover::after {
-    top: auto; /* Reset top */
-    bottom: 0; /* Move to bottom */
-    height: 4px; /* Brand visual weight */
-    z-index: 5;
-  }
-}
-
-footer .navbar__link {
+.footer__link {
   color: var(--sys-color-surface);
   font-family: var(--font-body);
-  /* FONT MATCH: Sync with top header scale */
-  font-size: clamp(14px, 1.1vw, 17px); 
+  font-size: clamp(0.875rem, 1.1vw, 1.0625rem);
+  letter-spacing: var(--letter-spacing-body);
   text-decoration: none;
   transition: all 0.3s ease;
-  
-  /* BOX MODEL SYNC: Match Top Nav "Heft" */
-  padding: 14px 24px; 
+  padding: 14px 24px;
   display: flex;
   align-items: center;
-  height: auto; /* Let container stretch define it if needed, or 100% */
   position: relative;
-  white-space: nowrap; /* Prevent text wrap */
-  border-radius: 0; /* Square edges for full-height hover */
-  margin-bottom: 0;
+  white-space: nowrap;
+  border-radius: 0;
 }
 
-/* Mobile Link Adjustment */
-@media screen and (max-width: 600px) {
-  footer .navbar__link {
-    /* Keep the massive padding for touch targets, maybe slightly less horizontal if needed, 
-       but user requested "Keep the padding: 14px 24px here" */
-    padding: 14px 24px; 
-    font-size: 0.9rem; 
-  }
+.footer__link:hover {
+  background-color: #444;
+  color: var(--sys-color-surface);
 }
 
-footer .navbar__link:hover {
-  color: var(--sys-color-surface); /* Keep White */
-  background-color: #444; /* Standard Charcoal Hover (Slightly lighter) */
-}
-
-/* THE MIRROR ACCENT: Magenta Highlight at TOP (Desktop Default) */
-footer .navbar__link:hover::after {
+/* THE MIRROR ACCENT: Magenta Highlight at TOP */
+.footer__link:hover::after {
   content: "";
   position: absolute;
-  top: 0; /* Inverted Accent on Desktop */
+  top: 0;
   left: 0;
   width: 100%;
-  height: 4px; /* Matched to Accent Lines */
-  background-color: var(--sys-color-tertiary); /* Magenta */
+  height: 0.25rem;
+  background-color: var(--sys-color-tertiary);
   display: block;
-  border-radius: 0 0 2px 2px; /* Soften slightly */
-  z-index: 5; /* Ensure it sits on top of the border */
+  border-radius: 0 0 0.125rem 0.125rem;
+  z-index: 1005;
 }
 
-/* Remove the active/bracket styling from footer links if they accidentally inherit it */
-footer .navbar__link.active {
-  background-color: transparent;
-  color: var(--sys-color-surface);
-  border-radius: 0;
-  margin-bottom: 0;
-  pointer-events: auto;
-}
+@media screen and (max-width: 768px) {
+  .footer__nav {
+    flex-direction: column;
+    width: 100%;
+    padding: 0 0 1rem 0;
+  }
 
-footer .navbar__link.active::before,
-footer .navbar__link.active::after {
-  display: none;
+  .footer__link {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 24px;
+  }
 }
