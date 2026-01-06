@@ -246,22 +246,39 @@ header > .navbar::after {
   width: 100%;
   height: 0.9375rem;
   z-index: -1;
-
-  /* SAFE HARBOR: Only show shelf on desktop where brackets exist */
   display: none; 
 
+  /* Your existing vertical depth gradient */
   background: linear-gradient(
     to bottom,
     var(--sys-color-primary) 0%,
     var(--sys-color-primary) 0.75rem,
     transparent 100%
   );
+
+  /* THE 150px MASK:
+     - 0px to 40px: Pure transparent (keeps the corner clean)
+     - 40px to 150px: Smooth ramp-up to solid black
+     - 150px+: Remains 100% solid to support the active tab brackets */
+  -webkit-mask-image: linear-gradient(
+    to right, 
+    transparent 0px, 
+    transparent 40px, 
+    black 150px
+  );
+  mask-image: linear-gradient(
+    to right, 
+    transparent 0px, 
+    transparent 40px, 
+    black 150px
+  );
+
   pointer-events: none;
 }
 
 @media screen and (min-width: 810px) {
   header > .navbar::after {
-    display: block; /* Restore shelf for desktop brackets */
+    display: block; 
   }
 }
 
