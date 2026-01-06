@@ -23,6 +23,11 @@
 * **Input Standardization:** All form fields (input, textarea) utilize a `0.5rem` (8px) border-radius. This aligns with the "Shape Language" of the primary CTA buttons, creating system-wide consistency.
 * **HUD Field Styling:** Inputs use a tinted "Transparent Ink" (`rgba(255, 255, 255, 0.08)`) to maintain the atmospheric theme without the jarring contrast of traditional white boxes.
 
+## 🌌 Environmental & Lighting Logic
+- **Safety Shelf Decoupling:** The `.navbar::after` (Safety Shelf) serves as a color-anchor for active navigation tabs. This decoupling allows the global background to be non-uniform without breaking navigation transparency.
+- **Directional Key-Light:** The `body::before` utilizes a radial key-light (positioned at `15% 10%`) to simulate a studio lighting environment. 
+- **Ink-Pool Depth:** The background transitions from rich Pine (`rgba(0, 45, 35, 1)`) into deep Charcoal (`#0a0a0a`). This intentional "dark-point" increases the visual "glow" intensity of Violet and Magenta accents across the site.
+
 ### 3. Accessibility & Visual Affordance
 * **The 44px Exit Target:** The Floating Close-X was scaled to a **2.75rem (44px)** diameter to meet WCAG touch-target standards.
 * **Visual Scale Boost:** The "X" stroke weight was increased to **4px** with a **25% scale increase** in length. This ensures the exit path is immediately obvious against the intense violet background bloom.
