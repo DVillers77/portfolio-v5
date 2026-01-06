@@ -34,6 +34,8 @@
   transforms into an 'X' when active.
 - **Icon Consistency:** The 'X' in the navbar and the 'X' in the contact modal
   must share the same stroke weight (4px) and visual scale.
+  - **Slideshow Dot Affordance:** Inactive dots utilize a `1.2x` scale and violet bloom on hover to provide visual affordance while maintaining the "active" magenta pill as the primary status indicator.
+- **Accessibility:** Existing ARIA roles, focus-trapping in `script.js`, and Escape-key listeners are sacred and must be preserved.
 - **Accessibility:** Existing ARIA roles, focus-trapping in `script.js`, and
   Escape-key listeners are sacred and must be preserved.
 

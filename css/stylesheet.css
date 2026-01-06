@@ -839,6 +839,14 @@ header > .navbar::after {
   box-shadow: 0 0 0 0.125rem var(--sys-color-surface); /* Stabilizer Ring */
 }
 
+/* --- SLIDESHOW DOT INTERACTION --- */
+.slideshow__dot:hover:not(.active) {
+  background-color: var(--sys-color-secondary); /* Transition to full Violet */
+  transform: scale(1.2); /* Tactile growth for feedback */
+  box-shadow: 0 0 8px rgba(var(--sys-color-secondary-rgb), 0.5); /* Soft violet bloom */
+  cursor: pointer;
+}
+
 /* ================================================= */
 /* === [V3] REFACTORED: BUTTONS (MUSCLE PASS)    === */
 /* ================================================= */
