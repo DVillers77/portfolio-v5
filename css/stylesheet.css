@@ -1,4 +1,13 @@
 /* ================================================= */
+/* === [V24] ATMOSPHERIC PULSE & HIGH-FIDELITY RIG PART A == */
+/* ================================================= */
+
+/* 1. REGISTRATION */
+@property --sunX { syntax: '<percentage>'; inherits: false; initial-value: 10%; }
+@property --sunY { syntax: '<percentage>'; inherits: false; initial-value: 10%; }
+@property --sunSize { syntax: '<percentage>'; inherits: false; initial-value: 85%; }
+
+/* ================================================= */
 /* === 1. GLOBAL ENGINE: Reset & Variables       === */
 /* ================================================= */
 html {
@@ -125,13 +134,8 @@ html {
 }
 
 /* ================================================= */
-/* == [V24] ATMOSPHERIC PULSE & HIGH-FIDELITY RIG == */
+/* == [V24] ATMOSPHERIC PULSE & HIGH-FIDELITY RIG PART B== */
 /* ================================================= */
-
-/* 1. REGISTRATION */
-@property --sunX { syntax: '<percentage>'; inherits: false; initial-value: 10%; }
-@property --sunY { syntax: '<percentage>'; inherits: false; initial-value: 10%; }
-@property --sunSize { syntax: '<percentage>'; inherits: false; initial-value: 85%; }
 
 /* 2. THE CHOREOGRAPHY (Keeps your perfected Desktop + Universal Pulse Mobile) */
 @keyframes completePinball {
