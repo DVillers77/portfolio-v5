@@ -125,35 +125,71 @@ html {
 }
 
 /* ================================================= */
-/* === [V3] GLOBAL LAYOUT & ATMOSPHERE (UPDATED) === */
+/* == [V24] ATMOSPHERIC PULSE & HIGH-FIDELITY RIG == */
 /* ================================================= */
 
+/* 1. REGISTRATION */
+@property --sunX { syntax: '<percentage>'; inherits: false; initial-value: 10%; }
+@property --sunY { syntax: '<percentage>'; inherits: false; initial-value: 10%; }
+@property --sunSize { syntax: '<percentage>'; inherits: false; initial-value: 85%; }
+
+/* 2. THE CHOREOGRAPHY (Keeps your perfected Desktop + Universal Pulse Mobile) */
+@keyframes completePinball {
+  /* DESKTOP Zig-Zag */
+  0%   { --sunX: 10%; --sunY: 5%;  --sunSize: 85%; }
+  15%  { --sunX: 90%; --sunY: 20%; --sunSize: 85%; } 
+  40%  { --sunX: 5%;  --sunY: 45%; --sunSize: 90%; }
+  65%  { --sunX: 95%; --sunY: 70%; --sunSize: 90%; }
+  85%  { --sunX: 8%;  --sunY: 88%; --sunSize: 95%; }
+  100% { --sunX: 90%; --sunY: 98%; --sunSize: 90%; }
+}
+
+@media screen and (max-width: 809px) {
+  @keyframes completePinball {
+    /* MOBILE HERO Migration */
+    0%   { --sunX: 15%; --sunY: 10%; --sunSize: 85%; }
+    15%  { --sunX: 50%; --sunY: 30%; --sunSize: 85%; } 
+    /* UNIVERSAL PULSE */
+    22%, 42%, 62%, 82% { --sunSize: 145%; } 
+    32%, 52%, 72%, 92% { --sunSize: 115%; }
+    100% { --sunX: 50%; --sunY: 92%; --sunSize: 120%; }
+  }
+}
+
+/* 3. THE RENDERER: Banding-Free & Anti-Strobe */
 body::before {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   z-index: -1;
+  background-color: #050505;
+
+  /* THE DITHERED RAMP (No more banding):
+     We break the fade into small steps so the browser 
+     doesn't create visible rings. */
   background-image: radial-gradient(
-    circle at 50% 30%,
-    var(--sys-color-primary) 0,
-    var(--sys-color-primary) var(--nav-gradient-stop),
-    var(--sys-color-surface-variant) 85%
+    circle at var(--sunX) var(--sunY), 
+    rgba(1, 98, 75, 1) 0%, 
+    rgba(1, 98, 75, 0.7) 25%, 
+    rgba(1, 98, 75, 0.3) 50%, 
+    rgba(1, 98, 75, 0.05) 80%, 
+    #050505 var(--sunSize)
   );
-  background-repeat: no-repeat;
-  background-size: cover;
-  transition: background-image 0.3s ease; /* Smooth transition when resizing */
+  
+  will-change: --sunX, --sunY, --sunSize;
+
+  /* THE ELASTIC TUNE (Anti-Strobe):
+     - 0.6s Cubic-Bezier: Provides the "liquid" lag that prevents dizziness.
+     - No CSS Filters: Keeps the gradient rendering at native bit-depth. */
+  transition: 
+    --sunX 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), 
+    --sunY 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), 
+    --sunSize 0.8s ease-in-out;
+
+  animation: completePinball linear;
+  animation-timeline: scroll();
 }
 
-/* For smaller screens, update the gradient stop to provide a minimum size 
-   for the solid color area, preventing it from becoming too small. */
-@media screen and (max-width: 809px) {
-  :root {
-    --nav-gradient-stop: calc(11.25rem + 15vw);
-  }
-}
 /* The 'Spine' of the site */
 .container {
   max-width: 1200px;
