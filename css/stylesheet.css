@@ -173,10 +173,10 @@ body::before {
      doesn't create visible rings. */
   background-image: radial-gradient(
     circle at var(--sunX) var(--sunY), 
-    rgba(1, 98, 75, 1) 0%, 
-    rgba(1, 98, 75, 0.7) 25%, 
-    rgba(1, 98, 75, 0.3) 50%, 
-    rgba(1, 98, 75, 0.05) 80%, 
+    rgba(var(--sys-color-primary-rgb), 1) 0%, 
+    rgba(var(--sys-color-primary-rgb), 0.7) 25%, 
+    rgba(var(--sys-color-primary-rgb), 0.3) 50%, 
+    rgba(var(--sys-color-primary-rgb), 0.05) 80%, 
     #050505 var(--sunSize)
   );
   
@@ -1036,6 +1036,16 @@ header > .navbar::after {
     text-align: center;
   }
 
+  /* Quote Scaling */
+  .feature-block__quote {
+    font-size: 1.1rem; /* Exactly 20%+ smaller than H2 for clear hierarchy */
+    line-height: 1.4;
+  }
+
+  .feature-block__quote-container {
+    margin: 1.5rem 0; /* Tightened margins for mobile density */
+  }
+
   /* Contact Page Mobile Signature */
   .cta-group--contact {
     flex-direction: column !important;
@@ -1213,10 +1223,19 @@ header > .navbar::after {
   animation: modal-open-anim 0.4s ease-out;
 }
 
-/* 3. THE INNER FORM (Atmospheric Depth & Layered Neon) */
+/* 3. THE INNER FORM (Atmospheric HUD 'Dithered Ink') */
 .contact-modal__form {
   border-radius: 0.3125rem;
-  background: linear-gradient(135deg, rgba(0, 45, 35, 1) 0%, rgba(18, 18, 18, 1) 100%); /* Layered Depth */
+  /* DITHERED RADIAL GRADIENT: Synced with Brand Rig */
+  background-image: radial-gradient(
+    circle at 10% 10%, 
+    rgba(var(--sys-color-primary-rgb), 1) 0%, 
+    rgba(var(--sys-color-primary-rgb), 0.7) 25%, 
+    rgba(var(--sys-color-primary-rgb), 0.3) 50%, 
+    rgba(var(--sys-color-primary-rgb), 0.05) 80%, 
+    #121212 115%
+  );
+  background-color: #121212;
   border: 2px solid var(--sys-color-primary); /* Pine Accent Rim */
   padding: 1.5rem;
   /* BOOSTED VIOLET GLOW (Hero Sync) */
@@ -1224,6 +1243,7 @@ header > .navbar::after {
               0 0 25px rgba(var(--sys-violet-rgb), 0.6), 
               0 0 50px rgba(var(--sys-violet-rgb), 0.3);
   font-family: var(--font-body); /* Force Sans-Serif */
+  transition: background-image 0.5s ease-in-out; /* Atmospheric Smoothness */
 }
 
 .contact-modal__form h2 {
