@@ -14,6 +14,8 @@ html {
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  scrollbar-gutter: stable; /* Reserve space for scrollbar to prevent jumps */
 }
 /* The "Stability" Reset */
 *,
@@ -282,6 +284,51 @@ header > .navbar::after {
   }
 }
 
+/* 3. THE BRAND LOGO */
+.navbar__logo {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  line-height: 1; /* prevents height bloat */
+  color: var(--sys-color-surface);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  margin-right: auto; /* Pushes everything else to the right */
+  padding: 0 1.25rem; /* Matches container gutter */
+  white-space: nowrap; /* Prevents wrapping */
+  flex-shrink: 0; /* Prevents squashing */
+  transition: transform 0.2s ease;
+  /* Ensure it sits first in the flex container */
+  order: 0;
+  z-index: 1002; /* Above the fold */
+}
+
+.logo__suffix {
+  color: var(--sys-color-tertiary);
+  transition: color 0.2s ease, text-shadow 0.2s ease; /* Performance optimization */
+}
+
+/* INTERACTION: The Neon Easter Egg */
+.navbar__logo:hover {
+  transform: translateY(-1px);
+}
+
+.navbar__logo:hover .logo__suffix {
+  color: #fff;
+  text-shadow: 
+    0 0 5px rgba(var(--sys-color-tertiary-rgb), 0.8), 
+    0 0 10px rgba(var(--sys-color-tertiary-rgb), 0.5), 
+    0 0 20px rgba(var(--sys-color-tertiary-rgb), 0.3);
+}
+
+/* MOBILE ADJUSTMENT: Symmetrical Align */
+@media screen and (max-width: 809px) {
+  .navbar__logo {
+    padding-left: 0.75rem; /* Tighter align for mobile symmetry */
+  }
+}
+
 /* 1. THE TOGGLE (Hamburger - VISIBLE BY DEFAULT) */
 .navbar__toggle {
   display: flex; /* Mobile Default */
@@ -439,6 +486,7 @@ header > .navbar::after {
 @media screen and (min-width: 810px) {
   .navbar {
     flex-direction: row;
+    flex-wrap: nowrap; /* Prevent wrapping */
     align-items: stretch;
     justify-content: space-between;
   }
@@ -451,7 +499,7 @@ header > .navbar::after {
     display: flex;
     flex-direction: row;
     justify-content: flex-end; /* RIGHT ALIGNED */
-    width: 100%;
+    width: auto; /* Allow it to sit next to logo */
     padding-right: 1.25rem; /* Room for the bracket */
     max-height: none; /* Disable mobile collapse */
     overflow: visible;
