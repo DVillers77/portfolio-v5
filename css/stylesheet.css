@@ -17,6 +17,11 @@ html {
   overflow-x: hidden; /* Prevent horizontal scroll */
   scrollbar-gutter: stable; /* Reserve space for scrollbar to prevent jumps */
 }
+
+h1, h2 {
+  letter-spacing: var(--letter-spacing-display);
+}
+
 /* The "Stability" Reset */
 *,
 *::before,
@@ -49,6 +54,12 @@ html {
 :focus-visible:not(.button):not(.navbar__link) {
   outline: none !important;
   box-shadow: 0 0 0 0.125rem white, 0 0 0 0.3125rem var(--sys-color-primary) !important;
+}
+
+/* 1.6 FORM & INTERACTION RESET */
+input, textarea, button {
+  font-family: var(--font-body);
+  font-size: 1rem;
 }
 
 :root {
@@ -129,6 +140,7 @@ html {
   --letter-spacing-display: -0.02em;
   --letter-spacing-title: 0.01em;
   --letter-spacing-body: 0.02em;
+  --letter-spacing-cta: 0.05rem;
   --line-height-display: 1.1;
   --line-height-headline: 1.2;
   --line-height-title: 1.4;
@@ -966,6 +978,7 @@ header > .navbar::after {
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 1.1rem;
+  letter-spacing: var(--letter-spacing-cta);
   text-decoration: none;
   border: none;
   cursor: pointer;
@@ -1114,8 +1127,8 @@ header > .navbar::after {
 
 
 
-/* --- 6. RESPONSIVE ENGINE (DESKTOP ENHANCEMENT 811px+) --- */
-@media screen and (min-width: 811px) {
+/* --- 6. RESPONSIVE ENGINE (DESKTOP ENHANCEMENT 810px+) --- */
+@media screen and (min-width: 810px) {
   /* 1. RESTORE GRID */
   .feature-block__grid {
     display: flex; /* Confirming flex */
@@ -1220,8 +1233,8 @@ header > .navbar::after {
     }
   }
 
-  /* CHUBBY FIX: (811px - 950px) */
-  @media screen and (min-width: 811px) and (max-width: 950px) {
+  /* CHUBBY FIX: (810px - 950px) */
+  @media screen and (min-width: 810px) and (max-width: 950px) {
     .button-group {
       gap: 0.75rem;
     }
@@ -1441,6 +1454,8 @@ header > .navbar::after {
     gap: 3rem; /* Tighten up the gutters */
   }
 }
+
+
 
 /* ================================================= */
 /* === [V18] GRID ARCHITECTURAL RESET (809px)    === */
