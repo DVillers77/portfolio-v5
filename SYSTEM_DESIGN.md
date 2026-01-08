@@ -32,3 +32,13 @@ Base font size is 16px. All values are implemented in `rem`.
 - **Title/Label (H3):** `1.125rem` | Line-height: 1.4
 - **Body:** `1rem` | Line-height: 1.6 (Inter)
 - **Mobile Quote:** `1.1rem` (Refactored for H2 hierarchy)
+
+## 🏷️ Typography Tokens (V24.1)
+| Token | Value | Role |
+| :--- | :--- | :--- |
+| `--letter-spacing-display` | `-0.02em` | Tightens headers for professional "locked" feel |
+| `--letter-spacing-cta` | `0.05rem` | Increases button legibility and "air" |
+| `--font-body` | `Inter, sans-serif` | Applied to all inputs/textareas to prevent browser defaults |
+
+## 🕹️ Component States
+- **.button--success:** Brand Pine background, white text, non-interactive, includes checkmark pseudo-element.

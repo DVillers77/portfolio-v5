@@ -16,7 +16,15 @@
 * **Lighting:** A triple-layered `box-shadow` (10px, 25px, 50px) simulates neon throw.
 * **Falloff:** Gradient extends to **115%** of container width to ensure soft-light dissipation on dark corners.
 
-## 📱 Mobile Interaction Rules
-- **Button Stacking:** 'Demo' and 'Code' buttons must remain side-by-side to minimize vertical scroll length.
-- **Touch Targets:** All interactive elements (Close-X, Dots, Links) maintain a minimum **44px (2.75rem)** hit area for WCAG compliance.
-- **Center-Weight Offset:** Modal "X" icons use a 4px inward shift to achieve perfect visual centering within the 3rem padding zone.
+## 📱 Mobile & Tablet Interaction Rules
+- **Vertical CTA Stacking:** Primary button MUST be on top of Secondary for all vertical layouts (Mobile).
+- **CTA Pairing Registry:**
+  - Home: [P] Projects | [S] My Story
+  - About: [P] Contact Me | [S] LinkedIn
+  - Projects: [P] Live Demo / Case Study | [S] Source Code
+- **Micro-Interaction:** The Contact Modal 'Submit' button enters a `.button--success` state (Sent ✓) upon valid Formspree trigger.
+
+## 🏗️ Architectural Refactor Logs
+### 3. Grid Equilibrium (810px - 1000px)
+- **Constraint:** Text columns in 2-col grids occasionally exceed image height.
+- **Rule:** Prioritize "Reading Terminus" (CTA at bottom of text). Use `align-items: center` or fluid column ratios (e.g., 60/40) to maintain visual balance without fragmenting the action.
