@@ -17,10 +17,14 @@
 - [x] Audit Mobile H2 vs. Blockquote hierarchy.
 - [x] Verify line-height consistency (1.1 for H1, 1.6 for Body).
 
-### 4. Stability Checks (The "Pixel-Perfect" Audit)
-- [ ] Verify `.active` tab brackets touch the navbar bottom edge with 0px gap.
-- [ ] Verify Slideshow "Straddle" math at 810px breakpoint.
-- [ ] Confirm `aria-label="Home"` is present on the typographic logo.
+# Antigravity Migration Instruction (Refactor Log)
+
+## 🏁 Current Milestone: V24.1 High-Fidelity UX Polish
+- [ ] **CTA Re-Architecture:** Flip Desktop order (Secondary Left | Primary Right).
+- [ ] **Typography Audit:** Implement letter-spacing hacks (Display: -0.02em | CTA: 0.05rem).
+- [ ] **Browser Cleanse:** Explicitly reset font-family on all input, button, and textarea elements.
+- [ ] **Equilibrium Audit:** Resolve height mismatch in Feature Blocks between 810px-1000px.
+- [x] **Syntax Branding:** Logo injected and stable across all pages.
 
 ## 🛠️ Ongoing Technical Compromises
 - **Scroll Anchor Stability:** `setupAnchorHandler` uses `e.preventDefault()` to block URL hash corruption.
