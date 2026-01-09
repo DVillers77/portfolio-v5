@@ -58,6 +58,7 @@ are defined as CSS Variables.
 | **Secondary Accent**     | `--sys-color-accent`          | `#ff00ff` | **Brand Accent:** Navbar inset shadows, hover glows, modal close icon hover.                       |
 | **Primary Background**   | `--sys-color-surface-variant` | `#f0fff4` | Main page background (odd rows), active navbar link background, form background.                   |
 | **Secondary Background** | `--sys-color-surface`         | `#ffffff` | Content panels (even rows), modal background.                                                      |
+| **Error**                | `--color-base-error`          | `#9b1e1e` | Modal form submit error                                                                            |
 
 ### Font Color Usage
 
