@@ -19,15 +19,24 @@ function toggleMobileNav() {
 }
 
 /**
- * Removes the modal from the DOM and restores scrolling.
+ * Removes the modal from the DOM with a Kinetic 400ms fade-out.
  */
 function closeModal() {
   const modalWrapper = document.getElementById("contact-modal");
-  if (modalWrapper) {
-    modalWrapper.remove();
-  }
-  // CRITICAL FIX: Restore scrolling to the body
-  document.body.style.overflow = "";
+  if (!modalWrapper) return;
+
+  // 1. Add Closing Class for Fade Out
+  modalWrapper.classList.add("is-closing");
+  modalWrapper.classList.remove("is-visible");
+
+  // 2. Wait for transition (400ms) then remove
+  setTimeout(() => {
+    if (modalWrapper) {
+      modalWrapper.remove();
+    }
+    // CRITICAL FIX: Restore scrolling to the body
+    document.body.style.overflow = "";
+  }, 400);
 }
 
 // ===========================================
@@ -38,8 +47,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   // NOTE: Scroll restoration is now handled by the browser default for consistency.
 
   function initSlideshow() {
-    // We use querySelector to match your new BEM class names
-    const slideshowContainer = document.getElementById("slideshow-container"); // Target for touch events
+    const slideshowContainer = document.getElementById("slideshow-container");
     const slides = document.querySelectorAll(".slideshow__slide");
     const dots = document.querySelectorAll(".slideshow__dot");
     const slideTitleElement = document.getElementById("slide-title");
@@ -78,20 +86,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
       if (slideTitleElement && slideTitleLink) {
         const currentTitle = currentSlide.getAttribute("data-title");
         const currentImage = currentSlide.querySelector(".slideshow__image");
-
-        // CRITICAL FIX: Ensure we are grabbing a clean ID (e.g., #tic-tac-toe-details)
         const currentTarget = currentImage
           ? currentImage.getAttribute("data-target")
           : "#";
 
         slideTitleElement.textContent = currentTitle;
-
-        // Use setAttribute to ensure the DOM updates immediately so the click listener sees it
         slideTitleLink.setAttribute("href", currentTarget);
       }
     }
 
-    // Your original event listeners
     if (prevButton)
       prevButton.addEventListener("click", () => showSlides((slideIndex -= 1)));
     if (nextButton)
@@ -101,7 +104,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
       dots[i].addEventListener("click", () => showSlides((slideIndex = i + 1)));
     }
 
-    // NEW: Touch Swipe Listeners
     if (slideshowContainer) {
       slideshowContainer.addEventListener("touchstart", (event) => {
         touchstartX = event.changedTouches[0].screenX;
@@ -114,18 +116,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 
     function handleSwipe() {
-      const swipeThreshold = 50; // Minimum distance for a swipe
-      // Swipe Left
+      const swipeThreshold = 50;
       if (touchstartX - touchendX > swipeThreshold) {
         showSlides((slideIndex += 1));
       }
-      // Swipe Right
       if (touchendX - touchstartX > swipeThreshold) {
         showSlides((slideIndex -= 1));
       }
     }
 
-    // Your original keyboard navigation
     window.addEventListener("keydown", (event) => {
       if (event.key === "ArrowLeft") showSlides((slideIndex -= 1));
       else if (event.key === "ArrowRight") showSlides((slideIndex += 1));
@@ -141,38 +140,31 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const modalTemplate = document.getElementById("contact-modal-template");
 
     if (!modalTemplate) {
-      console.error(
-        "Contact modal template not found. Modal will not function."
-      );
+      console.error("Contact modal template not found.");
       return;
     }
 
-    // Modal Helper Functions
     function getFocusableElements(modalWrapper) {
       const focusableSelectors =
         'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
       return Array.from(modalWrapper.querySelectorAll(focusableSelectors));
     }
 
-    function handleFormSubmission(e) {
-      e.preventDefault();
-      alert("Message sent successfully!");
-      closeModal();
-    }
-
-    // The function that opens the modal
     function openModal(e) {
       e.preventDefault();
 
-      // 1. Clone and inject the modal
       const modalWrapper =
         modalTemplate.content.cloneNode(true).firstElementChild;
       document.body.appendChild(modalWrapper);
 
+      // KINETIC ENTRY: Set Flex, force reflow, then add visible class
       modalWrapper.style.display = "flex";
+      // Force reflow
+      void modalWrapper.offsetWidth; 
+      modalWrapper.classList.add("is-visible");
+      
       document.body.style.overflow = "hidden";
 
-      // 2. DECLARE ALL VARIABLES ONCE
       const contactForm = modalWrapper.querySelector(".contact-modal__form");
       const submitBtn = modalWrapper.querySelector(
         ".contact-modal__button--submit"
@@ -181,18 +173,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
         ".contact-modal__close-icon"
       );
 
-      // 3. VALIDATION LOGIC
       function toggleButtonState() {
-        // Check if the form meets all 'required' and 'type' constraints
-        const isValid = contactForm.checkValidity();
-        submitBtn.disabled = !isValid;
+        submitBtn.disabled = !contactForm.checkValidity();
       }
 
-      // Set initial state (disabled) and listen for input
       toggleButtonState();
       contactForm.addEventListener("input", toggleButtonState);
 
-      // 4. ACCESSIBILITY & FOCUS TRAPPING
       const focusableElements = getFocusableElements(modalWrapper);
       const firstFocusable = focusableElements[0];
       const lastFocusable = focusableElements[focusableElements.length - 1];
@@ -205,13 +192,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
       modalWrapper.addEventListener("keydown", function (e) {
         if (e.key === "Tab") {
           if (e.shiftKey) {
-            // Shift + Tab
             if (document.activeElement === firstFocusable) {
               lastFocusable.focus();
               e.preventDefault();
             }
           } else {
-            // Tab only
             if (document.activeElement === lastFocusable) {
               firstFocusable.focus();
               e.preventDefault();
@@ -220,8 +205,74 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
       });
 
-      // 5. SUBMIT & CLICK-AWAY HANDLERS
-      contactForm.addEventListener("submit", handleFormSubmission);
+      // 5. AJAX SUBMISSION & HANDSHAKE PROTOCOL
+      contactForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        // 5a. PRE-FLIGHT STATE
+        submitBtn.style.pointerEvents = "none";
+        submitBtn.innerHTML = "SENDING...";
+        
+        // Reset Error State if Present
+        submitBtn.classList.remove("button--error");
+        
+        let statusBar = contactForm.querySelector(".contact-modal__status-bar");
+        if (!statusBar) {
+            statusBar = document.createElement("div");
+            statusBar.className = "contact-modal__status-bar";
+            contactForm.appendChild(statusBar);
+        }
+        statusBar.style.display = "none"; // Hide initially
+
+        const formData = new FormData(contactForm);
+
+        try {
+          const response = await fetch(contactForm.action, {
+            method: contactForm.method,
+            body: formData,
+            headers: { Accept: "application/json" },
+          });
+
+          if (response.ok) {
+            // 5b. SUCCESS STATE
+            submitBtn.classList.remove("button--error");
+            submitBtn.classList.add("button--success");
+            submitBtn.innerHTML = "SENT ✓";
+
+            // SYSTEM HANDSHAKE
+            statusBar.style.display = "block";
+            statusBar.innerHTML = `<span class="typewriter-text">[SYSTEM]: DATA RECEIVED. HANDSHAKE COMPLETE.</span>`;
+
+            // HANDSHAKE PROTOCOL: 3.5s Delay before closing
+            // We check if the modal still exists incase the user closed it manually.
+            setTimeout(() => {
+               // Only close if it's still in the DOM and open
+               const currentModal = document.getElementById("contact-modal");
+               if (currentModal) {
+                 closeModal();
+               }
+            }, 3500);
+
+          } else {
+            throw new Error("validation");
+          }
+        } catch (error) {
+          // 5c. ERROR STATE
+          submitBtn.style.pointerEvents = "auto";
+          submitBtn.classList.remove("button--success"); // CLASS CLEANUP
+          submitBtn.classList.add("button--error"); // COLOR BINDING
+          submitBtn.innerHTML = "RETRY?";
+
+          statusBar.style.display = "block";
+
+          const errorMsg =
+            error.message === "validation"
+              ? "[SYSTEM ALERT]: INVALID INPUT DETECTED..."
+              : "[SYSTEM ALERT]: CONNECTION LOST. USE BACKUP.";
+
+          statusBar.innerHTML = `<span class="typewriter-text">${errorMsg}</span>`;
+        }
+      });
 
       modalWrapper.addEventListener("click", function (e) {
         if (e.target === modalWrapper) {
@@ -230,39 +281,18 @@ document.addEventListener("DOMContentLoaded", (event) => {
       });
     }
 
-    // 4. Bind the modal open handler to all trigger links
     Array.from(contactTriggers).forEach((link) => {
       link.addEventListener("click", openModal);
     });
   }
 
-  /**
-   * Scroll Anchor Handler - CRITICAL FIX AND KNOWN COMPROMISE
-   * * The smooth scrolling for internal anchor links relies on this custom function
-   * to prevent a critical bug: the URL hash (#section-id) being permanently
-   * recorded in the browser's history (which causes a jarring jump on refresh).
-   * * Compromise: While the fix successfully prevents URL corruption, eliminates
-   * the jarring refresh jump, and stabilizes focus, the browser exhibits a
-   * negligible flicker or minor scroll inconsistency after multiple, rapid,
-   * consecutive refreshes. This is a low-impact race condition between the
-   * browser's aggressive scroll restoration and the JavaScript timing. The current
-   * solution represents the most stable and reliable compromise for production.
-   * * ----------------------------------------------------------------------------
-   * Functionality:
-   * Handles all internal anchor link clicks by preventing the native URL hash
-   * update (e.preventDefault) and manually applying smooth scroll. Uses setTimeout(0)
-   * to prevent the focus call from causing a secondary jump/flicker.
-   */
-
   function setupAnchorHandler() {
     document.addEventListener("click", function (e) {
-      // 1. Find the link - we look for the attribute specifically to ensure it's a hash link
       const anchor = e.target.closest("a");
       if (!anchor) return;
 
       const href = anchor.getAttribute("href");
 
-      // 2. Filter: Only internal links, excluding the contact modal
       if (
         href &&
         href.startsWith("#") &&
@@ -271,42 +301,27 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const targetElement = document.querySelector(href);
 
         if (targetElement) {
-          // 3. THE FIX: Stop the instant jump immediately
           e.preventDefault();
+          targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
 
-          // 4. Your fine-tuned smooth scroll
-          targetElement.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-
-          // 5. Your fine-tuned focus management (prevents the flicker)
           setTimeout(() => {
             targetElement.setAttribute("tabindex", "-1");
-            targetElement.focus({ preventScroll: true }); // Adding preventScroll ensures the focus doesn't cause a jump
+            targetElement.focus({ preventScroll: true });
           }, 0);
 
-          // Update URL bar without jumping
           history.pushState(null, null, href);
         }
       }
     });
   }
 
-  // ===========================================
-  // === B. CONDITIONAL EXECUTION & GLOBAL EVENTS ===
-  // ===========================================
-
+  // --- Initialization Calls ---
   const slideshowContainer = document.getElementById("slideshow-container");
-
   if (slideshowContainer) {
     initSlideshow();
   }
 
-  // Always initialize the modal logic here
   initContactModal();
-
-  // Initialize the anchor link handler (Replaces simple CSS smooth scroll)
   setupAnchorHandler();
 
   // GLOBAL EVENT LISTENER: Escape Key for mobile nav and modal
@@ -317,25 +332,23 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
       if (isModalOpen) {
         closeModal();
-      } else if (navBar.classList.contains("responsive")) {
+      } else if (navBar && navBar.classList.contains("responsive")) {
         toggleMobileNav();
       }
     }
   });
+
   // --- MOBILE NAV OFF-CLICK CLOSE ---
-  // Listens for clicks on the body to close the mobile menu if the user clicks away
   document.addEventListener("click", function (event) {
     const navBar = document.getElementById("myNavbar");
     const navToggleButton = document.querySelector(".navbar__toggle");
 
-    // Only run if the menu is currently open (has the 'responsive' class)
-    if (navBar.classList.contains("responsive")) {
-      // If the click was NOT inside the navbar AND NOT on the toggle button itself
+    if (navBar && navBar.classList.contains("responsive")) {
       if (
         !navBar.contains(event.target) &&
         !navToggleButton.contains(event.target)
       ) {
-        toggleMobileNav(); // Reuse your existing function to close it properly
+        toggleMobileNav();
       }
     }
   });

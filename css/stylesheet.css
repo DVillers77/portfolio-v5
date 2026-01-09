@@ -3,9 +3,21 @@
 /* ================================================= */
 
 /* 1. REGISTRATION */
-@property --sunX { syntax: '<percentage>'; inherits: false; initial-value: 10%; }
-@property --sunY { syntax: '<percentage>'; inherits: false; initial-value: 10%; }
-@property --sunSize { syntax: '<percentage>'; inherits: false; initial-value: 85%; }
+@property --sunX {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 10%;
+}
+@property --sunY {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 10%;
+}
+@property --sunSize {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 85%;
+}
 
 /* ================================================= */
 /* === 1. GLOBAL ENGINE: Reset & Variables       === */
@@ -18,7 +30,8 @@ html {
   scrollbar-gutter: stable; /* Reserve space for scrollbar to prevent jumps */
 }
 
-h1, h2 {
+h1,
+h2 {
   letter-spacing: var(--letter-spacing-display);
 }
 
@@ -37,7 +50,7 @@ h1, h2 {
   /* The box-shadow MUST follow the border-radius */
   box-shadow: 0 0 0 0.125rem white, 0 0 0 0.3125rem var(--sys-color-primary) !important;
   /* Force the anchor tag to respect its original button curves */
-  border-radius: 0.5rem !important; 
+  border-radius: 0.5rem !important;
   position: relative;
   z-index: 10;
 }
@@ -57,7 +70,9 @@ h1, h2 {
 }
 
 /* 1.6 FORM & INTERACTION RESET */
-input, textarea, button {
+input,
+textarea,
+button {
   font-family: var(--font-body);
   font-size: 1rem;
 }
@@ -70,12 +85,12 @@ input, textarea, button {
   --color-base-white: 255, 255, 255;
   --color-base-charcoal: 51, 51, 51;
   --color-base-black: 10, 10, 10;
-  --color-base-error: 176, 0, 32;
+  --color-base-error: 155, 30, 30;
 
   /* --- 2. SEMANTIC TOKENS (The Intent) --- */
-  --sys-color-primary-rgb: var(--sys-pine-rgb);      /* Brand Core */
-  --sys-color-secondary-rgb: var(--sys-violet-rgb);  /* Atmosphere/Feel */
-  --sys-color-tertiary-rgb: var(--sys-magenta-rgb);  /* Interaction/Action */
+  --sys-color-primary-rgb: var(--sys-pine-rgb); /* Brand Core */
+  --sys-color-secondary-rgb: var(--sys-violet-rgb); /* Atmosphere/Feel */
+  --sys-color-tertiary-rgb: var(--sys-magenta-rgb); /* Interaction/Action */
   --sys-color-surface-rgb: var(--color-base-white);
   --sys-color-on-surface-rgb: var(--color-base-charcoal);
 
@@ -84,10 +99,10 @@ input, textarea, button {
   --sys-color-secondary: rgb(var(--sys-color-secondary-rgb));
   --sys-color-tertiary: rgb(var(--sys-color-tertiary-rgb));
   --sys-color-surface: rgb(var(--sys-color-surface-rgb));
-  
+
   --sys-color-on-surface: rgb(var(--sys-color-on-surface-rgb));
   --sys-color-on-surface-emphasis: rgb(var(--color-base-black));
-  
+
   /* Tonal Containers */
   --sys-color-primary-container: rgba(var(--sys-color-primary-rgb), 0.12);
   --sys-color-on-primary-container: var(--sys-color-primary);
@@ -95,20 +110,22 @@ input, textarea, button {
 
   /* Text Colors */
   --sys-color-on-primary: var(--sys-color-surface);
-  
+
   /* Interaction & UI */
   --sys-color-outline: #555555;
   --sys-color-focus-halo: rgba(var(--sys-color-primary-rgb), 0.4);
   --sys-color-error: rgb(var(--color-base-error));
 
   /* --- 4. DEPTH & EFFECTS --- */
-  --sys-shadow-navbar-accent: inset 0 -0.25rem 0.375rem -0.25rem var(--sys-color-secondary);
+  --sys-shadow-navbar-accent: inset 0 -0.25rem 0.375rem -0.25rem
+    var(--sys-color-secondary);
 
   --glow-primary: 0 0 0.3125rem var(--sys-color-primary);
   --glow-accent-strong: 0 0 0.625rem 0 var(--sys-color-tertiary);
   --glow-accent-subtle: 0 0 0.625rem 0 rgba(var(--sys-color-secondary-rgb), 0.4);
 
-  --sys-glow-accent-inset: inset 0 0 0.625rem 0 rgba(var(--sys-color-tertiary-rgb), 0.4);
+  --sys-glow-accent-inset: inset 0 0 0.625rem 0
+    rgba(var(--sys-color-tertiary-rgb), 0.4);
   --sys-glow-primary-inset: inset 0 0 0.3125rem var(--sys-color-primary);
 
   --shadow-subtle: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
@@ -116,9 +133,18 @@ input, textarea, button {
     0 0.375rem 1.25rem 0 rgba(0, 0, 0, 0.19);
 
   /* Environmental Halo System */
-  --sys-shadow-halo-rim: 0 0 0 1.5px rgba(255, 255, 255, 0.8), 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.5), 0 0 0.9375rem rgba(var(--sys-color-secondary-rgb), 0.75), 0 0 3.125rem rgba(var(--sys-color-secondary-rgb), 0.3);
-  --sys-shadow-halo-standard: 0 0 0 1.5px rgba(255, 255, 255, 0.8), 0 0.625rem 1.875rem rgba(0, 0, 0, 0.15), 0 0 0.9375rem rgba(var(--sys-color-secondary-rgb), 0.7), 0 0 3.125rem rgba(var(--sys-color-secondary-rgb), 0.2);
-  --sys-shadow-halo-alt: 0 0 0 1.5px rgba(255, 255, 255, 0.8), 0 0.625rem 1.875rem rgba(var(--sys-color-primary-rgb), 0.3), 0 0 0.9375rem rgba(var(--sys-color-secondary-rgb), 0.8), 0 0 3.125rem rgba(var(--sys-color-secondary-rgb), 0.25);
+  --sys-shadow-halo-rim: 0 0 0 1.5px rgba(255, 255, 255, 0.8),
+    0 0.25rem 0.9375rem rgba(0, 0, 0, 0.5),
+    0 0 0.9375rem rgba(var(--sys-color-secondary-rgb), 0.75),
+    0 0 3.125rem rgba(var(--sys-color-secondary-rgb), 0.3);
+  --sys-shadow-halo-standard: 0 0 0 1.5px rgba(255, 255, 255, 0.8),
+    0 0.625rem 1.875rem rgba(0, 0, 0, 0.15),
+    0 0 0.9375rem rgba(var(--sys-color-secondary-rgb), 0.7),
+    0 0 3.125rem rgba(var(--sys-color-secondary-rgb), 0.2);
+  --sys-shadow-halo-alt: 0 0 0 1.5px rgba(255, 255, 255, 0.8),
+    0 0.625rem 1.875rem rgba(var(--sys-color-primary-rgb), 0.3),
+    0 0 0.9375rem rgba(var(--sys-color-secondary-rgb), 0.8),
+    0 0 3.125rem rgba(var(--sys-color-secondary-rgb), 0.25);
 
   /* --- FLUID GRADIENT CONTROL --- */
   --nav-gradient-stop: 45vw;
@@ -128,13 +154,13 @@ input, textarea, button {
   --font-display: "Poppins", sans-serif;
   --font-body: "Inter", sans-serif;
   --font-quote: "Playfair Display", serif;
-  
+
   /* M3 Scale Variables (rem-based) */
-  --font-size-display: 3.5rem;   /* H1 */
+  --font-size-display: 3.5rem; /* H1 */
   --font-size-headline: 1.75rem; /* H2 */
-  --font-size-title: 1.125rem;   /* H3 */
-  --font-size-body: 1rem;        /* Body */
-  --font-size-quote: 1.5rem;     /* Heroic Quote */
+  --font-size-title: 1.125rem; /* H3 */
+  --font-size-body: 1rem; /* Body */
+  --font-size-quote: 1.5rem; /* Heroic Quote */
 
   /* M3 Spacing & Rhythm Tokens */
   --letter-spacing-display: -0.02em;
@@ -154,23 +180,69 @@ input, textarea, button {
 /* 2. THE CHOREOGRAPHY (Keeps your perfected Desktop + Universal Pulse Mobile) */
 @keyframes completePinball {
   /* DESKTOP Zig-Zag */
-  0%   { --sunX: 10%; --sunY: 5%;  --sunSize: 85%; }
-  15%  { --sunX: 90%; --sunY: 20%; --sunSize: 85%; } 
-  40%  { --sunX: 5%;  --sunY: 45%; --sunSize: 90%; }
-  65%  { --sunX: 95%; --sunY: 70%; --sunSize: 90%; }
-  85%  { --sunX: 8%;  --sunY: 88%; --sunSize: 95%; }
-  100% { --sunX: 90%; --sunY: 98%; --sunSize: 90%; }
+  0% {
+    --sunX: 10%;
+    --sunY: 5%;
+    --sunSize: 85%;
+  }
+  15% {
+    --sunX: 90%;
+    --sunY: 20%;
+    --sunSize: 85%;
+  }
+  40% {
+    --sunX: 5%;
+    --sunY: 45%;
+    --sunSize: 90%;
+  }
+  65% {
+    --sunX: 95%;
+    --sunY: 70%;
+    --sunSize: 90%;
+  }
+  85% {
+    --sunX: 8%;
+    --sunY: 88%;
+    --sunSize: 95%;
+  }
+  100% {
+    --sunX: 90%;
+    --sunY: 98%;
+    --sunSize: 90%;
+  }
 }
 
 @media screen and (max-width: 809px) {
   @keyframes completePinball {
     /* MOBILE HERO Migration */
-    0%   { --sunX: 15%; --sunY: 10%; --sunSize: 85%; }
-    15%  { --sunX: 50%; --sunY: 30%; --sunSize: 85%; } 
+    0% {
+      --sunX: 15%;
+      --sunY: 10%;
+      --sunSize: 85%;
+    }
+    15% {
+      --sunX: 50%;
+      --sunY: 30%;
+      --sunSize: 85%;
+    }
     /* UNIVERSAL PULSE */
-    22%, 42%, 62%, 82% { --sunSize: 145%; } 
-    32%, 52%, 72%, 92% { --sunSize: 115%; }
-    100% { --sunX: 50%; --sunY: 92%; --sunSize: 120%; }
+    22%,
+    42%,
+    62%,
+    82% {
+      --sunSize: 145%;
+    }
+    32%,
+    52%,
+    72%,
+    92% {
+      --sunSize: 115%;
+    }
+    100% {
+      --sunX: 50%;
+      --sunY: 92%;
+      --sunSize: 120%;
+    }
   }
 }
 
@@ -186,23 +258,21 @@ body::before {
      We break the fade into small steps so the browser 
      doesn't create visible rings. */
   background-image: radial-gradient(
-    circle at var(--sunX) var(--sunY), 
-    rgba(var(--sys-color-primary-rgb), 1) 0%, 
-    rgba(var(--sys-color-primary-rgb), 0.7) 25%, 
-    rgba(var(--sys-color-primary-rgb), 0.3) 50%, 
-    rgba(var(--sys-color-primary-rgb), 0.05) 80%, 
+    circle at var(--sunX) var(--sunY),
+    rgba(var(--sys-color-primary-rgb), 1) 0%,
+    rgba(var(--sys-color-primary-rgb), 0.7) 25%,
+    rgba(var(--sys-color-primary-rgb), 0.3) 50%,
+    rgba(var(--sys-color-primary-rgb), 0.05) 80%,
     #050505 var(--sunSize)
   );
-  
+
   will-change: --sunX, --sunY, --sunSize;
 
   /* THE ELASTIC TUNE (Anti-Strobe):
      - 0.6s Cubic-Bezier: Provides the "liquid" lag that prevents dizziness.
      - No CSS Filters: Keeps the gradient rendering at native bit-depth. */
-  transition: 
-    --sunX 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), 
-    --sunY 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), 
-    --sunSize 0.8s ease-in-out;
+  transition: --sunX 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+    --sunY 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), --sunSize 0.8s ease-in-out;
 
   animation: completePinball linear;
   animation-timeline: scroll();
@@ -232,7 +302,7 @@ body::before {
   /* Switched to Pseudo-Element for cleaner stacking */
   border: none !important;
   overflow: visible; /* Ensure pseudo-elements aren't clipped */
-  
+
   /* MOBILE DEFAULT */
   flex-flow: row wrap; /* Allows Toggle to sit right of logo, links to break below */
   justify-content: space-between; /* Reserves space for Logo (Left) and Toggle (Right) */
@@ -248,7 +318,13 @@ header > .navbar::before {
   left: 0;
   width: 100%;
   height: 4px;
-  background: linear-gradient(to right, transparent 5%, var(--sys-color-secondary) 15%, var(--sys-color-secondary) 85%, transparent 95%);
+  background: linear-gradient(
+    to right,
+    transparent 5%,
+    var(--sys-color-secondary) 15%,
+    var(--sys-color-secondary) 85%,
+    transparent 95%
+  );
   z-index: 1001; /* High visibility, above background */
 }
 
@@ -260,7 +336,7 @@ header > .navbar::after {
   width: 100%;
   height: 0.9375rem;
   z-index: -1;
-  display: none; 
+  display: none;
 
   /* Your existing vertical depth gradient */
   background: linear-gradient(
@@ -275,15 +351,15 @@ header > .navbar::after {
      - 40px to 150px: Smooth ramp-up to solid black
      - 150px+: Remains 100% solid to support the active tab brackets */
   -webkit-mask-image: linear-gradient(
-    to right, 
-    transparent 0px, 
-    transparent 40px, 
+    to right,
+    transparent 0px,
+    transparent 40px,
     black 150px
   );
   mask-image: linear-gradient(
-    to right, 
-    transparent 0px, 
-    transparent 40px, 
+    to right,
+    transparent 0px,
+    transparent 40px,
     black 150px
   );
 
@@ -292,13 +368,13 @@ header > .navbar::after {
 
 @media screen and (min-width: 810px) {
   header > .navbar::after {
-    display: block; 
+    display: block;
   }
 }
 
 /* 3. THE BRAND LOGO */
 .navbar__logo {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 800;
   font-size: 1.25rem;
   line-height: 1; /* prevents height bloat */
@@ -328,9 +404,8 @@ header > .navbar::after {
 
 .navbar__logo:hover .logo__suffix {
   color: #fff;
-  text-shadow: 
-    0 0 5px rgba(var(--sys-color-tertiary-rgb), 0.8), 
-    0 0 10px rgba(var(--sys-color-tertiary-rgb), 0.5), 
+  text-shadow: 0 0 5px rgba(var(--sys-color-tertiary-rgb), 0.8),
+    0 0 10px rgba(var(--sys-color-tertiary-rgb), 0.5),
     0 0 20px rgba(var(--sys-color-tertiary-rgb), 0.3);
 }
 
@@ -394,7 +469,10 @@ header > .navbar::after {
 
 /* Mimic the Desktop Navlink Hover */
 .navbar__toggle:hover {
-  background-color: rgba(var(--sys-color-on-surface-rgb), 0.15); /* Tonal Charcoal shift */
+  background-color: rgba(
+    var(--sys-color-on-surface-rgb),
+    0.15
+  ); /* Tonal Charcoal shift */
   color: var(--sys-color-surface); /* Shifts icon to white for contrast */
 }
 
@@ -405,7 +483,7 @@ header > .navbar::after {
   width: 100%;
   padding-right: 0;
   order: 3; /* Ensures it breaks to the next line in the wrapped row */
-  
+
   /* MOMENTUM TRANSITION */
   max-height: 0;
   overflow: hidden;
@@ -440,7 +518,7 @@ header > .navbar::after {
 
 /* THE HOVER: Tonal shift & Accent Line */
 .navbar__link:hover:not(.active) {
-  background-color: #444; 
+  background-color: #444;
 }
 
 /* THE ACCENT RAIL ON HOVER (Top Nav) */
@@ -493,7 +571,6 @@ header > .navbar::after {
   border-bottom-left-radius: 1.1875rem;
 }
 
-
 /* --- DESKTOP ENHANCEMENT (810px+) --- */
 @media screen and (min-width: 810px) {
   .navbar {
@@ -537,10 +614,9 @@ header > .navbar::after {
   .hero__title {
     font-size: 3.75rem; /* PRO SCALE */
     /* ELECTRIC GLOW: Intense Violet Layers */
-    text-shadow: 
-      0 0 10px rgba(var(--sys-color-secondary-rgb), 0.5),
+    text-shadow: 0 0 10px rgba(var(--sys-color-secondary-rgb), 0.5),
       0 0 20px rgba(var(--sys-color-secondary-rgb), 0.3),
-      0 2px 4px rgba(0,0,0,0.5);
+      0 2px 4px rgba(0, 0, 0, 0.5);
   }
 
   .hero__subtitle {
@@ -555,8 +631,7 @@ header > .navbar::after {
   body .hero .hero__title {
     font-size: 4.5rem; /* PRO SCALE: RESTORED IMPACT */
     margin-bottom: 2rem;
-    text-shadow: 
-      0 0 1.25rem rgba(var(--sys-color-secondary-rgb), 0.6),
+    text-shadow: 0 0 1.25rem rgba(var(--sys-color-secondary-rgb), 0.6),
       0 0 2.5rem rgba(var(--sys-color-tertiary-rgb), 0.3),
       0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
   }
@@ -565,8 +640,6 @@ header > .navbar::after {
     font-size: 1.25rem;
   }
 }
-
-
 
 /* ================================================= */
 /* === [V3] REFACTORED: FEATURE BLOCK (ZIG-ZAG)  === */
@@ -717,7 +790,6 @@ header > .navbar::after {
 
 /* UNIFIED MOBILE STACKING (1024px and below) */
 
-
 /* Mobile Adjustments (600px-) */
 @media screen and (max-width: 600px) {
   .feature-block__image {
@@ -751,10 +823,9 @@ header > .navbar::after {
   letter-spacing: var(--letter-spacing-display);
   color: var(--sys-color-surface);
   /* PERSISTENT GLOW: Violet Core for Mobile Identity (Boosted) */
-  text-shadow: 
-    0 0 0.625rem rgba(var(--sys-color-secondary-rgb), 0.8), /* TIGHT CORE */
-    0 0 1.25rem rgba(var(--sys-color-secondary-rgb), 0.7), /* BOOSTED BLOOM */
-    0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0 0.625rem rgba(var(--sys-color-secondary-rgb), 0.8),
+    /* TIGHT CORE */ 0 0 1.25rem rgba(var(--sys-color-secondary-rgb), 0.7),
+    /* BOOSTED BLOOM */ 0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
   margin-bottom: 1rem;
   line-height: var(--line-height-display);
   font-weight: 700;
@@ -763,7 +834,10 @@ header > .navbar::after {
 .hero__subtitle {
   font-family: var(--font-body);
   font-size: 1.125rem; /* MOBILE DEFAULT */
-  color: rgba(var(--sys-color-surface-rgb), 0.9); /* Makes the subtitle soft white */
+  color: rgba(
+    var(--sys-color-surface-rgb),
+    0.9
+  ); /* Makes the subtitle soft white */
   max-width: 65ch; /* Restoring the readability limit */
   line-height: 1.5;
   margin-left: auto; /* Centering within the flex container */
@@ -883,7 +957,7 @@ header > .navbar::after {
 .slideshow__control {
   /* ... positioning remains from above ... */
   /* Update Colors: RESET TO DARK CIRCLE */
-  background-color: rgba(0, 0, 0, 0.6); 
+  background-color: rgba(0, 0, 0, 0.6);
   border: none; /* Removed borders */
 }
 .slideshow__control:hover {
@@ -989,28 +1063,55 @@ header > .navbar::after {
   transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* 1. Base Hover Logic (Shared expansion & transition) */
+.button:hover:not(:disabled) {
+  letter-spacing: 0.08rem;
+  transition: letter-spacing 0.3s ease, transform 0.3s ease,
+    background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 2. Specific Style Overrides (Colors & Shadows) */
+.button--primary:hover:not(:disabled) {
+  transform: translateY(-0.1875rem);
+  background-color: var(--sys-color-tertiary);
+  box-shadow: 0 0.375rem 0.9375rem rgba(var(--sys-color-tertiary-rgb), 0.4);
+}
+
+.button--tonal:hover:not(:disabled) {
+  transform: translateY(-0.1875rem);
+  background-color: rgba(var(--sys-color-secondary-rgb), 0.18);
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
+}
+
+/* Success State: Persistent Pine and White */
+.button.button--success {
+  background-color: var(--sys-color-primary) !important;
+  color: white !important;
+  transform: none !important; /* Stop the bounce once sent */
+  box-shadow: none !important;
+  letter-spacing: var(--letter-spacing-cta) !important;
+  cursor: default;
+}
+
+/* Error State: Persistent Red and White */
+.button.button--error {
+  background-color: var(--sys-color-error) !important;
+  color: white !important;
+  transform: none !important;
+  box-shadow: none !important;
+  letter-spacing: var(--letter-spacing-cta) !important;
+}
+
 /* 2. MODIFIER: PRIMARY */
 .button--primary {
   background-color: var(--sys-color-primary);
   color: var(--sys-color-on-primary);
 }
 
-.button--primary:hover:not(:disabled) {
-  transform: translateY(-0.1875rem);
-  background-color: var(--sys-color-tertiary); /* M3 Interaction: Pine to Magenta */
-  box-shadow: 0 0.375rem 0.9375rem rgba(var(--sys-color-tertiary-rgb), 0.4);
-}
-
 /* 3. MODIFIER: TONAL */
 .button--tonal {
   background-color: var(--sys-color-primary-container);
   color: var(--sys-color-on-primary-container);
-}
-
-.button--tonal:hover:not(:disabled) {
-  transform: translateY(-0.1875rem);
-  background-color: rgba(var(--sys-color-secondary-rgb), 0.18); /* Tonal Violet Shift */
-  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
 }
 
 /* 4. THE MOBILE SOLUTION: ACTIVE STATE */
@@ -1054,7 +1155,7 @@ header > .navbar::after {
     align-items: center !important;
     width: 100% !important;
   }
-  
+
   .button-group .button {
     min-width: 200px; /* RESTORED */
     padding: 0.625rem 2.5rem; /* RESTORED SACRED: 2.5rem padding */
@@ -1079,7 +1180,7 @@ header > .navbar::after {
   }
 
   /* 3. OVERFLOW & PILLAR PROTECTION */
-  .feature-block__quote-container, 
+  .feature-block__quote-container,
   .feature-block__quote-box {
     max-width: 100% !important;
     width: auto !important;
@@ -1124,9 +1225,6 @@ header > .navbar::after {
 
 /* RESPONSIVE: Stack buttons on small screens - KEEPING FROM BONES */
 
-
-
-
 /* --- 6. RESPONSIVE ENGINE (DESKTOP ENHANCEMENT 810px+) --- */
 @media screen and (min-width: 810px) {
   /* 1. RESTORE GRID */
@@ -1144,10 +1242,10 @@ header > .navbar::after {
 
   /* 2. RESTORE CONTENT FLEX (Kill display: contents from mobile) */
   .feature-block__media {
-    display: flex;  /* Forces image container to be flex */
-    flex: 1 1 50%;  /* Strictly lock to 50% */
-    min-width: 0;   /* Prevents flex blowout */
-    height: 100%;   /* Fill grid height */
+    display: flex; /* Forces image container to be flex */
+    flex: 1 1 50%; /* Strictly lock to 50% */
+    min-width: 0; /* Prevents flex blowout */
+    height: 100%; /* Fill grid height */
   }
 
   /* Force image to fill the locked column height */
@@ -1228,8 +1326,8 @@ header > .navbar::after {
     .button-group .button {
       padding-left: 1.5rem;
       padding-right: 1.5rem;
-      width: fit-content !important; 
-      flex: 0 1 auto; 
+      width: fit-content !important;
+      flex: 0 1 auto;
     }
   }
 
@@ -1243,13 +1341,9 @@ header > .navbar::after {
       padding-right: 1rem;
     }
   }
-  
+
   /* Reset Orders (Flex container ignores child order relative to separate flex items) */
   /* But strictly, cleaner to reset if they leak? Flex items (Image vs Content) order matches source or row-reverse. */
-  
-
-  
-
 }
 
 /* ================================================= */
@@ -1281,28 +1375,44 @@ header > .navbar::after {
   width: 90%;
   max-width: 500px;
   box-shadow: var(--shadow-modal);
-  animation: modal-open-anim 0.4s ease-out;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Kinetic Pop */
+}
+
+/* KINETIC STATE: OPEN */
+.contact-modal.is-visible .contact-modal__content {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* KINETIC STATE: CLOSING */
+.contact-modal.is-closing {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
 }
 
 /* 3. THE INNER FORM (Atmospheric HUD 'Dithered Ink') */
 .contact-modal__form {
+  position: relative; /* ANCHOR CHECK: Locks HUD to bottom */
   border-radius: 0.3125rem;
   /* DITHERED RADIAL GRADIENT: Synced with Brand Rig */
   background-image: radial-gradient(
-    circle at 10% 10%, 
-    rgba(var(--sys-color-primary-rgb), 1) 0%, 
-    rgba(var(--sys-color-primary-rgb), 0.7) 25%, 
-    rgba(var(--sys-color-primary-rgb), 0.3) 50%, 
-    rgba(var(--sys-color-primary-rgb), 0.05) 80%, 
+    circle at 10% 10%,
+    rgba(var(--sys-color-primary-rgb), 1) 0%,
+    rgba(var(--sys-color-primary-rgb), 0.7) 25%,
+    rgba(var(--sys-color-primary-rgb), 0.3) 50%,
+    rgba(var(--sys-color-primary-rgb), 0.05) 80%,
     #121212 115%
   );
   background-color: #121212;
   border: 2px solid var(--sys-color-primary); /* Pine Accent Rim */
   padding: 1.5rem;
   /* BOOSTED VIOLET GLOW (Hero Sync) */
-  box-shadow: 0 0 10px rgba(var(--sys-violet-rgb), 0.8), 
-              0 0 25px rgba(var(--sys-violet-rgb), 0.6), 
-              0 0 50px rgba(var(--sys-violet-rgb), 0.3);
+  box-shadow: 0 0 10px rgba(var(--sys-violet-rgb), 0.8),
+    0 0 25px rgba(var(--sys-violet-rgb), 0.6),
+    0 0 50px rgba(var(--sys-violet-rgb), 0.3);
   font-family: var(--font-body); /* Force Sans-Serif */
   transition: background-image 0.5s ease-in-out; /* Atmospheric Smoothness */
 }
@@ -1323,7 +1433,13 @@ header > .navbar::after {
   margin: 0.75rem auto 1.5rem auto;
   width: 100%;
   height: 4px;
-  background: linear-gradient(to right, transparent 5%, var(--sys-color-secondary) 15%, var(--sys-color-secondary) 85%, transparent 95%);
+  background: linear-gradient(
+    to right,
+    transparent 5%,
+    var(--sys-color-secondary) 15%,
+    var(--sys-color-secondary) 85%,
+    transparent 95%
+  );
 }
 
 .contact-modal__form label {
@@ -1342,7 +1458,7 @@ header > .navbar::after {
 .contact-modal__form textarea {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.1); 
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0.5rem; /* ROUNDED GEOMETRY */
   margin-top: 0.375rem;
   margin-bottom: 1rem;
@@ -1434,6 +1550,53 @@ header > .navbar::after {
   transform: rotate(-45deg);
 }
 
+/* THE HUD STATUS BAR (Absolute Version) */
+.contact-modal__status-bar {
+  position: absolute;
+  /* This places it 40px below the bottom edge of the form card */
+  bottom: -40px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.75rem;
+  color: var(--sys-color-accent);
+  text-transform: uppercase;
+  border-left: 3px solid var(--sys-color-accent);
+  padding-left: 8px;
+  display: none;
+  pointer-events: none; /* User can't click it */
+}
+
+/* Typewriter Animation (Width Sync Fix) */
+.typewriter-text {
+  display: inline-block;
+  white-space: nowrap; /* Keep on one line */
+  overflow: hidden;
+  letter-spacing: 0.1em;
+  /* typing animation needs to match the width of the text */
+  animation: typing 1.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  border-right: 0.15em solid var(--sys-color-accent);
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--sys-color-accent);
+  }
+}
+
 /* ================================================= */
 /* === [V3] TABLET TRANSITION (1070px to 769px)   === */
 /* ================================================= */
@@ -1455,15 +1618,9 @@ header > .navbar::after {
   }
 }
 
-
-
 /* ================================================= */
 /* === [V18] GRID ARCHITECTURAL RESET (809px)    === */
 /* ================================================= */
-
-
-
-
 
 /* ================================================= */
 /* === [V19] SEMANTIC FOOTER COMPONENT           === */
@@ -1489,7 +1646,13 @@ header > .navbar::after {
   left: 0;
   width: 100%;
   height: 4px;
-  background: linear-gradient(to right, transparent 5%, var(--sys-color-secondary) 15%, var(--sys-color-secondary) 85%, transparent 95%);
+  background: linear-gradient(
+    to right,
+    transparent 5%,
+    var(--sys-color-secondary) 15%,
+    var(--sys-color-secondary) 85%,
+    transparent 95%
+  );
   z-index: 5;
 }
 
