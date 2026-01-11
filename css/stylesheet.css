@@ -5,12 +5,12 @@
 /* 1. REGISTRATION */
 @property --sunX {
   syntax: "<percentage>";
-  inherits: false;
+  inherits: true;
   initial-value: 10%;
 }
 @property --sunY {
   syntax: "<percentage>";
-  inherits: false;
+  inherits: true;
   initial-value: 10%;
 }
 @property --sunSize {
@@ -26,8 +26,13 @@ html {
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  overflow-x: hidden; /* Prevent horizontal scroll */
-  scrollbar-gutter: stable; /* Reserve space for scrollbar to prevent jumps */
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+
+  /* THE INERTIA BRIDGE CONTROLLER:
+     The html tag now drives the values, but doesn't render the gradient. */
+  animation: completePinball linear;
+  animation-timeline: scroll();
 }
 
 h1,
@@ -88,9 +93,9 @@ button {
   --color-base-error: 155, 30, 30;
 
   /* --- 2. SEMANTIC TOKENS (The Intent) --- */
-  --sys-color-primary-rgb: var(--sys-pine-rgb); /* Brand Core */
-  --sys-color-secondary-rgb: var(--sys-violet-rgb); /* Atmosphere/Feel */
-  --sys-color-tertiary-rgb: var(--sys-magenta-rgb); /* Interaction/Action */
+  --sys-color-primary-rgb: var(--sys-pine-rgb);
+  --sys-color-secondary-rgb: var(--sys-violet-rgb);
+  --sys-color-tertiary-rgb: var(--sys-magenta-rgb);
   --sys-color-surface-rgb: var(--color-base-white);
   --sys-color-on-surface-rgb: var(--color-base-charcoal);
 
@@ -102,45 +107,58 @@ button {
 
   --sys-color-on-surface: rgb(var(--sys-color-on-surface-rgb));
   --sys-color-on-surface-emphasis: rgb(var(--color-base-black));
-
-  /* Tonal Containers */
-  --sys-color-primary-container: rgba(var(--sys-color-primary-rgb), 0.12);
   --sys-color-on-primary-container: var(--sys-color-primary);
-  --sys-color-surface-variant: #f0f7f5; /* Light Pine Tint */
-
-  /* Text Colors */
   --sys-color-on-primary: var(--sys-color-surface);
 
-  /* Interaction & UI */
-  --sys-color-outline: #555555;
+  /* --- 4. THE SCALING SYSTEM --- */
+  /* TAXONOMY:
+     [OVERLAY] = Translucent / Tint (Sticker). Use 'background-color'.
+     [SURFACE] = Opaque / Composite (Sandwich). Use 'background'.
+     [1] = Regular Weight (8% Alpha) - Large Canvas / Subtle State
+     [2] = Emphasis Weight (16% Alpha) - UI Objects / Defined State
+  */
+
+  --weight-1: 0.08;
+  --weight-2: 0.16;
+
+  /* --- OVERLAYS (Translucent) --- */
+  --sys-mint-overlay-1: rgba(var(--sys-pine-rgb), var(--weight-1));
+  --sys-mint-overlay-2: rgba(var(--sys-pine-rgb), var(--weight-2));
+
+  /* --- SURFACES (Solid) --- */
+  --sys-mint-surface-1: linear-gradient(
+      var(--sys-mint-overlay-1),
+      var(--sys-mint-overlay-1)
+    ),
+    var(--sys-color-surface);
+  --sys-mint-surface-2: linear-gradient(
+      var(--sys-mint-overlay-2),
+      var(--sys-mint-overlay-2)
+    ),
+    var(--sys-color-surface);
+
+  /* --- ON-SURFACE (Text) --- */
+  --sys-color-on-mint: var(--sys-color-primary);
+
+  /* --- 5. INTERACTION & UI --- */
+  --sys-color-outline: rgba(var(--color-base-charcoal), 0.2);
   --sys-color-focus-halo: rgba(var(--sys-color-primary-rgb), 0.4);
   --sys-color-error: rgb(var(--color-base-error));
+  --sys-color-state-hover: rgba(var(--sys-color-on-surface-rgb), 0.15);
 
-  /* --- 4. DEPTH & EFFECTS --- */
+  /* --- 6. DEPTH & EFFECTS --- */
   --sys-shadow-navbar-accent: inset 0 -0.25rem 0.375rem -0.25rem
     var(--sys-color-secondary);
-
   --glow-primary: 0 0 0.3125rem var(--sys-color-primary);
   --glow-accent-strong: 0 0 0.625rem 0 var(--sys-color-tertiary);
   --glow-accent-subtle: 0 0 0.625rem 0 rgba(var(--sys-color-secondary-rgb), 0.4);
 
-  --sys-glow-accent-inset: inset 0 0 0.625rem 0
-    rgba(var(--sys-color-tertiary-rgb), 0.4);
-  --sys-glow-primary-inset: inset 0 0 0.3125rem var(--sys-color-primary);
-
-  --shadow-subtle: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
-  --shadow-modal: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.2),
-    0 0.375rem 1.25rem 0 rgba(0, 0, 0, 0.19);
-
-  /* Environmental Halo System */
-  --sys-shadow-halo-rim: 0 0 0 1.5px rgba(255, 255, 255, 0.8),
-    0 0.25rem 0.9375rem rgba(0, 0, 0, 0.5),
-    0 0 0.9375rem rgba(var(--sys-color-secondary-rgb), 0.75),
-    0 0 3.125rem rgba(var(--sys-color-secondary-rgb), 0.3);
+  /* Halo System */
   --sys-shadow-halo-standard: 0 0 0 1.5px rgba(255, 255, 255, 0.8),
     0 0.625rem 1.875rem rgba(0, 0, 0, 0.15),
     0 0 0.9375rem rgba(var(--sys-color-secondary-rgb), 0.7),
     0 0 3.125rem rgba(var(--sys-color-secondary-rgb), 0.2);
+
   --sys-shadow-halo-alt: 0 0 0 1.5px rgba(255, 255, 255, 0.8),
     0 0.625rem 1.875rem rgba(var(--sys-color-primary-rgb), 0.3),
     0 0 0.9375rem rgba(var(--sys-color-secondary-rgb), 0.8),
@@ -150,17 +168,34 @@ button {
   --nav-gradient-stop: 45vw;
   --navbar-shelf-height: 0.9375rem;
 
-  /* --- GLOBAL FONTS & TYPE SCALE (M3) --- */
+  /* --- 5. SPACING PRIMITIVES (The Numeric 8px Grid) --- */
+  --ref-space-unit: 0.5rem;
+  --ref-space-1: calc(var(--ref-space-unit) * 1); /* 8px  */
+  --ref-space-2: calc(var(--ref-space-unit) * 2); /* 16px */
+  --ref-space-3: calc(var(--ref-space-unit) * 3); /* 24px */
+  --ref-space-4: calc(var(--ref-space-unit) * 4); /* 32px */
+  --ref-space-8: calc(var(--ref-space-unit) * 8); /* 64px */
+  --ref-space-10: calc(var(--ref-space-unit) * 10); /* 80px */
+
+  /* --- 6. SEMANTIC LAYOUT TOKENS (Mobile Defaults) --- */
+  --sys-spacing-gutter: var(--ref-space-2); /* 1rem on mobile */
+  --sys-spacing-section-v: var(--ref-space-8); /* 4rem */
+  --sys-spacing-hero-v: var(--ref-space-8); /* 4rem on mobile */
+  --sys-spacing-btn-v: var(--ref-space-2);
+  --sys-spacing-btn-h: var(--ref-space-3);
+
+  /* --- 7. GLOBAL FONTS & TYPE SCALE (M3) --- */
   --font-display: "Poppins", sans-serif;
   --font-body: "Inter", sans-serif;
   --font-quote: "Playfair Display", serif;
 
-  /* M3 Scale Variables (rem-based) */
-  --font-size-display: 3.5rem; /* H1 */
-  --font-size-headline: 1.75rem; /* H2 */
-  --font-size-title: 1.125rem; /* H3 */
-  --font-size-body: 1rem; /* Body */
-  --font-size-quote: 1.5rem; /* Heroic Quote */
+  /* M3 Scale Variables (Adaptive Mobile Baseline) */
+  --font-size-hero: 3rem; /* Reduced for mobile */
+  --font-size-display: 2.5rem; /* Reduced for mobile */
+  --font-size-headline: 1.5rem; /* Reduced for mobile */
+  --font-size-title: 1.125rem;
+  --font-size-body: 1rem;
+  --font-size-quote: 1.25rem; /* Reduced for mobile */
 
   /* M3 Spacing & Rhythm Tokens */
   --letter-spacing-display: -0.02em;
@@ -171,6 +206,21 @@ button {
   --line-height-headline: 1.2;
   --line-height-title: 1.4;
   --line-height-body: 1.6;
+}
+
+/* --- THE ADAPTIVE SWITCH (Desktop Refinement) --- */
+@media screen and (min-width: 810px) {
+  :root {
+    /* Layout Expansion */
+    --sys-spacing-gutter: var(--ref-space-3); /* 1.5rem */
+    --sys-spacing-hero-v: var(--ref-space-10); /* 5rem */
+
+    /* Typography Expansion */
+    --font-size-hero: 4.5rem;
+    --font-size-display: 3.5rem;
+    --font-size-headline: 1.75rem;
+    --font-size-quote: 1.5rem;
+  }
 }
 
 /* ================================================= */
@@ -252,30 +302,30 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -1;
+  /* Use literal hex here to force the background to stay dark */
   background-color: #050505;
 
   /* THE DITHERED RAMP (No more banding):
-     We break the fade into small steps so the browser 
-     doesn't create visible rings. */
+      We break the fade into small steps so the browser 
+      doesn't create visible rings. */
+  /* UX Engineering Note: Reverted to literal rgb(5, 5, 5) to stop 
+     the "White-Screen" rendering bail caused by variable lookup latency. */
   background-image: radial-gradient(
     circle at var(--sunX) var(--sunY),
     rgba(var(--sys-color-primary-rgb), 1) 0%,
     rgba(var(--sys-color-primary-rgb), 0.7) 25%,
     rgba(var(--sys-color-primary-rgb), 0.3) 50%,
     rgba(var(--sys-color-primary-rgb), 0.05) 80%,
-    #050505 var(--sunSize)
+    rgb(5, 5, 5) var(--sunSize)
   );
 
   will-change: --sunX, --sunY, --sunSize;
 
-  /* THE ELASTIC TUNE (Anti-Strobe):
-     - 0.6s Cubic-Bezier: Provides the "liquid" lag that prevents dizziness.
-     - No CSS Filters: Keeps the gradient rendering at native bit-depth. */
-  transition: --sunX 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
-    --sunY 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), --sunSize 0.8s ease-in-out;
-
-  animation: completePinball linear;
-  animation-timeline: scroll();
+  /* THE HEAVY LIQUID DAMPENER:
+     Because the animation is on the 'html', the transition here 
+     on 'body::before' will finally be respected. */
+  transition: --sunX 2.5s cubic-bezier(0.15, 1, 0.3, 1),
+    --sunY 2.5s cubic-bezier(0.15, 1, 0.3, 1), --sunSize 2s ease-in-out;
 }
 
 /* The 'Spine' of the site */
@@ -291,7 +341,7 @@ body::before {
 /* ================================================= */
 
 .navbar {
-  background-color: var(--sys-color-on-surface); /* Charcoal stays */
+  background-color: rgb(var(--color-base-charcoal)); /* Charcoal stays */
   display: flex;
   align-items: stretch; /* Pixel-Perfect Hover Heights */
   justify-content: space-between; /* Ensure logo/toggle/links spacing */
@@ -403,7 +453,7 @@ header > .navbar::after {
 }
 
 .navbar__logo:hover .logo__suffix {
-  color: #fff;
+  color: var(--sys-color-surface);
   text-shadow: 0 0 5px rgba(var(--sys-color-tertiary-rgb), 0.8),
     0 0 10px rgba(var(--sys-color-tertiary-rgb), 0.5),
     0 0 20px rgba(var(--sys-color-tertiary-rgb), 0.3);
@@ -469,10 +519,7 @@ header > .navbar::after {
 
 /* Mimic the Desktop Navlink Hover */
 .navbar__toggle:hover {
-  background-color: rgba(
-    var(--sys-color-on-surface-rgb),
-    0.15
-  ); /* Tonal Charcoal shift */
+  background-color: var(--sys-color-state-hover); /* Tonal Charcoal shift */
   color: var(--sys-color-surface); /* Shifts icon to white for contrast */
 }
 
@@ -518,7 +565,7 @@ header > .navbar::after {
 
 /* THE HOVER: Tonal shift & Accent Line */
 .navbar__link:hover:not(.active) {
-  background-color: #444;
+  background-color: var(--sys-color-outline);
 }
 
 /* THE ACCENT RAIL ON HOVER (Top Nav) */
@@ -611,33 +658,26 @@ header > .navbar::after {
   }
 
   /* --- HERO & SLIDESHOW ENHANCEMENTS (810px+) --- */
+  /* UX Engineer Note: Specificity reduced. 
+     Sizes are now driven by :root tokens. */
   .hero__title {
-    font-size: 3.75rem; /* PRO SCALE */
-    /* ELECTRIC GLOW: Intense Violet Layers */
-    text-shadow: 0 0 10px rgba(var(--sys-color-secondary-rgb), 0.5),
-      0 0 20px rgba(var(--sys-color-secondary-rgb), 0.3),
-      0 2px 4px rgba(0, 0, 0, 0.5);
-  }
+    font-size: var(--font-size-hero);
+    margin-bottom: var(--ref-space-4); /* Matches your 2rem */
 
-  .hero__subtitle {
-    font-size: 1.25rem;
-  }
-
-  .button-group {
-    flex-direction: row; /* Horizontal Buttons */
-  }
-
-  /* --- HERO & SLIDESHOW ENHANCEMENTS (810px+) --- */
-  body .hero .hero__title {
-    font-size: 4.5rem; /* PRO SCALE: RESTORED IMPACT */
-    margin-bottom: 2rem;
+    /* Unified Glow (Kept your best shadow version) */
     text-shadow: 0 0 1.25rem rgba(var(--sys-color-secondary-rgb), 0.6),
       0 0 2.5rem rgba(var(--sys-color-tertiary-rgb), 0.3),
       0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
   }
 
   .hero__subtitle {
-    font-size: 1.25rem;
+    font-size: var(
+      --font-size-title
+    ); /* Snapped to your 1.125rem+ title token */
+  }
+
+  .button-group {
+    flex-direction: row; /* Horizontal Buttons */
   }
 }
 
@@ -648,24 +688,27 @@ header > .navbar::after {
 /* --- 1. THE BLOCK (Container) --- */
 .feature-block {
   background-color: var(--sys-color-surface);
-  padding: 4rem 1.25rem;
+  padding: var(--sys-spacing-section-v) var(--sys-spacing-gutter);
   margin-bottom: 1.125rem; /* Tighter 18px Gutter Splash */
   width: 100%;
+  display: block;
+  z-index: 1;
 }
 
 /* Modifiers for Block */
 .feature-block--first {
   margin-top: 1.125rem;
   border-radius: 2rem 2rem 0 0; /* Rounded shoulders */
+  overflow: hidden; /* Clips any layered background  colors to the rounded corners */
 }
 
 .feature-block--alt {
-  background-color: var(
-    --sys-color-surface-variant
-  ) !important; /* Force Light Pine */
+  background: var(--sys-mint-surface-1);
+
+  /* Ensure the block is fully opaque so it hides the background pinball */
+  opacity: 1 !important;
 }
 
-/* --- 2. THE GRID (Flex Layout) --- */
 /* --- 2. THE GRID (Flex Layout - Mobile First Stack) --- */
 .feature-block__grid {
   display: flex;
@@ -701,7 +744,6 @@ header > .navbar::after {
   box-shadow: var(--sys-shadow-halo-alt) !important;
 }
 
-/* --- 4. CONTENT (Text & Typography) --- */
 /* --- 4. CONTENT (Text & Typography) --- */
 /* MOBILE DEFAULT: 'display: contents' allows children to interleave with the image via order */
 .feature-block__content {
@@ -742,6 +784,7 @@ header > .navbar::after {
 }
 
 .feature-block__jump-link {
+  font-family: "Poppins", sans-serif;
   font-size: var(--font-size-title);
   line-height: var(--line-height-title);
   letter-spacing: var(--letter-spacing-title);
@@ -757,7 +800,7 @@ header > .navbar::after {
 }
 
 .feature-block__quote-box {
-  background-color: var(--sys-color-surface-variant);
+  background-color: var(--sys-mint-overlay-1);
   padding: 2rem 2.5rem;
   border-left: 0.25rem solid var(--sys-color-secondary);
   border-right: none;
@@ -807,39 +850,41 @@ header > .navbar::after {
   justify-content: center;
   align-items: center;
   min-height: 40vh;
-  padding: 5rem 1.25rem 2rem 1.25rem;
+  /* Vertical: 5rem(10) | Horizontal: 1.25rem(3) | Bottom: 2rem(4) */
+  padding: var(--sys-spacing-hero-v) var(--sys-spacing-gutter)
+    var(--ref-space-4) var(--sys-spacing-gutter);
   text-align: center;
 }
 
 .hero__content {
   position: relative; /* Secondary anchor */
-  max-width: 65ch; /* Optimized for readability */
+  max-width: 70ch; /* Optimized for readability */
   margin: 0 auto;
 }
 
 .hero__title {
   font-family: var(--font-display);
-  font-size: var(--font-size-display); /* M3 Scale */
+  font-size: var(--font-size-hero);
   letter-spacing: var(--letter-spacing-display);
   color: var(--sys-color-surface);
   /* PERSISTENT GLOW: Violet Core for Mobile Identity (Boosted) */
   text-shadow: 0 0 0.625rem rgba(var(--sys-color-secondary-rgb), 0.8),
     /* TIGHT CORE */ 0 0 1.25rem rgba(var(--sys-color-secondary-rgb), 0.7),
     /* BOOSTED BLOOM */ 0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
-  margin-bottom: 1rem;
+  margin-bottom: var(--ref-space-2);
   line-height: var(--line-height-display);
   font-weight: 700;
 }
 
 .hero__subtitle {
   font-family: var(--font-body);
-  font-size: 1.125rem; /* MOBILE DEFAULT */
+  font-size: var(--font-size-title); /* MOBILE DEFAULT */
   color: rgba(
     var(--sys-color-surface-rgb),
     0.9
   ); /* Makes the subtitle soft white */
   max-width: 65ch; /* Restoring the readability limit */
-  line-height: 1.5;
+  line-height: var(--line-height-title);
   margin-left: auto; /* Centering within the flex container */
   margin-right: auto;
   text-align: center;
@@ -1110,14 +1155,14 @@ header > .navbar::after {
 
 /* 3. MODIFIER: TONAL */
 .button--tonal {
-  background-color: var(--sys-color-primary-container);
+  background-color: var(--sys-mint-overlay-2);
   color: var(--sys-color-on-primary-container);
 }
 
 /* 4. THE MOBILE SOLUTION: ACTIVE STATE */
 .button:active:not(:disabled) {
   transform: translateY(0.0625rem) scale(0.98);
-  box-shadow: inset 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0.125rem 0.25rem rgba(var(--color-base-black), 0.2);
   filter: brightness(0.9);
 }
 
@@ -1377,7 +1422,8 @@ header > .navbar::after {
   box-shadow: var(--shadow-modal);
   opacity: 0;
   transform: scale(0.95);
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Kinetic Pop */
+  transition: opacity 0.4s ease,
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Kinetic Pop */
 }
 
 /* KINETIC STATE: OPEN */
@@ -1608,14 +1654,6 @@ header > .navbar::after {
     justify-content: center;
     padding-right: 0;
   }
-
-  .hero__title {
-    font-size: 2.75rem; /* Slightly smaller for tablet */
-  }
-
-  .feature-block__grid {
-    gap: 3rem; /* Tighten up the gutters */
-  }
 }
 
 /* ================================================= */
@@ -1627,7 +1665,7 @@ header > .navbar::after {
 /* ================================================= */
 
 .footer {
-  background-color: var(--sys-color-on-surface); /* Charcoal */
+  background-color: rgb(var(--color-base-charcoal)); /* Charcoal */
   color: var(--sys-color-surface);
   position: relative;
   overflow: visible;
@@ -1675,7 +1713,7 @@ header > .navbar::after {
   letter-spacing: var(--letter-spacing-body);
   text-decoration: none;
   transition: all 0.3s ease;
-  padding: 14px 24px;
+  padding: var(--sys-spacing-btn-v) var(--sys-spacing-btn-h);
   display: flex;
   align-items: center;
   position: relative;
@@ -1684,7 +1722,7 @@ header > .navbar::after {
 }
 
 .footer__link:hover {
-  background-color: #444;
+  background-color: var(--sys-color-outline);
   color: var(--sys-color-surface);
 }
 
