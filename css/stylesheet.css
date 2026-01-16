@@ -1,23 +1,22 @@
 /* ================================================= */
-/* === [V24] ATMOSPHERIC PULSE & HIGH-FIDELITY RIG PART A == */
+/* === [V25] STEADY FLOOD & HIGH-FIDELITY RIG PART A == */
 /* ================================================= */
 
 /* 1. REGISTRATION */
 @property --sunX {
   syntax: "<percentage>";
   inherits: true;
-  initial-value: 10%;
+  initial-value: 50%;
 }
+
 @property --sunY {
   syntax: "<percentage>";
   inherits: true;
-  initial-value: 10%;
+  initial-value: 50%;
 }
-@property --sunSize {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 85%;
-}
+
+/* --sunSize REMOVED: Size is now a hard-coded constant (400%) in the background-gradient 
+   to ensure zero pulsing and maximum illumination across the viewport. */
 
 /* ================================================= */
 /* === 1. GLOBAL ENGINE: Reset & Variables       === */
@@ -83,6 +82,10 @@ button {
 }
 
 :root {
+  /* Increase this to push the sun center-point into the right margin */
+  --content-limit-percent: 37%;
+  --content-limit: 600px;
+
   /* --- 1. BASE PRIMITIVES (M3 Tonal Palette) --- */
   --sys-pine-rgb: 1, 98, 75;
   --sys-violet-rgb: 156, 39, 176;
@@ -110,58 +113,20 @@ button {
   --sys-color-on-primary-container: var(--sys-color-primary);
   --sys-color-on-primary: var(--sys-color-surface);
 
-  /* --- 4. THE SCALING SYSTEM --- */
-  /* TAXONOMY:
-     [OVERLAY] = Translucent / Tint (Sticker). Use 'background-color'.
-     [SURFACE] = Opaque / Composite (Sandwich). Use 'background'.
-     [1] = Regular Weight (8% Alpha) - Large Canvas / Subtle State
-     [2] = Emphasis Weight (16% Alpha) - UI Objects / Defined State
-  */
-
   --weight-1: 0.08;
   --weight-2: 0.16;
 
-  /* --- OVERLAYS (Translucent) --- */
-  --sys-mint-overlay-1: rgba(var(--sys-pine-rgb), var(--weight-1));
-  --sys-mint-overlay-2: rgba(var(--sys-pine-rgb), var(--weight-2));
-
-  /* --- SURFACES (Solid) --- */
-  --sys-mint-surface-1: linear-gradient(
-      var(--sys-mint-overlay-1),
-      var(--sys-mint-overlay-1)
-    ),
-    var(--sys-color-surface);
-  --sys-mint-surface-2: linear-gradient(
-      var(--sys-mint-overlay-2),
-      var(--sys-mint-overlay-2)
-    ),
-    var(--sys-color-surface);
-
-  /* --- ON-SURFACE (Text) --- */
-  --sys-color-on-mint: var(--sys-color-primary);
-
   /* --- 5. INTERACTION & UI --- */
   --sys-color-outline: rgba(var(--color-base-charcoal), 0.2);
-  --sys-color-focus-halo: rgba(var(--sys-color-primary-rgb), 0.4);
+
   --sys-color-error: rgb(var(--color-base-error));
-  --sys-color-state-hover: rgba(var(--sys-color-on-surface-rgb), 0.15);
 
   /* --- 6. DEPTH & EFFECTS --- */
-  --sys-shadow-navbar-accent: inset 0 -0.25rem 0.375rem -0.25rem
-    var(--sys-color-secondary);
-  --glow-primary: 0 0 0.3125rem var(--sys-color-primary);
-  --glow-accent-strong: 0 0 0.625rem 0 var(--sys-color-tertiary);
-  --glow-accent-subtle: 0 0 0.625rem 0 rgba(var(--sys-color-secondary-rgb), 0.4);
 
   /* Halo System */
-  --sys-shadow-halo-standard: 0 0 0 1.5px rgba(255, 255, 255, 0.8),
-    0 0.625rem 1.875rem rgba(0, 0, 0, 0.15),
-    0 0 0.9375rem rgba(var(--sys-color-secondary-rgb), 0.7),
-    0 0 3.125rem rgba(var(--sys-color-secondary-rgb), 0.2);
 
   --sys-shadow-halo-alt: 0 0 0 1.5px rgba(255, 255, 255, 0.8),
-    0 0.625rem 1.875rem rgba(var(--sys-color-primary-rgb), 0.3),
-    0 0 0.9375rem rgba(var(--sys-color-secondary-rgb), 0.8),
+    0 0.625rem 1.875rem rgba(var(--sys-color-primary-rgb), 0.3), 0 0 0.9375rem rgba(var(--sys-color-secondary-rgb), 0.8),
     0 0 3.125rem rgba(var(--sys-color-secondary-rgb), 0.25);
 
   /* --- FLUID GRADIENT CONTROL --- */
@@ -206,126 +171,371 @@ button {
   --line-height-headline: 1.2;
   --line-height-title: 1.4;
   --line-height-body: 1.6;
-}
 
-/* --- THE ADAPTIVE SWITCH (Desktop Refinement) --- */
-@media screen and (min-width: 810px) {
-  :root {
-    /* Layout Expansion */
-    --sys-spacing-gutter: var(--ref-space-3); /* 1.5rem */
-    --sys-spacing-hero-v: var(--ref-space-10); /* 5rem */
+  /* ================================================= */
+  /* === THE KINETIC GAUGE ENGINE (Spinal Tap)      === */
+  /* ================================================= */
+  /* ================================================= */
+  /* === 1. PIGMENTS (The Chemistry / DNA)         === */
+  /* ================================================= */
+  --pigment-pine-rgb: 1, 98, 75;
+  --pigment-violet-rgb: 156, 39, 176;
+  --pigment-magenta-rgb: 255, 0, 255;
+  --pigment-white-rgb: 255, 255, 255;
+  --pigment-charcoal-rgb: 51, 51, 51;
+  --pigment-black-rgb: 10, 10, 10;
+  --pigment-crimson-rgb: 155, 30, 30;
+  --pigment-amber-rgb: 255, 191, 0;
+  --pigment-sky-rgb: 0, 122, 255;
 
-    /* Typography Expansion */
-    --font-size-hero: 4.5rem;
-    --font-size-display: 3.5rem;
-    --font-size-headline: 1.75rem;
-    --font-size-quote: 1.5rem;
-  }
+  /* ================================================= */
+  /* === 2. THE KINETIC GAUGE (The Universal Physics) === */
+  /* ================================================= */
+  /* HARMONIC SCALE REFERENCE (8-Factor Multiplier)
+     -------------------------------------------------
+     Gauge | Factor | Opacity | Space (80px Base)
+     1     | 0.08   | 8%      | 6.4px (Whisper)
+     2     | 0.16   | 16%     | 12.8px (Talk)
+     3     | 0.24   | 24%     | 19.2px (Standard)
+     4     | 0.32   | 32%     | 25.6px (Shout)
+     5     | 0.40   | 40%     | 32.0px
+     6     | 0.48   | 48%     | 38.4px
+     7     | 0.56   | 56%     | 44.8px
+     8     | 0.64   | 64%     | 51.2px (Boost)
+     9     | 0.72   | 72%     | 57.6px
+     10    | 0.84   | 84%     | 67.2px
+     11    | 0.96   | 96%     | 76.8px (Redline)
+  */
+  --gauge-1: 0.08;
+  --gauge-2: 0.16;
+  --gauge-3: 0.24;
+  --gauge-4: 0.32;
+  --gauge-5: 0.4;
+  --gauge-6: 0.48;
+  --gauge-7: 0.56;
+  --gauge-8: 0.64;
+  --gauge-9: 0.72;
+  --gauge-10: 0.84;
+  --gauge-11: 0.96;
+
+  /* ================================================= */
+  /* === 3. THE SWITCHBOARD (Semantic Roles)       === */
+  /* ================================================= */
+  --sys-role-primary-rgb: var(--pigment-pine-rgb);
+  --sys-role-accent-rgb: var(--pigment-violet-rgb);
+  --sys-role-action-rgb: var(--pigment-magenta-rgb);
+  --sys-role-canvas-rgb: var(--pigment-white-rgb);
+  --sys-role-neutral-rgb: var(--pigment-charcoal-rgb);
+  --sys-role-error-rgb: var(--pigment-crimson-rgb);
+  --sys-role-warning-rgb: var(--pigment-amber-rgb);
+  --sys-role-info-rgb: var(--pigment-sky-rgb);
+  --sys-role-success-rgb: var(--pigment-pine-rgb);
+
+  /* ================================================= */
+  /* === 4. DERIVED TOOLS (The Solids)             === */
+  /* ================================================= */
+  --sys-color-primary: rgb(var(--sys-role-primary-rgb));
+  --sys-color-accent: rgb(var(--sys-role-accent-rgb));
+  --sys-color-action: rgb(var(--sys-role-action-rgb));
+  --sys-color-canvas: rgb(var(--sys-role-canvas-rgb));
+  --sys-color-neutral: rgb(var(--sys-role-neutral-rgb));
+  --sys-color-error: rgb(var(--sys-role-error-rgb));
+  --sys-color-warning: rgb(var(--sys-role-warning-rgb));
+  --sys-color-info: rgb(var(--sys-role-info-rgb));
+  --sys-color-success: rgb(var(--sys-role-success-rgb));
+
+  /* ================================================= */
+  /* === 5. THE ALPHA MATRIX (Unabridged 1-11)     === */
+  /* ================================================= */
+
+  /* PRIMARY (PINE) */
+  --sys-color-primary-alpha-1: rgba(var(--sys-role-primary-rgb), var(--gauge-1));
+  --sys-color-primary-alpha-2: rgba(var(--sys-role-primary-rgb), var(--gauge-2));
+  --sys-color-primary-alpha-3: rgba(var(--sys-role-primary-rgb), var(--gauge-3));
+  --sys-color-primary-alpha-4: rgba(var(--sys-role-primary-rgb), var(--gauge-4));
+  --sys-color-primary-alpha-5: rgba(var(--sys-role-primary-rgb), var(--gauge-5));
+  --sys-color-primary-alpha-6: rgba(var(--sys-role-primary-rgb), var(--gauge-6));
+  --sys-color-primary-alpha-7: rgba(var(--sys-role-primary-rgb), var(--gauge-7));
+  --sys-color-primary-alpha-8: rgba(var(--sys-role-primary-rgb), var(--gauge-8));
+  --sys-color-primary-alpha-9: rgba(var(--sys-role-primary-rgb), var(--gauge-9));
+  --sys-color-primary-alpha-10: rgba(var(--sys-role-primary-rgb), var(--gauge-10));
+  --sys-color-primary-alpha-11: rgba(var(--sys-role-primary-rgb), var(--gauge-11));
+
+  /* ACCENT (VIOLET) */
+  --sys-color-accent-alpha-1: rgba(var(--sys-role-accent-rgb), var(--gauge-1));
+  --sys-color-accent-alpha-2: rgba(var(--sys-role-accent-rgb), var(--gauge-2));
+  --sys-color-accent-alpha-3: rgba(var(--sys-role-accent-rgb), var(--gauge-3));
+  --sys-color-accent-alpha-4: rgba(var(--sys-role-accent-rgb), var(--gauge-4));
+  --sys-color-accent-alpha-5: rgba(var(--sys-role-accent-rgb), var(--gauge-5));
+  --sys-color-accent-alpha-6: rgba(var(--sys-role-accent-rgb), var(--gauge-6));
+  --sys-color-accent-alpha-7: rgba(var(--sys-role-accent-rgb), var(--gauge-7));
+  --sys-color-accent-alpha-8: rgba(var(--sys-role-accent-rgb), var(--gauge-8));
+  --sys-color-accent-alpha-9: rgba(var(--sys-role-accent-rgb), var(--gauge-9));
+  --sys-color-accent-alpha-10: rgba(var(--sys-role-accent-rgb), var(--gauge-10));
+  --sys-color-accent-alpha-11: rgba(var(--sys-role-accent-rgb), var(--gauge-11));
+
+  /* ACTION (MAGENTA) */
+  --sys-color-action-alpha-1: rgba(var(--sys-role-action-rgb), var(--gauge-1));
+  --sys-color-action-alpha-2: rgba(var(--sys-role-action-rgb), var(--gauge-2));
+  --sys-color-action-alpha-3: rgba(var(--sys-role-action-rgb), var(--gauge-3));
+  --sys-color-action-alpha-4: rgba(var(--sys-role-action-rgb), var(--gauge-4));
+  --sys-color-action-alpha-5: rgba(var(--sys-role-action-rgb), var(--gauge-5));
+  --sys-color-action-alpha-6: rgba(var(--sys-role-action-rgb), var(--gauge-6));
+  --sys-color-action-alpha-7: rgba(var(--sys-role-action-rgb), var(--gauge-7));
+  --sys-color-action-alpha-8: rgba(var(--sys-role-action-rgb), var(--gauge-8));
+  --sys-color-action-alpha-9: rgba(var(--sys-role-action-rgb), var(--gauge-9));
+  --sys-color-action-alpha-10: rgba(var(--sys-role-action-rgb), var(--gauge-10));
+  --sys-color-action-alpha-11: rgba(var(--sys-role-action-rgb), var(--gauge-11));
+
+  /* NEUTRAL (INK) */
+  --sys-color-neutral-alpha-1: rgba(var(--sys-role-neutral-rgb), var(--gauge-1));
+  --sys-color-neutral-alpha-2: rgba(var(--sys-role-neutral-rgb), var(--gauge-2));
+  --sys-color-neutral-alpha-3: rgba(var(--sys-role-neutral-rgb), var(--gauge-3));
+  --sys-color-neutral-alpha-4: rgba(var(--sys-role-neutral-rgb), var(--gauge-4));
+  --sys-color-neutral-alpha-5: rgba(var(--sys-role-neutral-rgb), var(--gauge-5));
+  --sys-color-neutral-alpha-6: rgba(var(--sys-role-neutral-rgb), var(--gauge-6));
+  --sys-color-neutral-alpha-7: rgba(var(--sys-role-neutral-rgb), var(--gauge-7));
+  --sys-color-neutral-alpha-8: rgba(var(--sys-role-neutral-rgb), var(--gauge-8));
+  --sys-color-neutral-alpha-9: rgba(var(--sys-role-neutral-rgb), var(--gauge-9));
+  --sys-color-neutral-alpha-10: rgba(var(--sys-role-neutral-rgb), var(--gauge-10));
+  --sys-color-neutral-alpha-11: rgba(var(--sys-role-neutral-rgb), var(--gauge-11));
+
+  /* CANVAS (LIFT) */
+  --sys-color-canvas-alpha-1: rgba(var(--sys-role-canvas-rgb), var(--gauge-1));
+  --sys-color-canvas-alpha-2: rgba(var(--sys-role-canvas-rgb), var(--gauge-2));
+  --sys-color-canvas-alpha-3: rgba(var(--sys-role-canvas-rgb), var(--gauge-3));
+  --sys-color-canvas-alpha-4: rgba(var(--sys-role-canvas-rgb), var(--gauge-4));
+  --sys-color-canvas-alpha-5: rgba(var(--sys-role-canvas-rgb), var(--gauge-5));
+  --sys-color-canvas-alpha-6: rgba(var(--sys-role-canvas-rgb), var(--gauge-6));
+  --sys-color-canvas-alpha-7: rgba(var(--sys-role-canvas-rgb), var(--gauge-7));
+  --sys-color-canvas-alpha-8: rgba(var(--sys-role-canvas-rgb), var(--gauge-8));
+  --sys-color-canvas-alpha-9: rgba(var(--sys-role-canvas-rgb), var(--gauge-9));
+  --sys-color-canvas-alpha-10: rgba(var(--sys-role-canvas-rgb), var(--gauge-10));
+  --sys-color-canvas-alpha-11: rgba(var(--sys-role-canvas-rgb), var(--gauge-11));
+
+  /* ================================================= */
+  /* === 6. ATMOSPHERICS (Depth & Glow Rig)        === */
+  /* ================================================= */
+
+  /* THE HALO: 1.5px separator + multi-layer violet bloom */
+  --sys-shadow-halo-standard: 0 0 0 1.5px var(--sys-color-canvas-alpha-10), 0 0.625rem 1.875rem rgba(0, 0, 0, 0.15),
+    0 0 0.9375rem var(--sys-color-accent-alpha-9), 0 0 3.125rem var(--sys-color-accent-alpha-3);
+
+  /* THE MODAL: Depth layers using Neutral-4 and Neutral-8 */
+  --sys-shadow-depth-modal: 0 0.5rem 2rem var(--sys-color-neutral-alpha-4),
+    0 1.25rem 5rem var(--sys-color-neutral-alpha-8);
+
+  /* THE FOCUS: Safety gap + Primary Kinetic glow */
+  --sys-shadow-focus-primary: 0 0 0 3px var(--sys-color-canvas), 0 0 0 6px var(--sys-color-primary-alpha-4);
+
+  /* THE MUFFLER TOKEN: Refined containment for interactive elements */
+  --sys-shadow-muffler-action: 0 0 0.5rem var(--sys-color-action-alpha-4), 0 0 1rem var(--sys-color-action-alpha-2);
+
+  /* BAKE: On-Canvas Solids (Opacity flattened against white) */
+  --sys-color-primary-on-canvas-1-bg: linear-gradient(
+      var(--sys-color-primary-alpha-1),
+      var(--sys-color-primary-alpha-1)
+    ),
+    var(--sys-color-canvas);
+
+  /* ================================================= */
+  /* === 7. KINETIC SPACE (1-11 Unabridged)        === */
+  /* ================================================= */
+  /* Definition: Gauge * 5rem (80px base) */
+  --sys-space-1: calc(var(--gauge-1) * 5rem);
+  --sys-space-2: calc(var(--gauge-2) * 5rem);
+  --sys-space-3: calc(var(--gauge-3) * 5rem);
+  --sys-space-4: calc(var(--gauge-4) * 5rem);
+  --sys-space-5: calc(var(--gauge-5) * 5rem);
+  --sys-space-6: calc(var(--gauge-6) * 5rem);
+  --sys-space-7: calc(var(--gauge-7) * 5rem);
+  --sys-space-8: calc(var(--gauge-8) * 5rem);
+  --sys-space-9: calc(var(--gauge-9) * 5rem);
+  --sys-space-10: calc(var(--gauge-10) * 5rem);
+  --sys-space-11: calc(var(--gauge-11) * 5rem);
+
+  /* ================================================= */
+  /* === 8. KINETIC RADIUS (1-11 Unabridged)       === */
+  /* ================================================= */
+  /* Definition: Gauge * 2rem (32px base) */
+  --sys-radius-1: calc(var(--gauge-1) * 2rem);
+  --sys-radius-2: calc(var(--gauge-2) * 2rem);
+  --sys-radius-3: calc(var(--gauge-3) * 2rem);
+  --sys-radius-4: calc(var(--gauge-4) * 2rem);
+  --sys-radius-5: calc(var(--gauge-5) * 2rem);
+  --sys-radius-6: calc(var(--gauge-6) * 2rem);
+  --sys-radius-7: calc(var(--gauge-7) * 2rem);
+  --sys-radius-8: calc(var(--gauge-8) * 2rem);
+  --sys-radius-9: calc(var(--gauge-9) * 2rem);
+  --sys-radius-10: calc(var(--gauge-10) * 2rem);
+  --sys-radius-11: 100px; /* Redline Pill */
+
+  /* ================================================= */
+  /* === 9. SEMANTIC ALIASES                       === */
+  /* ================================================= */
+  --sys-space-body-base: var(--sys-space-2);
+  --sys-space-cta-v: var(--sys-space-2);
+  --sys-space-cta-h: var(--sys-space-4);
+  --sys-radius-button: var(--sys-radius-3);
+  --sys-radius-modal: var(--sys-radius-8);
+
+  /* ================================================= */
+  /* === [V20] KINETIC TYPOGRAPHY SWITCHBOARD      === */
+  /* ================================================= */
+
+  /* FONT FAMILIES (Maintained) */
+  --font-display: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-quote: "Playfair Display", serif;
+
+  /* ================================================= */
+  /* === [V21] KINETIC TYPOGRAPHY: GROWTH SCALE    === */
+  /* ================================================= */
+
+  /* Hero: 48px (Mobile) -> 96px (Desktop Heroic) */
+  --sys-type-hero: clamp(3rem, 8vw, 6rem);
+
+  /* Display: 40px (Mobile) -> 64px (Desktop) */
+  --sys-type-display: clamp(2.5rem, 6vw, 4rem);
+
+  /* Headline: 24px (Mobile) -> 40px (Desktop) */
+  --sys-type-headline: clamp(1.5rem, 4vw, 2.5rem);
+
+  /* Title/Quote: 20px (Mobile) -> 24px (Desktop) */
+  --sys-type-title: clamp(1.25rem, 2vw, 1.5rem);
+
+  /* Body: 16px (Mobile Baseline) -> 18px (Desktop Editorial) */
+  --sys-type-body: clamp(1rem, 1.25vw, 1.125rem);
+
+  /* Caption: 12px (Mobile) -> 14px (Desktop) */
+  --sys-type-caption: clamp(0.75rem, 1vw, 0.875rem);
+
+  /* ================================================= */
+  /* === [V21] SEMANTIC LAYOUT: GAUGE SYNC         === */
+  /* ================================================= */
+
+  /* Gutter: 16px (Gauge 2) */
+  --sys-spacing-gutter: var(--sys-space-2);
+
+  /* Section Vertical: 64px (Gauge 8) */
+  --sys-spacing-section-v: var(--sys-space-8);
+
+  /* Hero Vertical: 80px (Gauge 10) */
+  --sys-spacing-hero-v: var(--sys-space-10);
+
+  /* Button/CTA Logic: 16px V / 24px H */
+  --sys-spacing-cta-v: var(--sys-space-2);
+  --sys-spacing-cta-h: var(--sys-space-4);
+
+  /* RHYTHM & FLOW */
+  --sys-line-height-tight: 1.1;
+  --sys-line-height-standard: 1.4;
+  --sys-line-height-reading: 1.6;
+
+  --sys-letter-spacing-wide: 0.05rem;
+  --sys-letter-spacing-standard: 0.02em;
+  --sys-letter-spacing-display: 0; /* Pure Neutral for Display */
+  --sys-letter-spacing-tight: -0.015em;
 }
 
 /* ================================================= */
-/* == [V24] ATMOSPHERIC PULSE & HIGH-FIDELITY RIG PART B== */
+/* == [V25] STEADY FLOOD & HIGH-FIDELITY RIG PART B == */
 /* ================================================= */
 
 /* 2. THE CHOREOGRAPHY (Keeps your perfected Desktop + Universal Pulse Mobile) */
+
 @keyframes completePinball {
-  /* DESKTOP Zig-Zag */
+  /* Only X and Y are animated. Size is now a constant property of the background. */
   0% {
     --sunX: 10%;
     --sunY: 5%;
-    --sunSize: 85%;
   }
-  15% {
-    --sunX: 90%;
-    --sunY: 20%;
-    --sunSize: 85%;
+  24% {
+    --sunX: calc(50% + var(--content-limit-percent));
+    --sunY: 68%;
   }
-  40% {
-    --sunX: 5%;
-    --sunY: 45%;
-    --sunSize: 90%;
+  43% {
+    --sunX: calc(50% - var(--content-limit-percent));
+    --sunY: 85%;
   }
-  65% {
-    --sunX: 95%;
-    --sunY: 70%;
-    --sunSize: 90%;
+  61% {
+    --sunX: calc(50% + var(--content-limit-percent));
+    --sunY: 92%;
   }
-  85% {
-    --sunX: 8%;
-    --sunY: 88%;
-    --sunSize: 95%;
+  79% {
+    --sunX: calc(50% - var(--content-limit-percent));
+    --sunY: 96%;
   }
   100% {
-    --sunX: 90%;
-    --sunY: 98%;
-    --sunSize: 90%;
+    --sunX: calc(50% + var(--content-limit-percent));
+    --sunY: 91%;
   }
 }
 
 @media screen and (max-width: 809px) {
   @keyframes completePinball {
-    /* MOBILE HERO Migration */
+    /* START: Top Left (Matches Desktop feel) */
     0% {
       --sunX: 15%;
       --sunY: 10%;
-      --sunSize: 85%;
     }
-    15% {
+
+    /* THE ARCH: As it starts to move, we push X faster than Y 
+       to create a slow 'swinging' curve toward the center. */
+    25% {
+      --sunX: 45%;
+      --sunY: 20%;
+    }
+
+    /* THE STAGE LIGHT: Locked at 50vh for the main body content */
+    50%,
+    80% {
       --sunX: 50%;
-      --sunY: 30%;
-      --sunSize: 85%;
+      --sunY: 50%;
     }
-    /* UNIVERSAL PULSE */
-    22%,
-    42%,
-    62%,
-    82% {
-      --sunSize: 145%;
-    }
-    32%,
-    52%,
-    72%,
-    92% {
-      --sunSize: 115%;
-    }
+
+    /* LANDING: Final rest at the bottom for the CTAs */
     100% {
       --sunX: 50%;
-      --sunY: 92%;
-      --sunSize: 120%;
+      --sunY: 95%;
     }
   }
 }
 
-/* 3. THE RENDERER: Banding-Free & Anti-Strobe */
+/* ================================================= */
+/* == [V26] STEADY FLOOD & HIGH-FIDELITY RIG PART C == */
+/* ================================================= */
+
+/* 3. THE RENDERER: Stable & GPU Accelerated */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -1;
-  /* Use literal hex here to force the background to stay dark */
-  background-color: #050505;
 
-  /* THE DITHERED RAMP (No more banding):
-      We break the fade into small steps so the browser 
-      doesn't create visible rings. */
-  /* UX Engineering Note: Reverted to literal rgb(5, 5, 5) to stop 
-     the "White-Screen" rendering bail caused by variable lookup latency. */
-  background-image: radial-gradient(
+  /* GPU PROMOTION: Forces the background onto its own hardware layer */
+  will-change: transform;
+  transform: translateZ(0);
+
+  contain: strict; /* Tells the browser this element never affects the layout of others */
+
+  /* RE-SIMPLIFIED GRADIENT: 
+     Removed the Noise URL to prevent the 'Black Screen' error.
+  */
+  background: radial-gradient(
     circle at var(--sunX) var(--sunY),
-    rgba(var(--sys-color-primary-rgb), 1) 0%,
-    rgba(var(--sys-color-primary-rgb), 0.7) 25%,
-    rgba(var(--sys-color-primary-rgb), 0.3) 50%,
-    rgba(var(--sys-color-primary-rgb), 0.05) 80%,
-    rgb(5, 5, 5) var(--sunSize)
+    rgba(1, 98, 75, 1) 0%,
+    rgba(1, 98, 75, 0.9) 45%,
+    rgba(1, 98, 75, 0.5) 75%,
+    rgba(1, 98, 75, 0.1) 92%,
+    transparent 400%
   );
 
-  will-change: --sunX, --sunY, --sunSize;
+  background-color: #010101;
+  z-index: -1;
+  pointer-events: none;
 
-  /* THE HEAVY LIQUID DAMPENER:
-     Because the animation is on the 'html', the transition here 
-     on 'body::before' will finally be respected. */
-  transition: --sunX 2.5s cubic-bezier(0.15, 1, 0.3, 1),
-    --sunY 2.5s cubic-bezier(0.15, 1, 0.3, 1), --sunSize 2s ease-in-out;
+  /* THE LIQUID DAMPENER */
+  transition: --sunX 2.5s cubic-bezier(0.15, 1, 0.3, 1), --sunY 2.5s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
 /* The 'Spine' of the site */
@@ -341,23 +551,20 @@ body::before {
 /* ================================================= */
 
 .navbar {
-  background-color: rgb(var(--color-base-charcoal)); /* Charcoal stays */
+  background-color: var(--sys-color-neutral); /* CHARCOAL */
   display: flex;
-  align-items: stretch; /* Pixel-Perfect Hover Heights */
-  justify-content: space-between; /* Ensure logo/toggle/links spacing */
+  align-items: stretch;
+  justify-content: space-between;
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: none; /* Removed for Gradient Border */
-  /* Switched to Pseudo-Element for cleaner stacking */
   border: none !important;
-  overflow: visible; /* Ensure pseudo-elements aren't clipped */
+  overflow: visible;
 
-  /* MOBILE DEFAULT */
-  flex-flow: row wrap; /* Allows Toggle to sit right of logo, links to break below */
-  justify-content: space-between; /* Reserves space for Logo (Left) and Toggle (Right) */
+  /* MOBILE LAYOUT BASE */
+  flex-flow: row wrap;
   align-items: center;
-  position: relative; /* Enable focus ring z-index */
+  position: relative;
 }
 
 /* THE ACCENT LINE (Top Nav) */
@@ -375,51 +582,28 @@ header > .navbar::before {
     var(--sys-color-secondary) 85%,
     transparent 95%
   );
-  z-index: 1001; /* High visibility, above background */
+  z-index: 1001;
 }
 
+/* THE SAFETY SHELF (Fades Left to Blend) */
 header > .navbar::after {
   content: "";
   position: absolute;
   top: 100%;
   left: 0;
   width: 100%;
-  height: 0.9375rem;
+  height: 1rem;
   z-index: -1;
-  display: none;
-
-  /* Your existing vertical depth gradient */
+  display: none; /* Desktop Only via Media Query */
   background: linear-gradient(
     to bottom,
     var(--sys-color-primary) 0%,
     var(--sys-color-primary) 0.75rem,
     transparent 100%
   );
-
-  /* THE 150px MASK:
-     - 0px to 40px: Pure transparent (keeps the corner clean)
-     - 40px to 150px: Smooth ramp-up to solid black
-     - 150px+: Remains 100% solid to support the active tab brackets */
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0px,
-    transparent 40px,
-    black 150px
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0px,
-    transparent 40px,
-    black 150px
-  );
-
+  -webkit-mask-image: linear-gradient(to right, transparent 0px, transparent 40px, black 150px);
+  mask-image: linear-gradient(to right, transparent 0px, transparent 40px, black 150px);
   pointer-events: none;
-}
-
-@media screen and (min-width: 810px) {
-  header > .navbar::after {
-    display: block;
-  }
 }
 
 /* 3. THE BRAND LOGO */
@@ -427,68 +611,54 @@ header > .navbar::after {
   font-family: "Poppins", sans-serif;
   font-weight: 800;
   font-size: 1.25rem;
-  line-height: 1; /* prevents height bloat */
-  color: var(--sys-color-surface);
+  line-height: 1;
+  color: var(--sys-color-canvas); /* AUDIT: Synced to Canvas */
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  margin-right: auto; /* Pushes everything else to the right */
-  padding: 0 1.25rem; /* Matches container gutter */
-  white-space: nowrap; /* Prevents wrapping */
-  flex-shrink: 0; /* Prevents squashing */
+  margin-right: auto;
+  padding: var(--sys-space-1) var(--sys-space-3); /* AUDIT: Gauge 1 / Gauge 3 */
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: transform 0.2s ease;
-  /* Ensure it sits first in the flex container */
   order: 0;
-  z-index: 1002; /* Above the fold */
+  z-index: 1002;
 }
 
 .logo__suffix {
-  color: var(--sys-color-tertiary);
-  transition: color 0.2s ease, text-shadow 0.2s ease; /* Performance optimization */
+  color: var(--sys-color-action); /* AUDIT: Synced to Action (Magenta) */
+  transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
-/* INTERACTION: The Neon Easter Egg */
 .navbar__logo:hover {
   transform: translateY(-1px);
 }
 
 .navbar__logo:hover .logo__suffix {
-  color: var(--sys-color-surface);
-  text-shadow: 0 0 5px rgba(var(--sys-color-tertiary-rgb), 0.8),
-    0 0 10px rgba(var(--sys-color-tertiary-rgb), 0.5),
-    0 0 20px rgba(var(--sys-color-tertiary-rgb), 0.3);
+  color: var(--sys-color-canvas);
+  /* AUDIT: Using Role-RGB + Engine Gauges for Bloom */
+  text-shadow: 0 0 5px var(--sys-color-action-alpha-10), 0 0 15px var(--sys-color-action-alpha-5);
 }
 
-/* MOBILE ADJUSTMENT: Symmetrical Align */
-@media screen and (max-width: 809px) {
-  .navbar__logo {
-    padding-left: 0.75rem; /* Tighter align for mobile symmetry */
-  }
-}
-
-/* 1. THE TOGGLE (Hamburger - VISIBLE BY DEFAULT) */
+/* 1. THE TOGGLE (Hamburger - JS Target) */
 .navbar__toggle {
-  display: flex; /* Mobile Default */
+  display: flex;
   align-items: center;
   justify-content: center;
   float: right;
-  color: var(--sys-color-tertiary);
-  padding: 0.875rem 1.5rem; /* Matches the vertical height of desktop links */
+  color: var(--sys-color-action); /* AUDIT: Synced to Action */
+  padding: var(--sys-space-2) var(--sys-space-3); /* AUDIT: Gauge 2 / Gauge 3 */
   cursor: pointer;
   text-decoration: none;
-  position: relative; /* Necessary for the magenta underline */
+  position: relative;
   transition: background-color 0.2s ease, color 0.2s ease;
-  /* align-self: flex-end; */ /* Handled by justify-content: space-between in row layout */
-  /* FORCE RIGHT ALIGNMENT in Flex Wrap Row */
   margin-left: auto;
-  order: 2; /* Ensure it sits after the logo (order 0) */
+  order: 2;
 }
 
-/* CUSTOM CSS HAMBURGER */
 .navbar__toggle-icon {
   width: 1.5rem;
   height: 1.125rem;
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -497,104 +667,88 @@ header > .navbar::after {
 .navbar__toggle-icon span {
   display: block;
   width: 100%;
-  height: 2px; /* Matches font thickness per user constraint */
+  height: 2px;
   background-color: currentColor;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 0.125rem;
 }
 
-/* Animation: Hamburger to X */
+/* HAMBURGER ANIMATION (Triggered by .responsive class from JS) */
 .navbar.responsive .navbar__toggle-icon span:nth-child(1) {
   transform: translateY(0.5rem) rotate(45deg);
 }
-
 .navbar.responsive .navbar__toggle-icon span:nth-child(2) {
   opacity: 0;
   transform: translateX(-1.25rem);
 }
-
 .navbar.responsive .navbar__toggle-icon span:nth-child(3) {
   transform: translateY(-0.5rem) rotate(-45deg);
 }
 
-/* Mimic the Desktop Navlink Hover */
 .navbar__toggle:hover {
-  background-color: var(--sys-color-state-hover); /* Tonal Charcoal shift */
-  color: var(--sys-color-surface); /* Shifts icon to white for contrast */
+  background-color: var(--sys-color-neutral-alpha-4);
+  color: var(--sys-color-canvas);
 }
 
-/* 2. THE LINKS CONTAINER (Mobile: Collapsed/Hidden) */
+/* 2. THE LINKS CONTAINER (Triggered by .responsive class) */
 .navbar__links {
-  display: flex; /* Always flex, control visibility with height */
+  display: flex;
   flex-direction: column;
   width: 100%;
-  padding-right: 0;
-  order: 3; /* Ensures it breaks to the next line in the wrapped row */
-
-  /* MOMENTUM TRANSITION */
+  order: 3;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* OPEN STATE (JS toggles .responsive class on navbar) */
 .navbar.responsive .navbar__links {
-  max-height: 500px; /* High enough for all links */
+  max-height: 500px; /* Expands when JS toggles .responsive */
 }
 
-/* Base Link Style: The "Hit-Box" */
 .navbar__link {
   font-family: var(--font-body);
-  /* Use clamp for fluid typography: 
-     Min: 14px, Preferred: 1.1vw, Max: 17px */
   font-size: clamp(0.875rem, 1.1vw, 1.0625rem);
-  letter-spacing: var(--letter-spacing-body);
-  /* Reduce horizontal padding on tablets to keep the bar narrow */
-  font-weight: 400;
-  color: var(--sys-color-surface);
+  color: var(--sys-color-canvas);
   text-decoration: none;
-
-  /* MOBILE DEFAULT */
-  width: 100%;
-  padding: 0.875rem 1.5rem;
+  padding: var(--sys-space-2) var(--sys-space-4);
   display: block;
-  transition: all 0.2s ease;
+  /* ENGINE PURE: Swap 'all' for explicit targets */
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
   position: relative;
-  /* border-radius: 0; */
 }
 
-/* THE HOVER: Tonal shift & Accent Line */
+/* THE HOVER: Fixed White Text */
 .navbar__link:hover:not(.active) {
-  background-color: var(--sys-color-outline);
+  background-color: var(--sys-color-canvas-alpha-1);
+  color: var(--sys-color-canvas) !important;
+  box-shadow: inset 0 0 0 2px var(--sys-color-canvas-alpha-2);
 }
 
-/* THE ACCENT RAIL ON HOVER (Top Nav) */
+/* THE ACCENT RAIL ON HOVER */
 .navbar__link:hover:not(.active)::after {
   content: "";
   position: absolute;
-  bottom: 0; /* SACRED: Bottom for Top Nav */
+  bottom: 0;
   left: 0;
   width: 100%;
   height: 0.25rem;
-  background-color: var(--sys-color-tertiary); /* Magenta */
+  background-color: var(--sys-color-action); /* AUDIT: Synced to Action */
   z-index: 1005;
 }
 
 /* THE ACTIVE TAB: The 'Bridge' */
 .navbar__link.active {
-  background-color: var(--sys-color-primary); /* Dark Pine */
-  color: white;
-  border-radius: 0; /* Mobile Square */
+  background-color: var(--sys-color-primary); /* AUDIT: Solid Pine */
+  color: var(--sys-color-canvas);
   z-index: 1001;
-  /* This margin-bottom pulls the tab down to cover the rail */
-  margin-bottom: -3px;
+  margin-bottom: -3px; /* Pulls tab down to bridge the gap */
 
-  /* UX ADDITION: Remove interactivity from current page tab */
-  cursor: default;
+  /* AUDIT: Dead Link Logic (JS-Safe) */
+  cursor: default !important;
   pointer-events: none;
 }
 
-/* THE BRACKETS: Fixed Positioning (HIDDEN ON MOBILE) */
+/* THE BRACKETS (Desktop Only) */
 .navbar__link.active::before,
 .navbar__link.active::after {
   content: "";
@@ -604,52 +758,43 @@ header > .navbar::after {
   height: 1.25rem;
   background-color: transparent;
   box-shadow: 0 0.625rem 0 0 var(--sys-color-primary);
-  pointer-events: none; /* Prevents brackets from being clickable */
-  display: none; /* Mobile Default */
+  display: none;
 }
 
 .navbar__link.active::before {
-  left: -1.1875rem; /* 19px -> 1.1875rem */
+  left: -1.1875rem;
   border-bottom-right-radius: 1.1875rem;
 }
-
 .navbar__link.active::after {
-  right: -1.1875rem; /* 19px -> 1.1875rem */
+  right: -1.1875rem;
   border-bottom-left-radius: 1.1875rem;
 }
 
-/* --- DESKTOP ENHANCEMENT (810px+) --- */
+/* --- DESKTOP BREAKPOINT (810px+) --- */
 @media screen and (min-width: 810px) {
-  .navbar {
-    flex-direction: row;
-    flex-wrap: nowrap; /* Prevent wrapping */
-    align-items: stretch;
-    justify-content: space-between;
+  header > .navbar::after {
+    display: block;
   }
 
   .navbar__toggle {
-    display: none;
+    display: none; /* Hamburger disappears on desktop */
+  }
+
+  .navbar {
+    flex-flow: row nowrap;
+    align-items: stretch;
   }
 
   .navbar__links {
-    display: flex;
     flex-direction: row;
-    justify-content: flex-end; /* RIGHT ALIGNED */
-    width: auto; /* Allow it to sit next to logo */
-    padding-right: 1.25rem; /* Room for the bracket */
-    max-height: none; /* Disable mobile collapse */
+    width: auto;
+    max-height: none; /* Always visible on desktop */
     overflow: visible;
   }
 
   .navbar__link {
     width: auto;
-    display: inline-block;
     padding: 0.875rem clamp(0.75rem, 1.5vw, 1.5rem);
-  }
-
-  /* Desktop Active State (With Tabs & Brackets) */
-  .navbar__link.active {
-    border-radius: 0.75rem 0.75rem 0 0; /* 12px -> 0.75rem */
   }
 
   .navbar__link.active::before,
@@ -657,63 +802,91 @@ header > .navbar::after {
     display: block;
   }
 
-  /* --- HERO & SLIDESHOW ENHANCEMENTS (810px+) --- */
-  /* UX Engineer Note: Specificity reduced. 
-     Sizes are now driven by :root tokens. */
-  .hero__title {
-    font-size: var(--font-size-hero);
-    margin-bottom: var(--ref-space-4); /* Matches your 2rem */
-
-    /* Unified Glow (Kept your best shadow version) */
-    text-shadow: 0 0 1.25rem rgba(var(--sys-color-secondary-rgb), 0.6),
-      0 0 2.5rem rgba(var(--sys-color-tertiary-rgb), 0.3),
-      0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
-  }
-
-  .hero__subtitle {
-    font-size: var(
-      --font-size-title
-    ); /* Snapped to your 1.125rem+ title token */
-  }
-
-  .button-group {
-    flex-direction: row; /* Horizontal Buttons */
+  .navbar__link.active {
+    border-radius: 0.75rem 0.75rem 0 0;
   }
 }
 
+.button-group {
+  flex-direction: row; /* Horizontal Buttons */
+}
+
 /* ================================================= */
-/* === [V3] REFACTORED: FEATURE BLOCK (ZIG-ZAG)  === */
+/* === [V27] REFACTORED: ATMOSPHERIC FEATURE BLOCK === */
 /* ================================================= */
 
 /* --- 1. THE BLOCK (Container) --- */
 .feature-block {
-  background-color: var(--sys-color-surface);
-  padding: var(--sys-spacing-section-v) var(--sys-spacing-gutter);
-  margin-bottom: 1.125rem; /* Tighter 18px Gutter Splash */
+  background-color: var(--sys-color-canvas);
+  /* UPDATED: Vertical Gauge 8 (64px) / Horizontal Gauge 5 (40px) */
+  padding: var(--sys-spacing-section-v) var(--sys-space-5);
+  margin-bottom: var(--sys-space-3); /* Clean 16px Gutter Splash */
   width: 100%;
   display: block;
   z-index: 1;
+  position: relative;
+
+  /* PREMIUM BORDER: 2px wide to catch the Arched Drift light. 
+     Using Alpha-1 (8%) so it 'ignites' as the flood passes behind it. */
+  border: 2px solid var(--sys-color-primary-alpha-1);
+
+  /* THE CLEAN EDGE TRICK: Forces the white canvas to stop at the inside 
+     edge of the border, preventing 'color-bleed' on high-res screens. */
+  background-clip: padding-box;
+
+  /* ATMOSPHERIC DEPTH: Swapped Charcoal for Pine-pigmented shadows.
+     This ensures the 'gutters' between cards feel like deep water 
+     rather than muddy ink, preserving the 'Light Gap' effect. */
+  box-shadow: 0 10px 30px -15px rgba(var(--pigment-pine-rgb), var(--gauge-3)),
+    0 5px 10px -5px rgba(var(--pigment-pine-rgb), var(--gauge-1));
+
+  /* KINETIC PHYSICS: Smooth transition for the 'Ignition' effect on hover */
+  transition: transform 0.4s cubic-bezier(0.15, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.15, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
-/* Modifiers for Block */
+/* THE HANDSHAKE: Transition from Hero to the first card */
 .feature-block--first {
-  margin-top: 1.125rem;
-  border-radius: 2rem 2rem 0 0; /* Rounded shoulders */
-  overflow: hidden; /* Clips any layered background  colors to the rounded corners */
+  margin-top: var(--sys-space-2);
+  /* RATIO SYNC: Gauge 8 shoulders for balanced weight */
+  border-radius: var(--sys-radius-8) var(--sys-radius-8) 0 0;
+  overflow: hidden;
 }
 
+/* --- THE ALT BLOCK (Pine Wash Integration) --- */
 .feature-block--alt {
-  background: var(--sys-mint-surface-1);
+  /* This uses your 'Bake' logic (Pine flattened on white) */
+  background: var(--sys-color-primary-on-canvas-1-bg);
+  background-clip: padding-box;
 
-  /* Ensure the block is fully opaque so it hides the background pinball */
-  opacity: 1 !important;
+  /* ALT SHADOW: We push the Gauge to 6 (48%) and 3 (24%) here.
+     Since the background is already Pine-tinted, we need a denser
+     shadow DNA to create visible separation from the floodlight. */
+  box-shadow: 0 10px 30px -15px rgba(var(--pigment-pine-rgb), var(--gauge-6)),
+    0 5px 10px -5px rgba(var(--pigment-pine-rgb), var(--gauge-3));
+
+  /* Increased border-alpha for better definition on tinted background */
+  border-color: var(--sys-color-primary-alpha-2);
+}
+
+/* --- HOVER DYNAMICS (The Lift & Ignite) --- */
+.feature-block:hover {
+  z-index: 10; /* Ensures the shadow doesn't get 'swallowed' by neighbors */
+  transform: translateY(-4px); /* Subtle physics lift */
+
+  /* BORDER IGNITION: The edge glows brighter when the user engages */
+  border-color: var(--sys-color-primary-alpha-4);
+
+  /* SHADOW EXPANSION: Bloom effect using Primary (Pine) DNA */
+  box-shadow: 0 20px 40px -20px rgba(var(--pigment-pine-rgb), var(--gauge-5)),
+    0 10px 15px -10px rgba(var(--pigment-pine-rgb), var(--gauge-2));
 }
 
 /* --- 2. THE GRID (Flex Layout - Mobile First Stack) --- */
 .feature-block__grid {
   display: flex;
   flex-direction: column; /* Mobile stack by default */
-  gap: 2rem;
+  gap: var(--sys-space-5);
   max-width: 1200px; /* THE ANCHOR */
   margin: 0 auto;
   align-items: flex-start; /* Standard: Left-Aligned */
@@ -731,10 +904,11 @@ header > .navbar::after {
   height: auto; /* FLUID SCALING */
   /* aspect-ratio: 1 / 1; REMOVED per fluid request */
   object-fit: cover;
-  border-radius: 0.5rem; /* Explicit 0.5rem per global rule */
+  /* SYNCED: Gauge 2 Radius (12.8px) vs previous 0.5rem (8px) */
+  border-radius: var(--sys-radius-2);
   box-shadow: var(--sys-shadow-halo-standard);
   display: block;
-  margin: 0 auto; /* Centers image if it's smaller than the container */
+  margin: 0 auto var(--sys-space-3); /* Added Gauge 3 bottom margin */
   order: -1; /* Image First on Mobile (Global Rule) */
   margin-bottom: 1.5rem;
 }
@@ -757,15 +931,14 @@ header > .navbar::after {
   align-items: center;
 }
 
+/* --- 4. CONTENT --- */
 .feature-block__title--column {
-  font-size: var(--font-size-headline);
-  letter-spacing: 0;
-  max-width: 26ch;
-  color: var(--sys-color-primary);
-  margin-bottom: 2.5rem; /* ELEVATED spacing for editorial rhythm */
   font-family: var(--font-display);
-  line-height: var(--line-height-headline);
-  text-align: left; /* Standard: Left-Aligned */
+  font-size: var(--sys-type-headline); /* KINETIC TYPE SYNC */
+  line-height: var(--sys-line-height-tight);
+  color: var(--sys-color-primary);
+  margin-bottom: var(--sys-space-5); /* Rhythmic 32px spacing */
+  max-width: 26ch;
 }
 
 /* Storyteller Override */
@@ -775,12 +948,11 @@ header > .navbar::after {
 
 .feature-block__intro-text {
   font-family: var(--font-body);
-  font-size: var(--font-size-body);
-  letter-spacing: var(--letter-spacing-body);
-  line-height: var(--line-height-body);
-  max-width: 31.25rem; /* Constrained for readability */
-  margin-bottom: 1.5rem;
-  text-align: left; /* Standard: Left-Aligned */
+  font-size: var(--sys-type-body); /* KINETIC TYPE SYNC */
+  line-height: var(--sys-line-height-reading);
+  letter-spacing: var(--letter-spacing-standard);
+  max-width: 31.25rem;
+  margin-bottom: var(--sys-space-3);
 }
 
 .feature-block__jump-link {
@@ -800,33 +972,33 @@ header > .navbar::after {
 }
 
 .feature-block__quote-box {
-  background-color: var(--sys-mint-overlay-1);
-  padding: 2rem 2.5rem;
-  border-left: 0.25rem solid var(--sys-color-secondary);
+  background-color: var(--sys-color-primary-alpha-1);
+  padding: var(--sys-space-5) var(--sys-space-6); /* Gauge 5x6 balance */
+  border-left: 0.25rem solid var(--sys-color-accent-alpha-10);
   border-right: none;
   border-radius: 0.5rem;
   font-family: var(--font-quote);
-  font-size: var(--font-size-quote); /* HEROIC: 1.5rem */
+  font-size: var(--sys-type-title); /* Balanced Quote Scale */
   font-style: italic;
   width: 100%;
   text-align: left !important;
 }
 
 .feature-block__quote-box--on-alt {
-  background-color: var(--sys-color-surface) !important;
+  background-color: var(--sys-color-canvas) !important;
 }
 
 .feature-block__author {
   font-family: var(--font-body);
   text-align: right; /* Standard Signature Position */
   margin-top: 1rem;
-  font-size: 0.85rem;
+  font-size: var(--sys-type-caption); /* KINETIC TYPE SYNC */
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--sys-color-primary);
   width: 100%;
-  padding-right: 1rem !important; /* Optical Margin Signature */
+  padding-right: var(--sys-space-2) !important;
 }
 
 /* --- 6. RESPONSIVE ENGINE --- */
@@ -844,51 +1016,117 @@ header > .navbar::after {
 /* === [V3] GLOBAL LAYOUT & WRAPPERS             === */
 /* ================================================= */
 
-/* 1. HERO COMPONENT */
+/* ================================================= */
+/* === [V26] CONSOLIDATED KINETIC HERO           === */
+/* ================================================= */
+
 .hero {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  min-height: 40vh;
-  /* Vertical: 5rem(10) | Horizontal: 1.25rem(3) | Bottom: 2rem(4) */
-  padding: var(--sys-spacing-hero-v) var(--sys-spacing-gutter)
-    var(--ref-space-4) var(--sys-spacing-gutter);
+  justify-content: flex-start; /* Prevents jumping */
+  width: 100%;
+  position: relative;
   text-align: center;
+
+  /* THE HORIZON: Clear the navbar + Gauge 10 (80px) 
+     This should move the H1 down to about 4 fingers from the top. */
+  padding-top: calc(var(--sys-spacing-hero-v) + var(--sys-space-10));
+
+  /* THE STATURE: Gauge 11 * 3 (Approx 230px)
+     This should give you about 8-10 fingers of space at the bottom. */
+  padding-bottom: calc(var(--sys-space-11) * 3);
+
+  padding-left: var(--sys-space-5);
+  padding-right: var(--sys-space-5);
 }
 
+/* CONTENT BOX: Keeps title/subtitle centered */
 .hero__content {
-  position: relative; /* Secondary anchor */
-  max-width: 70ch; /* Optimized for readability */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 90rem;
+  width: 100%;
   margin: 0 auto;
 }
 
+/* 1. THE STAGE: Fixes the uneven bottom gap */
+.hero--slideshow {
+  /* This '1px' padding-bottom prevents "Margin Collapse," 
+     ensuring the dots' margin doesn't blend into the next section. */
+  padding-bottom: 1px;
+  justify-content: flex-start;
+}
+
+/* INTERNAL SPACING: Gap between Subtitle/Buttons and Slideshow */
+.hero--slideshow .hero__subtitle,
+.hero--slideshow .button-group {
+  margin-bottom: var(--sys-space-10);
+}
+
+/* 2. THE SLIDESHOW: Restoring the Glow */
+.slideshow {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+
+  /* THE GLOW FIX: Remove 'overflow: hidden' so shadows and buttons show */
+  overflow: visible;
+
+  /* TOP GAP: Reset to Gauge 10 (2 Fingers) */
+  margin-top: var(--sys-space-11);
+  /* BOTTOM GAP: Reset to Gauge 10 (2 Fingers) */
+  margin-bottom: var(--sys-space-11);
+}
+/* ================================================= */
+/* === [V25] REFACTORED: HERO TYPOGRAPHY         === */
+/* ================================================= */
+
 .hero__title {
   font-family: var(--font-display);
-  font-size: var(--font-size-hero);
-  letter-spacing: var(--letter-spacing-display);
-  color: var(--sys-color-surface);
-  /* PERSISTENT GLOW: Violet Core for Mobile Identity (Boosted) */
-  text-shadow: 0 0 0.625rem rgba(var(--sys-color-secondary-rgb), 0.8),
-    /* TIGHT CORE */ 0 0 1.25rem rgba(var(--sys-color-secondary-rgb), 0.7),
-    /* BOOSTED BLOOM */ 0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
-  margin-bottom: var(--ref-space-2);
-  line-height: var(--line-height-display);
+  font-size: var(--sys-type-hero); /* DNA: 3rem (48px) to 6rem (96px) */
   font-weight: 700;
+  color: var(--sys-color-surface);
+  text-align: center;
+
+  /* UPDATED: Neutral spacing to stop overlap */
+  letter-spacing: var(--sys-letter-spacing-display);
+  line-height: var(--sys-line-height-tight);
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1;
+
+  /* KINETIC ALIGNMENT: Instead of nowrap, we use 'balance' 
+     to ensure that if it MUST wrap on tiny screens, it does so elegantly. */
+  text-wrap: balance;
+  word-break: keep-all; /* Prevents "Port-folio" hyphenation breaks */
+  /* GAUGE SYNC: Standardized gap to the Pill/Slideshow below */
+  margin-bottom: var(--sys-space-10);
+
+  /* GLOW: Preserving your exact 'Unified Glow' */
+  text-shadow: 0 0 1.25rem rgba(var(--sys-role-accent-rgb), 0.6), 0 0 2.5rem rgba(var(--sys-role-action-rgb), 0.3),
+    0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
 }
 
 .hero__subtitle {
   font-family: var(--font-body);
-  font-size: var(--font-size-title); /* MOBILE DEFAULT */
-  color: rgba(
-    var(--sys-color-surface-rgb),
-    0.9
-  ); /* Makes the subtitle soft white */
-  max-width: 65ch; /* Restoring the readability limit */
-  line-height: var(--line-height-title);
-  margin-left: auto; /* Centering within the flex container */
+  color: rgba(var(--sys-role-canvas-rgb), 0.9);
+  max-width: 65ch;
+  margin-left: auto;
   margin-right: auto;
   text-align: center;
-  margin-bottom: 3rem;
+
+  /* KINETIC: Using the Title Scale for the Subtitle */
+  font-size: var(--sys-type-title);
+  line-height: var(--sys-line-height-standard);
+
+  /* GAUGE SYNC: Replacing the parasitic 3rem (48px) with Gauge 6 */
+  margin-bottom: var(--sys-space-6);
 }
 
 /* 2. ACCESSIBILITY */
@@ -908,16 +1146,6 @@ header > .navbar::after {
 /* === [V4] REFACTORED: SLIDESHOW SYSTEM (BEM)   === */
 /* ================================================= */
 
-.slideshow {
-  position: relative;
-  width: 100%;
-  max-width: 500px; /* Restores your standardized desktop width */
-  margin: 0 auto;
-  display: flex; /* Use flexbox for clean vertical stacking on mobile */
-  flex-direction: column;
-  align-items: center;
-}
-
 /* THE NEW ANCHOR */
 .slideshow__positioner {
   position: relative;
@@ -931,10 +1159,10 @@ header > .navbar::after {
   width: 100%;
   aspect-ratio: 1 / 1; /* Keeps it square */
   /* overflow: hidden; */ /* MOVED to the slide itself to unclip buttons */
-  border-radius: 0.5rem;
-  background-color: #000;
-  box-shadow: var(--sys-shadow-halo-rim);
-  margin-bottom: 1.5rem;
+  border-radius: var(--sys-radius-2); /* AUDIT: Standardized Radius */
+  background-color: var(--sys-color-neutral);
+  box-shadow: var(--sys-shadow-halo-standard);
+  margin-bottom: var(--sys-space-4); /* AUDIT: Gauge 4 Sync (24px) */
 }
 
 .slideshow__slide {
@@ -956,29 +1184,64 @@ header > .navbar::after {
   display: block;
 }
 
-/* --- 3. THE CONTROLS: Fluid & Universal --- */
+/* --- 3. THE CONTROLS: Muffled High-Fidelity Rig --- */
 .slideshow__control {
   position: absolute;
-  /* 50% of the WIDTH of a square is the vertical center */
   top: 50%;
-  transform: translateY(-50%);
+  /* 3D Anchor: Keeps the circle and text character from vibrating */
+  transform: translateY(-50%) translateZ(0) scale(1);
   z-index: 20;
+
+  /* GEOMETRY: 54px Scale */
   width: 3.375rem;
   height: 3.375rem;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border-radius: 50%;
+  border-radius: var(--sys-radius-11);
+
+  /* KINETIC BASE: Charcoal HUD style */
+  background-color: var(--sys-color-neutral-alpha-7);
+  color: var(--sys-color-canvas);
+
+  /* BORDER: Transparent base prevents layout 'jumps' on hover */
+  border: 1px solid var(--sys-color-canvas-alpha-2);
+
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  transition: all 0.2s ease;
+
+  /* CRITICAL: Hide raw text to use the stable pseudo-element below */
+  font-size: 0;
   cursor: pointer;
+
+  /* PERFORMANCE TRANSITION */
+  /* ENGINE SYNC: Snappier 0.2s to match Navbars */
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease, box-shadow 0.2s ease,
+    border-color 0.2s ease;
+
+  /* Initial state: Clean and flat */
+  box-shadow: none;
+  backface-visibility: hidden;
+  will-change: transform, box-shadow, border-color;
 }
 
-/* Base position: Safe inside the image area */
+/* THE STABILIZER: The Chevron character treated as a graphic */
+.slideshow__control::before {
+  content: "❯";
+  font-size: 1.5rem;
+  line-height: 1;
+  display: block;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Specific adjustment for the 'prev' flip */
+.slideshow__control--prev::before {
+  content: "❮";
+}
+
+/* POSITIONING: The Straddle Logic */
 .slideshow__control--prev {
-  left: -1.125rem; /* MOBILE STRADDLE: -18px (75% in / 25% out) */
+  left: -1.125rem;
 }
 .slideshow__control--next {
   right: -1.125rem;
@@ -986,207 +1249,246 @@ header > .navbar::after {
 
 @media screen and (min-width: 810px) {
   .slideshow__control--prev {
-    left: -1.6875rem; /* DESKTOP STRADDLE: -27px (50/50) */
+    left: -1.6875rem;
   }
   .slideshow__control--next {
     right: -1.6875rem;
   }
 }
 
+/* INTERACTION: The Muffled Power-Up */
 .slideshow__control:hover {
-  background-color: rgba(var(--sys-color-on-surface-rgb), 0.85);
-  color: var(--sys-color-tertiary);
+  /* Action Role (72% pigment) */
+  background-color: var(--sys-color-action-alpha-9);
+  color: var(--sys-color-canvas);
+
+  /* THE SWAP: Solid Magenta Border */
+  border-color: var(--sys-color-action);
+
+  /* THE MUFFLER: Tight, sophisticated Magenta glow */
+  box-shadow: var(--sys-shadow-muffler-action);
+
+  /* PHYSICS: 5% expansion for tactile feedback */
+  transform: translateY(-50%) translateZ(0) scale(1.05);
 }
 
-/* 4a. NAV CHEVRONS (Protection: Layout Unchanged) */
-.slideshow__control {
-  /* ... positioning remains from above ... */
-  /* Update Colors: RESET TO DARK CIRCLE */
-  background-color: rgba(0, 0, 0, 0.6);
-  border: none; /* Removed borders */
-}
-.slideshow__control:hover {
-  background-color: var(--sys-color-secondary); /* Violet Hover */
-  color: white;
-}
-.slideshow__control:hover {
-  background-color: var(--sys-color-secondary); /* Violet Hover */
-  color: white;
-  border-color: var(--sys-color-secondary);
-}
 .slideshow__control:active {
-  background-color: var(--sys-color-tertiary); /* Magenta Active */
-  color: white;
+  /* Redline state (96% pigment) */
+  background-color: var(--sys-color-action-alpha-11);
+  border-color: var(--sys-color-action);
+
+  /* Compression: Feels like a physical click */
+  transform: translateY(-50%) translateZ(0) scale(0.95);
+  transition: transform 0.1s ease;
 }
 
-/* 4. THE PILL: Styling moved from ID to BEM Class */
+/* 3. THE PILL: Tightening the internal gap */
 .slideshow__pill {
-  margin-bottom: 1.5rem;
+  /* Shrink this to Gauge 2 to keep it close to the gallery */
+  margin-bottom: var(--sys-space-2);
   z-index: 20;
 }
 
 .slideshow__pill-link {
   display: inline-block;
-  background-color: rgba(0, 0, 0, 0.5); /* IDLE: DARK HUD BG */
-  backdrop-filter: blur(10px); /* FROSTED GLASS */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* IDLE: NEUTRAL SILVER */
-  color: white;
+  /* KINETIC BASE: Neutral Shout (56%) + Glass HUD */
+  background-color: var(--sys-color-neutral-alpha-7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  /* BORDER: Subtle silver edge using Canvas Alpha 2 */
+  border: 1px solid var(--sys-color-canvas-alpha-2);
+  color: var(--sys-color-canvas);
+
   padding: 0.8rem 1.6rem;
-  border-radius: 100px;
+  border-radius: var(--sys-radius-11);
   text-decoration: none;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-  /* Restored your specific transition */
-  transition: all 300ms ease;
-  font-family: var(--font-body); /* BRAND SANS-SERIF */
+  font-family: var(--font-body);
+
+  /* STABLE PHYSICS: Anchored without swelling */
+  transform: translateZ(0);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+
+  box-shadow: var(--sys-shadow-muffler-neutral);
+  will-change: background-color, box-shadow;
 }
 
-/* Restored your specific hover effects */
 .slideshow__pill-link:hover {
-  background-color: rgba(255, 255, 255, 0.1); /* HOVER: LIGHT HUD TINT */
-  transform: none; /* HOVER: STABLE POSITION */
-  border-color: var(--sys-color-tertiary); /* HOVER: MAGENTA BORDER */
-  box-shadow: 0 0 15px rgba(var(--sys-color-tertiary-rgb), 0.5); /* HOVER: MAGENTA BLOOM */
+  /* BALANCED POWER-UP: Matches base opacity (56%) to prevent 'shouting' */
+  background-color: var(--sys-color-action-alpha-7);
+  border-color: var(--sys-color-action);
+
+  /* THE MUFFLER: 
+     We manually define a tighter shadow using the Action Alphas.
+     This replaces the 'Shouting' global halo with a 'Whisper' glow. */
+  box-shadow: var(--sys-shadow-muffler-action);
+
+  /* PHYSICS: Explicitly 'none' to stay grounded unlike the controls */
+  transform: translateZ(0);
 }
 
-/* 5. THE DOTS */
+/* 4. THE DOTS: Pulling them closer */
 .slideshow__dots {
   display: flex;
-  justify-content: center; /* THIS CENTERS THE DOTS GLOBALLY */
-  gap: 0.75rem;
-  align-items: center;
-  margin-bottom: 5rem;
-  padding: 0;
+  justify-content: center;
+  gap: var(--sys-space-2);
+
+  /* Pull the dots up closer to the image gallery */
+  margin-top: var(--sys-space-2);
+  /* Zero this out so the .slideshow margin-bottom handles the '2-finger' gap */
+  margin-bottom: 0;
+
   list-style: none;
+  padding: 0;
 }
 
 .slideshow__dot {
-  width: 0.5rem;
-  height: 0.5rem;
-  background-color: rgba(var(--sys-color-secondary-rgb), 0.85);
-  border-radius: 50%;
+  width: 0.625rem;
+  height: 0.625rem;
+
+  /* BASE: White (Canvas) Alpha 4 */
+  background-color: var(--sys-color-canvas-alpha-4);
+
+  /* THE STABILIZER: Transparent border prevents jumping when active */
+  border: 1px solid transparent;
+
+  border-radius: var(--sys-radius-11);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transform: scale(1);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease, width 0.2s ease,
+    border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* THE ACTIVE STATE: Refined & Contained */
 .slideshow__dot.active {
-  background-color: var(--sys-color-tertiary); /* MAGENTA ACTIVE */
+  /* Use Alpha 9 for the core pigment */
+  background-color: var(--sys-color-action-alpha-9);
   width: 1.5rem;
-  border-radius: 0.625rem;
-  box-shadow: 0 0 0 0.125rem var(--sys-color-surface); /* Stabilizer Ring */
+
+  /* THE SWAP: Solid border instead of just a glow */
+  border-color: var(--sys-color-action);
+
+  /* THE MUFFLER: Tight Magenta Glow instead of the large Halo */
+  box-shadow: var(--sys-shadow-muffler-action);
 }
 
-/* --- SLIDESHOW DOT INTERACTION --- */
+/* THE HOVER STATE: Inactive dots "Light Up" */
 .slideshow__dot:hover:not(.active) {
-  background-color: var(--sys-color-secondary); /* Transition to full Violet */
-  transform: scale(1.2); /* Tactile growth for feedback */
-  box-shadow: 0 0 8px rgba(var(--sys-color-secondary-rgb), 0.5); /* Soft violet bloom */
-  cursor: pointer;
+  background-color: var(--sys-color-canvas-alpha-8);
+  transform: scale(1.2);
+}
+
+@media screen and (max-width: 809px) {
+  .slideshow__dots {
+    /* CONTEXTUAL SPACING: Gauge 3 for Mobile Touch Targets */
+    gap: var(--sys-space-3);
+  }
 }
 
 /* ================================================= */
-/* === [V3] REFACTORED: BUTTONS (MUSCLE PASS)    === */
+/* === [V3.4] FINAL AUDITED: BUTTONS & LAYOUT    === */
 /* ================================================= */
 
-/* 1. THE BLOCK (Base Style & Muscle) */
+/* 1. THE BLOCK (Base Physics) */
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.9rem 1.8rem;
-  border-radius: 0.5rem;
+  padding: var(--sys-space-cta-v) var(--sys-space-cta-h);
+  border-radius: var(--sys-radius-button);
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 1.1rem;
   letter-spacing: var(--letter-spacing-cta);
   text-decoration: none;
-  border: none;
+  border: 1px solid transparent;
   cursor: pointer;
   gap: 0.625rem;
-  white-space: nowrap; /* FORCE SINGLE LINE */
+  white-space: nowrap;
 
-  /* 300ms transition to reduce "noise" */
+  /* HARDWARE ACCELERATION & STABILIZER */
+  transform: translateY(0) translateZ(0);
   transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 1. Base Hover Logic (Shared expansion & transition) */
+/* 2. BASE HOVER LOGIC */
 .button:hover:not(:disabled) {
   letter-spacing: 0.08rem;
-  transition: letter-spacing 0.3s ease, transform 0.3s ease,
-    background-color 0.3s ease, box-shadow 0.3s ease;
+  transform: translateY(-0.1875rem) translateZ(0);
 }
 
-/* 2. Specific Style Overrides (Colors & Shadows) */
+/* 3. MODIFIER: PRIMARY (The Beacon) */
+.button--primary {
+  background-color: var(--sys-color-primary);
+  color: var(--sys-color-canvas);
+}
+
 .button--primary:hover:not(:disabled) {
-  transform: translateY(-0.1875rem);
-  background-color: var(--sys-color-tertiary);
-  box-shadow: 0 0.375rem 0.9375rem rgba(var(--sys-color-tertiary-rgb), 0.4);
+  background-color: var(--sys-color-action-alpha-10);
+  border-color: var(--sys-color-action);
+  box-shadow: var(--sys-shadow-muffler-action);
+}
+
+/* 4. MODIFIER: TONAL (Negative Space Path) */
+.button--tonal {
+  background-color: var(--sys-color-primary-alpha-2);
+  color: var(--sys-color-neutral-alpha-11);
+  border: 1px solid var(--sys-color-primary-alpha-3);
 }
 
 .button--tonal:hover:not(:disabled) {
-  transform: translateY(-0.1875rem);
-  background-color: rgba(var(--sys-color-secondary-rgb), 0.18);
-  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
+  background-color: var(--sys-color-primary-alpha-4);
+  border-color: var(--sys-color-primary);
+  box-shadow: 0 0.25rem 0.625rem var(--sys-color-neutral-alpha-3);
 }
 
-/* Success State: Persistent Pine and White */
+/* 5. ACTIVE STATE (Mobile/Click Compression) */
+.button:active:not(:disabled) {
+  transform: translateY(0.0625rem) scale(0.98);
+  filter: brightness(0.9);
+  box-shadow: none;
+}
+
+/* 6. STATE MODIFIERS (Persistence) */
 .button.button--success {
-  background-color: var(--sys-color-primary) !important;
-  color: white !important;
-  transform: none !important; /* Stop the bounce once sent */
-  box-shadow: none !important;
-  letter-spacing: var(--letter-spacing-cta) !important;
+  background-color: var(--sys-color-success) !important;
+  color: var(--sys-color-canvas) !important;
+  transform: none !important;
   cursor: default;
 }
 
-/* Error State: Persistent Red and White */
 .button.button--error {
   background-color: var(--sys-color-error) !important;
-  color: white !important;
+  color: var(--sys-color-canvas) !important;
   transform: none !important;
-  box-shadow: none !important;
-  letter-spacing: var(--letter-spacing-cta) !important;
 }
 
-/* 2. MODIFIER: PRIMARY */
-.button--primary {
-  background-color: var(--sys-color-primary);
-  color: var(--sys-color-on-primary);
-}
+/* ================================================= */
+/* === [V3.4] CTA & GROUP LAYOUTS (GAUGE SYNC)   === */
+/* ================================================= */
 
-/* 3. MODIFIER: TONAL */
-.button--tonal {
-  background-color: var(--sys-mint-overlay-2);
-  color: var(--sys-color-on-primary-container);
-}
-
-/* 4. THE MOBILE SOLUTION: ACTIVE STATE */
-.button:active:not(:disabled) {
-  transform: translateY(0.0625rem) scale(0.98);
-  box-shadow: inset 0 0.125rem 0.25rem rgba(var(--color-base-black), 0.2);
-  filter: brightness(0.9);
-}
-
-/* 5. THE BUTTON GROUP (Layout Wrapper) - KEEPING FROM BONES */
+/* 7. THE BUTTON GROUP (Stacking Wrapper) */
 .button-group {
   display: flex;
   flex-direction: column;
-  order: 5; /* SACRED ORDER: Sits below H3 (order 4) */
+  order: 5; /* Sits below H3 (order 4) */
 }
 
-/* --- 6. CTA ALIGNMENT STRATEGY (V21) --- */
+/* 8. CENTERED CONTAINER (Single CTA alignment) */
 .cta-container--centered {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 2rem;
+  margin-top: var(--sys-space-5); /* Engine-synced 32px */
 }
 
+/* 9. CONTACT GROUP (Side-by-Side alignment) */
 .cta-group--contact {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
+  gap: var(--sys-space-3); /* Engine-synced 19.2px gap */
   width: 100%;
-  margin-top: 2rem;
+  margin-top: var(--sys-space-5);
 }
 
 /* ================================================= */
@@ -1274,14 +1576,16 @@ header > .navbar::after {
 @media screen and (min-width: 810px) {
   /* 1. RESTORE GRID */
   .feature-block__grid {
-    display: flex; /* Confirming flex */
     flex-direction: row;
     justify-content: center;
-    align-items: stretch; /* FORCES columns to match height */
-    gap: 2rem; /* Tightened Gap */
+    align-items: stretch; /* Preserving your height-matching style */
+
+    /* UPDATED: From Space-8 (64px) down to Space-5 (40px) 
+       This keeps the "Tightened" feel while giving the edges room to breathe. */
+    gap: var(--sys-space-6);
   }
 
-  .feature-block__grid--reverse {
+  .feature-block:nth-child(odd) .feature-block__grid {
     flex-direction: row-reverse;
   }
 
@@ -1344,7 +1648,7 @@ header > .navbar::after {
   /* ZIG-ZAG LOGIC (Desktop): Border always closest to image */
   .feature-block:nth-of-type(odd) .feature-block__quote-box {
     border-left: none;
-    border-right: 4px solid var(--sys-color-secondary);
+    border-right: 4px solid var(--sys-color-accent-alpha-10);
   }
 
   /* SUBTLE SEPARATOR: For 'Jump to' section on desktop */
@@ -1422,8 +1726,7 @@ header > .navbar::after {
   box-shadow: var(--shadow-modal);
   opacity: 0;
   transform: scale(0.95);
-  transition: opacity 0.4s ease,
-    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Kinetic Pop */
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Kinetic Pop */
 }
 
 /* KINETIC STATE: OPEN */
@@ -1456,8 +1759,7 @@ header > .navbar::after {
   border: 2px solid var(--sys-color-primary); /* Pine Accent Rim */
   padding: 1.5rem;
   /* BOOSTED VIOLET GLOW (Hero Sync) */
-  box-shadow: 0 0 10px rgba(var(--sys-violet-rgb), 0.8),
-    0 0 25px rgba(var(--sys-violet-rgb), 0.6),
+  box-shadow: 0 0 10px rgba(var(--sys-violet-rgb), 0.8), 0 0 25px rgba(var(--sys-violet-rgb), 0.6),
     0 0 50px rgba(var(--sys-violet-rgb), 0.3);
   font-family: var(--font-body); /* Force Sans-Serif */
   transition: background-image 0.5s ease-in-out; /* Atmospheric Smoothness */
@@ -1661,12 +1963,12 @@ header > .navbar::after {
 /* ================================================= */
 
 /* ================================================= */
-/* === [V19] SEMANTIC FOOTER COMPONENT           === */
+/* === [V4.0] SEMANTIC FOOTER: MIRROR ARCHITECTURE === */
 /* ================================================= */
 
 .footer {
-  background-color: rgb(var(--color-base-charcoal)); /* Charcoal */
-  color: var(--sys-color-surface);
+  background-color: var(--sys-color-neutral); /* CHARCOAL */
+  color: var(--sys-color-canvas);
   position: relative;
   overflow: visible;
   padding: 0;
@@ -1676,11 +1978,11 @@ header > .navbar::after {
   width: 100%;
 }
 
-/* THE ACCENT LINE (Footer) */
+/* THE ACCENT LINE (Footer - Mirror of Top Nav) */
 .footer::before {
   content: "";
   position: absolute;
-  top: 0;
+  top: 0; /* SACRED: Top for Footer */
   left: 0;
   width: 100%;
   height: 4px;
@@ -1691,7 +1993,7 @@ header > .navbar::after {
     var(--sys-color-secondary) 85%,
     transparent 95%
   );
-  z-index: 5;
+  z-index: 5; /* Base level for the line */
 }
 
 .footer__nav {
@@ -1702,54 +2004,66 @@ header > .navbar::after {
   gap: 0;
   width: auto;
   max-width: 100%;
-  padding: 0 40px 5px 40px;
+  /* ENGINE SYNC: Using Gauge 5 for side breathability */
+  padding: 0 var(--sys-space-5) var(--sys-space-1) var(--sys-space-5);
   overflow: visible;
 }
 
 .footer__link {
-  color: var(--sys-color-surface);
+  color: var(--sys-color-canvas);
   font-family: var(--font-body);
   font-size: clamp(0.875rem, 1.1vw, 1.0625rem);
   letter-spacing: var(--letter-spacing-body);
   text-decoration: none;
-  transition: all 0.3s ease;
-  padding: var(--sys-spacing-btn-v) var(--sys-spacing-btn-h);
+  /* MIRROR SYNC: Targeted transitions only */
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+
+  /* ENGINE SYNC: Vertical Gauge 3 (19.2px) vs Horizontal Gauge 5 (32px) 
+     This creates the "Taller/Wider" footer feel you requested. */
+  padding: var(--sys-space-3) var(--sys-space-5);
+
   display: flex;
   align-items: center;
-  position: relative;
   white-space: nowrap;
-  border-radius: 0;
+  position: relative;
+  /* THE FIX: z-index must be higher than the .footer::before (5) */
+  z-index: 10;
 }
 
+/* THE HOVER: Fixed White Text & Tonal Glow */
 .footer__link:hover {
-  background-color: var(--sys-color-outline);
-  color: var(--sys-color-surface);
+  background-color: var(--sys-color-canvas-alpha-1);
+  color: var(--sys-color-canvas) !important;
+  box-shadow: inset 0 0 0 2px var(--sys-color-canvas-alpha-2);
 }
 
-/* THE MIRROR ACCENT: Magenta Highlight at TOP */
+/* THE MIRROR ACCENT: Magenta Highlight (Covers the Accent Line) */
 .footer__link:hover::after {
   content: "";
   position: absolute;
-  top: 0;
+  top: 0; /* Align to the very top edge */
   left: 0;
   width: 100%;
-  height: 0.25rem;
-  background-color: var(--sys-color-tertiary);
+  height: 4px; /* Matches the .footer::before height */
+  background-color: var(--sys-color-action); /* Action Magenta */
   display: block;
-  border-radius: 0 0 0.125rem 0.125rem;
-  z-index: 1005;
+  /* Subtle rounding on the bottom to soften the "overlap" */
+  border-radius: 0 0 2px 2px;
+  z-index: 11; /* Sits on top of everything */
 }
 
-@media screen and (max-width: 768px) {
+/* --- MOBILE STACKING LOGIC --- */
+@media screen and (max-width: 809px) {
   .footer__nav {
     flex-direction: column;
     width: 100%;
-    padding: 0 0 1rem 0;
+    padding: 0 0 var(--sys-space-3) 0;
   }
 
   .footer__link {
     width: 100%;
     justify-content: center;
-    padding: 14px 24px;
+    /* Maintain hit-box symmetry on mobile */
+    padding: var(--sys-space-2) var(--sys-space-4);
   }
 }
