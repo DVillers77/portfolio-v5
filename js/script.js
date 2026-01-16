@@ -34,8 +34,9 @@ function closeModal() {
     if (modalWrapper) {
       modalWrapper.remove();
     }
-    // CRITICAL FIX: Restore scrolling to the body
-    document.body.style.overflow = "";
+    // UNLOCK
+    document.documentElement.classList.remove("no-scroll");
+    document.body.classList.remove("no-scroll");
   }, 400);
 }
 
@@ -86,19 +87,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
       if (slideTitleElement && slideTitleLink) {
         const currentTitle = currentSlide.getAttribute("data-title");
         const currentImage = currentSlide.querySelector(".slideshow__image");
-        const currentTarget = currentImage
-          ? currentImage.getAttribute("data-target")
-          : "#";
+        const currentTarget = currentImage ? currentImage.getAttribute("data-target") : "#";
 
         slideTitleElement.textContent = currentTitle;
         slideTitleLink.setAttribute("href", currentTarget);
       }
     }
 
-    if (prevButton)
-      prevButton.addEventListener("click", () => showSlides((slideIndex -= 1)));
-    if (nextButton)
-      nextButton.addEventListener("click", () => showSlides((slideIndex += 1)));
+    if (prevButton) prevButton.addEventListener("click", () => showSlides((slideIndex -= 1)));
+    if (nextButton) nextButton.addEventListener("click", () => showSlides((slideIndex += 1)));
 
     for (let i = 0; i < dots.length; i++) {
       dots[i].addEventListener("click", () => showSlides((slideIndex = i + 1)));
@@ -134,9 +131,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   }
 
   function initContactModal() {
-    const contactTriggers = document.getElementsByClassName(
-      "navbar__link--contact-trigger"
-    );
+    const contactTriggers = document.getElementsByClassName("navbar__link--contact-trigger");
     const modalTemplate = document.getElementById("contact-modal-template");
 
     if (!modalTemplate) {
@@ -153,25 +148,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
     function openModal(e) {
       e.preventDefault();
 
-      const modalWrapper =
-        modalTemplate.content.cloneNode(true).firstElementChild;
+      // LOCK THE ENTIRE PORTAL
+      document.documentElement.classList.add("no-scroll");
+      document.body.classList.add("no-scroll");
+
+      const modalWrapper = modalTemplate.content.cloneNode(true).firstElementChild;
       document.body.appendChild(modalWrapper);
 
-      // KINETIC ENTRY: Set Flex, force reflow, then add visible class
+      // 2. KINETIC ENTRY
       modalWrapper.style.display = "flex";
-      // Force reflow
-      void modalWrapper.offsetWidth; 
+      void modalWrapper.offsetWidth;
       modalWrapper.classList.add("is-visible");
-      
-      document.body.style.overflow = "hidden";
 
       const contactForm = modalWrapper.querySelector(".contact-modal__form");
-      const submitBtn = modalWrapper.querySelector(
-        ".contact-modal__button--submit"
-      );
-      const closeModalButton = modalWrapper.querySelector(
-        ".contact-modal__close-icon"
-      );
+      const submitBtn = modalWrapper.querySelector(".contact-modal__button--submit");
+      const closeModalButton = modalWrapper.querySelector(".contact-modal__close-icon");
 
       function toggleButtonState() {
         submitBtn.disabled = !contactForm.checkValidity();
@@ -180,6 +171,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
       toggleButtonState();
       contactForm.addEventListener("input", toggleButtonState);
 
+      // --- PHYSICAL BARRIER 2: THE FOCUS TRAP ---
+      // We recalculate this AFTER the modal is visible to ensure accuracy
       const focusableElements = getFocusableElements(modalWrapper);
       const firstFocusable = focusableElements[0];
       const lastFocusable = focusableElements[focusableElements.length - 1];
@@ -192,11 +185,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
       modalWrapper.addEventListener("keydown", function (e) {
         if (e.key === "Tab") {
           if (e.shiftKey) {
+            // Shift + Tab
             if (document.activeElement === firstFocusable) {
               lastFocusable.focus();
               e.preventDefault();
             }
           } else {
+            // Tab
             if (document.activeElement === lastFocusable) {
               firstFocusable.focus();
               e.preventDefault();
@@ -212,15 +207,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
         // 5a. PRE-FLIGHT STATE
         submitBtn.style.pointerEvents = "none";
         submitBtn.innerHTML = "SENDING...";
-        
+
         // Reset Error State if Present
         submitBtn.classList.remove("button--error");
-        
+
         let statusBar = contactForm.querySelector(".contact-modal__status-bar");
         if (!statusBar) {
-            statusBar = document.createElement("div");
-            statusBar.className = "contact-modal__status-bar";
-            contactForm.appendChild(statusBar);
+          statusBar = document.createElement("div");
+          statusBar.className = "contact-modal__status-bar";
+          contactForm.appendChild(statusBar);
         }
         statusBar.style.display = "none"; // Hide initially
 
@@ -246,13 +241,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
             // HANDSHAKE PROTOCOL: 3.5s Delay before closing
             // We check if the modal still exists incase the user closed it manually.
             setTimeout(() => {
-               // Only close if it's still in the DOM and open
-               const currentModal = document.getElementById("contact-modal");
-               if (currentModal) {
-                 closeModal();
-               }
+              // Only close if it's still in the DOM and open
+              const currentModal = document.getElementById("contact-modal");
+              if (currentModal) {
+                closeModal();
+              }
             }, 3500);
-
           } else {
             throw new Error("validation");
           }
@@ -293,11 +287,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
       const href = anchor.getAttribute("href");
 
-      if (
-        href &&
-        href.startsWith("#") &&
-        !anchor.classList.contains("navbar__link--contact-trigger")
-      ) {
+      if (href && href.startsWith("#") && !anchor.classList.contains("navbar__link--contact-trigger")) {
         const targetElement = document.querySelector(href);
 
         if (targetElement) {
@@ -344,10 +334,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const navToggleButton = document.querySelector(".navbar__toggle");
 
     if (navBar && navBar.classList.contains("responsive")) {
-      if (
-        !navBar.contains(event.target) &&
-        !navToggleButton.contains(event.target)
-      ) {
+      if (!navBar.contains(event.target) && !navToggleButton.contains(event.target)) {
         toggleMobileNav();
       }
     }

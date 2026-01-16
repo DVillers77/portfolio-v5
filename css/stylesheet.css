@@ -339,20 +339,21 @@ button {
     var(--sys-color-canvas);
 
   /* ================================================= */
-  /* === 7. KINETIC SPACE (1-11 Unabridged)        === */
+  /* === 7. KINETIC SPACE (1-11 Unabridged)         === */
   /* ================================================= */
-  /* Definition: Gauge * 5rem (80px base) */
-  --sys-space-1: calc(var(--gauge-1) * 5rem);
-  --sys-space-2: calc(var(--gauge-2) * 5rem);
-  --sys-space-3: calc(var(--gauge-3) * 5rem);
-  --sys-space-4: calc(var(--gauge-4) * 5rem);
-  --sys-space-5: calc(var(--gauge-5) * 5rem);
-  --sys-space-6: calc(var(--gauge-6) * 5rem);
-  --sys-space-7: calc(var(--gauge-7) * 5rem);
-  --sys-space-8: calc(var(--gauge-8) * 5rem);
-  --sys-space-9: calc(var(--gauge-9) * 5rem);
-  --sys-space-10: calc(var(--gauge-10) * 5rem);
-  --sys-space-11: calc(var(--gauge-11) * 5rem);
+  /* Definition: Gauge * 5rem (80px base)              */
+  /* ------------------------------------------------- */
+  --sys-space-1: calc(var(--gauge-1) * 5rem); /* 6.4px  (Whisper)  */
+  --sys-space-2: calc(var(--gauge-2) * 5rem); /* 12.8px (Talk)     */
+  --sys-space-3: calc(var(--gauge-3) * 5rem); /* 19.2px (Standard) */
+  --sys-space-4: calc(var(--gauge-4) * 5rem); /* 25.6px (Shout)    */
+  --sys-space-5: calc(var(--gauge-5) * 5rem); /* 32.0px            */
+  --sys-space-6: calc(var(--gauge-6) * 5rem); /* 38.4px            */
+  --sys-space-7: calc(var(--gauge-7) * 5rem); /* 44.8px            */
+  --sys-space-8: calc(var(--gauge-8) * 5rem); /* 51.2px (Boost)    */
+  --sys-space-9: calc(var(--gauge-9) * 5rem); /* 57.6px            */
+  --sys-space-10: calc(var(--gauge-10) * 5rem); /* 67.2px            */
+  --sys-space-11: calc(var(--gauge-11) * 5rem); /* 76.8px (Redline)  */
 
   /* ================================================= */
   /* === 8. KINETIC RADIUS (1-11 Unabridged)       === */
@@ -373,6 +374,8 @@ button {
   /* ================================================= */
   /* === 9. SEMANTIC ALIASES                       === */
   /* ================================================= */
+
+  /* needs review */
   --sys-space-body-base: var(--sys-space-2);
   --sys-space-cta-v: var(--sys-space-2);
   --sys-space-cta-h: var(--sys-space-4);
@@ -436,6 +439,46 @@ button {
   --sys-letter-spacing-standard: 0.02em;
   --sys-letter-spacing-display: 0; /* Pure Neutral for Display */
   --sys-letter-spacing-tight: -0.015em;
+
+  /* ================================================= */
+  /* == [V25] STESS TEST QUICK FIX MOBILE ADJUSTMENTS == */
+  /* ================================================= */
+
+  /* gauge calibration under review*/
+  @media screen and (max-width: 809px) {
+    :root {
+      /* MOBILE RECALIBRATION (3rem / 48px Base) */
+      /* This keeps your Gauges (0.08, 0.16, etc) but applies them 
+       to a smaller 'World Size' so everything stays proportional. */
+      --sys-space-1: calc(var(--gauge-1) * 3rem); /* ~4px  */
+      --sys-space-2: calc(var(--gauge-2) * 3rem); /* ~8px  */
+      --sys-space-3: calc(var(--gauge-3) * 3rem); /* ~12px */
+      --sys-space-4: calc(var(--gauge-4) * 3rem); /* ~15px */
+      --sys-space-5: calc(var(--gauge-5) * 3rem); /* ~20px */
+      --sys-space-6: calc(var(--gauge-6) * 3rem); /* ~23px */
+      --sys-space-7: calc(var(--gauge-7) * 3rem); /* ~27px */
+      --sys-space-8: calc(var(--gauge-8) * 3rem); /* ~31px */
+      --sys-space-9: calc(var(--gauge-9) * 3rem); /* ~35px */
+      --sys-space-10: calc(var(--gauge-10) * 3rem); /* ~40px */
+      --sys-space-11: calc(var(--gauge-11) * 3rem); /* ~46px */
+    }
+
+    /* FORCE BOX-SIZING SAFETY */
+    * {
+      max-width: 100vw;
+      overflow-wrap: break-word; /* Prevents long URLs/words from pushing the wall out */
+    }
+
+    /* CARD OVERFLOW FIX */
+    .feature-block {
+      padding-left: var(--sys-space-3); /* 16px is the mobile 'Sweet Spot' */
+      padding-right: var(--sys-space-3);
+    }
+
+    .feature-block__grid {
+      gap: var(--sys-space-4); /* Tighten the stack */
+    }
+  }
 }
 
 /* ================================================= */
@@ -474,27 +517,30 @@ button {
 
 @media screen and (max-width: 809px) {
   @keyframes completePinball {
-    /* START: Top Left (Matches Desktop feel) */
+    /* START: Initial position at the very top */
     0% {
       --sunX: 15%;
       --sunY: 10%;
     }
 
-    /* THE ARCH: As it starts to move, we push X faster than Y 
-       to create a slow 'swinging' curve toward the center. */
-    25% {
-      --sunX: 45%;
-      --sunY: 20%;
+    /* THE ACCELERATED ARCH: 
+       By moving this to 15%, the light reaches the center-line 
+       much faster as the user starts their first scroll. */
+    15% {
+      --sunX: 50%;
+      --sunY: 35%; /* Mid-point of the swing */
     }
 
-    /* THE STAGE LIGHT: Locked at 50vh for the main body content */
-    50%,
-    80% {
+    /* THE STAGE LIGHT (Extended): 
+       Now the light is centered from 25% scroll all the way to 85%.
+       This covers the bulk of your feature cards. */
+    25%,
+    85% {
       --sunX: 50%;
       --sunY: 50%;
     }
 
-    /* LANDING: Final rest at the bottom for the CTAs */
+    /* LANDING: Quick drop to the bottom for the final contact CTAs */
     100% {
       --sunX: 50%;
       --sunY: 95%;
@@ -1718,7 +1764,7 @@ header > .navbar::after {
 .contact-modal__content {
   position: relative;
   background-color: var(--sys-color-surface);
-  padding: 3rem 2.5rem; /* SPATIAL EXPANSION */
+  padding: var(--sys-space-7) var(--sys-space-6);
   border-radius: 0.8rem;
   border: 1px solid var(--sys-color-outline);
   width: 90%;
@@ -1898,33 +1944,53 @@ header > .navbar::after {
   transform: rotate(-45deg);
 }
 
-/* THE HUD STATUS BAR (Absolute Version) */
+/* 1. THE HUD STATUS BAR */
 .contact-modal__status-bar {
   position: absolute;
-  /* This places it 40px below the bottom edge of the form card */
-  bottom: -40px;
+  /* Use System Space instead of hardcoded 40px */
+  bottom: calc(var(--sys-space-5) * -1);
   left: 0;
   width: 100%;
-  height: 20px;
+  /* REMOVED: height: 20px (Let it grow if text wraps) */
+  min-height: var(--sys-space-3);
+
   font-family: "Courier New", Courier, monospace;
-  font-size: 0.75rem;
-  color: var(--sys-color-accent);
+  font-weight: 600;
+  font-size: var(--sys-type-caption);
+  color: var(--sys-color-primary);
   text-transform: uppercase;
-  border-left: 3px solid var(--sys-color-accent);
-  padding-left: 8px;
+  padding-left: var(--sys-space-1);
+  padding-right: var(--sys-space-1);
   display: none;
-  pointer-events: none; /* User can't click it */
+  pointer-events: none;
 }
 
-/* Typewriter Animation (Width Sync Fix) */
+/* 1. THE TYPEWRITER: DEFAULT (Desktop/Large Screens) */
 .typewriter-text {
-  display: inline-block;
-  white-space: nowrap; /* Keep on one line */
+  display: inline-block; /* Essential for width-based typing animation */
+  white-space: nowrap; /* Keep it on one line for the crawl effect */
   overflow: hidden;
   letter-spacing: 0.1em;
-  /* typing animation needs to match the width of the text */
+  border-right: 0.2em solid var(--sys-color-primary);
+
+  /* THE CRAWL: Restored as the primary behavior */
   animation: typing 1.5s steps(40, end), blink-caret 0.75s step-end infinite;
-  border-right: 0.15em solid var(--sys-color-accent);
+}
+
+/* 2. THE MOBILE ADAPTATION: (The Safety Net) */
+@media screen and (max-width: 809px) {
+  .typewriter-text {
+    /* If the text is too long for the mobile screen, 
+       we kill the 'nowrap' to prevent overflow city. */
+    display: inline;
+    white-space: normal;
+    overflow-wrap: break-word;
+
+    /* We disable the 'typing' animation on mobile because 
+       it conflicts with wrapped text, but we KEEP the caret blink 
+       so it still feels 'alive'. */
+    animation: blink-caret 0.75s step-end infinite;
+  }
 }
 
 @keyframes typing {
@@ -1941,7 +2007,7 @@ header > .navbar::after {
     border-color: transparent;
   }
   50% {
-    border-color: var(--sys-color-accent);
+    border-color: var(--sys-color-primary-alpha-8);
   }
 }
 
@@ -2066,4 +2132,16 @@ header > .navbar::after {
     /* Maintain hit-box symmetry on mobile */
     padding: var(--sys-space-2) var(--sys-space-4);
   }
+}
+
+/* ================================================= */
+/* === STRESS TEST FIXES THAT NEDD INTEGRATION AND REVIEW    === */
+/* ================================================= */
+
+/* Add this to your CSS file */
+.no-scroll {
+  overflow: hidden !important;
+  height: 100% !important;
+  position: fixed; /* The ultimate 'kill-switch' for background scrolling */
+  width: 100%;
 }
