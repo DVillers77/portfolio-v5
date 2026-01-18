@@ -86,49 +86,6 @@ button {
   --content-limit-percent: 37%;
   --content-limit: 600px;
 
-  /* --- 1. BASE PRIMITIVES (M3 Tonal Palette) --- */
-  --sys-pine-rgb: 1, 98, 75;
-  --sys-violet-rgb: 156, 39, 176;
-  --sys-magenta-rgb: 255, 0, 255;
-  --color-base-white: 255, 255, 255;
-  --color-base-charcoal: 51, 51, 51;
-  --color-base-black: 10, 10, 10;
-  --color-base-error: 155, 30, 30;
-
-  /* --- 2. SEMANTIC TOKENS (The Intent) --- */
-  --sys-color-primary-rgb: var(--sys-pine-rgb);
-  --sys-color-secondary-rgb: var(--sys-violet-rgb);
-  --sys-color-tertiary-rgb: var(--sys-magenta-rgb);
-  --sys-color-surface-rgb: var(--color-base-white);
-  --sys-color-on-surface-rgb: var(--color-base-charcoal);
-
-  /* --- 3. DERIVED VALUES --- */
-  --sys-color-primary: rgb(var(--sys-color-primary-rgb));
-  --sys-color-secondary: rgb(var(--sys-color-secondary-rgb));
-  --sys-color-tertiary: rgb(var(--sys-color-tertiary-rgb));
-  --sys-color-surface: rgb(var(--sys-color-surface-rgb));
-
-  --sys-color-on-surface: rgb(var(--sys-color-on-surface-rgb));
-  --sys-color-on-surface-emphasis: rgb(var(--color-base-black));
-  --sys-color-on-primary-container: var(--sys-color-primary);
-  --sys-color-on-primary: var(--sys-color-surface);
-
-  --weight-1: 0.08;
-  --weight-2: 0.16;
-
-  /* --- 5. INTERACTION & UI --- */
-  --sys-color-outline: rgba(var(--color-base-charcoal), 0.2);
-
-  --sys-color-error: rgb(var(--color-base-error));
-
-  /* --- 6. DEPTH & EFFECTS --- */
-
-  /* Halo System */
-
-  --sys-shadow-halo-alt: 0 0 0 1.5px rgba(255, 255, 255, 0.8),
-    0 0.625rem 1.875rem rgba(var(--sys-color-primary-rgb), 0.3), 0 0 0.9375rem rgba(var(--sys-color-secondary-rgb), 0.8),
-    0 0 3.125rem rgba(var(--sys-color-secondary-rgb), 0.25);
-
   /* --- FLUID GRADIENT CONTROL --- */
   --nav-gradient-stop: 45vw;
   --navbar-shelf-height: 0.9375rem;
@@ -192,20 +149,20 @@ button {
   /* === 2. THE KINETIC GAUGE (The Universal Physics) === */
   /* ================================================= */
   /* HARMONIC SCALE REFERENCE (8-Factor Multiplier)
-     -------------------------------------------------
-     Gauge | Factor | Opacity | Space (80px Base)
-     1     | 0.08   | 8%      | 6.4px (Whisper)
-     2     | 0.16   | 16%     | 12.8px (Talk)
-     3     | 0.24   | 24%     | 19.2px (Standard)
-     4     | 0.32   | 32%     | 25.6px (Shout)
-     5     | 0.40   | 40%     | 32.0px
-     6     | 0.48   | 48%     | 38.4px
-     7     | 0.56   | 56%     | 44.8px
-     8     | 0.64   | 64%     | 51.2px (Boost)
-     9     | 0.72   | 72%     | 57.6px
-     10    | 0.84   | 84%     | 67.2px
-     11    | 0.96   | 96%     | 76.8px (Redline)
-  */
+   -------------------------------------------------
+   Gauge | Factor | Opacity | Space (80px Base) | Phonic Label
+   1     | 0.08   | 8%      | 6.4px             | (Muted)
+   2     | 0.16   | 16%     | 12.8px            | (Whisper)
+   3     | 0.24   | 24%     | 19.2px            | (Standard)
+   4     | 0.32   | 32%     | 25.6px            | (Talk)
+   5     | 0.40   | 40%     | 32.0px            | 
+   6     | 0.48   | 48%     | 38.4px            | 
+   7     | 0.56   | 56%     | 44.8px            | 
+   8     | 0.64   | 64%     | 51.2px            | (Shout)
+   9     | 0.72   | 72%     | 57.6px            | 
+   10    | 0.84   | 84%     | 67.2px            | (Boost)
+   11    | 0.96   | 96%     | 76.8px            | (Redline)
+*/
   --gauge-1: 0.08;
   --gauge-2: 0.16;
   --gauge-3: 0.24;
@@ -221,11 +178,20 @@ button {
   /* ================================================= */
   /* === 3. THE SWITCHBOARD (Semantic Roles)       === */
   /* ================================================= */
+
+  /* ROLES: DO NOT USE IN COMPONENT CSS. USE DERIVED TOOLS ONLY. */
+
   --sys-role-primary-rgb: var(--pigment-pine-rgb);
   --sys-role-accent-rgb: var(--pigment-violet-rgb);
   --sys-role-action-rgb: var(--pigment-magenta-rgb);
   --sys-role-canvas-rgb: var(--pigment-white-rgb);
+
+  /* The Fixed Anchor: Used for solid type and stable borders */
   --sys-role-neutral-rgb: var(--pigment-charcoal-rgb);
+
+  /* The Fluid Floor: Used for the Alpha Matrix and Depth */
+  --sys-role-void-rgb: var(--pigment-black-rgb);
+
   --sys-role-error-rgb: var(--pigment-crimson-rgb);
   --sys-role-warning-rgb: var(--pigment-amber-rgb);
   --sys-role-info-rgb: var(--pigment-sky-rgb);
@@ -243,6 +209,25 @@ button {
   --sys-color-warning: rgb(var(--sys-role-warning-rgb));
   --sys-color-info: rgb(var(--sys-role-info-rgb));
   --sys-color-success: rgb(var(--sys-role-success-rgb));
+
+  /* ================================================= */
+  /* === 7. PHONIC TYPE SYSTEM (The Baked Solids)  === */
+  /* ================================================= */
+
+  /* REDLINE: Peak contrast using Black pigment */
+  --sys-color-type-redline: rgb(var(--pigment-black-rgb));
+
+  /* SHOUT: The high-end of your Charcoal pigment */
+  --sys-color-type-shout: rgb(var(--pigment-charcoal-rgb));
+
+  /* TALK: Charcoal baked at a high gauge against the canvas */
+  --sys-color-type-talk: color-mix(in srgb, var(--sys-color-neutral), var(--sys-color-canvas) 20%);
+
+  /* WHISPER: Charcoal baked at a mid gauge */
+  --sys-color-type-whisper: color-mix(in srgb, var(--sys-color-neutral), var(--sys-color-canvas) 45%);
+
+  /* MUTED: The minimum accessible threshold */
+  --sys-color-type-muted: color-mix(in srgb, var(--sys-color-neutral), var(--sys-color-canvas) 65%);
 
   /* ================================================= */
   /* === 5. THE ALPHA MATRIX (Unabridged 1-11)     === */
@@ -287,18 +272,18 @@ button {
   --sys-color-action-alpha-10: rgba(var(--sys-role-action-rgb), var(--gauge-10));
   --sys-color-action-alpha-11: rgba(var(--sys-role-action-rgb), var(--gauge-11));
 
-  /* NEUTRAL (INK) */
-  --sys-color-neutral-alpha-1: rgba(var(--sys-role-neutral-rgb), var(--gauge-1));
-  --sys-color-neutral-alpha-2: rgba(var(--sys-role-neutral-rgb), var(--gauge-2));
-  --sys-color-neutral-alpha-3: rgba(var(--sys-role-neutral-rgb), var(--gauge-3));
-  --sys-color-neutral-alpha-4: rgba(var(--sys-role-neutral-rgb), var(--gauge-4));
-  --sys-color-neutral-alpha-5: rgba(var(--sys-role-neutral-rgb), var(--gauge-5));
-  --sys-color-neutral-alpha-6: rgba(var(--sys-role-neutral-rgb), var(--gauge-6));
-  --sys-color-neutral-alpha-7: rgba(var(--sys-role-neutral-rgb), var(--gauge-7));
-  --sys-color-neutral-alpha-8: rgba(var(--sys-role-neutral-rgb), var(--gauge-8));
-  --sys-color-neutral-alpha-9: rgba(var(--sys-role-neutral-rgb), var(--gauge-9));
-  --sys-color-neutral-alpha-10: rgba(var(--sys-role-neutral-rgb), var(--gauge-10));
-  --sys-color-neutral-alpha-11: rgba(var(--sys-role-neutral-rgb), var(--gauge-11));
+  /* VOID (ATMOSHPHERE) */
+  --sys-color-void-alpha-1: rgba(var(--sys-role-void-rgb), var(--gauge-1)); /* Muted */
+  --sys-color-void-alpha-2: rgba(var(--sys-role-void-rgb), var(--gauge-2)); /* Whisper */
+  --sys-color-void-alpha-3: rgba(var(--sys-role-void-rgb), var(--gauge-3)); /* Standard */
+  --sys-color-void-alpha-4: rgba(var(--sys-role-void-rgb), var(--gauge-4)); /* Talk */
+  --sys-color-void-alpha-5: rgba(var(--sys-role-void-rgb), var(--gauge-5));
+  --sys-color-void-alpha-6: rgba(var(--sys-role-void-rgb), var(--gauge-6));
+  --sys-color-void-alpha-7: rgba(var(--sys-role-void-rgb), var(--gauge-7));
+  --sys-color-void-alpha-8: rgba(var(--sys-role-void-rgb), var(--gauge-8)); /* Shout */
+  --sys-color-void-alpha-9: rgba(var(--sys-role-void-rgb), var(--gauge-9));
+  --sys-color-void-alpha-10: rgba(var(--sys-role-void-rgb), var(--gauge-10)); /* Boost */
+  --sys-color-void-alpha-11: rgba(var(--sys-role-void-rgb), var(--gauge-11)); /* Redline */
 
   /* CANVAS (LIFT) */
   --sys-color-canvas-alpha-1: rgba(var(--sys-role-canvas-rgb), var(--gauge-1));
@@ -321,15 +306,17 @@ button {
   --sys-shadow-halo-standard: 0 0 0 1.5px var(--sys-color-canvas-alpha-10), 0 0.625rem 1.875rem rgba(0, 0, 0, 0.15),
     0 0 0.9375rem var(--sys-color-accent-alpha-9), 0 0 3.125rem var(--sys-color-accent-alpha-3);
 
-  /* THE MODAL: Depth layers using Neutral-4 and Neutral-8 */
-  --sys-shadow-depth-modal: 0 0.5rem 2rem var(--sys-color-neutral-alpha-4),
-    0 1.25rem 5rem var(--sys-color-neutral-alpha-8);
+  /* THE MODAL: Depth layers using Void-4 and Void-8 */
+  --sys-shadow-depth-modal: 0 0.5rem 2rem var(--sys-color-void-alpha-4),
+    /* Talk Shadow */ 0 1.25rem 5rem var(--sys-color-void-alpha-8); /* Shout Shadow */
 
   /* THE FOCUS: Safety gap + Primary Kinetic glow */
   --sys-shadow-focus-primary: 0 0 0 3px var(--sys-color-canvas), 0 0 0 6px var(--sys-color-primary-alpha-4);
 
-  /* THE MUFFLER TOKEN: Refined containment for interactive elements */
+  /* THE MUFFLER TOKENS: Refined containment for interactive elements */
   --sys-shadow-muffler-action: 0 0 0.5rem var(--sys-color-action-alpha-4), 0 0 1rem var(--sys-color-action-alpha-2);
+
+  --sys-shadow-muffler-void: 0 0 0.5rem var(--sys-color-void-alpha-4), 0 0 1rem var(--sys-color-void-alpha-2);
 
   /* BAKE: On-Canvas Solids (Opacity flattened against white) */
   --sys-color-primary-on-canvas-1-bg: linear-gradient(
@@ -624,8 +611,8 @@ header > .navbar::before {
   background: linear-gradient(
     to right,
     transparent 5%,
-    var(--sys-color-secondary) 15%,
-    var(--sys-color-secondary) 85%,
+    var(--sys-color-accent) 15%,
+    var(--sys-color-accent) 85%,
     transparent 95%
   );
   z-index: 1001;
@@ -731,9 +718,16 @@ header > .navbar::after {
   transform: translateY(-0.5rem) rotate(-45deg);
 }
 
+/* THE HAMBURGER: Atmospheric Interaction */
 .navbar__toggle:hover {
-  background-color: var(--sys-color-neutral-alpha-4);
+  /* Snapping 32% (Talk) for a clear 'Handshake' interaction */
+  background-color: var(--sys-color-void-alpha-4);
+
+  /* Ensuring the icon remains high-contrast (Pigment: White) */
   color: var(--sys-color-canvas);
+
+  /* UX Tip: Ensure the transition feels 'Kinetic' */
+  transition: background-color 0.2s ease;
 }
 
 /* 2. THE LINKS CONTAINER (Triggered by .responsive class) */
@@ -961,7 +955,7 @@ header > .navbar::after {
 
 /* Override for Alt Block (Light Pine) */
 .feature-block--alt .feature-block__grid .feature-block__image {
-  box-shadow: var(--sys-shadow-halo-alt) !important;
+  box-shadow: var(--sys-shadow-halo-standard) !important;
 }
 
 /* --- 4. CONTENT (Text & Typography) --- */
@@ -1138,7 +1132,7 @@ header > .navbar::after {
   font-family: var(--font-display);
   font-size: var(--sys-type-hero); /* DNA: 3rem (48px) to 6rem (96px) */
   font-weight: 700;
-  color: var(--sys-color-surface);
+  color: var(--sys-color-canvas);
   text-align: center;
 
   /* UPDATED: Neutral spacing to stop overlap */
@@ -1243,11 +1237,14 @@ header > .navbar::after {
   height: 3.375rem;
   border-radius: var(--sys-radius-11);
 
-  /* KINETIC BASE: Charcoal HUD style */
-  background-color: var(--sys-color-neutral-alpha-7);
+  /* KINETIC BASE: Void HUD style */
+  /* Using Gauge 7 (56%) - This is the "Heavy" Atmospheric level */
+  background-color: var(--sys-color-void-alpha-7);
+
+  /* Keeping Canvas (White) for the chevron icon */
   color: var(--sys-color-canvas);
 
-  /* BORDER: Transparent base prevents layout 'jumps' on hover */
+  /* BORDER: Already on-system using Canvas Alpha 2 (Whisper) */
   border: 1px solid var(--sys-color-canvas-alpha-2);
 
   display: flex;
@@ -1337,12 +1334,14 @@ header > .navbar::after {
 
 .slideshow__pill-link {
   display: inline-block;
-  /* KINETIC BASE: Neutral Shout (56%) + Glass HUD */
-  background-color: var(--sys-color-neutral-alpha-7);
+  /* KINETIC BASE: Void Atmosphere (56%) + Glass HUD */
+  /* Using Gauge 7 (Shout/Heavy) for legibility over imagery */
+  background-color: var(--sys-color-void-alpha-7);
+
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 
-  /* BORDER: Subtle silver edge using Canvas Alpha 2 */
+  /* BORDER: Stays on-system with Canvas Alpha 2 */
   border: 1px solid var(--sys-color-canvas-alpha-2);
   color: var(--sys-color-canvas);
 
@@ -1355,7 +1354,7 @@ header > .navbar::after {
   transform: translateZ(0);
   transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 
-  box-shadow: var(--sys-shadow-muffler-neutral);
+  box-shadow: var(--sys-shadow-muffler-void);
   will-change: background-color, box-shadow;
 }
 
@@ -1477,15 +1476,22 @@ header > .navbar::after {
 
 /* 4. MODIFIER: TONAL (Negative Space Path) */
 .button--tonal {
+  /* BACKGROUND: Stays Kinetic (Primary at 16%) */
   background-color: var(--sys-color-primary-alpha-2);
-  color: var(--sys-color-neutral-alpha-11);
+
+  /* TYPE: Switching to the Phonic Solid for maximum legibility */
+  /* This uses your 'Baked' Redline/Black for peak authority */
+  color: var(--sys-color-type-shout);
+
   border: 1px solid var(--sys-color-primary-alpha-3);
 }
 
 .button--tonal:hover:not(:disabled) {
   background-color: var(--sys-color-primary-alpha-4);
   border-color: var(--sys-color-primary);
-  box-shadow: 0 0.25rem 0.625rem var(--sys-color-neutral-alpha-3);
+
+  /* SHADOW: Switching to Void for a 'cleaner' depth over color */
+  box-shadow: 0 0.25rem 0.625rem var(--sys-color-void-alpha-3);
 }
 
 /* 5. ACTIVE STATE (Mobile/Click Compression) */
@@ -1699,7 +1705,7 @@ header > .navbar::after {
 
   /* SUBTLE SEPARATOR: For 'Jump to' section on desktop */
   .feature-block__jump-link {
-    border-top: 0.0625rem solid rgba(var(--sys-color-primary-rgb), 0.1);
+    border-top: 0.0625rem solid var(--sys-color-primary-alpha-2);
     padding-top: 1rem;
     margin-top: 1rem;
     display: block;
@@ -1763,10 +1769,10 @@ header > .navbar::after {
 /* 2. THE CONTENT CARD (Outer Shell) */
 .contact-modal__content {
   position: relative;
-  background-color: var(--sys-color-surface);
+  background-color: var(--sys-color-canvas);
   padding: var(--sys-space-7) var(--sys-space-6);
   border-radius: 0.8rem;
-  border: 1px solid var(--sys-color-outline);
+  border: 1px solid var(--sys-color-void-alpha-3);
   width: 90%;
   max-width: 500px;
   box-shadow: var(--shadow-modal);
@@ -1795,18 +1801,18 @@ header > .navbar::after {
   /* DITHERED RADIAL GRADIENT: Synced with Brand Rig */
   background-image: radial-gradient(
     circle at 10% 10%,
-    rgba(var(--sys-color-primary-rgb), 1) 0%,
-    rgba(var(--sys-color-primary-rgb), 0.7) 25%,
-    rgba(var(--sys-color-primary-rgb), 0.3) 50%,
-    rgba(var(--sys-color-primary-rgb), 0.05) 80%,
-    #121212 115%
+    var(--sys-color-primary) 0%,
+    var(--sys-color-primary-alpha-9) 25%,
+    var(--sys-color-primary-alpha-4) 50%,
+    var(--sys-color-primary-alpha-1) 80%,
+    rgb(var(--pigment-black-rgb)) 115%
   );
   background-color: #121212;
   border: 2px solid var(--sys-color-primary); /* Pine Accent Rim */
   padding: 1.5rem;
   /* BOOSTED VIOLET GLOW (Hero Sync) */
-  box-shadow: 0 0 10px rgba(var(--sys-violet-rgb), 0.8), 0 0 25px rgba(var(--sys-violet-rgb), 0.6),
-    0 0 50px rgba(var(--sys-violet-rgb), 0.3);
+  box-shadow: 0 0 10px rgba(var(--sys-color-accent), 0.8), 0 0 25px rgba(var(--sys-color-accent), 0.6),
+    0 0 50px rgba(var(--sys-color-accent), 0.3);
   font-family: var(--font-body); /* Force Sans-Serif */
   transition: background-image 0.5s ease-in-out; /* Atmospheric Smoothness */
 }
@@ -1815,7 +1821,7 @@ header > .navbar::after {
   max-width: 100%;
   text-align: center;
   margin-bottom: 0.5rem; /* Reduced for the rail */
-  color: var(--sys-color-surface); /* White */
+  color: var(--sys-color-canvas); /* White */
   font-family: var(--font-display); /* Poppins Sync */
   position: relative;
 }
@@ -1830,8 +1836,8 @@ header > .navbar::after {
   background: linear-gradient(
     to right,
     transparent 5%,
-    var(--sys-color-secondary) 15%,
-    var(--sys-color-secondary) 85%,
+    var(--sys-color-accent) 15%,
+    var(--sys-color-accent) 85%,
     transparent 95%
   );
 }
@@ -1842,7 +1848,7 @@ header > .navbar::after {
   margin-bottom: 0.25rem;
   margin-top: 0.5rem;
   font-family: var(--font-body); /* Inter Sync */
-  color: var(--sys-color-surface);
+  color: var(--sys-color-canvas);
   font-weight: 500;
 }
 
@@ -1859,7 +1865,7 @@ header > .navbar::after {
   font-family: var(--font-body); /* Inter Sync */
   font-size: 1rem;
   background-color: rgba(255, 255, 255, 0.08); /* Transparent Ink */
-  color: var(--sys-color-surface); /* White Text */
+  color: var(--sys-color-canvas); /* White Text */
   box-sizing: border-box;
   transition: all 0.3s ease;
 }
@@ -1882,7 +1888,7 @@ header > .navbar::after {
 }
 
 .contact-modal__form .contact-modal__button--submit:hover:not(:disabled) {
-  background-color: var(--sys-color-tertiary); /* Sync to interaction system */
+  background-color: var(--sys-color-action); /* Sync to interaction system */
   box-shadow: var(--glow-accent-strong-inset), var(--glow-accent-subtle);
 }
 
@@ -1910,11 +1916,11 @@ header > .navbar::after {
   cursor: pointer;
   transition: all 0.3s ease;
   z-index: 100;
-  color: var(--sys-color-on-surface); /* Charcoal 'X' */
+  color: var(--sys-color-type-talk); /* Charcoal 'X' */
 }
 
 .contact-modal__close-icon:hover {
-  color: var(--sys-color-tertiary);
+  color: var(--sys-color-action);
   transform: rotate(90deg);
 }
 
@@ -2055,8 +2061,8 @@ header > .navbar::after {
   background: linear-gradient(
     to right,
     transparent 5%,
-    var(--sys-color-secondary) 15%,
-    var(--sys-color-secondary) 85%,
+    var(--sys-color-accent) 15%,
+    var(--sys-color-accent) 85%,
     transparent 95%
   );
   z-index: 5; /* Base level for the line */
