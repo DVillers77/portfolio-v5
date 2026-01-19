@@ -175,6 +175,22 @@ button {
   --gauge-10: 0.84;
   --gauge-11: 0.96;
 
+  /* WORLD ANCHORS: The Raw Ingredients */
+  --sys-world-base-mobile: 3rem; /* 48px */
+  --sys-world-base-desktop: 5rem; /* 80px */
+
+  /* THE SWITCH: Defaulting to Mobile First */
+  --sys-world-base-dynamic: var(--sys-world-base-mobile);
+
+  /* ================================================= */
+  /* === MOBILE RECALIBRATION (The Brain)          === */
+  /* ================================================= */
+  @media screen and (min-width: 810px) {
+    :root {
+      --sys-world-base-dynamic: var(--sys-world-base-desktop);
+    }
+  }
+
   /* ================================================= */
   /* === 3. THE SWITCHBOARD (Semantic Roles)       === */
   /* ================================================= */
@@ -382,22 +398,22 @@ button {
   /* === [V21] KINETIC TYPOGRAPHY: GROWTH SCALE    === */
   /* ================================================= */
 
-  /* Hero: 48px (Mobile) -> 96px (Desktop Heroic) */
-  --sys-type-hero: clamp(3rem, 8vw, 6rem);
+  /* Hero: Gauge 10 (48px @3rem base) -> Gauge 11 (96px @6.25rem base) */
+  --sys-type-hero: clamp(3rem, 10vw, 6rem);
 
-  /* Display: 40px (Mobile) -> 64px (Desktop) */
-  --sys-type-display: clamp(2.5rem, 6vw, 4rem);
+  /* Display: Gauge 8 (31px @3rem base) -> Gauge 8 (64px @5rem base) */
+  --sys-type-display: clamp(2rem, 6vw, 4rem);
 
-  /* Headline: 24px (Mobile) -> 40px (Desktop) */
-  --sys-type-headline: clamp(1.5rem, 4vw, 2.5rem);
+  /* Headline: Gauge 5 (19.2px @3rem base) -> Gauge 5 (40px @5rem base) */
+  --sys-type-headline: clamp(1.2rem, 4vw, 2.5rem);
 
-  /* Title/Quote: 20px (Mobile) -> 24px (Desktop) */
-  --sys-type-title: clamp(1.25rem, 2vw, 1.5rem);
+  /* Title: Gauge 4 (15.3px @3rem base) -> Gauge 3 (19.2px @5rem base) */
+  --sys-type-title: clamp(1rem, 2.5vw, 1.25rem);
 
-  /* Body: 16px (Mobile Baseline) -> 18px (Desktop Editorial) */
+  /* Body: 16px Baseline -> 18px Editorial */
   --sys-type-body: clamp(1rem, 1.25vw, 1.125rem);
 
-  /* Caption: 12px (Mobile) -> 14px (Desktop) */
+  /* Caption: Gauge 2 (7.6px @3rem base) -> Gauge 2 (12.8px @5rem base) */
   --sys-type-caption: clamp(0.75rem, 1vw, 0.875rem);
 
   /* ================================================= */
