@@ -1,150 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+<body id="top">
+  <section class="hero">
+    <div class="hero__content">
+      <p class="metadata-whisper">Portfolio Evolution: Epoch V1 ➔ V5</p>
+      <h1>Architectural Refactor Study</h1>
+      <p>
+        An engineering audit of the transition from a localized legacy workflow to a high-fidelity, tokenized design
+        system.
+      </p>
+    </div>
+  </section>
 
-    <!-- The actual stylesheet link for the font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@1,400;1,700&family=Poppins:wght@700;800&display=swap"
-      rel="stylesheet"
-    />
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-
-    <link rel="stylesheet" href="css/stylesheet.css" />
-
-    <script src="js/script.js" defer></script>
-
-    <title>Project Title | Case Study</title>
-  </head>
-  <body id="top">
-    <section class="hero">
-      <div class="hero__content">
-        <h1>[Project Name]</h1>
-        <p>
-          A deep dive into the UX challenges and technical solutions behind
-          [Brief Summary].
-        </p>
+  <main class="project-archive">
+    <section class="feature-block feature-block--first">
+      <div class="project-container">
+        <div class="feature-block__grid">
+          <div class="feature-block__media">
+            <img src="images/v1-legacy-capture.jpg" class="feature-block__image" alt="V1 Legacy UI" />
+          </div>
+          <div class="feature-block__content">
+            <h2 class="feature-block__title--column">The V1 Legacy Baseline</h2>
+            <p class="feature-block__intro-text">
+              Document the "Inertia." V1 relied on arbitrary pixel values and localized CSS, leading to structural drift
+              and "bracket bleed" in the navigation rig.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <main>
-      <section class="feature-block feature-block--first">
-        <div class="project-container">
-          <div class="feature-block__grid">
-            <div class="feature-block__media">
-              <img
-                src="images/placeholder-challenge.jpg"
-                class="feature-block__image"
-                alt="Problem Illustration"
-              />
-            </div>
-            <div class="feature-block__content">
-              <h2 class="feature-block__title--column">The Challenge</h2>
-              <p class="feature-block__intro-text">
-                Explain the "Pain Point." Why did this project need to exist?
-                Who were the users, and what was the main goal?
-              </p>
-            </div>
+    <section class="feature-block feature-block--alt">
+      <div class="project-container">
+        <div class="feature-block__grid feature-block__grid--reverse">
+          <div class="feature-block__media">
+            <img src="images/v5-rig-detail.jpg" class="feature-block__image" alt="V5 High-Fidelity Rig" />
+          </div>
+          <div class="feature-block__content">
+            <h2 class="feature-block__title--column">The V5 Spinal Tap Engine</h2>
+            <p class="feature-block__intro-text">
+              The refactor implemented a 1.414 Harmonic Scale and a tokenized Pigment Profile system. This eliminated
+              color-banding via the Houdini-powered Steady Flood engine.
+            </p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="feature-block feature-block--alt">
-        <div class="project-container">
-          <div class="feature-block__grid feature-block__grid--reverse">
-            <div class="feature-block__media">
-              <img
-                src="images/placeholder-research.jpg"
-                class="feature-block__image"
-                alt="Research Artifacts"
-              />
-            </div>
-            <div class="feature-block__content">
-              <h2 class="feature-block__title--column">Strategy & Research</h2>
-              <p class="feature-block__intro-text">
-                Talk about your process here. Did you do competitive audits?
-                User personas? How did the data shape the design?
-              </p>
-            </div>
+    <section class="feature-block">
+      <div class="project-container">
+        <div class="feature-block__grid">
+          <div class="feature-block__media">
+            <img src="images/wedge-geometry.jpg" class="feature-block__image" alt="Wedge Brackets Detail" />
+          </div>
+          <div class="feature-block__content">
+            <h2 class="feature-block__title--column">Protocol: Orange Wedge Brackets</h2>
+            <p class="feature-block__intro-text">
+              A deep dive into the "Handshake Protocol." Using pseudo-elements to create extruded radii, welding the
+              active tab to the safety shelf for a zero-leak UI.
+            </p>
           </div>
         </div>
-      </section>
-
-      <section class="feature-block">
-        <div class="project-container">
-          <div class="feature-block__grid">
-            <div class="feature-block__media">
-              <img
-                src="images/placeholder-execution.jpg"
-                class="feature-block__image"
-                alt="Design Process"
-              />
-            </div>
-            <div class="feature-block__content">
-              <h2 class="feature-block__title--column">
-                Design & Technical Execution
-              </h2>
-              <p class="feature-block__intro-text">
-                Mention the tools used (M3, BEM, JavaScript logic). Explain a
-                specific technical hurdle you overcame.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="feature-block feature-block--alt">
-        <div class="project-container">
-          <div class="feature-block__grid feature-block__grid--reverse">
-            <div class="feature-block__media">
-              <img
-                src="images/placeholder-final.jpg"
-                class="feature-block__image"
-                alt="Final Product Screenshot"
-              />
-            </div>
-            <div class="feature-block__content">
-              <h2 class="feature-block__title--column">The Final Solution</h2>
-              <p class="feature-block__intro-text">
-                Show off the result. Link back to the live demo and the GitHub
-                repo.
-              </p>
-              <div class="button-group">
-                <a href="#" class="button button--primary" aria-label="Live Demo for this project">Live Demo</a>
-                <a href="#" class="button button--tonal" aria-label="Source Code for this project">Source Code</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-    <!-- FOOTER NAVBAR -->
-    <footer class="footer">
-      <nav class="footer__nav" aria-label="Footer navigation">
-        <a href="#top" class="footer__link"
-          ><i class="fa fa-fw fa-arrow-up"></i> Top</a
-        >
-        <a href="./index.html" class="footer__link"
-          ><i class="fa fa-fw fa-fort-awesome"></i> Home</a
-        >
-        <a href="./about.html" class="footer__link"
-          ><i class="fa fa-fw fa-heartbeat"></i> About</a
-        >
-        <a href="./projects.html" class="footer__link"
-          ><i class="fa fa-fw fa-code"></i> Projects</a
-        >
-        <a class="navbar__link--contact-trigger footer__link" href="#"
-          ><i class="fa fa-fw fa-hand-o-right"></i> Contact</a
-        >
-      </nav>
-    </footer>
-  </body>
-</html>
+      </div>
+    </section>
+  </main>
+</body>

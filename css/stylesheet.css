@@ -34,11 +34,6 @@ html {
   animation-timeline: scroll();
 }
 
-h1,
-h2 {
-  letter-spacing: var(--letter-spacing-display);
-}
-
 /* The "Stability" Reset */
 *,
 *::before,
@@ -52,7 +47,9 @@ h2 {
 .button:focus-visible {
   outline: none !important;
   /* The box-shadow MUST follow the border-radius */
-  box-shadow: 0 0 0 0.125rem white, 0 0 0 0.3125rem var(--sys-color-primary) !important;
+  box-shadow:
+    0 0 0 0.125rem white,
+    0 0 0 0.3125rem var(--sys-color-primary) !important;
   /* Force the anchor tag to respect its original button curves */
   border-radius: 0.5rem !important;
   position: relative;
@@ -61,7 +58,9 @@ h2 {
 
 .navbar__link:focus-visible {
   outline: none !important;
-  box-shadow: 0 0 0 0.125rem white, 0 0 0 0.3125rem var(--sys-color-primary) !important;
+  box-shadow:
+    0 0 0 0.125rem white,
+    0 0 0 0.3125rem var(--sys-color-primary) !important;
   border-radius: 0 !important; /* Keep nav links sharp */
   position: relative;
   z-index: 2002;
@@ -70,7 +69,9 @@ h2 {
 /* Fallback for other focusable elements */
 :focus-visible:not(.button):not(.navbar__link) {
   outline: none !important;
-  box-shadow: 0 0 0 0.125rem white, 0 0 0 0.3125rem var(--sys-color-primary) !important;
+  box-shadow:
+    0 0 0 0.125rem white,
+    0 0 0 0.3125rem var(--sys-color-primary) !important;
 }
 
 /* 1.6 FORM & INTERACTION RESET */
@@ -90,51 +91,96 @@ button {
   --nav-gradient-stop: 45vw;
   --navbar-shelf-height: 0.9375rem;
 
-  /* --- 5. SPACING PRIMITIVES (The Numeric 8px Grid) --- */
-  --ref-space-unit: 0.5rem;
-  --ref-space-1: calc(var(--ref-space-unit) * 1); /* 8px  */
-  --ref-space-2: calc(var(--ref-space-unit) * 2); /* 16px */
-  --ref-space-3: calc(var(--ref-space-unit) * 3); /* 24px */
-  --ref-space-4: calc(var(--ref-space-unit) * 4); /* 32px */
-  --ref-space-8: calc(var(--ref-space-unit) * 8); /* 64px */
-  --ref-space-10: calc(var(--ref-space-unit) * 10); /* 80px */
-
-  /* --- 6. SEMANTIC LAYOUT TOKENS (Mobile Defaults) --- */
-  --sys-spacing-gutter: var(--ref-space-2); /* 1rem on mobile */
-  --sys-spacing-section-v: var(--ref-space-8); /* 4rem */
-  --sys-spacing-hero-v: var(--ref-space-8); /* 4rem on mobile */
-  --sys-spacing-btn-v: var(--ref-space-2);
-  --sys-spacing-btn-h: var(--ref-space-3);
-
-  /* --- 7. GLOBAL FONTS & TYPE SCALE (M3) --- */
-  --font-display: "Poppins", sans-serif;
-  --font-body: "Inter", sans-serif;
-  --font-quote: "Playfair Display", serif;
-
-  /* M3 Scale Variables (Adaptive Mobile Baseline) */
-  --font-size-hero: 3rem; /* Reduced for mobile */
-  --font-size-display: 2.5rem; /* Reduced for mobile */
-  --font-size-headline: 1.5rem; /* Reduced for mobile */
-  --font-size-title: 1.125rem;
-  --font-size-body: 1rem;
-  --font-size-quote: 1.25rem; /* Reduced for mobile */
-
-  /* M3 Spacing & Rhythm Tokens */
-  --letter-spacing-display: -0.02em;
-  --letter-spacing-title: 0.01em;
-  --letter-spacing-body: 0.02em;
-  --letter-spacing-cta: 0.05rem;
-  --line-height-display: 1.1;
-  --line-height-headline: 1.2;
-  --line-height-title: 1.4;
-  --line-height-body: 1.6;
-
   /* ================================================= */
-  /* === THE KINETIC GAUGE ENGINE (Spinal Tap)      === */
+  /* === [V6] THE CREATOR: 1.414 HARMONIC SCALE     === */
   /* ================================================= */
-  /* ================================================= */
-  /* === 1. PIGMENTS (The Chemistry / DNA)         === */
-  /* ================================================= */
+  /* ESTIMATED VALUES BASED ON THE 1.414 AUGMENTED FOURTH RATIO, 
+   CALIBRATED FOR A MOBILE-FIRST APPROACH WITH A 16px BASE. 
+   THESE VALUES SHOULD BE TESTED AND ADJUSTED BASED ON 
+   SPECIFIC DESIGN AND CONTENT NEEDS. */
+
+  /* 1. FONT DNA */
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-story: "Playfair Display", serif;
+
+  /* 
+  ==========================================================================
+  RESONANT TYPOGRAPHY CONSTITUTION (v1.0)
+  --------------------------------------------------------------------------
+  VOICE:    Creator Archetype (High-tension, Engineered, Precise)
+  SCALE:    1.414 Augmented Fourth (Non-melodic / Dramatic)
+  FONTS:    Poppins (Display/Lead) | Inter (Body/UI)
+  STRATEGY: Fluid-Optical (No Media Queries)
+  ==========================================================================
+*/
+
+  /* 1. THE 11-TIER CLAMP MATRIX (1.414 Augmented Fourth) */
+  --fs-t1: clamp(2.5rem, 10vw, 6rem); /* Hero Display */
+  --fs-t2: clamp(1.75rem, 0.5rem + 7vw, 4.25rem); /* Page Title */
+  --fs-t3: clamp(1.25rem, 0.4rem + 5vw, 3rem); /* Section Head */
+  --fs-t4: clamp(1.15rem, 0.3rem + 3.5vw, 2.15rem); /* Sub-title */
+  --fs-t5: clamp(1.1rem, 0.2rem + 2.5vw, 1.5rem); /* Minor Head */
+  --fs-t6: clamp(1.05rem, 0.1rem + 2vw, 1.25rem); /* Lead / Intro (Poppins wt600) */
+  --fs-t7: clamp(1rem, 0.8rem + 0.5vw, 1.125rem); /* Body Main (Inter wt400) */
+  --fs-t8: clamp(0.875rem, 0.75rem + 0.3vw, 1rem); /* Body Small */
+  --fs-t9: clamp(0.8rem, 0.7rem + 0.2vw, 0.875rem); /* Caption */
+  --fs-t10: clamp(0.75rem, 0.68rem + 0.1vw, 0.8rem); /* Helper / Meta */
+  --fs-t11: clamp(0.7rem, 0.65rem + 0.1vw, 0.75rem); /* Legal / Fine */
+
+  /* 2. OPTICAL LINE HEIGHTS (Unitless Multipliers) */
+  /* 
+   TIGHTER RANGE: 1.15 on Mobile -> 1.05 on Desktop
+   The 0.08 multiplier makes the "tightening" more aggressive as the screen grows.
+*/
+  --lh-display-hero: clamp(1.05, 1.25 - 0.08 * 1vw, 1.15);
+  /* Tightens dynamically from 1.2 to 1.1 as font scales up */
+  --lh-display: clamp(1.1, 1.3 - 0.05 * 1vw, 1.2); /* T1-T3 */
+  --lh-heading: 1.25; /* T4-T5 */
+  --lh-lead: 1.4; /* T6 (Poppins wt600) */
+  --lh-body: 1.6; /* T7-T8 (Inter wt400) */
+  --lh-small: 1.45; /* T9-T11 */
+
+  /* 3. PROPORTIONAL LETTER SPACING (Relative em units) */
+  --ls-display: -0.02em; /* T1-T3 (Poppins Tight) */
+  --ls-heading: -0.015em; /* T4-T6 (Poppins Subtle) */
+  --ls-normal: 0; /* T7-T8 (Inter Standard) */
+  --ls-wide: 0.025em; /* T9 (Breathing Room) */
+  --ls-micro: 0.05em; /* T10-T11 (Legibility) */
+
+  /* 4. STORY OVERRIDE (Playfair Display at T6 and WT400) */
+  --lh-story: 1.5; /* Elegant breathing room for high-contrast serifs */
+  --ls-story: 0.015em; /* Prevents italic serifs from "tangling" */
+
+  /* 
+  IMPLEMENTATION GUIDELINES:
+  - T1-T6: Use Poppins. Weights 600-700.
+  - T7-T11: Use Inter. Weights 400.
+  - Avoid fixed pixel heights/spacings to preserve fluid resonance.
+*/
+}
+
+/* 5. GLOBAL TAG RE-CALIBRATION */
+h2 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-t3) !important;
+}
+p {
+  font-family: var(--font-body);
+  font-size: var(--fs-t7) !important;
+  line-height: var(--lh-body);
+  max-width: 65ch; /* Your optimal line length research */
+}
+
+/* ================================================= */
+/* === THE KINETIC GAUGE ENGINE (Spinal Tap)      === */
+/* ================================================= */
+/* ================================================= */
+/* === [A] THE INGREDIENTS (The Raw Physics)     === */
+/* ================================================= */
+
+/* --- A.1 PIGMENTS (DNA) --- */
+:root {
   --pigment-pine-rgb: 1, 98, 75;
   --pigment-violet-rgb: 156, 39, 176;
   --pigment-magenta-rgb: 255, 0, 255;
@@ -145,24 +191,22 @@ button {
   --pigment-amber-rgb: 255, 191, 0;
   --pigment-sky-rgb: 0, 122, 255;
 
-  /* ================================================= */
-  /* === 2. THE KINETIC GAUGE (The Universal Physics) === */
-  /* ================================================= */
+  /* --- A.2 THE GAUGE (Physics) --- */
   /* HARMONIC SCALE REFERENCE (8-Factor Multiplier)
-   -------------------------------------------------
-   Gauge | Factor | Opacity | Space (80px Base) | Phonic Label
-   1     | 0.08   | 8%      | 6.4px             | (Muted)
-   2     | 0.16   | 16%     | 12.8px            | (Whisper)
-   3     | 0.24   | 24%     | 19.2px            | (Standard)
-   4     | 0.32   | 32%     | 25.6px            | (Talk)
-   5     | 0.40   | 40%     | 32.0px            | 
-   6     | 0.48   | 48%     | 38.4px            | 
-   7     | 0.56   | 56%     | 44.8px            | 
-   8     | 0.64   | 64%     | 51.2px            | (Shout)
-   9     | 0.72   | 72%     | 57.6px            | 
-   10    | 0.84   | 84%     | 67.2px            | (Boost)
-   11    | 0.96   | 96%     | 76.8px            | (Redline)
+   Gauge | Factor | Space (80px Base) | Phonic Label
+   1     | 0.08   | 6.4px             | (Muted)
+   2     | 0.16   | 12.8px            | (Whisper)
+   3     | 0.24   | 19.2px            | (Standard)
+   4     | 0.32   | 25.6px            | (Talk)
+   5     | 0.40   | 32.0px            | 
+   6     | 0.48   | 38.4px            | 
+   7     | 0.56   | 44.8px            | 
+   8     | 0.64   | 51.2px            | (Shout)
+   9     | 0.72   | 57.6px            | 
+   10    | 0.84   | 67.2px            | (Boost)
+   11    | 0.96   | 76.8px            | (Redline)
 */
+
   --gauge-1: 0.08;
   --gauge-2: 0.16;
   --gauge-3: 0.24;
@@ -175,81 +219,91 @@ button {
   --gauge-10: 0.84;
   --gauge-11: 0.96;
 
-  /* WORLD ANCHORS: The Raw Ingredients */
+  /* WORLD ANCHORS */
   --sys-world-base-mobile: 3rem; /* 48px */
   --sys-world-base-desktop: 5rem; /* 80px */
-
-  /* THE SWITCH: Defaulting to Mobile First */
   --sys-world-base-dynamic: var(--sys-world-base-mobile);
+}
 
-  /* ================================================= */
-  /* === MOBILE RECALIBRATION (The Brain)          === */
-  /* ================================================= */
-  @media screen and (min-width: 810px) {
-    :root {
-      --sys-world-base-dynamic: var(--sys-world-base-desktop);
-    }
+/* --- A.3 RECALIBRATION --- */
+@media screen and (min-width: 810px) {
+  :root {
+    --sys-world-base-dynamic: var(--sys-world-base-desktop);
   }
+}
 
-  /* ================================================= */
-  /* === 3. THE SWITCHBOARD (Semantic Roles)       === */
-  /* ================================================= */
+/* ================================================= */
+/* === [B] THE SWITCHBOARDS (Semantic Roles)     === */
+/* ================================================= */
 
-  /* ROLES: DO NOT USE IN COMPONENT CSS. USE DERIVED TOOLS ONLY. */
-
+/* --- B.1 COLOR ROLES --- */
+:root {
   --sys-role-primary-rgb: var(--pigment-pine-rgb);
   --sys-role-accent-rgb: var(--pigment-violet-rgb);
   --sys-role-action-rgb: var(--pigment-magenta-rgb);
   --sys-role-canvas-rgb: var(--pigment-white-rgb);
-
-  /* The Fixed Anchor: Used for solid type and stable borders */
   --sys-role-neutral-rgb: var(--pigment-charcoal-rgb);
-
-  /* The Fluid Floor: Used for the Alpha Matrix and Depth */
   --sys-role-void-rgb: var(--pigment-black-rgb);
 
-  --sys-role-error-rgb: var(--pigment-crimson-rgb);
-  --sys-role-warning-rgb: var(--pigment-amber-rgb);
-  --sys-role-info-rgb: var(--pigment-sky-rgb);
-  --sys-role-success-rgb: var(--pigment-pine-rgb);
+  /* --- B.2 DERIVED SOLIDS --- */
 
-  /* ================================================= */
-  /* === 4. DERIVED TOOLS (The Solids)             === */
-  /* ================================================= */
   --sys-color-primary: rgb(var(--sys-role-primary-rgb));
   --sys-color-accent: rgb(var(--sys-role-accent-rgb));
   --sys-color-action: rgb(var(--sys-role-action-rgb));
   --sys-color-canvas: rgb(var(--sys-role-canvas-rgb));
   --sys-color-neutral: rgb(var(--sys-role-neutral-rgb));
-  --sys-color-error: rgb(var(--sys-role-error-rgb));
-  --sys-color-warning: rgb(var(--sys-role-warning-rgb));
-  --sys-color-info: rgb(var(--sys-role-info-rgb));
-  --sys-color-success: rgb(var(--sys-role-success-rgb));
+  --sys-color-void: rgb(var(--sys-role-void-rgb));
+
+  /* --- B.3 PHONIC TYPE SYSTEM --- */
+
+  /* REDLINE: Maximum contrast for critical alerts. Black (10, 10, 10) */
+  --sys-color-type-redline: rgb(var(--sys-color-void));
+  /* SHOUT: High contrast for emphasis without the severity of redline. Charcoal (51, 51, 51*/
+  --sys-color-type-shout: rgb(var(--sys-color-neutral));
+  /* TALK: 90% Black (10, 10, 10) mixed with 10% White (255, 255, 255) */
+  --sys-color-type-talk: color-mix(in srgb, var(--sys-color-void), var(--sys-color-canvas) 10%);
+  /* WHISPER: 85% Black (10, 10, 10) mixed with 15% White (255, 255, 255) */
+  --sys-color-type-whisper: color-mix(in srgb, var(--sys-color-void), var(--sys-color-canvas) 15%);
+  /* Muted: 80% Black (10, 10, 10) mixed with 20% White (255, 255, 255) */
+  --sys-color-type-muted: color-mix(in srgb, var(--sys-color-void), var(--sys-color-canvas) 20%);
 
   /* ================================================= */
-  /* === 7. PHONIC TYPE SYSTEM (The Baked Solids)  === */
+  /* === [D] KINETIC GEOMETRY (Unabridged 1-11)    === */
   /* ================================================= */
 
-  /* REDLINE: Peak contrast using Black pigment */
-  --sys-color-type-redline: rgb(var(--pigment-black-rgb));
+  /* --- D.1 SPACE (Dynamic Base Scaling) --- */
 
-  /* SHOUT: The high-end of your Charcoal pigment */
-  --sys-color-type-shout: rgb(var(--pigment-charcoal-rgb));
+  --sys-space-1: calc(var(--gauge-1) * var(--sys-world-base-dynamic)); /* 6.4px  */
+  --sys-space-2: calc(var(--gauge-2) * var(--sys-world-base-dynamic)); /* 12.8px */
+  --sys-space-3: calc(var(--gauge-3) * var(--sys-world-base-dynamic)); /* 19.2px */
+  --sys-space-4: calc(var(--gauge-4) * var(--sys-world-base-dynamic)); /* 25.6px */
+  --sys-space-5: calc(var(--gauge-5) * var(--sys-world-base-dynamic)); /* 32.0px */
+  --sys-space-6: calc(var(--gauge-6) * var(--sys-world-base-dynamic)); /* 38.4px */
+  --sys-space-7: calc(var(--gauge-7) * var(--sys-world-base-dynamic)); /* 44.8px */
+  --sys-space-8: calc(var(--gauge-8) * var(--sys-world-base-dynamic)); /* 51.2px */
+  --sys-space-9: calc(var(--gauge-9) * var(--sys-world-base-dynamic)); /* 57.6px */
+  --sys-space-10: calc(var(--gauge-10) * var(--sys-world-base-dynamic)); /* 67.2px */
+  --sys-space-11: calc(var(--gauge-11) * var(--sys-world-base-dynamic)); /* 76.8px */
 
-  /* TALK: Charcoal baked at a high gauge against the canvas */
-  --sys-color-type-talk: color-mix(in srgb, var(--sys-color-neutral), var(--sys-color-canvas) 20%);
+  /* --- D.2 RADIUS (Static 32px Radius Base) --- */
 
-  /* WHISPER: Charcoal baked at a mid gauge */
-  --sys-color-type-whisper: color-mix(in srgb, var(--sys-color-neutral), var(--sys-color-canvas) 45%);
-
-  /* MUTED: The minimum accessible threshold */
-  --sys-color-type-muted: color-mix(in srgb, var(--sys-color-neutral), var(--sys-color-canvas) 65%);
+  --sys-radius-1: calc(var(--gauge-1) * 2rem); /* 2.5px  */
+  --sys-radius-2: calc(var(--gauge-2) * 2rem); /* 5.1px  */
+  --sys-radius-3: calc(var(--gauge-3) * 2rem); /* 7.6px  */
+  --sys-radius-4: calc(var(--gauge-4) * 2rem); /* 10.2px */
+  --sys-radius-5: calc(var(--gauge-5) * 2rem); /* 12.8px */
+  --sys-radius-6: calc(var(--gauge-6) * 2rem); /* 15.3px */
+  --sys-radius-7: calc(var(--gauge-7) * 2rem); /* 17.9px */
+  --sys-radius-8: calc(var(--gauge-8) * 2rem); /* 20.4px */
+  --sys-radius-9: calc(var(--gauge-9) * 2rem); /* 23.0px */
+  --sys-radius-10: calc(var(--gauge-10) * 2rem); /* 26.8px */
+  --sys-radius-11: 100px; /* Pill */
 
   /* ================================================= */
-  /* === 5. THE ALPHA MATRIX (Unabridged 1-11)     === */
+  /* === [E] THE ALPHA MATRIX (Unabridged 1-11)     === */
   /* ================================================= */
 
-  /* PRIMARY (PINE) */
+  /* PRIMARY (PINE) 1-11 */
   --sys-color-primary-alpha-1: rgba(var(--sys-role-primary-rgb), var(--gauge-1));
   --sys-color-primary-alpha-2: rgba(var(--sys-role-primary-rgb), var(--gauge-2));
   --sys-color-primary-alpha-3: rgba(var(--sys-role-primary-rgb), var(--gauge-3));
@@ -262,7 +316,7 @@ button {
   --sys-color-primary-alpha-10: rgba(var(--sys-role-primary-rgb), var(--gauge-10));
   --sys-color-primary-alpha-11: rgba(var(--sys-role-primary-rgb), var(--gauge-11));
 
-  /* ACCENT (VIOLET) */
+  /* ACCENT (VIOLET) 1-11 */
   --sys-color-accent-alpha-1: rgba(var(--sys-role-accent-rgb), var(--gauge-1));
   --sys-color-accent-alpha-2: rgba(var(--sys-role-accent-rgb), var(--gauge-2));
   --sys-color-accent-alpha-3: rgba(var(--sys-role-accent-rgb), var(--gauge-3));
@@ -275,7 +329,7 @@ button {
   --sys-color-accent-alpha-10: rgba(var(--sys-role-accent-rgb), var(--gauge-10));
   --sys-color-accent-alpha-11: rgba(var(--sys-role-accent-rgb), var(--gauge-11));
 
-  /* ACTION (MAGENTA) */
+  /* ACTION (MAGENTA) 1-11 */
   --sys-color-action-alpha-1: rgba(var(--sys-role-action-rgb), var(--gauge-1));
   --sys-color-action-alpha-2: rgba(var(--sys-role-action-rgb), var(--gauge-2));
   --sys-color-action-alpha-3: rgba(var(--sys-role-action-rgb), var(--gauge-3));
@@ -288,18 +342,18 @@ button {
   --sys-color-action-alpha-10: rgba(var(--sys-role-action-rgb), var(--gauge-10));
   --sys-color-action-alpha-11: rgba(var(--sys-role-action-rgb), var(--gauge-11));
 
-  /* VOID (ATMOSHPHERE) */
-  --sys-color-void-alpha-1: rgba(var(--sys-role-void-rgb), var(--gauge-1)); /* Muted */
-  --sys-color-void-alpha-2: rgba(var(--sys-role-void-rgb), var(--gauge-2)); /* Whisper */
-  --sys-color-void-alpha-3: rgba(var(--sys-role-void-rgb), var(--gauge-3)); /* Standard */
-  --sys-color-void-alpha-4: rgba(var(--sys-role-void-rgb), var(--gauge-4)); /* Talk */
+  /* VOID (ATMOSPHERE) 1-11 */
+  --sys-color-void-alpha-1: rgba(var(--sys-role-void-rgb), var(--gauge-1));
+  --sys-color-void-alpha-2: rgba(var(--sys-role-void-rgb), var(--gauge-2));
+  --sys-color-void-alpha-3: rgba(var(--sys-role-void-rgb), var(--gauge-3));
+  --sys-color-void-alpha-4: rgba(var(--sys-role-void-rgb), var(--gauge-4));
   --sys-color-void-alpha-5: rgba(var(--sys-role-void-rgb), var(--gauge-5));
   --sys-color-void-alpha-6: rgba(var(--sys-role-void-rgb), var(--gauge-6));
   --sys-color-void-alpha-7: rgba(var(--sys-role-void-rgb), var(--gauge-7));
-  --sys-color-void-alpha-8: rgba(var(--sys-role-void-rgb), var(--gauge-8)); /* Shout */
+  --sys-color-void-alpha-8: rgba(var(--sys-role-void-rgb), var(--gauge-8));
   --sys-color-void-alpha-9: rgba(var(--sys-role-void-rgb), var(--gauge-9));
-  --sys-color-void-alpha-10: rgba(var(--sys-role-void-rgb), var(--gauge-10)); /* Boost */
-  --sys-color-void-alpha-11: rgba(var(--sys-role-void-rgb), var(--gauge-11)); /* Redline */
+  --sys-color-void-alpha-10: rgba(var(--sys-role-void-rgb), var(--gauge-10));
+  --sys-color-void-alpha-11: rgba(var(--sys-role-void-rgb), var(--gauge-11));
 
   /* CANVAS (LIFT) */
   --sys-color-canvas-alpha-1: rgba(var(--sys-role-canvas-rgb), var(--gauge-1));
@@ -315,173 +369,62 @@ button {
   --sys-color-canvas-alpha-11: rgba(var(--sys-role-canvas-rgb), var(--gauge-11));
 
   /* ================================================= */
-  /* === 6. ATMOSPHERICS (Depth & Glow Rig)        === */
+  /* === [C] ATMOSPHERICS (Depth & Glow Rig)       === */
   /* ================================================= */
 
   /* THE HALO: 1.5px separator + multi-layer violet bloom */
-  --sys-shadow-halo-standard: 0 0 0 1.5px var(--sys-color-canvas-alpha-10), 0 0.625rem 1.875rem rgba(0, 0, 0, 0.15),
+  --sys-shadow-halo-standard:
+    0 0 0 1.5px var(--sys-color-canvas-alpha-10), 0 0.625rem 1.875rem rgba(0, 0, 0, 0.15),
     0 0 0.9375rem var(--sys-color-accent-alpha-9), 0 0 3.125rem var(--sys-color-accent-alpha-3);
 
   /* THE MODAL: Depth layers using Void-4 and Void-8 */
-  --sys-shadow-depth-modal: 0 0.5rem 2rem var(--sys-color-void-alpha-4),
-    /* Talk Shadow */ 0 1.25rem 5rem var(--sys-color-void-alpha-8); /* Shout Shadow */
+  --sys-shadow-depth-modal:
+    0 0.5rem 2rem var(--sys-color-void-alpha-4), /* Talk Shadow */ 0 1.25rem 5rem var(--sys-color-void-alpha-8); /* Shout Shadow */
 
   /* THE FOCUS: Safety gap + Primary Kinetic glow */
   --sys-shadow-focus-primary: 0 0 0 3px var(--sys-color-canvas), 0 0 0 6px var(--sys-color-primary-alpha-4);
 
   /* THE MUFFLER TOKENS: Refined containment for interactive elements */
   --sys-shadow-muffler-action: 0 0 0.5rem var(--sys-color-action-alpha-4), 0 0 1rem var(--sys-color-action-alpha-2);
-
   --sys-shadow-muffler-void: 0 0 0.5rem var(--sys-color-void-alpha-4), 0 0 1rem var(--sys-color-void-alpha-2);
 
   /* BAKE: On-Canvas Solids (Opacity flattened against white) */
-  --sys-color-primary-on-canvas-1-bg: linear-gradient(
-      var(--sys-color-primary-alpha-1),
-      var(--sys-color-primary-alpha-1)
-    ),
-    var(--sys-color-canvas);
+  --sys-color-primary-on-canvas-1-bg:
+    linear-gradient(var(--sys-color-primary-alpha-1), var(--sys-color-primary-alpha-1)), var(--sys-color-canvas);
 
   /* ================================================= */
-  /* === 7. KINETIC SPACE (1-11 Unabridged)         === */
+  /* === [F] SEMANTIC ALIASES (The Handshake)      === */
   /* ================================================= */
-  /* Definition: Gauge * 5rem (80px base)              */
-  /* ------------------------------------------------- */
-  --sys-space-1: calc(var(--gauge-1) * 5rem); /* 6.4px  (Whisper)  */
-  --sys-space-2: calc(var(--gauge-2) * 5rem); /* 12.8px (Talk)     */
-  --sys-space-3: calc(var(--gauge-3) * 5rem); /* 19.2px (Standard) */
-  --sys-space-4: calc(var(--gauge-4) * 5rem); /* 25.6px (Shout)    */
-  --sys-space-5: calc(var(--gauge-5) * 5rem); /* 32.0px            */
-  --sys-space-6: calc(var(--gauge-6) * 5rem); /* 38.4px            */
-  --sys-space-7: calc(var(--gauge-7) * 5rem); /* 44.8px            */
-  --sys-space-8: calc(var(--gauge-8) * 5rem); /* 51.2px (Boost)    */
-  --sys-space-9: calc(var(--gauge-9) * 5rem); /* 57.6px            */
-  --sys-space-10: calc(var(--gauge-10) * 5rem); /* 67.2px            */
-  --sys-space-11: calc(var(--gauge-11) * 5rem); /* 76.8px (Redline)  */
+  /* PURPOSE: 
+   This section maps "Universal Physics" to "Intent." 
+   It serves as the master control panel for the site's 'vibe'.
 
-  /* ================================================= */
-  /* === 8. KINETIC RADIUS (1-11 Unabridged)       === */
-  /* ================================================= */
-  /* Definition: Gauge * 2rem (32px base) */
-  --sys-radius-1: calc(var(--gauge-1) * 2rem);
-  --sys-radius-2: calc(var(--gauge-2) * 2rem);
-  --sys-radius-3: calc(var(--gauge-3) * 2rem);
-  --sys-radius-4: calc(var(--gauge-4) * 2rem);
-  --sys-radius-5: calc(var(--gauge-5) * 2rem);
-  --sys-radius-6: calc(var(--gauge-6) * 2rem);
-  --sys-radius-7: calc(var(--gauge-7) * 2rem);
-  --sys-radius-8: calc(var(--gauge-8) * 2rem);
-  --sys-radius-9: calc(var(--gauge-9) * 2rem);
-  --sys-radius-10: calc(var(--gauge-10) * 2rem);
-  --sys-radius-11: 100px; /* Redline Pill */
+   HOW TO USE:
+   - Assign a Primitive (e.g., --sys-space-4) to a Semantic Role.
+   - Use these tokens in your component CSS instead of the Primitives.
+   - To update the layout globally, change the assignment here.
 
-  /* ================================================= */
-  /* === 9. SEMANTIC ALIASES                       === */
-  /* ================================================= */
+   DEFAULTS:
+   The tokens below are a 'Starter Set' curated for optimal Gestalt 
+   grouping and mobile touch-safety.
 
-  /* needs review */
+   STRATEGIC GOVERNANCE:
+   - BE CAUTIOUS: Only create a token here if you find yourself 
+     using the same Primitive for a specific UI role multiple times.
+   - DETERMINATION: Ask "If I change a Button, should the Card change too?"
+   - WHY: Over-aliasing creates "Token Fatigue" and makes the 
+     system harder to learn for humans and AI agents.
+==================================================== */
+
   --sys-space-body-base: var(--sys-space-2);
-  --sys-space-cta-v: var(--sys-space-2);
-  --sys-space-cta-h: var(--sys-space-4);
+  --sys-spacing-cta-v: var(--sys-space-2);
+  --sys-spacing-cta-h: var(--sys-space-4);
   --sys-radius-button: var(--sys-radius-3);
   --sys-radius-modal: var(--sys-radius-8);
 
-  /* ================================================= */
-  /* === [V20] KINETIC TYPOGRAPHY SWITCHBOARD      === */
-  /* ================================================= */
-
-  /* FONT FAMILIES (Maintained) */
-  --font-display: "Poppins", sans-serif;
-  --font-body: "Inter", sans-serif;
-  --font-quote: "Playfair Display", serif;
-
-  /* ================================================= */
-  /* === [V21] KINETIC TYPOGRAPHY: GROWTH SCALE    === */
-  /* ================================================= */
-
-  /* Hero: Gauge 10 (48px @3rem base) -> Gauge 11 (96px @6.25rem base) */
-  --sys-type-hero: clamp(3rem, 10vw, 6rem);
-
-  /* Display: Gauge 8 (31px @3rem base) -> Gauge 8 (64px @5rem base) */
-  --sys-type-display: clamp(2rem, 6vw, 4rem);
-
-  /* Headline: Gauge 5 (19.2px @3rem base) -> Gauge 5 (40px @5rem base) */
-  --sys-type-headline: clamp(1.2rem, 4vw, 2.5rem);
-
-  /* Title: Gauge 4 (15.3px @3rem base) -> Gauge 3 (19.2px @5rem base) */
-  --sys-type-title: clamp(1rem, 2.5vw, 1.25rem);
-
-  /* Body: 16px Baseline -> 18px Editorial */
-  --sys-type-body: clamp(1rem, 1.25vw, 1.125rem);
-
-  /* Caption: Gauge 2 (7.6px @3rem base) -> Gauge 2 (12.8px @5rem base) */
-  --sys-type-caption: clamp(0.75rem, 1vw, 0.875rem);
-
-  /* ================================================= */
-  /* === [V21] SEMANTIC LAYOUT: GAUGE SYNC         === */
-  /* ================================================= */
-
-  /* Gutter: 16px (Gauge 2) */
   --sys-spacing-gutter: var(--sys-space-2);
-
-  /* Section Vertical: 64px (Gauge 8) */
   --sys-spacing-section-v: var(--sys-space-8);
-
-  /* Hero Vertical: 80px (Gauge 10) */
   --sys-spacing-hero-v: var(--sys-space-10);
-
-  /* Button/CTA Logic: 16px V / 24px H */
-  --sys-spacing-cta-v: var(--sys-space-2);
-  --sys-spacing-cta-h: var(--sys-space-4);
-
-  /* RHYTHM & FLOW */
-  --sys-line-height-tight: 1.1;
-  --sys-line-height-standard: 1.4;
-  --sys-line-height-reading: 1.6;
-
-  --sys-letter-spacing-wide: 0.05rem;
-  --sys-letter-spacing-standard: 0.02em;
-  --sys-letter-spacing-display: 0; /* Pure Neutral for Display */
-  --sys-letter-spacing-tight: -0.015em;
-
-  /* ================================================= */
-  /* == [V25] STESS TEST QUICK FIX MOBILE ADJUSTMENTS == */
-  /* ================================================= */
-
-  /* gauge calibration under review*/
-  @media screen and (max-width: 809px) {
-    :root {
-      /* MOBILE RECALIBRATION (3rem / 48px Base) */
-      /* This keeps your Gauges (0.08, 0.16, etc) but applies them 
-       to a smaller 'World Size' so everything stays proportional. */
-      --sys-space-1: calc(var(--gauge-1) * 3rem); /* ~4px  */
-      --sys-space-2: calc(var(--gauge-2) * 3rem); /* ~8px  */
-      --sys-space-3: calc(var(--gauge-3) * 3rem); /* ~12px */
-      --sys-space-4: calc(var(--gauge-4) * 3rem); /* ~15px */
-      --sys-space-5: calc(var(--gauge-5) * 3rem); /* ~20px */
-      --sys-space-6: calc(var(--gauge-6) * 3rem); /* ~23px */
-      --sys-space-7: calc(var(--gauge-7) * 3rem); /* ~27px */
-      --sys-space-8: calc(var(--gauge-8) * 3rem); /* ~31px */
-      --sys-space-9: calc(var(--gauge-9) * 3rem); /* ~35px */
-      --sys-space-10: calc(var(--gauge-10) * 3rem); /* ~40px */
-      --sys-space-11: calc(var(--gauge-11) * 3rem); /* ~46px */
-    }
-
-    /* FORCE BOX-SIZING SAFETY */
-    * {
-      max-width: 100vw;
-      overflow-wrap: break-word; /* Prevents long URLs/words from pushing the wall out */
-    }
-
-    /* CARD OVERFLOW FIX */
-    .feature-block {
-      padding-left: var(--sys-space-3); /* 16px is the mobile 'Sweet Spot' */
-      padding-right: var(--sys-space-3);
-    }
-
-    .feature-block__grid {
-      gap: var(--sys-space-4); /* Tighten the stack */
-    }
-  }
 }
 
 /* ================================================= */
@@ -584,7 +527,9 @@ body::before {
   pointer-events: none;
 
   /* THE LIQUID DAMPENER */
-  transition: --sunX 2.5s cubic-bezier(0.15, 1, 0.3, 1), --sunY 2.5s cubic-bezier(0.15, 1, 0.3, 1);
+  transition:
+    --sunX 2.5s cubic-bezier(0.15, 1, 0.3, 1),
+    --sunY 2.5s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
 /* The 'Spine' of the site */
@@ -676,7 +621,9 @@ header > .navbar::after {
 
 .logo__suffix {
   color: var(--sys-color-action); /* AUDIT: Synced to Action (Magenta) */
-  transition: color 0.2s ease, text-shadow 0.2s ease;
+  transition:
+    color 0.2s ease,
+    text-shadow 0.2s ease;
 }
 
 .navbar__logo:hover {
@@ -686,7 +633,9 @@ header > .navbar::after {
 .navbar__logo:hover .logo__suffix {
   color: var(--sys-color-canvas);
   /* AUDIT: Using Role-RGB + Engine Gauges for Bloom */
-  text-shadow: 0 0 5px var(--sys-color-action-alpha-10), 0 0 15px var(--sys-color-action-alpha-5);
+  text-shadow:
+    0 0 5px var(--sys-color-action-alpha-10),
+    0 0 15px var(--sys-color-action-alpha-5);
 }
 
 /* 1. THE TOGGLE (Hamburger - JS Target) */
@@ -700,7 +649,9 @@ header > .navbar::after {
   cursor: pointer;
   text-decoration: none;
   position: relative;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
   margin-left: auto;
   order: 2;
 }
@@ -769,7 +720,10 @@ header > .navbar::after {
   padding: var(--sys-space-2) var(--sys-space-4);
   display: block;
   /* ENGINE PURE: Swap 'all' for explicit targets */
-  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
   position: relative;
 }
 
@@ -893,14 +847,20 @@ header > .navbar::after {
   /* ATMOSPHERIC DEPTH: Swapped Charcoal for Pine-pigmented shadows.
      This ensures the 'gutters' between cards feel like deep water 
      rather than muddy ink, preserving the 'Light Gap' effect. */
-  box-shadow: 0 10px 30px -15px rgba(var(--pigment-pine-rgb), var(--gauge-3)),
+  box-shadow:
+    0 10px 30px -15px rgba(var(--pigment-pine-rgb), var(--gauge-3)),
     0 5px 10px -5px rgba(var(--pigment-pine-rgb), var(--gauge-1));
 
   /* KINETIC PHYSICS: Smooth transition for the 'Ignition' effect on hover */
-  transition: transform 0.4s cubic-bezier(0.15, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.15, 1, 0.3, 1),
+  transition:
+    transform 0.4s cubic-bezier(0.15, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.15, 1, 0.3, 1),
     box-shadow 0.4s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
+.project-archive .feature-block {
+  margin-bottom: var(--sys-space-6); /* larger size to make project cards more distinct */
+}
 /* THE HANDSHAKE: Transition from Hero to the first card */
 .feature-block--first {
   margin-top: var(--sys-space-2);
@@ -918,7 +878,8 @@ header > .navbar::after {
   /* ALT SHADOW: We push the Gauge to 6 (48%) and 3 (24%) here.
      Since the background is already Pine-tinted, we need a denser
      shadow DNA to create visible separation from the floodlight. */
-  box-shadow: 0 10px 30px -15px rgba(var(--pigment-pine-rgb), var(--gauge-6)),
+  box-shadow:
+    0 10px 30px -15px rgba(var(--pigment-pine-rgb), var(--gauge-6)),
     0 5px 10px -5px rgba(var(--pigment-pine-rgb), var(--gauge-3));
 
   /* Increased border-alpha for better definition on tinted background */
@@ -934,7 +895,8 @@ header > .navbar::after {
   border-color: var(--sys-color-primary-alpha-4);
 
   /* SHADOW EXPANSION: Bloom effect using Primary (Pine) DNA */
-  box-shadow: 0 20px 40px -20px rgba(var(--pigment-pine-rgb), var(--gauge-5)),
+  box-shadow:
+    0 20px 40px -20px rgba(var(--pigment-pine-rgb), var(--gauge-5)),
     0 10px 15px -10px rgba(var(--pigment-pine-rgb), var(--gauge-2));
 }
 
@@ -987,38 +949,73 @@ header > .navbar::after {
   align-items: center;
 }
 
-/* --- 4. CONTENT --- */
+/* --- 4. CONTENT (RESONANT REFACTOR) --- */
+
+/* 4a. SHARED STRUCTURAL LOGIC (The "Dry" Layout) */
+.feature-block__intro-text,
+.feature-block__text {
+  /* The Triple Lock: Constraint & Consistency */
+  max-width: min(100%, 65ch, 31.25rem);
+  margin-bottom: var(--sys-space-4); /* Increased for 1.414 rhythm */
+}
+
+/* 4b. PHONIC ROLES (The Individual "Voices") */
+
 .feature-block__title--column {
-  font-family: var(--font-display);
-  font-size: var(--sys-type-headline); /* KINETIC TYPE SYNC */
-  line-height: var(--sys-line-height-tight);
+  font-family: var(--font-heading);
+  font-size: var(--fs-t3) !important;
+  line-height: var(--lh-display); /* Using the Optical Gem 1.1-1.2 */
+  letter-spacing: var(--ls-display); /* -0.02em */
   color: var(--sys-color-primary);
-  margin-bottom: var(--sys-space-5); /* Rhythmic 32px spacing */
+  margin-bottom: var(--sys-space-5);
   max-width: 26ch;
 }
 
-/* Storyteller Override */
-.feature-block--storyteller .feature-block__title--column {
-  text-align: center;
+.feature-block__intro-text {
+  /* THE HANDSHAKE: Poppins wt600 */
+  font-family: var(--font-heading);
+  font-size: var(--fs-t6) !important;
+  font-weight: 600;
+  line-height: var(--lh-lead); /* 1.4 Bridge */
+  letter-spacing: var(--ls-heading); /* -0.015em Squeeze */
+  color: var(--sys-color-type-whisper);
 }
 
-.feature-block__intro-text {
+.feature-block__intro-text strong {
+  /* THE DIAGNOSIS (Highlight) */
+  color: var(--sys-color-type-talk); /* PINE: The Brand Signature */
+}
+
+.feature-block__text {
+  /* THE DATA: Inter wt400 */
   font-family: var(--font-body);
-  font-size: var(--sys-type-body); /* KINETIC TYPE SYNC */
-  line-height: var(--sys-line-height-reading);
-  letter-spacing: var(--letter-spacing-standard);
-  max-width: 31.25rem;
-  margin-bottom: var(--sys-space-3);
+  font-size: var(--fs-t7) !important;
+  font-weight: 400;
+  line-height: var(--lh-body); /* 1.6 Breathability */
+  letter-spacing: var(--ls-normal); /* 0 Neutral DNA */
+  color: var(--sys-color-type-shout);
 }
 
 .feature-block__jump-link {
-  font-family: "Poppins", sans-serif;
-  font-size: var(--font-size-title);
-  line-height: var(--line-height-title);
-  letter-spacing: var(--letter-spacing-title);
+  /* NAVIGATIONAL LABEL: Micro-Engineered */
+  font-family: var(--font-heading);
+  font-size: var(--fs-t10); /* Smaller, more 'Meta' */
+  line-height: 1;
+  letter-spacing: var(--ls-micro); /* 0.05em tracked out */
+  text-transform: uppercase; /* Engineering clarity */
   color: var(--sys-color-primary);
-  margin-bottom: 1rem;
-  order: 4; /* SACRED ORDER: Per Engineering Notes */
+  margin-bottom: var(--sys-space-4);
+}
+
+.feature-block__note--column {
+  /* THE FOOTNOTE */
+  font-family: var(--font-body);
+  font-size: var(--fs-t8) !important;
+  line-height: var(--lh-small);
+  color: var(--sys-color-type-shout);
+  border-top: 1px solid var(--sys-color-primary-alpha-2);
+  padding-top: var(--sys-space-4);
+  margin-top: var(--sys-space-5);
 }
 
 /* --- 5. QUOTES & AUTHORS --- */
@@ -1029,13 +1026,17 @@ header > .navbar::after {
 
 .feature-block__quote-box {
   background-color: var(--sys-color-primary-alpha-1);
+  color: var(--sys-color-type-shout);
   padding: var(--sys-space-5) var(--sys-space-6); /* Gauge 5x6 balance */
   border-left: 0.25rem solid var(--sys-color-accent-alpha-10);
   border-right: none;
   border-radius: 0.5rem;
-  font-family: var(--font-quote);
-  font-size: var(--sys-type-title); /* Balanced Quote Scale */
+  font-family: var(--font-story);
+  letter-spacing: var(--ls-story);
+  line-height: var(--lh-story);
+  font-size: var(--fs-t6); /* Balanced Quote Scale */
   font-style: italic;
+  font-weight: 400;
   width: 100%;
   text-align: left !important;
 }
@@ -1047,13 +1048,13 @@ header > .navbar::after {
 .feature-block__author {
   font-family: var(--font-body);
   text-align: right; /* Standard Signature Position */
-  margin-top: 1rem;
   font-size: var(--sys-type-caption); /* KINETIC TYPE SYNC */
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--sys-color-primary);
   width: 100%;
+  margin-top: var(--sys-space-3);
   padding-right: var(--sys-space-2) !important;
 }
 
@@ -1145,15 +1146,16 @@ header > .navbar::after {
 /* ================================================= */
 
 .hero__title {
-  font-family: var(--font-display);
-  font-size: var(--sys-type-hero); /* DNA: 3rem (48px) to 6rem (96px) */
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: var(--fs-t1); /* Tier 1: Hero Main */
+  font-weight: 900;
   color: var(--sys-color-canvas);
   text-align: center;
 
   /* UPDATED: Neutral spacing to stop overlap */
-  letter-spacing: var(--sys-letter-spacing-display);
-  line-height: var(--sys-line-height-tight);
+  letter-spacing: 0.03em; /* Increased for 900wt All-Caps resonance */
+  line-height: var(--lh-display-hero);
+  text-transform: uppercase;
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern" 1;
 
@@ -1165,7 +1167,9 @@ header > .navbar::after {
   margin-bottom: var(--sys-space-10);
 
   /* GLOW: Preserving your exact 'Unified Glow' */
-  text-shadow: 0 0 1.25rem rgba(var(--sys-role-accent-rgb), 0.6), 0 0 2.5rem rgba(var(--sys-role-action-rgb), 0.3),
+  text-shadow:
+    0 0 1.25rem rgba(var(--sys-role-accent-rgb), 0.6),
+    0 0 2.5rem rgba(var(--sys-role-action-rgb), 0.3),
     0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
 }
 
@@ -1178,13 +1182,21 @@ header > .navbar::after {
   text-align: center;
 
   /* KINETIC: Using the Title Scale for the Subtitle */
-  font-size: var(--sys-type-title);
-  line-height: var(--sys-line-height-standard);
+  font-size: var(--fs-t3) !important; /* DNA: 1.25rem (20px) to 2.25rem (36px) */
+  font-weight: 600;
+  line-height: var(--lh-display);
+  letter-spacing: -0.01em; /* Slight tightening for the large T3 scale */
 
   /* GAUGE SYNC: Replacing the parasitic 3rem (48px) with Gauge 6 */
   margin-bottom: var(--sys-space-6);
+  max-width: 35ch; /* Forces a cleaner 2 or 3 line "stack" on mobile */
+  margin-inline: auto; /* Centers the stack */
 }
-
+.hero__subtitle strong {
+  font-weight: 900; /* 900 to match the Hero Title's 'DNA' */
+  letter-spacing: var(--ls-display); /* Tighter tracking for heavier weights */
+  color: var(--sys-color-canvas);
+}
 /* 2. ACCESSIBILITY */
 .sr-only {
   position: absolute;
@@ -1273,7 +1285,10 @@ header > .navbar::after {
 
   /* PERFORMANCE TRANSITION */
   /* ENGINE SYNC: Snappier 0.2s to match Navbars */
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease, box-shadow 0.2s ease,
+  transition:
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
     border-color 0.2s ease;
 
   /* Initial state: Clean and flat */
@@ -1368,7 +1383,10 @@ header > .navbar::after {
 
   /* STABLE PHYSICS: Anchored without swelling */
   transform: translateZ(0);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 
   box-shadow: var(--sys-shadow-muffler-void);
   will-change: background-color, box-shadow;
@@ -1416,8 +1434,12 @@ header > .navbar::after {
   border-radius: var(--sys-radius-11);
   cursor: pointer;
   transform: scale(1);
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease, width 0.2s ease,
-    border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.2s ease,
+    width 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 /* THE ACTIVE STATE: Refined & Contained */
@@ -1455,12 +1477,12 @@ header > .navbar::after {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--sys-space-cta-v) var(--sys-space-cta-h);
+  padding: 0.625rem 2.5rem;
   border-radius: var(--sys-radius-button);
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 1.1rem;
-  letter-spacing: var(--letter-spacing-cta);
+  letter-spacing: 0.05rem;
   text-decoration: none;
   border: 1px solid transparent;
   cursor: pointer;
@@ -1713,6 +1735,20 @@ header > .navbar::after {
     width: 50%;
   }
 
+  .feature-block__note--column {
+    /* We keep text left-aligned for Jakob's Law/readability, 
+           but we shift the block's physical 'anchor' to the right edge */
+    margin-left: auto;
+    margin-right: 0;
+    margin-top: var(--sys-space-3);
+    text-align: left; /* Reading stays natural */
+    border-top: 1px solid var(--sys-color-primary-alpha-1); /* Subtle divider */
+
+    /* Optional: Change the border-top to a border-right to create a vertical 'Vector' */
+    border-top: 1px solid var(--sys-color-primary-alpha-2); /* Subtle divider */
+    padding-top: var(--sys-space-3);
+  }
+
   /* ZIG-ZAG LOGIC (Desktop): Border always closest to image */
   .feature-block:nth-of-type(odd) .feature-block__quote-box {
     border-left: none;
@@ -1794,7 +1830,9 @@ header > .navbar::after {
   box-shadow: var(--shadow-modal);
   opacity: 0;
   transform: scale(0.95);
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Kinetic Pop */
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Kinetic Pop */
 }
 
 /* KINETIC STATE: OPEN */
@@ -1827,7 +1865,9 @@ header > .navbar::after {
   border: 2px solid var(--sys-color-primary); /* Pine Accent Rim */
   padding: 1.5rem;
   /* BOOSTED VIOLET GLOW (Hero Sync) */
-  box-shadow: 0 0 10px rgba(var(--sys-color-accent), 0.8), 0 0 25px rgba(var(--sys-color-accent), 0.6),
+  box-shadow:
+    0 0 10px rgba(var(--sys-color-accent), 0.8),
+    0 0 25px rgba(var(--sys-color-accent), 0.6),
     0 0 50px rgba(var(--sys-color-accent), 0.3);
   font-family: var(--font-body); /* Force Sans-Serif */
   transition: background-image 0.5s ease-in-out; /* Atmospheric Smoothness */
@@ -1838,7 +1878,7 @@ header > .navbar::after {
   text-align: center;
   margin-bottom: 0.5rem; /* Reduced for the rail */
   color: var(--sys-color-canvas); /* White */
-  font-family: var(--font-display); /* Poppins Sync */
+  font-family: var(--font-heading); /* Poppins Sync */
   position: relative;
 }
 
@@ -1996,7 +2036,9 @@ header > .navbar::after {
   border-right: 0.2em solid var(--sys-color-primary);
 
   /* THE CRAWL: Restored as the primary behavior */
-  animation: typing 1.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  animation:
+    typing 1.5s steps(40, end),
+    blink-caret 0.75s step-end infinite;
 }
 
 /* 2. THE MOBILE ADAPTATION: (The Safety Net) */
@@ -2101,10 +2143,13 @@ header > .navbar::after {
   color: var(--sys-color-canvas);
   font-family: var(--font-body);
   font-size: clamp(0.875rem, 1.1vw, 1.0625rem);
-  letter-spacing: var(--letter-spacing-body);
+  letter-spacing: -0.02em;
   text-decoration: none;
   /* MIRROR SYNC: Targeted transitions only */
-  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
 
   /* ENGINE SYNC: Vertical Gauge 3 (19.2px) vs Horizontal Gauge 5 (32px) 
      This creates the "Taller/Wider" footer feel you requested. */
@@ -2157,7 +2202,7 @@ header > .navbar::after {
 }
 
 /* ================================================= */
-/* === STRESS TEST FIXES THAT NEDD INTEGRATION AND REVIEW    === */
+/* === STRESS TEST FIXES THAT NEED INTEGRATION AND REVIEW    === */
 /* ================================================= */
 
 /* Add this to your CSS file */

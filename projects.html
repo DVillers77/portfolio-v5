@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,10 +13,7 @@
       rel="stylesheet"
     />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
     <link rel="stylesheet" href="css/stylesheet.css" />
 
@@ -28,9 +25,7 @@
   <body id="top">
     <header>
       <nav class="navbar" id="myNavbar" aria-label="Main navigation">
-        <a href="index.html" class="navbar__logo" aria-label="Home">
-          Dave<span class="logo__suffix">'s</span>
-        </a>
+        <a href="index.html" class="navbar__logo" aria-label="Home"> Dave<span class="logo__suffix">'s</span> </a>
         <a
           href="javascript:void(0);"
           class="navbar__toggle"
@@ -48,17 +43,11 @@
         </a>
         <!-- Menu links container -->
         <div class="navbar__links">
-          <a href="./index.html" class="navbar__link"
-            ><i class="fa fa-fw fa-fort-awesome"></i> Home</a
-          >
+          <a href="./index.html" class="navbar__link"><i class="fa fa-fw fa-fort-awesome"></i> Home</a>
           <a href="./about.html" class="navbar__link--bracket-left navbar__link"
             ><i class="fa fa-fw fa-heartbeat"></i> About</a
           >
-          <a
-            class="active active-page-name navbar__link"
-            aria-current="page"
-            tabindex="-1"
-          >
+          <a class="active active-page-name navbar__link" aria-current="page" tabindex="-1">
             <i class="fa fa-fw fa-code"></i> Projects</a
           >
           <a
@@ -82,63 +71,52 @@
       </nav>
     </header>
 
-    <main class="container">
+    <main class="container project-archive">
       <section id="slideshow-container" class="hero hero--slideshow">
         <div class="hero__content">
-          <h1 class="hero__title">Project Gallery</h1>
+          <h1 class="hero__title">The Engineering Archive</h1>
           <p class="hero__subtitle">
-            A portfolio of <strong>production-ready code</strong> and
-            <strong>accessible interfaces</strong> engineered to solve
-            real-world digital problems.
+            An archive of <strong>rigorously engineered systems</strong> and <strong>accessible interfaces</strong>,
+            built to demonstrate technical scalability and structural clarity.
           </p>
 
           <div class="slideshow" role="region" aria-label="Project Slideshow">
             <div class="slideshow__positioner">
               <div class="slideshow__viewport">
-                <div
-                  id="slide-announcer"
-                  aria-live="polite"
-                  class="sr-only"
-                ></div>
+                <div id="slide-announcer" aria-live="polite" class="sr-only"></div>
 
                 <div
                   class="slideshow__slide slideshow__slide--active"
-                  data-title="Modern Tic-Tac-Toe Game"
+                  data-title="Logic & State: Recursive Engineering"
                 >
                   <img
-                    src="images/modern-tic-tac-toe-500h.jpg"
+                    src="images/modern-tic-tac-toe-md.webp"
                     class="slideshow__image"
-                    alt="Tic-Tac-Toe"
+                    alt="UI of a Tic-Tac-Toe game using the Minimax algorithm"
                     data-target="#tic-tac-toe-details"
                   />
                 </div>
-                <div
-                  class="slideshow__slide"
-                  data-title="Interactive To-Do App"
-                >
+                <div class="slideshow__slide" data-title="Inclusive Design: Persistent Architectures">
                   <img
-                    src="images/to-do-app-500h.jpg"
+                    src="images/todo-app-md.webp"
                     class="slideshow__image"
-                    alt="To-Do App"
+                    alt="TaskMaster interface showing dark mode and persistent state task management"
                     data-target="#to-do-app-details"
                   />
                 </div>
-                <div
-                  class="slideshow__slide"
-                  data-title="Portfolio: A Meta-Project"
-                >
+                <div class="slideshow__slide" data-title="The Meta-Study: Systemic Design Engineering">
                   <img
-                    src="images/portfolio-screenshot-01.jpg"
+                    src="images/portfolio-screenshot-01-md.webp"
                     class="slideshow__image"
-                    alt="Portfolio"
+                    alt="Portfolio homepage showcasing fluid typography and BEM architecture"
                     data-target="#portfolio-details"
                   />
                 </div>
-                <div class="slideshow__slide" data-title="API Fun Center">
+                <div class="slideshow__slide" data-title="Interface & Integration: Asynchronous Data">
                   <img
-                    src="images/api-fun-center.jpg"
+                    src="images/api-fun-center-md.webp"
                     class="slideshow__image"
-                    alt="API Fun Center"
+                    alt="Dashboard integrating multiple third-party asynchronous API streams"
                     data-target="#api-fun-center-details"
                   />
                 </div>
@@ -161,32 +139,40 @@
             </div>
             <div class="slideshow__pill">
               <a id="slide-title-link" href="#" class="slideshow__pill-link">
-                <h3 id="slide-title">Modern Tic-Tac-Toe Game</h3>
+                <h3 id="slide-title">Logic & State: Recursive Engineering</h3>
               </a>
             </div>
 
-            <div class="slideshow__dots">
-              <span
+            <div class="slideshow__dots" role="tablist" aria-label="Slideshow navigation">
+              <button
                 class="slideshow__dot active"
                 data-slide-index="0"
                 aria-label="Go to slide 1"
                 aria-current="true"
-              ></span>
-              <span
+                type="button"
+                role="tab"
+              ></button>
+              <button
                 class="slideshow__dot"
                 data-slide-index="1"
                 aria-label="Go to slide 2"
-              ></span>
-              <span
+                type="button"
+                role="tab"
+              ></button>
+              <button
                 class="slideshow__dot"
                 data-slide-index="2"
                 aria-label="Go to slide 3"
-              ></span>
-              <span
+                type="button"
+                role="tab"
+              ></button>
+              <button
                 class="slideshow__dot"
                 data-slide-index="3"
                 aria-label="Go to slide 4"
-              ></span>
+                type="button"
+                role="tab"
+              ></button>
             </div>
           </div>
         </div>
@@ -196,86 +182,55 @@
       <section class="feature-block feature-block--first" id="project-intro">
         <div class="feature-block__grid">
           <div class="feature-block__media">
-            <img
-              src="images/dain-miller-sadle-reigns-quote-md.png"
-              alt="Diverse group"
-              class="feature-block__image"
-            />
+            <img src="images/dain-miller-sadle-reigns-quote-md.webp" alt="Diverse group" class="feature-block__image" />
           </div>
           <div class="feature-block__content">
-            <h2 class="feature-block__title--column">
-              Systems-Driven Engineering
-            </h2>
+            <h2 class="feature-block__title--column">Systems-Driven Engineering: The Auditor’s Archive</h2>
+
             <p class="feature-block__intro-text">
-              This gallery documents my transition from auditing physical
-              systems to engineering digital ones. Every project here has been
-              <strong>individually audited</strong> for
-              <strong>structural integrity, semantic clarity,</strong> and
-              <strong>technical scalability.</strong> I treat code as a system
-              that must be as resilient and intuitive as the human body.
+              This gallery documents my transition from auditing physical systems to engineering digital ones. Every
+              project here has been <strong>individually audited</strong> for structural integrity, semantic clarity,
+              and technical scalability. I treat code as a living system that must remain as resilient, adaptive, and
+              intuitive as the human body.
             </p>
-            <p class="feature-block__intro-text">
-              From implementing <strong>recursive AI algorithms</strong> to
-              managing <strong>complex asynchronous data cycles</strong>, my
-              focus remains on
-              <strong>clean code architecture (BEM/DRY)</strong> and strict
-              adherence to
-              <strong>WCAG AA accessibility standards.</strong> Explore the
-              collection below to see how I translate technical rigor into
-              seamless, human-centered digital solutions.
+
+            <p class="feature-block__text">
+              From implementing <strong>recursive AI algorithms</strong> to managing
+              <strong>complex asynchronous data cycles</strong>, my focus remains on clean code architecture (BEM/DRY)
+              and strict adherence to <strong>WCAG AA accessibility standards</strong>. By translating technical rigor
+              into human-centered solutions, I ensure that high-performance engineering never comes at the cost of the
+              user experience.
             </p>
           </div>
         </div>
       </section>
       <!-- ROW 2 (Image Right, Text Left) -->
-      <section
-        id="tic-tac-toe-details"
-        class="feature-block feature-block--alt"
-        tabindex="-1"
-      >
+      <section id="tic-tac-toe-details" class="feature-block feature-block--alt" tabindex="-1">
         <div class="feature-block__grid feature-block__grid--reverse">
           <div class="feature-block__media">
-            <img
-              src="images/modern-tic-tac-toe-500h.jpg"
-              alt="Tic-Tac-Toe"
-              class="feature-block__image"
-            />
+            <img src="images/modern-tic-tac-toe-md.webp" alt="Tic-Tac-Toe" class="feature-block__image" />
           </div>
           <div class="feature-block__content">
-            <h2 class="feature-block__title--column">
-              Modern Tic-Tac-Toe: Advanced Logic & State Management
-            </h2>
+            <h2 class="feature-block__title--column">Logic & State: Recursive Engineering</h2>
+
             <p class="feature-block__intro-text">
-              I engineered this "Cyber-Theme" application to demonstrate
-              <strong>recursive logic</strong> and
-              <strong>defensive programming</strong> in Vanilla JavaScript. The
-              centerpiece is an unbeatable "Hard Mode" powered by the
-              <strong>Minimax algorithm</strong>, which evaluates all possible
-              game outcomes to ensure optimal computer moves.
+              I engineered this "Cyber-Theme" environment to demonstrate <strong>recursive logic</strong> and
+              <strong>defensive programming</strong> in Vanilla JavaScript. The core engine is designed to handle
+              complex state evaluations without the overhead of external libraries.
             </p>
-            <p class="feature-block__intro-text">
-              To enhance the user experience, I integrated the
-              <strong>HTML5 Canvas API</strong> for dynamic win-line animations
-              and implemented <strong>LocalStorage</strong> for persistent
-              session state, ensuring user scores remain intact across page
-              refreshes. This project represents the intersection of robust
-              back-end logic and high-contrast, performant UI design.
+
+            <p class="feature-block__text">
+              The centerpiece is an unbeatable "Hard Mode" powered by the <strong>Minimax algorithm</strong>, which
+              recursively evaluates every possible game outcome to ensure optimal computer moves. To bridge the gap
+              between back-end logic and UX, I integrated the <strong>HTML5 Canvas API</strong> to handle dynamic
+              win-line animations and utilized <strong>LocalStorage</strong> for persistent session state. This project
+              demonstrates the intersection of high-fidelity visual feedback and rigorous mathematical problem-solving.
             </p>
 
             <div class="cta-container--centered">
               <div class="button-group">
-                <a
-                  href="#"
-                  class="button button--tonal"
-                  aria-label="Source Code for Modern Tic-Tac-Toe"
-                  >Source Code</a
-                >
-                <a
-                  href="#"
-                  class="button button--primary"
-                  aria-label="Live Demo for Modern Tic-Tac-Toe"
-                  >Live Demo</a
-                >
+                <a href="#" class="button button--tonal" aria-label="Source Code for Modern Tic-Tac-Toe">Source Code</a>
+                <a href="#" class="button button--primary" aria-label="Live Demo for Modern Tic-Tac-Toe">Live Demo</a>
               </div>
             </div>
           </div>
@@ -285,50 +240,30 @@
       <section id="to-do-app-details" class="feature-block" tabindex="-1">
         <div class="feature-block__grid">
           <div class="feature-block__media">
-            <img
-              src="images/to-do-app-500h.jpg"
-              alt="To-Do App"
-              class="feature-block__image"
-            />
+            <img src="images/todo-app-md.webp" alt="To-Do App" class="feature-block__image" />
           </div>
           <div class="feature-block__content">
-            <h2 class="feature-block__title--column">
-              TaskMaster: Accessible Task Management & Persistent State
-            </h2>
+            <h2 class="feature-block__title--column">Inclusive Design: Persistent Task Architectures</h2>
+
             <p class="feature-block__intro-text">
-              I engineered this utility to master
-              <strong>Vanilla JavaScript state management</strong> and
-              <strong>inclusive design patterns</strong>. The application
-              features a robust
-              <strong>persistent data architecture</strong> using
-              <strong>JSON and LocalStorage</strong>, ensuring that tasks and
-              user theme preferences (Light/Dark mode) remain intact across
-              browser sessions.
+              TaskMaster is a deep-dive into <strong>state persistence</strong> and
+              <strong>WCAG AA accessibility patterns</strong>. I engineered this system to bridge the gap between simple
+              CRUD operations and a high-fidelity user experience.
             </p>
-            <p class="feature-block__intro-text">
-              a UX Engineering perspective, I prioritized
-              <strong>WCAG AA accessibility standards</strong>, implementing
-              full <strong>keyboard navigability</strong>, semantic
-              <strong>ARIA labels</strong>, and an
-              <strong>Undo/History buffer</strong> for error recovery. The
-              visual system is built on a scalable
-              <strong>BEM-structured CSS</strong> architecture with
-              <strong>CSS Custom Properties</strong>, demonstrating a
-              "mobile-first" approach to building reliable, professional-grade
-              web tools.
+
+            <p class="feature-block__text">
+              The application features a robust <strong>History Buffer</strong>, allowing for non-destructive "Undo"
+              actions by managing a secondary state array. I implemented <strong>Event Delegation</strong> to handle
+              dynamic DOM updates efficiently and integrated a <strong>CSS Variable-driven Theme Engine</strong> for
+              instant Light/Dark mode transitions. By prioritizing keyboard navigability and semantic ARIA labeling, I
+              ensured the tool remains performant and accessible across all assistive technologies.
             </p>
             <div class="cta-container--centered">
               <div class="button-group">
-                <a
-                  href="#"
-                  class="button button--tonal"
-                  aria-label="Source Code for Interactive To-Do App"
+                <a href="#" class="button button--tonal" aria-label="Source Code for Interactive To-Do App"
                   >Source Code</a
                 >
-                <a
-                  href="#"
-                  class="button button--primary"
-                  aria-label="Live Demo for Interactive To-Do App"
+                <a href="#" class="button button--primary" aria-label="Live Demo for Interactive To-Do App"
                   >Live Demo</a
                 >
               </div>
@@ -337,50 +272,33 @@
         </div>
       </section>
       <!-- ROW 4 (Image Right, Text Left) -->
-      <section
-        id="portfolio-details"
-        class="feature-block feature-block--alt"
-        tabindex="-1"
-      >
+      <section id="portfolio-details" class="feature-block feature-block--alt" tabindex="-1">
         <div class="feature-block__grid feature-block__grid--reverse">
           <div class="feature-block__media">
-            <img
-              src="images/portfolio-screenshot-01.jpg"
-              alt="Portfolio Case Study"
-              class="feature-block__image"
-            />
+            <img src="images/portfolio-screenshot-01-md.webp" alt="Portfolio Case Study" class="feature-block__image" />
           </div>
           <div class="feature-block__content">
-            <h2 class="feature-block__title--column">
-              Portfolio: A Meta-Study in Systems Architecture
-            </h2>
+            <h2 class="feature-block__title--column">The Meta-Study: Systemic Design Engineering</h2>
+
             <p class="feature-block__intro-text">
-              I treated the development of this portfolio as a
-              <strong>meta-project</strong> to showcase my transition from
-              <strong>systems auditing</strong> to
-              <strong>UX Engineering</strong>. Built with a "vanilla-first"
-              philosophy, the site architecture utilizes
-              <strong>BEM methodology</strong> for scalable CSS and
-              <strong>semantic HTML5</strong> to ensure high performance and SEO
-              visibility without the overhead of heavy frameworks.
+              I treated the development of this environment as a <strong>master project</strong> to showcase the
+              transition from physical systems auditing to high-fidelity Design Engineering. Built with a
+              "vanilla-first" philosophy, the architecture utilizes an
+              <strong>11-tier fluid typography scale</strong> and BEM methodology to ensure performance without the
+              overhead of heavy frameworks.
             </p>
-            <p class="feature-block__intro-text">
-              The core of this project is its
-              <strong>human-centered design system</strong>. I implemented a
-              custom <strong>responsive grid logic</strong>, integrated
-              <strong>AI-augmented workflows</strong> for creative asset
-              generation, and strictly adhered to
-              <strong>WCAG AA accessibility standards</strong>. This site serves
-              as a live demonstration of my ability to build clean,
-              maintainable, and structurally sound digital products from the
-              ground up.
+
+            <p class="feature-block__text">
+              The core of this project is a <strong>human-centered design system</strong> featuring custom responsive
+              grid logic and sophisticated UI metaphors—such as the <strong>"Orange Wedge" tab masking</strong> and a
+              <strong>16px safety shelf</strong> for seamless navigation transitions. By integrating AI-augmented
+              workflows for asset generation and maintaining strict <strong>WCAG AA compliance</strong>, this site
+              serves as a live demonstration of my ability to architect clean, maintainable, and structurally sound
+              digital products from the ground up.
             </p>
             <div class="cta-container--centered">
               <div class="button-group">
-                <a
-                  href="#"
-                  class="button button--tonal"
-                  aria-label="Source Code for Portfolio Meta-Project"
+                <a href="#" class="button button--tonal" aria-label="Source Code for Portfolio Meta-Project"
                   >Source Code</a
                 >
                 <a
@@ -398,52 +316,28 @@
       <section id="api-fun-center-details" class="feature-block" tabindex="-1">
         <div class="feature-block__grid">
           <div class="feature-block__media">
-            <img
-              src="images/api-fun-center.jpg"
-              alt="API Fun Center"
-              class="feature-block__image"
-            />
+            <img src="images/api-fun-center-md.webp" alt="API Fun Center" class="feature-block__image" />
           </div>
           <div class="feature-block__content">
-            <h2 class="feature-block__title--column">
-              API Fun Center: Asynchronous Data Integration
-            </h2>
+            <h2 class="feature-block__title--column">Interface & Integration: Asynchronous Data Streams</h2>
+
             <p class="feature-block__intro-text">
-              I developed this application to master
-              <strong>Asynchronous JavaScript (AJAX)</strong> and the
-              <strong>Fetch API</strong>. The project demonstrates the ability
-              to integrate multiple <strong>third-party REST APIs</strong>,
-              handling complex data types ranging from JSON text strings to
-              dynamic image assets. I focused heavily on
-              <strong>error handling</strong> and
-              <strong>input sanitization</strong> (using
-              <code>encodeURIComponent</code>) to ensure the application remains
-              stable even when external services return unexpected results.
+              The API Fun Center is a technical study in <strong>asynchronous middleware integration</strong>. I
+              engineered this dashboard to demonstrate the seamless handling of multiple third-party data streams within
+              a single unified interface.
             </p>
-            <p class="feature-block__intro-text">
-              To enhance the user experience, I implemented
-              <strong>dynamic UI feedback</strong>, including loading states and
-              fallback messaging for screen readers. By managing the
-              <strong>asynchronous lifecycle</strong> of four distinct data
-              sources—including a translator and random fact generators—this
-              project showcases my ability to bridge the gap between back-end
-              data services and
-              <strong>performant, responsive front-end interfaces</strong>.
+
+            <p class="feature-block__text">
+              I utilized the <strong>Fetch API</strong> and <strong>Promise-based architecture</strong> to manage
+              concurrent requests from four unique endpoints. A key focus of this project was implementing robust
+              <strong>exception handling</strong>—specifically managing API rate-limiting (HTTP 429) and network
+              latency. By isolating the data-fetching logic from the UI rendering, I ensured that the application
+              remains responsive and provides clear diagnostic feedback to the user during the request lifecycle.
             </p>
             <div class="cta-container--centered">
               <div class="button-group">
-                <a
-                  href="#"
-                  class="button button--tonal"
-                  aria-label="Source Code for API Fun Center"
-                  >Source Code</a
-                >
-                <a
-                  href="#"
-                  class="button button--primary"
-                  aria-label="Live Demo for API Fun Center"
-                  >Live Demo</a
-                >
+                <a href="#" class="button button--tonal" aria-label="Source Code for API Fun Center">Source Code</a>
+                <a href="#" class="button button--primary" aria-label="Live Demo for API Fun Center">Live Demo</a>
               </div>
             </div>
           </div>
@@ -453,20 +347,10 @@
     <!-- FOOTER NAVBAR -->
     <footer class="footer">
       <nav class="footer__nav" aria-label="Footer navigation">
-        <a href="#top" class="footer__link"
-          ><i class="fa fa-fw fa-arrow-up"></i> Top</a
-        >
-        <a href="./index.html" class="footer__link"
-          ><i class="fa fa-fw fa-fort-awesome"></i> Home</a
-        >
-        <a href="./about.html" class="footer__link"
-          ><i class="fa fa-fw fa-heartbeat"></i> About</a
-        >
-        <a
-          href="https://github.com/DVillers77"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="footer__link"
+        <a href="#top" class="footer__link"><i class="fa fa-fw fa-arrow-up"></i> Top</a>
+        <a href="./index.html" class="footer__link"><i class="fa fa-fw fa-fort-awesome"></i> Home</a>
+        <a href="./about.html" class="footer__link"><i class="fa fa-fw fa-heartbeat"></i> About</a>
+        <a href="https://github.com/DVillers77" target="_blank" rel="noopener noreferrer" class="footer__link"
           ><i class="fa fa-fw fa-github"></i> GitHub</a
         >
         <a
@@ -483,53 +367,34 @@
     </footer>
     <!-- Contact Modal -->
     <template id="contact-modal-template">
-      <div id="contact-modal" class="contact-modal">
+      <div
+        id="contact-modal"
+        class="contact-modal"
+        id="contact-modal"
+        class="contact-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="contact-heading"
+      >
         <div class="contact-modal__content">
-          <button
-            type="button"
-            class="contact-modal__close-icon"
-            aria-label="Close contact form"
-          >
+          <button type="button" class="contact-modal__close-icon" aria-label="Close contact form">
             <div class="contact-modal__close-icon-box">
               <span></span>
               <span></span>
             </div>
           </button>
-          <form
-            action="https://formspree.io/f/xovnjzlr"
-            method="POST"
-            class="contact-modal__form"
-          >
+          <form action="https://formspree.io/f/xovnjzlr" method="POST" class="contact-modal__form">
             <h2>Contact Me</h2>
             <label for="name"><b>Name</b></label>
-            <input
-              type="text"
-              placeholder="Enter your name"
-              name="name"
-              required
-            />
+            <input type="text" id="name" placeholder="Enter your name" name="name" required />
 
             <label for="email"><b>Email</b></label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              name="email"
-              required
-            />
+            <input type="email" placeholder="Enter your email" name="email" required />
 
             <label for="message"><b>Message</b></label>
-            <textarea
-              placeholder="Tell me about your project..."
-              name="message"
-              required
-            ></textarea>
+            <textarea placeholder="Tell me about your project..." name="message" required></textarea>
 
-            <button
-              type="submit"
-              class="button button--primary contact-modal__button--submit"
-            >
-              SEND MESSAGE
-            </button>
+            <button type="submit" class="button button--primary contact-modal__button--submit">SEND MESSAGE</button>
           </form>
         </div>
       </div>

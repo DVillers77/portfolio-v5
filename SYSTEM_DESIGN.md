@@ -1,44 +1,41 @@
-# System Design: Tonal Tokens & Typography
+# System Design: Tonal Tokens & Spacing Physics
 
-## 🌌 Atmospheric Engine (V24 Rig)
-The site uses a dynamic "Atmospheric Pulse" powered by CSS `@property` registrations. This allows the background lighting to transition smoothly without performance lag.
+## 🌌 Atmospheric Engine (V25 Rig)
 
-| Property | Initial Value | Role |
-| :--- | :--- | :--- |
-| `--sunX` | `10%` | Horizontal focal point of the radial light |
-| `--sunY` | `10%` | Vertical focal point of the radial light |
-| `--sunSize` | `85%` | Spread of the illumination |
+The interface is powered by a high-fidelity "Steady Flood" lighting system. Utilizing CSS `@property` registrations, the
+engine eliminates color-banding and provides a living UI depth without performance regression.
 
-## 🎨 Tonal Color Palette (Intent-Based)
-All hex codes are deprecated in favor of RGB Tonal Tokens to allow for atmospheric layering and transparency control.
+| Property    | Initial Value | Role                                   |
+| :---------- | :------------ | :------------------------------------- |
+| `--sunX`    | `50%`         | Horizontal focal point (Inertia Shift) |
+| `--sunY`    | `50%`         | Vertical focal point (Scroll-Synced)   |
+| `--sunSize` | `400%`        | Hard-coded Illumination Constant       |
 
-| Role | Token Name | RGB Value | Hex Equivalent |
-| :--- | :--- | :--- | :--- |
-| **Brand Base** | `--sys-pine-rgb` | `1, 98, 75` | #01624b (Pine) |
-| **Brand Feel** | `--sys-violet-rgb` | `156, 39, 176` | #9c27b0 (Violet) |
-| **Action/Portal** | `--sys-magenta-rgb` | `255, 0, 255` | #ff00ff (Magenta) |
+## 🎨 Tonal Color Palette (Pigment Profiles)
 
-## 🏷️ Brand Architecture: The Syntax Signature
-The logo `Dave's` serves as a functional brand anchor.
-- **Base Color:** `var(--sys-color-surface)` (White) for high contrast on the Charcoal navbar.
-- **Suffix Color:** `var(--sys-color-tertiary)` (Magenta) signaling "Developer/Action."
-- **Interaction:** A "Neon Bloom" hover effect utilizing `text-shadow` and `filter: saturate()`.
+All hex codes are deprecated in favor of RGB Tonal Tokens to allow for the **Clean Edge Trick** and transparency control
+within the "Steady Flood."
 
-## 📐 Typography Scale (rem-based)
-Base font size is 16px. All values are implemented in `rem`.
+| Role              | Token Name            | RGB Value      | Hex Equivalent    |
+| :---------------- | :-------------------- | :------------- | :---------------- |
+| **Brand Base**    | `--sys-color-primary` | `1, 98, 75`    | #01624b (Pine)    |
+| **Brand Feel**    | `--sys-color-accent`  | `156, 39, 176` | #9c27b0 (Violet)  |
+| **Action/Portal** | `--sys-color-action`  | `255, 0, 255`  | #ff00ff (Magenta) |
 
-- **Display (H1):** `3.5rem` | Line-height: 1.1 | Letter-spacing: -0.02em
-- **Headline (H2):** `1.75rem` | Line-height: 1.2
-- **Title/Label (H3):** `1.125rem` | Line-height: 1.4
+## 🏷️ The Chrome-Tab Rig (Active State Logic)
+
+The active navigation tab is engineered to mimic the "Sovereignty" of a browser tab.
+
+- **The Wedge Protocol:** Uses `:before` and `:after` pseudo-elements as "Orange Wedge" brackets.
+- **Extruded Radii:** These brackets create a negative corner radius that blends the tab into the "Safety Shelf"
+  (`.navbar::after`).
+- **Visual Result:** The active tab extrudes from the background, acting as a permanent page label while inactive tabs
+  remain "submerged."
+
+## 📐 Typography Scale (1.414 Harmonic)
+
+Base font size is 16px. We employ an **Augmented Fourth Scale** to ensure non-melodic, high-tension hierarchy.
+
+- **Display (H1):** `clamp(2.5rem, 10vw, 6rem)` | Line-height: 1.1 (Poppins)
 - **Body:** `1rem` | Line-height: 1.6 (Inter)
-- **Mobile Quote:** `1.1rem` (Refactored for H2 hierarchy)
-
-## 🏷️ Typography Tokens (V24.1)
-| Token | Value | Role |
-| :--- | :--- | :--- |
-| `--letter-spacing-display` | `-0.02em` | Tightens headers for professional "locked" feel |
-| `--letter-spacing-cta` | `0.05rem` | Increases button legibility and "air" |
-| `--font-body` | `Inter, sans-serif` | Applied to all inputs/textareas to prevent browser defaults |
-
-## 🕹️ Component States
-- **.button--success:** Brand Pine background, white text, non-interactive, includes checkmark pseudo-element.
+- **Muted Floor:** `0.8rem` | 20% Canvas Mix | Minimum floor for technical metadata.

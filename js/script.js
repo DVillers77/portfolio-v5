@@ -2,6 +2,9 @@
 // === GLOBAL UTILITY FUNCTIONS ===
 // ===============================================
 
+// NEW: Global reference to restore focus after modal shutdown
+let lastFocusedElement;
+
 /**
  * Toggles the mobile navigation menu (Hamburger Menu).
  */
@@ -34,6 +37,13 @@ function closeModal() {
     if (modalWrapper) {
       modalWrapper.remove();
     }
+
+    // --- NEW: THE FOCUS RESTORATION ---
+    // If we saved a previous element, return the Pilot there now.
+    if (lastFocusedElement) {
+      lastFocusedElement.focus();
+    }
+
     // UNLOCK
     document.documentElement.classList.remove("no-scroll");
     document.body.classList.remove("no-scroll");
@@ -148,6 +158,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     function openModal(e) {
       e.preventDefault();
 
+      // Save the current focus (the button that was clicked)
+      lastFocusedElement = document.activeElement;
+
       // LOCK THE ENTIRE PORTAL
       document.documentElement.classList.add("no-scroll");
       document.body.classList.add("no-scroll");
@@ -177,8 +190,19 @@ document.addEventListener("DOMContentLoaded", (event) => {
       const firstFocusable = focusableElements[0];
       const lastFocusable = focusableElements[focusableElements.length - 1];
 
-      if (closeModalButton) {
+      // --- THE FOCUS HANDSHAKE ---
+      // We look for the Name field specifically to drop the Pilot into the action
+      const nameInput = modalWrapper.querySelector("#name") || modalWrapper.querySelector('[name="name"]');
+
+      if (nameInput) {
+        nameInput.focus();
+      } else if (closeModalButton) {
+        // Fallback: if Name isn't found, focus the Close button so focus isn't lost
         closeModalButton.focus();
+      }
+
+      // Ensure the close button still has its "Power-Down" listener
+      if (closeModalButton) {
         closeModalButton.addEventListener("click", closeModal);
       }
 

@@ -1,52 +1,47 @@
-# UX Engineering: Logic & Interaction Rules
+# UX Engineering: Handshake Protocols & Constraints
 
-## 🛡️ Sacred Layout Rules (DO NOT MODIFY)
+## 🛡️ Immutable Constraints (The Rig Integrity)
 
-- **The "Safety Shelf":** The `.navbar::after` (15px) and its 12px solid
-  linear-gradient stop are critical. They prevent "bracket bleed" from the
-  navigation links into the hero section.
-- **Navbar Alignment:** Desktop MUST use `align-items: stretch`. This allows the
-  "Chrome Tab" brackets of active links to bridge the gap to the background rig
-  perfectly.
-- **Slideshow Controls:** - Desktop: 50% on/50% off.
-  - Mobile: 75% inside/25% off (exactly `-18px` offset).
+These rules are hard-coded to prevent "Bracket Bleed" and layout collapse. They must be maintained during all future
+refactors.
 
-## 🏗️ Architectural Refactor Logs
+- **The Safety Shelf Protocol:** The `.navbar::after` (15px) is a critical structural anchor. It provides the landing
+  pad for the Nav Rig's **Orange Wedge** extrusions.
+- **Wedge Alignment:** Desktop navigation MUST use `align-items: stretch`. This allows the `:before` and `:after`
+  pseudo-brackets of the active tab to bridge the gap to the background rig with zero light-leak.
+- **The Clean Edge Trick:** All `.feature-block` elements utilize `background-clip: padding-box`. This forces the white
+  canvas to terminate at the inside edge of the 2px border, preventing color-bleed on high-DPI (Retina) displays.
 
-### 1. Typographic Hierarchy (V24)
+## 🏗️ Interaction Handshakes (Kinetic Logic)
 
-- **Problem:** Mobile blockquotes (1.5rem) competed with H2 headers, causing
-  cognitive load issues.
-- **Solution:** Reduced Mobile Quote size to **1.1rem**. This restores a **20%
-  visual gap**, ensuring H2s remain the primary anchor point.
+Interaction is treated as a physical event between the Pilot and the System.
 
-### 2. Atmospheric HUD Design (Modals)
+### 1. The Kinetic Lift
 
-- **Surface:** Background uses a `135deg` gradient (`#002d23` to `#121212`) to
-  create environmental depth.
-- **Lighting:** A triple-layered `box-shadow` (10px, 25px, 50px) simulates neon
-  throw.
-- **Falloff:** Gradient extends to **115%** of container width to ensure
-  soft-light dissipation on dark corners.
-- **Handshake Protocol:** The 3.5s dwell time is officially registered as an
-  "Intentional UX Interaction" to provide system feedback.
+Hovering a `.feature-block` triggers a `-4px` `translateY`.
 
-## 📱 Mobile & Tablet Interaction Rules
+- **Calibration:** In the `project-archive` context, this lift is framed by the **38.4px Atmospheric Gap**. This
+  provides the necessary "Bloom" room for the Pine-pigmented shadows to expand without overlapping adjacent content.
 
-- **Vertical CTA Stacking:** Primary button MUST be on top of Secondary for all
-  vertical layouts (Mobile).
-- **CTA Pairing Registry:**
-  - Home: [P] Projects | [S] My Story
-  - About: [P] Contact Me | [S] LinkedIn
-  - Projects: [P] Live Demo / Case Study | [S] Source Code
-- **Micro-Interaction:** The Contact Modal 'Submit' button enters a
-  `.button--success` state (Sent ✓) upon valid Formspree trigger.
+### 2. The 400ms Modal Handshake
 
-## 🏗️ Architectural Refactor Logs
+The `closeModal()` function in `script.js` is throttled to exactly 400ms.
 
-### 3. Grid Equilibrium (810px - 1000px)
+- **Purpose:** This is not a delay; it is a registered kinetic fade-out. It provides the user with visual confirmation
+  of system "Power-Down" before the DOM element is purged.
 
-- **Constraint:** Text columns in 2-col grids occasionally exceed image height.
-- **Rule:** Prioritize "Reading Terminus" (CTA at bottom of text). Use
-  `align-items: center` or fluid column ratios (e.g., 60/40) to maintain visual
-  balance without fragmenting the action.
+### 3. Phonic Volume Registry (Contrast Control)
+
+We utilize "Ink Weight" to manage the user's focus hierarchy.
+
+- **Redline:** 0% Dilution. Reserved for primary anchors and H1 display.
+- **Talk:** 10% Canvas Mix. Standard narrative flow.
+- **Muted Floor:** 20% Canvas Mix. Minimum floor for technical metadata to ensure **WCAG 2.1 AA** compliance on
+  non-Retina hardware.
+
+## 📱 Adaptive Physics (Mobile Constraints)
+
+- **The 44px Protocol:** All interactive triggers (nav-links, buttons) are calibrated to a 44px minimum touch-target to
+  accommodate human motor variance.
+- **Shutter Compression:** Gaps are reduced to `23.04px` on mobile. This maintains the "Zig-Zag" rhythm while accounting
+  for the reduced vertical real estate.
