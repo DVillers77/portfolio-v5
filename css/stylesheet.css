@@ -1553,6 +1553,15 @@ header > .navbar::after {
   transform: none !important;
 }
 
+/** DISABLED STATE */
+.button--disabled {
+  opacity: 0.6;
+  filter: grayscale(1);
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+}
+
 /* ================================================= */
 /* === [V3.4] CTA & GROUP LAYOUTS (GAUGE SYNC)   === */
 /* ================================================= */
