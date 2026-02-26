@@ -99,8 +99,22 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const currentImage = currentSlide.querySelector(".slideshow__image");
         const currentTarget = currentImage ? currentImage.getAttribute("data-target") : "#";
 
+        // 1. Update the visible text
         slideTitleElement.textContent = currentTitle;
+
+        // 2. Update the navigation destination
         slideTitleLink.setAttribute("href", currentTarget);
+
+        // 3. THE HANDSHAKE: Combining Title + Action for absolute clarity
+        // This tells them exactly WHAT they are viewing in full size.
+        slideTitleLink.setAttribute("aria-label", `${currentTitle} - View full size uncropped image`);
+
+        // 4. THE CONNECTION: Link the pill to the target section ID
+        if (currentTarget.startsWith("#")) {
+          slideTitleLink.setAttribute("aria-controls", currentTarget.substring(1));
+        } else {
+          slideTitleLink.removeAttribute("aria-controls");
+        }
       }
     }
 
