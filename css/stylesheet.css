@@ -740,6 +740,45 @@ header > .navbar::after {
   position: relative;
 }
 
+/* --- BUTTON & LINK SYNC ENGINE --- */
+button.navbar__link,
+button.footer__link,
+button.navbar__link--contact-trigger,
+.navbar__link {
+  /* 1. TYPOGRAPHY SYNC */
+  font-family: var(--font-body);
+  font-size: var(--fs-t7); /* Replacing hard-coded clamp with your fluid token */
+  color: var(--sys-color-canvas);
+
+  /* 2. RESET & LAYOUT */
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: var(--sys-space-2) var(--sys-space-4);
+
+  /* 3. INTERACTION RIG */
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+  position: relative;
+  text-decoration: none;
+}
+
+/* --- BREAKPOINT CALIBRATION --- */
+@media screen and (min-width: 810px) {
+  button.navbar__link,
+  button.navbar__link--contact-trigger,
+  .navbar__link {
+    width: auto;
+    /* Maintain the explicit desktop height padding from your original rig */
+    padding: 0.875rem clamp(0.75rem, 1.5vw, 1.5rem);
+  }
+}
+
 /* THE HOVER: Fixed White Text */
 .navbar__link:hover:not(.active) {
   background-color: var(--sys-color-canvas-alpha-1);

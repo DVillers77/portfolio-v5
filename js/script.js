@@ -139,8 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const contactTriggers = document.querySelectorAll(".navbar__link--contact-trigger");
 
     async function openModal(e) {
-      e.preventDefault();
-
       if (!modalInstance) {
         try {
           const response = await fetch("components/contact-modal.html");
@@ -266,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!anchor) return;
       const href = anchor.getAttribute("href");
 
-      if (href && href.startsWith("#") && !anchor.classList.contains("navbar__link--contact-trigger")) {
+      if (href && href.startsWith("#")) {
         const target = document.querySelector(href);
         if (target) {
           e.preventDefault();
