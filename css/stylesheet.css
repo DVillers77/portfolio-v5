@@ -960,7 +960,6 @@ button.navbar__link--contact-trigger:not(.button) {
   gap: var(--sys-space-5);
   max-width: 1200px; /* THE ANCHOR */
   margin: 0 auto;
-  align-items: flex-start; /* Standard: Left-Aligned */
 }
 
 /* --- 3. MEDIA (Image Styling) --- */
