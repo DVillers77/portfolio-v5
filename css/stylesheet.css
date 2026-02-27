@@ -741,13 +741,15 @@ header > .navbar::after {
 }
 
 /* --- BUTTON & LINK SYNC ENGINE --- */
+/* Apply this to standard links and the "hidden" button triggers */
+.navbar__link,
 button.navbar__link,
 button.footer__link,
-button.navbar__link--contact-trigger,
-.navbar__link {
+/* Target contact triggers ONLY if they aren't part of a CTA button group */
+button.navbar__link--contact-trigger:not(.button) {
   /* 1. TYPOGRAPHY SYNC */
   font-family: var(--font-body);
-  font-size: var(--fs-t7); /* Replacing hard-coded clamp with your fluid token */
+  font-size: var(--fs-t7);
   color: var(--sys-color-canvas);
 
   /* 2. RESET & LAYOUT */
@@ -768,13 +770,12 @@ button.navbar__link--contact-trigger,
   text-decoration: none;
 }
 
-/* --- BREAKPOINT CALIBRATION --- */
+/* --- DESKTOP RECALIBRATION --- */
 @media screen and (min-width: 810px) {
+  .navbar__link,
   button.navbar__link,
-  button.navbar__link--contact-trigger,
-  .navbar__link {
+  button.navbar__link--contact-trigger:not(.button) {
     width: auto;
-    /* Maintain the explicit desktop height padding from your original rig */
     padding: 0.875rem clamp(0.75rem, 1.5vw, 1.5rem);
   }
 }
