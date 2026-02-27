@@ -2220,7 +2220,7 @@ dialog.contact-modal[open] {
 .footer__link {
   color: var(--sys-color-canvas);
   font-family: var(--font-body);
-  font-size: clamp(0.875rem, 1.1vw, 1.0625rem);
+  font-size: var(--fs-t7);
   letter-spacing: -0.02em;
   text-decoration: none;
   /* MIRROR SYNC: Targeted transitions only */
