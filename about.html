@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
 
     <!-- The actual stylesheet link for the font -->
-    <!-- The actual stylesheet link for the font -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@1,400;1,700&family=Poppins:wght@700;800&display=swap"
       rel="stylesheet"
@@ -27,7 +26,6 @@
   </head>
   <body id="top">
     <header>
-      <!--TOP NAVBAR -->
       <!--TOP NAVBAR -->
       <nav class="navbar" id="myNavbar" aria-label="Main navigation">
         <a href="index.html" class="navbar__logo" aria-label="Home"> Dave<span class="logo__suffix">'s</span> </a>
@@ -68,9 +66,9 @@
             class="navbar__link"
             ><i class="fa fa-fw fa-linkedin"></i> LinkedIn</a
           >
-          <a class="navbar__link--contact-trigger navbar__link" href="#"
-            ><i class="fa fa-fw fa-hand-o-right"></i> Contact</a
-          >
+          <a href="#" class="navbar__link navbar__link--contact-trigger">
+            <i class="fa fa-fw fa-hand-o-right"></i> Contact
+          </a>
         </div>
       </nav>
     </header>
@@ -272,39 +270,5 @@
         >
       </nav>
     </footer>
-    <!-- Contact Modal -->
-    <template id="contact-modal-template">
-      <div
-        id="contact-modal"
-        class="contact-modal"
-        id="contact-modal"
-        class="contact-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="contact-heading"
-      >
-        <div class="contact-modal__content">
-          <button type="button" class="contact-modal__close-icon" aria-label="Close contact form">
-            <div class="contact-modal__close-icon-box">
-              <span></span>
-              <span></span>
-            </div>
-          </button>
-          <form action="https://formspree.io/f/xovnjzlr" method="POST" class="contact-modal__form">
-            <h2>Contact Me</h2>
-            <label for="name"><b>Name</b></label>
-            <input type="text" id="name" placeholder="Enter your name" name="name" required />
-
-            <label for="email"><b>Email</b></label>
-            <input type="email" placeholder="Enter your email" name="email" required />
-
-            <label for="message"><b>Message</b></label>
-            <textarea placeholder="Tell me about your project..." name="message" required></textarea>
-
-            <button type="submit" class="button button--primary contact-modal__button--submit">SEND MESSAGE</button>
-          </form>
-        </div>
-      </div>
-    </template>
   </body>
 </html>

@@ -15,9 +15,6 @@
   initial-value: 50%;
 }
 
-/* --sunSize REMOVED: Size is now a hard-coded constant (400%) in the background-gradient 
-   to ensure zero pulsing and maximum illumination across the viewport. */
-
 /* ================================================= */
 /* === 1. GLOBAL ENGINE: Reset & Variables       === */
 /* ================================================= */
@@ -244,6 +241,10 @@ p {
   --sys-role-canvas-rgb: var(--pigment-white-rgb);
   --sys-role-neutral-rgb: var(--pigment-charcoal-rgb);
   --sys-role-void-rgb: var(--pigment-black-rgb);
+  --sys-role-error-rgb: var(--pigment-crimson-rgb);
+  --sys-role-warning-rgb: var(--pigment-amber-rgb);
+  --sys-role-info-rgb: var(--pigment-sky-rgb);
+  --sys-role-success-rgb: var(--pigment-pine-rgb);
 
   /* --- B.2 DERIVED SOLIDS --- */
 
@@ -253,6 +254,10 @@ p {
   --sys-color-canvas: rgb(var(--sys-role-canvas-rgb));
   --sys-color-neutral: rgb(var(--sys-role-neutral-rgb));
   --sys-color-void: rgb(var(--sys-role-void-rgb));
+  --sys-color-error: rgb(var(--sys-role-error-rgb));
+  --sys-color-warning: rgb(var(--sys-role-warning-rgb));
+  --sys-color-info: rgb(var(--sys-role-info-rgb));
+  --sys-color-success: rgb(var(--sys-role-success-rgb));
 
   /* --- B.3 PHONIC TYPE SYSTEM --- */
 
@@ -1048,7 +1053,7 @@ header > .navbar::after {
 .feature-block__author {
   font-family: var(--font-body);
   text-align: right; /* Standard Signature Position */
-  font-size: var(--sys-type-caption); /* KINETIC TYPE SYNC */
+  font-size: var(--fs-t9); /* KINETIC TYPE SYNC */
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -1842,6 +1847,22 @@ header > .navbar::after {
   transition:
     opacity 0.4s ease,
     transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Kinetic Pop */
+  z-index: 100;
+}
+
+dialog.contact-modal::backdrop {
+  /* Using your specific Alpha-1 Canvas token for system consistency */
+  background: var(--sys-color-canvas-alpha-1);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.4s ease forwards;
+}
+
+dialog.contact-modal[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
 }
 
 /* KINETIC STATE: OPEN */
@@ -2027,7 +2048,7 @@ header > .navbar::after {
 
   font-family: "Courier New", Courier, monospace;
   font-weight: 600;
-  font-size: var(--sys-type-caption);
+  font-size: var(--fs-t9);
   color: var(--sys-color-primary);
   text-transform: uppercase;
   padding-left: var(--sys-space-1);
@@ -2054,7 +2075,7 @@ header > .navbar::after {
 @media screen and (max-width: 809px) {
   .typewriter-text {
     /* If the text is too long for the mobile screen, 
-       we kill the 'nowrap' to prevent overflow city. */
+       we kill the 'nowrap' to prevent overflow. */
     display: inline;
     white-space: normal;
     overflow-wrap: break-word;
