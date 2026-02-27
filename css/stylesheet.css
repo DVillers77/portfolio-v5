@@ -644,22 +644,29 @@ header > .navbar::after {
     0 0 15px var(--sys-color-action-alpha-5);
 }
 
-/* 1. THE TOGGLE (Hamburger - JS Target) */
+/* 1. THE TOGGLE (Now a Semantic Button) */
 .navbar__toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  float: right;
-  color: var(--sys-color-action); /* AUDIT: Synced to Action */
-  padding: var(--sys-space-2) var(--sys-space-3); /* AUDIT: Gauge 2 / Gauge 3 */
+
+  /* Resetting Button Defaults */
+  background: none;
+  border: none;
+  font: inherit;
+
+  color: var(--sys-color-action);
+  padding: var(--sys-space-2) var(--sys-space-3);
   cursor: pointer;
-  text-decoration: none;
   position: relative;
+
+  /* Layout Logic */
+  margin-left: auto;
+  order: 2;
+
   transition:
     background-color 0.2s ease,
     color 0.2s ease;
-  margin-left: auto;
-  order: 2;
 }
 
 .navbar__toggle-icon {

@@ -287,6 +287,12 @@ document.addEventListener("DOMContentLoaded", () => {
   initContactModal();
   setupAnchorHandler();
 
+  // Handshake for the Mobile Toggle (Replaces HTML onclick)
+  const navToggleButton = document.querySelector(".navbar__toggle");
+  if (navToggleButton) {
+    navToggleButton.addEventListener("click", toggleMobileNav);
+  }
+
   // Global Keydown: Escape key handles both Modal and Mobile Nav contextually
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
