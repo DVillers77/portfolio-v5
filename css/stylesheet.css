@@ -431,6 +431,8 @@ p {
   --sys-spacing-section-v: var(--sys-space-8);
   --sys-spacing-hero-v: var(--sys-space-10);
   --accent-rail-height: 4px; /* Universal height for 'Mirror' accents and global navigation rails */
+  /* Matching existing 'Kinetic Physics' 0.4s Bezier */
+  --sys-transition-slow: 0.4s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
 /* ================================================= */
@@ -960,32 +962,96 @@ button.navbar__link--contact-trigger:not(.button) {
   gap: var(--sys-space-5);
   max-width: 1200px; /* THE ANCHOR */
   margin: 0 auto;
+  align-items: flex-start; /* Standard: Left-Aligned */
 }
 
-/* --- 3. MEDIA (Image Styling) --- */
-/* --- UNIFIED MEDIA STYLING --- */
+/* --- THE MEDIA CONTAINER (The 'Rail' Creator) --- */
 .feature-block__media {
-  display: contents; /* Allows image to participate in Grid Order */
+  display: flex;
+  justify-content: center; /* Centers image horizontally in its 50% column */
+  align-items: center; /* Centers image vertically against the text */
+  width: 100%;
+  padding: var(--sys-space-4); /* Your buffer/rail padding */
 }
 
+/* --- THE IMAGE COMPONENT (The Precision Rig) --- */
 .feature-block__image {
   width: 100%;
-  max-width: 500px; /* Limits size on desktop */
-  height: auto; /* FLUID SCALING */
-  /* aspect-ratio: 1 / 1; REMOVED per fluid request */
+
+  /* 1. THE RAIL LIMITER: 
+     Ensures the image never exceeds your 500px design intent, 
+     creating that clean 'gutter' on larger screens. */
+  max-width: 500px;
+
+  /* 2. THE STABILITY BOX: 
+     By forcing a 1:1 (square) or 4:5 (portrait) ratio, you stop the 
+     'bouncing' layout. 1:1 is very clean for engineering portfolios. */
+  aspect-ratio: 1 / 1;
+
+  /* 3. THE CLIPPING ENGINE: 
+     This acts like your slideshow fix. It fills the box without 
+     stretching the 375px or 541px images. */
   object-fit: cover;
-  /* SYNCED: Gauge 2 Radius (12.8px) vs previous 0.5rem (8px) */
-  border-radius: var(--sys-radius-2);
+  object-position: center;
+
+  border-radius: var(--sys-radius-4);
   box-shadow: var(--sys-shadow-halo-standard);
-  display: block;
-  margin: 0 auto var(--sys-space-3); /* Added Gauge 3 bottom margin */
-  order: -1; /* Image First on Mobile (Global Rule) */
-  margin-bottom: 1.5rem;
+  height: auto;
+  margin-inline: auto; /* Absolute centering backup */
+
+  transition: transform var(--sys-transition-slow);
 }
 
-/* Override for Alt Block (Light Pine) */
-.feature-block--alt .feature-block__grid .feature-block__image {
-  box-shadow: var(--sys-shadow-halo-standard) !important;
+.feature-block:hover .feature-block__image {
+  transform: scale(1.03); /* Subtle high-fidelity zoom */
+}
+
+/* --- THE PORTRAIT SPECIALIST --- */
+/* Apply this class ONLY to images that are naturally taller */
+.feature-block__image--portrait {
+  aspect-ratio: 4 / 5 !important;
+  /* We use !important here because it is a specific override 
+     intended to beat the global 1/1 rule. */
+}
+
+/* --- THE VERTICAL SHIFT (Under 809px) --- */
+@media (max-width: 809px) {
+  .feature-block__media {
+    /* Ensures when they stack, the image has clear separation 
+       from the text above/below it. */
+    padding: var(--sys-space-6) 0;
+  }
+
+  .feature-block__image {
+    /* On mobile, we can let it be slightly smaller (e.g., 85% of screen) 
+       to keep that 'High-Fidelity' card look. */
+    max-width: 400px;
+  }
+}
+
+/* --- THE CLEAN 810px ZIGZAG LOGIC --- */
+@media (min-width: 810px) {
+  .feature-block__grid {
+    flex-direction: row;
+    align-items: center; /* Vertical alignment for the text/image pair */
+    gap: var(--sys-space-8); /* This creates your 'Center Gutter' */
+  }
+
+  /* The Zig-Zag */
+  .feature-block:nth-child(odd) .feature-block__grid {
+    flex-direction: row-reverse;
+  }
+
+  .feature-block__content,
+  .feature-block__media {
+    flex: 1; /* Gives both columns equal weight (50/50) */
+    width: 50%;
+  }
+
+  .feature-block__media {
+    display: flex;
+    justify-content: center; /* This is what creates the 'Visual Rail' */
+  }
 }
 
 /* --- 4. CONTENT (Text & Typography) --- */
@@ -1108,17 +1174,6 @@ button.navbar__link--contact-trigger:not(.button) {
   width: 100%;
   margin-top: var(--sys-space-3);
   padding-right: var(--sys-space-2) !important;
-}
-
-/* --- 6. RESPONSIVE ENGINE --- */
-
-/* UNIFIED MOBILE STACKING (1024px and below) */
-
-/* Mobile Adjustments (600px-) */
-@media screen and (max-width: 600px) {
-  .feature-block__image {
-    width: 100%;
-  }
 }
 
 /* ================================================= */
@@ -1740,22 +1795,6 @@ button.navbar__link--contact-trigger:not(.button) {
     flex-direction: row-reverse;
   }
 
-  /* 2. RESTORE CONTENT FLEX (Kill display: contents from mobile) */
-  .feature-block__media {
-    display: flex; /* Forces image container to be flex */
-    flex: 1 1 50%; /* Strictly lock to 50% */
-    min-width: 0; /* Prevents flex blowout */
-    height: 100%; /* Fill grid height */
-  }
-
-  /* Force image to fill the locked column height */
-  .feature-block__media .feature-block__image {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 0.5rem;
-  }
-
   .feature-block__content {
     display: flex;
     flex-direction: column;
@@ -1790,10 +1829,6 @@ button.navbar__link--contact-trigger:not(.button) {
   .feature-block--storyteller .feature-block__intro-text,
   .feature-block--storyteller .feature-block__quote-container {
     text-align: center;
-  }
-
-  .feature-block__media {
-    width: 50%;
   }
 
   .feature-block__note--column {
