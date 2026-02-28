@@ -1334,7 +1334,7 @@ button.navbar__link--contact-trigger:not(.button) {
   width: 100%;
   aspect-ratio: 1 / 1; /* Keeps it square */
   /* overflow: hidden; */ /* MOVED to the slide itself to unclip buttons */
-  border-radius: var(--sys-radius-2); /* AUDIT: Standardized Radius */
+  border-radius: var(--sys-radius-4); /* AUDIT: Standardized Radius */
   background-color: var(--sys-color-neutral);
   box-shadow: var(--sys-shadow-halo-standard);
   margin-bottom: var(--sys-space-4); /* AUDIT: Gauge 4 Sync (24px) */
@@ -1345,7 +1345,7 @@ button.navbar__link--contact-trigger:not(.button) {
   height: 100%;
   display: none;
   overflow: hidden; /* CLIPS the image content, not the controls */
-  border-radius: 0.5rem;
+  border-radius: var(--sys-radius-4);
 }
 
 .slideshow__slide--active {
