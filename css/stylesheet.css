@@ -1987,7 +1987,7 @@ to maintain visual rhythm without breaking the scale.
   position: relative;
   background-color: var(--sys-color-canvas);
   padding: var(--sys-space-7) var(--sys-space-6);
-  border-radius: 0.8rem;
+  border-radius: var(--sys-radius-5);
   border: 1px solid var(--sys-color-void-alpha-3);
   width: 90%;
   max-width: 500px;
@@ -2031,7 +2031,7 @@ dialog.contact-modal[open] {
 /* 3. THE INNER FORM (Atmospheric HUD 'Dithered Ink') */
 .contact-modal__form {
   position: relative; /* ANCHOR CHECK: Locks HUD to bottom */
-  border-radius: 0.3125rem;
+  border-radius: var(--sys-radius-4);
   /* DITHERED RADIAL GRADIENT: Synced with Brand Rig */
   background-image: radial-gradient(
     circle at 10% 10%,
@@ -2043,7 +2043,7 @@ dialog.contact-modal[open] {
   );
   background-color: #121212;
   border: 2px solid var(--sys-color-primary); /* Pine Accent Rim */
-  padding: 1.5rem;
+  padding: var(--sys-space-6);
   /* BOOSTED VIOLET GLOW (Hero Sync) */
   box-shadow:
     0 0 10px rgba(var(--sys-color-accent), 0.8),
@@ -2153,6 +2153,14 @@ dialog.contact-modal[open] {
   transition: all var(--sys-transition-standard);
   z-index: var(--z-modal-dialog);
   color: var(--sys-color-type-talk); /* Charcoal 'X' */
+}
+@media screen and (max-width: 809px) {
+  .contact-modal__close-icon {
+    top: -0.75rem; /* 8px for mobile */
+    right: -0.75rem; /* 8px for mobile */
+    width: 3.5rem; /* 56px for mobile */
+    height: 3.5rem; /* 56px for mobile */
+  }
 }
 
 .contact-modal__close-icon:hover {
