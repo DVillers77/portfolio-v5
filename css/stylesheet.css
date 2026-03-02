@@ -1,84 +1,20 @@
 /* ================================================= */
-/* === [V25] STEADY FLOOD & HIGH-FIDELITY RIG PART A == */
+/* === [V26] KINETIC GAUGE ENGINE: SYSTEM BRAIN   == */
 /* ================================================= */
 
-/* 1. REGISTRATION */
+/* 1. REGISTRATION (Browser API Setup) */
 @property --sunX {
   syntax: "<percentage>";
   inherits: true;
   initial-value: 50%;
 }
-
 @property --sunY {
   syntax: "<percentage>";
   inherits: true;
   initial-value: 50%;
 }
 
-/* ================================================= */
-/* === 1. GLOBAL ENGINE: Reset & Variables       === */
-/* ================================================= */
-html {
-  -webkit-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  overflow-x: hidden;
-  scrollbar-gutter: stable;
-
-  /* THE INERTIA BRIDGE CONTROLLER:
-     The html tag now drives the values, but doesn't render the gradient. */
-  animation: completePinball linear;
-  animation-timeline: scroll();
-}
-
-/* The "Stability" Reset */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* 1.5 ACCESSIBILITY: Precision Focus Separation */
-.button:focus-visible {
-  outline: none !important;
-  /* The box-shadow MUST follow the border-radius */
-  box-shadow:
-    0 0 0 0.125rem white,
-    0 0 0 0.3125rem var(--sys-color-primary) !important;
-  /* Force the anchor tag to respect its original button curves */
-  border-radius: 0.5rem !important;
-  position: relative;
-  z-index: 10;
-}
-
-.navbar__link:focus-visible {
-  outline: none !important;
-  box-shadow:
-    0 0 0 0.125rem white,
-    0 0 0 0.3125rem var(--sys-color-primary) !important;
-  border-radius: 0 !important; /* Keep nav links sharp */
-  position: relative;
-  z-index: 2002;
-}
-
-/* Fallback for other focusable elements */
-:focus-visible:not(.button):not(.navbar__link) {
-  outline: none !important;
-  box-shadow:
-    0 0 0 0.125rem white,
-    0 0 0 0.3125rem var(--sys-color-primary) !important;
-}
-
-/* 1.6 FORM & INTERACTION RESET */
-input,
-textarea,
-button {
-  font-family: var(--font-body);
-  font-size: 1rem;
-}
-
+/* 2. THE DESIGN SYSTEM (The "Brain" / Source of Truth) */
 :root {
   /* Increase this to push the sun center-point into the right margin */
   --content-limit-percent: 37%;
@@ -86,98 +22,12 @@ button {
 
   /* --- FLUID GRADIENT CONTROL --- */
   --nav-gradient-stop: 45vw;
-  --navbar-shelf-height: 0.9375rem;
-
+  --navbar-shelf-height: var(--sys-space-3);
   /* ================================================= */
-  /* === [V6] THE CREATOR: 1.414 HARMONIC SCALE     === */
+  /* === [A] THE INGREDIENTS (The Raw Physics)     === */
   /* ================================================= */
-  /* ESTIMATED VALUES BASED ON THE 1.414 AUGMENTED FOURTH RATIO, 
-   CALIBRATED FOR A MOBILE-FIRST APPROACH WITH A 16px BASE. 
-   THESE VALUES SHOULD BE TESTED AND ADJUSTED BASED ON 
-   SPECIFIC DESIGN AND CONTENT NEEDS. */
 
-  /* 1. FONT DNA */
-  --font-heading: "Poppins", sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
-  --font-story: "Playfair Display", serif;
-
-  /* 
-  ==========================================================================
-  RESONANT TYPOGRAPHY CONSTITUTION (v1.0)
-  --------------------------------------------------------------------------
-  VOICE:    Creator Archetype (High-tension, Engineered, Precise)
-  SCALE:    1.414 Augmented Fourth (Non-melodic / Dramatic)
-  FONTS:    Poppins (Display/Lead) | Inter (Body/UI)
-  STRATEGY: Fluid-Optical (No Media Queries)
-  ==========================================================================
-*/
-
-  /* 1. THE 11-TIER CLAMP MATRIX (1.414 Augmented Fourth) */
-  --fs-t1: clamp(2.5rem, 10vw, 6rem); /* Hero Display */
-  --fs-t2: clamp(1.75rem, 0.5rem + 7vw, 4.25rem); /* Page Title */
-  --fs-t3: clamp(1.25rem, 0.4rem + 5vw, 3rem); /* Section Head */
-  --fs-t4: clamp(1.15rem, 0.3rem + 3.5vw, 2.15rem); /* Sub-title */
-  --fs-t5: clamp(1.1rem, 0.2rem + 2.5vw, 1.5rem); /* Minor Head */
-  --fs-t6: clamp(1.05rem, 0.1rem + 2vw, 1.25rem); /* Lead / Intro (Poppins wt600) */
-  --fs-t7: clamp(1rem, 0.8rem + 0.5vw, 1.125rem); /* Body Main (Inter wt400) */
-  --fs-t8: clamp(0.875rem, 0.75rem + 0.3vw, 1rem); /* Body Small */
-  --fs-t9: clamp(0.8rem, 0.7rem + 0.2vw, 0.875rem); /* Caption */
-  --fs-t10: clamp(0.75rem, 0.68rem + 0.1vw, 0.8rem); /* Helper / Meta */
-  --fs-t11: clamp(0.7rem, 0.65rem + 0.1vw, 0.75rem); /* Legal / Fine */
-
-  /* 2. OPTICAL LINE HEIGHTS (Unitless Multipliers) */
-  /* 
-   TIGHTER RANGE: 1.15 on Mobile -> 1.05 on Desktop
-   The 0.08 multiplier makes the "tightening" more aggressive as the screen grows.
-*/
-  --lh-display-hero: clamp(1.05, 1.25 - 0.08 * 1vw, 1.15);
-  /* Tightens dynamically from 1.2 to 1.1 as font scales up */
-  --lh-display: clamp(1.1, 1.3 - 0.05 * 1vw, 1.2); /* T1-T3 */
-  --lh-heading: 1.25; /* T4-T5 */
-  --lh-lead: 1.4; /* T6 (Poppins wt600) */
-  --lh-body: 1.6; /* T7-T8 (Inter wt400) */
-  --lh-small: 1.45; /* T9-T11 */
-
-  /* 3. PROPORTIONAL LETTER SPACING (Relative em units) */
-  --ls-display: -0.02em; /* T1-T3 (Poppins Tight) */
-  --ls-heading: -0.015em; /* T4-T6 (Poppins Subtle) */
-  --ls-normal: 0; /* T7-T8 (Inter Standard) */
-  --ls-wide: 0.025em; /* T9 (Breathing Room) */
-  --ls-micro: 0.05em; /* T10-T11 (Legibility) */
-
-  /* 4. STORY OVERRIDE (Playfair Display at T6 and WT400) */
-  --lh-story: 1.5; /* Elegant breathing room for high-contrast serifs */
-  --ls-story: 0.015em; /* Prevents italic serifs from "tangling" */
-
-  /* 
-  IMPLEMENTATION GUIDELINES:
-  - T1-T6: Use Poppins. Weights 600-700.
-  - T7-T11: Use Inter. Weights 400.
-  - Avoid fixed pixel heights/spacings to preserve fluid resonance.
-*/
-}
-
-/* 5. GLOBAL TAG RE-CALIBRATION */
-h2 {
-  font-family: var(--font-heading);
-  font-size: var(--fs-t3) !important;
-}
-p {
-  font-family: var(--font-body);
-  font-size: var(--fs-t7) !important;
-  line-height: var(--lh-body);
-  max-width: 65ch; /* Your optimal line length research */
-}
-
-/* ================================================= */
-/* === THE KINETIC GAUGE ENGINE (Spinal Tap)      === */
-/* ================================================= */
-/* ================================================= */
-/* === [A] THE INGREDIENTS (The Raw Physics)     === */
-/* ================================================= */
-
-/* --- A.1 PIGMENTS (DNA) --- */
-:root {
+  /* --- THE PIGMENTS (The DNA) --- */
   --pigment-pine-rgb: 1, 98, 75;
   --pigment-violet-rgb: 156, 39, 176;
   --pigment-magenta-rgb: 255, 0, 255;
@@ -228,13 +78,12 @@ p {
     --sys-world-base-dynamic: var(--sys-world-base-desktop);
   }
 }
-
-/* ================================================= */
-/* === [B] THE SWITCHBOARDS (Semantic Roles)     === */
-/* ================================================= */
-
-/* --- B.1 COLOR ROLES --- */
 :root {
+  /* ================================================= */
+  /* === [B] THE SWITCHBOARDS (Semantic Roles)     === */
+  /* ================================================= */
+  /* --- B.1 COLOR ROLES --- */
+
   --sys-role-primary-rgb: var(--pigment-pine-rgb);
   --sys-role-accent-rgb: var(--pigment-violet-rgb);
   --sys-role-action-rgb: var(--pigment-magenta-rgb);
@@ -258,51 +107,6 @@ p {
   --sys-color-warning: rgb(var(--sys-role-warning-rgb));
   --sys-color-info: rgb(var(--sys-role-info-rgb));
   --sys-color-success: rgb(var(--sys-role-success-rgb));
-
-  /* --- B.3 PHONIC TYPE SYSTEM --- */
-
-  /* REDLINE: Maximum contrast for critical alerts. Black (10, 10, 10) */
-  --sys-color-type-redline: rgb(var(--sys-color-void));
-  /* SHOUT: High contrast for emphasis without the severity of redline. Charcoal (51, 51, 51*/
-  --sys-color-type-shout: rgb(var(--sys-color-neutral));
-  /* TALK: 90% Black (10, 10, 10) mixed with 10% White (255, 255, 255) */
-  --sys-color-type-talk: color-mix(in srgb, var(--sys-color-void), var(--sys-color-canvas) 10%);
-  /* WHISPER: 85% Black (10, 10, 10) mixed with 15% White (255, 255, 255) */
-  --sys-color-type-whisper: color-mix(in srgb, var(--sys-color-void), var(--sys-color-canvas) 15%);
-  /* Muted: 80% Black (10, 10, 10) mixed with 20% White (255, 255, 255) */
-  --sys-color-type-muted: color-mix(in srgb, var(--sys-color-void), var(--sys-color-canvas) 20%);
-
-  /* ================================================= */
-  /* === [D] KINETIC GEOMETRY (Unabridged 1-11)    === */
-  /* ================================================= */
-
-  /* --- D.1 SPACE (Dynamic Base Scaling) --- */
-
-  --sys-space-1: calc(var(--gauge-1) * var(--sys-world-base-dynamic)); /* 6.4px  */
-  --sys-space-2: calc(var(--gauge-2) * var(--sys-world-base-dynamic)); /* 12.8px */
-  --sys-space-3: calc(var(--gauge-3) * var(--sys-world-base-dynamic)); /* 19.2px */
-  --sys-space-4: calc(var(--gauge-4) * var(--sys-world-base-dynamic)); /* 25.6px */
-  --sys-space-5: calc(var(--gauge-5) * var(--sys-world-base-dynamic)); /* 32.0px */
-  --sys-space-6: calc(var(--gauge-6) * var(--sys-world-base-dynamic)); /* 38.4px */
-  --sys-space-7: calc(var(--gauge-7) * var(--sys-world-base-dynamic)); /* 44.8px */
-  --sys-space-8: calc(var(--gauge-8) * var(--sys-world-base-dynamic)); /* 51.2px */
-  --sys-space-9: calc(var(--gauge-9) * var(--sys-world-base-dynamic)); /* 57.6px */
-  --sys-space-10: calc(var(--gauge-10) * var(--sys-world-base-dynamic)); /* 67.2px */
-  --sys-space-11: calc(var(--gauge-11) * var(--sys-world-base-dynamic)); /* 76.8px */
-
-  /* --- D.2 RADIUS (Static 32px Radius Base) --- */
-
-  --sys-radius-1: calc(var(--gauge-1) * 2rem); /* 2.5px  */
-  --sys-radius-2: calc(var(--gauge-2) * 2rem); /* 5.1px  */
-  --sys-radius-3: calc(var(--gauge-3) * 2rem); /* 7.6px  */
-  --sys-radius-4: calc(var(--gauge-4) * 2rem); /* 10.2px */
-  --sys-radius-5: calc(var(--gauge-5) * 2rem); /* 12.8px */
-  --sys-radius-6: calc(var(--gauge-6) * 2rem); /* 15.3px */
-  --sys-radius-7: calc(var(--gauge-7) * 2rem); /* 17.9px */
-  --sys-radius-8: calc(var(--gauge-8) * 2rem); /* 20.4px */
-  --sys-radius-9: calc(var(--gauge-9) * 2rem); /* 23.0px */
-  --sys-radius-10: calc(var(--gauge-10) * 2rem); /* 26.8px */
-  --sys-radius-11: 100px; /* Pill */
 
   /* ================================================= */
   /* === [E] THE ALPHA MATRIX (Unabridged 1-11)     === */
@@ -374,6 +178,119 @@ p {
   --sys-color-canvas-alpha-11: rgba(var(--sys-role-canvas-rgb), var(--gauge-11));
 
   /* ================================================= */
+  /* === [V6] THE CREATOR: 1.414 HARMONIC SCALE     === */
+  /* ================================================= */
+  /* ESTIMATED VALUES BASED ON THE 1.414 AUGMENTED FOURTH RATIO, 
+   CALIBRATED FOR A MOBILE-FIRST APPROACH WITH A 16px BASE. 
+   THESE VALUES SHOULD BE TESTED AND ADJUSTED BASED ON 
+   SPECIFIC DESIGN AND CONTENT NEEDS. */
+
+  /* 1. FONT DNA */
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-story: "Playfair Display", serif;
+
+  /* 
+  ==========================================================================
+  RESONANT TYPOGRAPHY CONSTITUTION (v1.0)
+  --------------------------------------------------------------------------
+  VOICE:    Creator Archetype (High-tension, Engineered, Precise)
+  SCALE:    1.414 Augmented Fourth (Non-melodic / Dramatic)
+  FONTS:    Poppins (Display/Lead) | Inter (Body/UI)
+  STRATEGY: Fluid-Optical (No Media Queries)
+  ==========================================================================
+*/
+
+  /* 1. THE 11-TIER CLAMP MATRIX (1.414 Augmented Fourth) */
+  --fs-t1: clamp(2.5rem, 10vw, 6rem); /* Hero Display */
+  --fs-t2: clamp(1.75rem, 0.5rem + 7vw, 4.25rem); /* Page Title */
+  --fs-t3: clamp(1.25rem, 0.4rem + 5vw, 3rem); /* Section Head */
+  --fs-t4: clamp(1.15rem, 0.3rem + 3.5vw, 2.15rem); /* Sub-title */
+  --fs-t5: clamp(1.1rem, 0.2rem + 2.5vw, 1.5rem); /* Minor Head */
+  --fs-t6: clamp(1.05rem, 0.1rem + 2vw, 1.25rem); /* Lead / Intro (Poppins wt600) */
+  --fs-t7: clamp(1rem, 0.8rem + 0.5vw, 1.125rem); /* Body Main (Inter wt400) */
+  --fs-t8: clamp(0.875rem, 0.75rem + 0.3vw, 1rem); /* Body Small */
+  --fs-t9: clamp(0.8rem, 0.7rem + 0.2vw, 0.875rem); /* Caption */
+  --fs-t10: clamp(0.75rem, 0.68rem + 0.1vw, 0.8rem); /* Helper / Meta */
+  --fs-t11: clamp(0.7rem, 0.65rem + 0.1vw, 0.75rem); /* Legal / Fine */
+
+  /* 2. OPTICAL LINE HEIGHTS (Unitless Multipliers) */
+  /* 
+   TIGHTER RANGE: 1.15 on Mobile -> 1.05 on Desktop
+   The 0.08 multiplier makes the "tightening" more aggressive as the screen grows.
+*/
+  --lh-display-hero: clamp(1.05, 1.25 - 0.08 * 1vw, 1.15);
+  /* Tightens dynamically from 1.2 to 1.1 as font scales up */
+  --lh-display: clamp(1.1, 1.3 - 0.05 * 1vw, 1.2); /* T1-T3 */
+  --lh-heading: 1.25; /* T4-T5 */
+  --lh-lead: 1.4; /* T6 (Poppins wt600) */
+  --lh-body: 1.6; /* T7-T8 (Inter wt400) */
+  --lh-small: 1.45; /* T9-T11 */
+
+  /* 3. PROPORTIONAL LETTER SPACING (Relative em units) */
+  --ls-display: -0.02em; /* T1-T3 (Poppins Tight) */
+  --ls-heading: -0.015em; /* T4-T6 (Poppins Subtle) */
+  --ls-normal: 0; /* T7-T8 (Inter Standard) */
+  --ls-wide: 0.025em; /* T9 (Breathing Room) */
+  --ls-micro: 0.05em; /* T10-T11 (Legibility) */
+
+  /* 4. STORY OVERRIDE (Playfair Display at T6 and WT400) */
+  --lh-story: 1.5; /* Elegant breathing room for high-contrast serifs */
+  --ls-story: 0.015em; /* Prevents italic serifs from "tangling" */
+
+  /* 
+  IMPLEMENTATION GUIDELINES:
+  - T1-T6: Use Poppins. Weights 600-700.
+  - T7-T11: Use Inter. Weights 400.
+  - Avoid fixed pixel heights/spacings to preserve fluid resonance.
+*/
+
+  /* --- B.3 PHONIC TYPE SYSTEM --- */
+
+  /* REDLINE: Maximum contrast for critical alerts. Black (10, 10, 10) */
+  --sys-color-type-redline: rgb(var(--sys-color-void));
+  /* SHOUT: High contrast for emphasis without the severity of redline. Charcoal (51, 51, 51*/
+  --sys-color-type-shout: rgb(var(--sys-color-neutral));
+  /* TALK: 90% Black (10, 10, 10) mixed with 10% White (255, 255, 255) */
+  --sys-color-type-talk: color-mix(in srgb, var(--sys-color-void), var(--sys-color-canvas) 10%);
+  /* WHISPER: 85% Black (10, 10, 10) mixed with 15% White (255, 255, 255) */
+  --sys-color-type-whisper: color-mix(in srgb, var(--sys-color-void), var(--sys-color-canvas) 15%);
+  /* Muted: 80% Black (10, 10, 10) mixed with 20% White (255, 255, 255) */
+  --sys-color-type-muted: color-mix(in srgb, var(--sys-color-void), var(--sys-color-canvas) 20%);
+
+  /* ================================================= */
+  /* === [D] KINETIC GEOMETRY (Unabridged 1-11)    === */
+  /* ================================================= */
+
+  /* --- D.1 SPACE (Dynamic Base Scaling) --- */
+
+  --sys-space-1: calc(var(--gauge-1) * var(--sys-world-base-dynamic)); /* 6.4px  */
+  --sys-space-2: calc(var(--gauge-2) * var(--sys-world-base-dynamic)); /* 12.8px */
+  --sys-space-3: calc(var(--gauge-3) * var(--sys-world-base-dynamic)); /* 19.2px */
+  --sys-space-4: calc(var(--gauge-4) * var(--sys-world-base-dynamic)); /* 25.6px */
+  --sys-space-5: calc(var(--gauge-5) * var(--sys-world-base-dynamic)); /* 32.0px */
+  --sys-space-6: calc(var(--gauge-6) * var(--sys-world-base-dynamic)); /* 38.4px */
+  --sys-space-7: calc(var(--gauge-7) * var(--sys-world-base-dynamic)); /* 44.8px */
+  --sys-space-8: calc(var(--gauge-8) * var(--sys-world-base-dynamic)); /* 51.2px */
+  --sys-space-9: calc(var(--gauge-9) * var(--sys-world-base-dynamic)); /* 57.6px */
+  --sys-space-10: calc(var(--gauge-10) * var(--sys-world-base-dynamic)); /* 67.2px */
+  --sys-space-11: calc(var(--gauge-11) * var(--sys-world-base-dynamic)); /* 76.8px */
+
+  /* --- D.2 RADIUS (Static 32px Radius Base) --- */
+
+  --sys-radius-1: calc(var(--gauge-1) * 2rem); /* 2.5px  */
+  --sys-radius-2: calc(var(--gauge-2) * 2rem); /* 5.1px  */
+  --sys-radius-3: calc(var(--gauge-3) * 2rem); /* 7.6px  */
+  --sys-radius-4: calc(var(--gauge-4) * 2rem); /* 10.2px */
+  --sys-radius-5: calc(var(--gauge-5) * 2rem); /* 12.8px */
+  --sys-radius-6: calc(var(--gauge-6) * 2rem); /* 15.3px */
+  --sys-radius-7: calc(var(--gauge-7) * 2rem); /* 17.9px */
+  --sys-radius-8: calc(var(--gauge-8) * 2rem); /* 20.4px */
+  --sys-radius-9: calc(var(--gauge-9) * 2rem); /* 23.0px */
+  --sys-radius-10: calc(var(--gauge-10) * 2rem); /* 26.8px */
+  --sys-radius-11: 100px; /* Pill */
+
+  /* ================================================= */
   /* === [C] ATMOSPHERICS (Depth & Glow Rig)       === */
   /* ================================================= */
 
@@ -397,29 +314,25 @@ p {
   --sys-color-primary-on-canvas-1-bg:
     linear-gradient(var(--sys-color-primary-alpha-1), var(--sys-color-primary-alpha-1)), var(--sys-color-canvas);
 
+  /* SEMANTIC FOCUS DEFINITION
+     DX NOTE: We use a multi-layered shadow to create a 'Halo' effect.
+     Layer 1: Canvas color (Space 1) creates a gap to prevent color bleeding.
+     Layer 2: Primary color (Space 2) creates the high-visibility indicator.
+  */
+  --sys-focus-ring-gap: var(--sys-space-1);
+  --sys-focus-ring-thickness: var(--sys-space-2);
+
+  --sys-shadow-focus-halo:
+    0 0 0 var(--sys-focus-ring-gap) var(--sys-color-canvas),
+    0 0 0 var(--sys-focus-ring-thickness) var(--sys-color-primary);
+
+  /* LAYER INDICATORS */
+  --layer-focus-standard: 10;
+  --layer-focus-topmost: 2002;
+
   /* ================================================= */
   /* === [F] SEMANTIC ALIASES (The Handshake)      === */
   /* ================================================= */
-  /* PURPOSE: 
-   This section maps "Universal Physics" to "Intent." 
-   It serves as the master control panel for the site's 'vibe'.
-
-   HOW TO USE:
-   - Assign a Primitive (e.g., --sys-space-4) to a Semantic Role.
-   - Use these tokens in your component CSS instead of the Primitives.
-   - To update the layout globally, change the assignment here.
-
-   DEFAULTS:
-   The tokens below are a 'Starter Set' curated for optimal Gestalt 
-   grouping and mobile touch-safety.
-
-   STRATEGIC GOVERNANCE:
-   - BE CAUTIOUS: Only create a token here if you find yourself 
-     using the same Primitive for a specific UI role multiple times.
-   - DETERMINATION: Ask "If I change a Button, should the Card change too?"
-   - WHY: Over-aliasing creates "Token Fatigue" and makes the 
-     system harder to learn for humans and AI agents.
-==================================================== */
 
   --sys-space-body-base: var(--sys-space-2);
   --sys-spacing-cta-v: var(--sys-space-2);
@@ -430,9 +343,40 @@ p {
   --sys-spacing-gutter: var(--sys-space-2);
   --sys-spacing-section-v: var(--sys-space-8);
   --sys-spacing-hero-v: var(--sys-space-10);
-  --accent-rail-height: 4px; /* Universal height for 'Mirror' accents and global navigation rails */
-  /* Matching existing 'Kinetic Physics' 0.4s Bezier */
-  --sys-transition-slow: 0.4s cubic-bezier(0.15, 1, 0.3, 1);
+
+  /* --- B.5 LAYER STACK (The Depth Engine) --- */
+  /* DX NOTE: 1000-unit gaps allow for 'relative stacking' 
+     within components (e.g., calc(var(--layer-nav) + 1)) 
+  */
+  --layer-sink: -1; /* Background light/gradients */
+  --layer-surface: 1; /* Default content */
+  --layer-raised: 10; /* Active buttons / Hovered cards */
+  --layer-nav: 1000; /* Sticky navigation bar */
+  --layer-overlay: 2000; /* Dropdowns / Modals / Focus rings */
+  --layer-topmost: 3000; /* Skip Links / Tooltips */
+
+  /* --- B.5 MOTION ENGINE (The Personality) --- */
+  /* DX NOTE: We use specific cubic-beziers to define 'The Creator' archetype.
+     Standard: Balanced for UI (Buttons/Dots)
+     Inertia: Heavy and smooth (Cards/Layout)
+     Kinetic: Elastic and responsive (Modals/Popups)
+  */
+  --sys-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --sys-ease-inertia: cubic-bezier(0.15, 1, 0.3, 1);
+  --sys-ease-kinetic: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --sys-duration-fast: 0.2s;
+  --sys-duration-mid: 0.3s;
+  --sys-duration-slow: 0.4s;
+
+  /* COMPOUND TOKENS (The "One-Stop" Transition) */
+  --sys-transition-standard: var(--sys-duration-mid) var(--sys-ease-standard);
+  --sys-transition-snappy: var(--sys-duration-fast) var(--sys-ease-standard);
+  --sys-transition-smooth: var(--sys-duration-slow) var(--sys-ease-inertia);
+  --sys-transition-pop: var(--sys-duration-slow) var(--sys-ease-kinetic);
+
+  /* Universal height for 'Mirror' accents and global navigation rails */
+  --accent-rail-height: 4px;
 }
 
 /* ================================================= */
@@ -530,22 +474,127 @@ body::before {
     transparent 400%
   );
 
+  /* NOTE: Using hex #010101 instead of --sys-color-void to prevent 8-bit color banding in the radial-gradient transition. */
   background-color: #010101;
   z-index: -1;
   pointer-events: none;
 
   /* THE LIQUID DAMPENER */
   transition:
-    --sunX 2.5s cubic-bezier(0.15, 1, 0.3, 1),
-    --sunY 2.5s cubic-bezier(0.15, 1, 0.3, 1);
+    --sunX 2.5s var(--sys-ease-inertia),
+    --sunY 2.5s var(--sys-ease-inertia);
 }
 
 /* The 'Spine' of the site */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1.25rem;
+  padding: 0 var(--sys-space-3);
   width: 100%;
+}
+
+/* ================================================= */
+/* === 1. GLOBAL ENGINE: Reset & Variables       === */
+/* ================================================= */
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+
+  /* THE INERTIA BRIDGE CONTROLLER:
+     The html tag now drives the values, but doesn't render the gradient. */
+  animation: completePinball linear;
+  animation-timeline: scroll();
+}
+
+/* The "Stability" Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 5. GLOBAL TAG RE-CALIBRATION */
+h2 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-t3) !important;
+}
+p {
+  font-family: var(--font-body);
+  font-size: var(--fs-t7) !important;
+  line-height: var(--lh-body);
+  max-width: 65ch; /* optimal line length research */
+}
+
+/* 1.5 ACCESSIBILITY: Precision Focus Separation
+   DX NOTE: This pattern ensures high-contrast visibility for keyboard users
+   while adhering to the Kinetic Gauge spacing engine. 
+*/
+
+.button:focus-visible {
+  outline: none !important;
+  /* The halo automatically scales with the world-base-dynamic */
+  box-shadow: var(--sys-shadow-focus-halo) !important;
+
+  /* UX NOTE: Ensuring the focus ring hugs the specific geometry of buttons */
+  border-radius: var(--sys-radius-button) !important;
+  position: relative;
+  z-index: var(--layer-focus-standard);
+}
+
+.navbar__link:focus-visible {
+  outline: none !important;
+  box-shadow: var(--sys-shadow-focus-halo) !important;
+
+  /* UX NOTE: Sharp edges for nav items provide better alignment with the 'Shelf' */
+  border-radius: 0 !important;
+  position: relative;
+  z-index: var(--layer-focus-topmost);
+}
+
+/* Global Fallback for Generic Interactive Elements (Inputs, Selects, etc.) */
+:focus-visible:not(.button):not(.navbar__link) {
+  outline: none !important;
+  box-shadow: var(--sys-shadow-focus-halo) !important;
+}
+
+/* 1.6 FORM & INTERACTION RESET */
+input,
+textarea,
+button {
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+/* 1.7 ACCESSIBILITY: Skip to Main Content 
+   DX NOTE: Essential for keyboard users to bypass nav menus.
+   Visualized only on focus to maintain "The Creator" aesthetic.
+*/
+.skip-link {
+  position: absolute;
+  top: -100%; /* Deeply hidden off-screen */
+  left: var(--sys-space-3);
+  background-color: var(--sys-color-action); /* High-visibility Magenta */
+  color: var(--sys-color-canvas);
+  padding: var(--sys-space-2) var(--sys-space-4);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 var(--sys-radius-3) var(--sys-radius-3);
+  z-index: 3000; /* Stays above the Pinball and Nav */
+  transition: top var(--sys-transition-standard);
+}
+
+.skip-link:focus {
+  top: 0; /* Drops into view on first TAB press */
+  outline: none;
+  box-shadow:
+    0 0 0 0.125rem var(--sys-color-canvas),
+    0 0 0 0.3125rem var(--sys-color-primary) !important;
 }
 
 /* ================================================= */
@@ -594,7 +643,7 @@ header > .navbar::after {
   top: 100%;
   left: 0;
   width: 100%;
-  height: 1rem;
+  height: var(--navbar-shelf-height);
   z-index: -1;
   display: none; /* Desktop Only via Media Query */
   background: linear-gradient(
@@ -612,8 +661,9 @@ header > .navbar::after {
 .navbar__logo {
   font-family: "Poppins", sans-serif;
   font-weight: 800;
-  font-size: 1.25rem;
+  font-size: var(--fs-t5);
   line-height: 1;
+  letter-spacing: var(--ls-wide);
   color: var(--sys-color-canvas); /* AUDIT: Synced to Canvas */
   text-decoration: none;
   display: inline-flex;
@@ -622,7 +672,9 @@ header > .navbar::after {
   padding: var(--sys-space-1) var(--sys-space-3); /* AUDIT: Gauge 1 / Gauge 3 */
   white-space: nowrap;
   flex-shrink: 0;
-  transition: transform 0.2s ease;
+  transition:
+    transform var(--sys-transition-snappy),
+    color var(--sys-transition-snappy);
   order: 0;
   z-index: 1002;
 }
@@ -630,8 +682,8 @@ header > .navbar::after {
 .logo__suffix {
   color: var(--sys-color-action); /* AUDIT: Synced to Action (Magenta) */
   transition:
-    color 0.2s ease,
-    text-shadow 0.2s ease;
+    color var(--sys-transition-snappy),
+    text-shadow var(--sys-transition-snappy);
 }
 
 .navbar__logo:hover {
@@ -667,8 +719,8 @@ header > .navbar::after {
   order: 2;
 
   transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
+    background-color var(--sys-transition-snappy),
+    color var(--sys-transition-snappy);
 }
 
 .navbar__toggle-icon {
@@ -684,7 +736,7 @@ header > .navbar::after {
   width: 100%;
   height: 2px;
   background-color: currentColor;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--sys-transition-standard);
   border-radius: 0.125rem;
 }
 
@@ -709,7 +761,7 @@ header > .navbar::after {
   color: var(--sys-color-canvas);
 
   /* UX Tip: Ensure the transition feels 'Kinetic' */
-  transition: background-color 0.2s ease;
+  transition: background-color var(--sys-transition-snappy);
 }
 
 /* 2. THE LINKS CONTAINER (Triggered by .responsive class) */
@@ -720,26 +772,11 @@ header > .navbar::after {
   order: 3;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: max-height var(--sys-transition-smooth);
 }
 
 .navbar.responsive .navbar__links {
   max-height: 500px; /* Expands when JS toggles .responsive */
-}
-
-.navbar__link {
-  font-family: var(--font-body);
-  font-size: clamp(0.875rem, 1.1vw, 1.0625rem);
-  color: var(--sys-color-canvas);
-  text-decoration: none;
-  padding: var(--sys-space-2) var(--sys-space-4);
-  display: block;
-  /* ENGINE PURE: Swap 'all' for explicit targets */
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    box-shadow 0.2s ease;
-  position: relative;
 }
 
 /* --- BUTTON & LINK SYNC ENGINE --- */
@@ -753,6 +790,7 @@ button.navbar__link--contact-trigger:not(.button) {
   font-family: var(--font-body);
   font-size: var(--fs-t7);
   color: var(--sys-color-canvas);
+  text-decoration: none;
 
   /* 2. RESET & LAYOUT */
   background: none;
@@ -765,11 +803,10 @@ button.navbar__link--contact-trigger:not(.button) {
 
   /* 3. INTERACTION RIG */
   transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    box-shadow 0.2s ease;
+    background-color var(--sys-transition-snappy),
+    color var(--sys-transition-snappy),
+    box-shadow var(--sys-transition-snappy);
   position: relative;
-  text-decoration: none;
 }
 
 /* --- DESKTOP RECALIBRATION --- */
@@ -778,7 +815,12 @@ button.navbar__link--contact-trigger:not(.button) {
   button.navbar__link,
   button.navbar__link--contact-trigger:not(.button) {
     width: auto;
-    padding: 0.875rem clamp(0.75rem, 1.5vw, 1.5rem);
+    /* 
+Refactored to align with System Spacing Ramp. 
+Mapped 0.875rem (14px) -> --sys-space-2 (12.8px) 
+to maintain visual rhythm without breaking the scale. 
+*/
+    padding: var(--sys-space-2) clamp(var(--sys-space-2), 1.5vw, var(--sys-space-4));
   }
 }
 
@@ -859,7 +901,12 @@ button.navbar__link--contact-trigger:not(.button) {
 
   .navbar__link {
     width: auto;
-    padding: 0.875rem clamp(0.75rem, 1.5vw, 1.5rem);
+    /* 
+Refactored to align with System Spacing Ramp. 
+Mapped 0.875rem (14px) -> --sys-space-2 (12.8px) 
+to maintain visual rhythm without breaking the scale. 
+*/
+    padding: var(--sys-space-2) clamp(var(--sys-space-2), 1.5vw, var(--sys-space-4));
   }
 
   .navbar__link.active::before,
@@ -868,7 +915,8 @@ button.navbar__link--contact-trigger:not(.button) {
   }
 
   .navbar__link.active {
-    border-radius: 0.75rem 0.75rem 0 0;
+    /* Mapping 0.75rem (12px) to closest system token (12.8px) */
+    border-radius: var(--sys-radius-5) var(--sys-radius-5) 0 0;
   }
 }
 
@@ -908,9 +956,9 @@ button.navbar__link--contact-trigger:not(.button) {
 
   /* KINETIC PHYSICS: Smooth transition for the 'Ignition' effect on hover */
   transition:
-    transform 0.4s cubic-bezier(0.15, 1, 0.3, 1),
-    border-color 0.4s cubic-bezier(0.15, 1, 0.3, 1),
-    box-shadow 0.4s cubic-bezier(0.15, 1, 0.3, 1);
+    transform var(--sys-transition-smooth),
+    border-color var(--sys-transition-smooth),
+    box-shadow var(--sys-transition-smooth);
 }
 
 .project-archive .feature-block {
@@ -999,7 +1047,7 @@ button.navbar__link--contact-trigger:not(.button) {
   height: auto;
   margin-inline: auto; /* Absolute centering backup */
 
-  transition: transform var(--sys-transition-slow);
+  transition: transform var(--sys-transition-smooth);
 }
 
 .feature-block:hover .feature-block__image {
@@ -1118,7 +1166,7 @@ button.navbar__link--contact-trigger:not(.button) {
   /* NAVIGATIONAL LABEL: Micro-Engineered */
   font-family: var(--font-heading);
   font-size: var(--fs-t10); /* Smaller, more 'Meta' */
-  line-height: 1;
+  line-height: var(--lh-display-hero);
   letter-spacing: var(--ls-micro); /* 0.05em tracked out */
   text-transform: uppercase; /* Engineering clarity */
   color: var(--sys-color-primary);
@@ -1148,7 +1196,7 @@ button.navbar__link--contact-trigger:not(.button) {
   padding: var(--sys-space-5) var(--sys-space-6); /* Gauge 5x6 balance */
   border-left: 0.25rem solid var(--sys-color-accent-alpha-10);
   border-right: none;
-  border-radius: 0.5rem;
+  border-radius: var(--sys-radius-4);
   font-family: var(--font-story);
   letter-spacing: var(--ls-story);
   line-height: var(--lh-story);
@@ -1260,7 +1308,7 @@ button.navbar__link--contact-trigger:not(.button) {
   text-align: center;
 
   /* UPDATED: Neutral spacing to stop overlap */
-  letter-spacing: 0.03em; /* Increased for 900wt All-Caps resonance */
+  letter-spacing: var(--ls-wide);
   line-height: var(--lh-display-hero);
   text-transform: uppercase;
   text-rendering: optimizeLegibility;
@@ -1393,10 +1441,10 @@ button.navbar__link--contact-trigger:not(.button) {
   /* PERFORMANCE TRANSITION */
   /* ENGINE SYNC: Snappier 0.2s to match Navbars */
   transition:
-    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+    transform var(--sys-transition-snappy),
+    background-color var(--sys-transition-snappy),
+    box-shadow var(--sys-transition-snappy),
+    border-color var(--sys-transition-snappy);
 
   /* Initial state: Clean and flat */
   box-shadow: none;
@@ -1451,6 +1499,12 @@ button.navbar__link--contact-trigger:not(.button) {
 
   /* PHYSICS: 5% expansion for tactile feedback */
   transform: translateY(-50%) translateZ(0) scale(1.05);
+  /* Sync with the base state */
+  transition:
+    transform var(--sys-transition-snappy),
+    background-color var(--sys-transition-snappy),
+    border-color var(--sys-transition-snappy),
+    box-shadow var(--sys-transition-snappy);
 }
 
 .slideshow__control:active {
@@ -1460,7 +1514,7 @@ button.navbar__link--contact-trigger:not(.button) {
 
   /* Compression: Feels like a physical click */
   transform: translateY(-50%) translateZ(0) scale(0.95);
-  transition: transform 0.1s ease;
+  transition: transform var(--sys-duration-fast) var(--sys-ease-standard);
 }
 
 /* 3. THE PILL: Tightening the internal gap */
@@ -1483,17 +1537,20 @@ button.navbar__link--contact-trigger:not(.button) {
   border: 1px solid var(--sys-color-canvas-alpha-2);
   color: var(--sys-color-canvas);
 
-  padding: 0.8rem 1.6rem;
+  /* 0.8rem (12.8px) maps exactly to --sys-space-2 */
+  /* 1.6rem (25.6px) maps exactly to --sys-space-4 */
+  padding: var(--sys-space-2) var(--sys-space-4);
   border-radius: var(--sys-radius-11);
   text-decoration: none;
   font-family: var(--font-body);
 
   /* STABLE PHYSICS: Anchored without swelling */
   transform: translateZ(0);
+  /* Mapped to Standard (0.3s + Standard Easing) */
   transition:
-    background-color 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
+    background-color var(--sys-transition-standard),
+    box-shadow var(--sys-transition-standard),
+    border-color var(--sys-transition-standard);
 
   box-shadow: var(--sys-shadow-muffler-void);
   will-change: background-color, box-shadow;
@@ -1542,11 +1599,11 @@ button.navbar__link--contact-trigger:not(.button) {
   cursor: pointer;
   transform: scale(1);
   transition:
-    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 0.2s ease,
-    width 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    transform var(--sys-transition-snappy),
+    background-color var(--sys-transition-snappy),
+    width var(--sys-transition-snappy),
+    border-color var(--sys-transition-snappy),
+    box-shadow var(--sys-transition-snappy);
 }
 
 /* THE ACTIVE STATE: Refined & Contained */
@@ -1584,26 +1641,34 @@ button.navbar__link--contact-trigger:not(.button) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.625rem 2.5rem;
-  border-radius: var(--sys-radius-button);
+
+  /* System Spacing Tokens */
+  padding: var(--sys-space-2) var(--sys-space-6);
+  gap: var(--sys-space-1);
+
+  /* System Typography Tokens */
   font-family: var(--font-body);
+  font-size: var(--fs-t6);
   font-weight: 600;
-  font-size: 1.1rem;
-  letter-spacing: 0.05rem;
+  line-height: var(--lh-lead);
+  letter-spacing: var(--ls-wide);
+
+  border-radius: var(--sys-radius-button);
   text-decoration: none;
   border: 1px solid transparent;
   cursor: pointer;
-  gap: 0.625rem;
   white-space: nowrap;
 
-  /* HARDWARE ACCELERATION & STABILIZER */
-  transform: translateY(0) translateZ(0);
-  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* Performance-optimized transitions */
+  transition:
+    transform var(--sys-transition-standard),
+    background-color var(--sys-transition-standard),
+    letter-spacing var(--sys-transition-standard);
 }
 
 /* 2. BASE HOVER LOGIC */
 .button:hover:not(:disabled) {
-  letter-spacing: 0.08rem;
+  letter-spacing: var(--ls-micro);
   transform: translateY(-0.1875rem) translateZ(0);
 }
 
@@ -1644,6 +1709,9 @@ button.navbar__link--contact-trigger:not(.button) {
   transform: translateY(0.0625rem) scale(0.98);
   filter: brightness(0.9);
   box-shadow: none;
+  transition:
+    transform var(--sys-duration-fast) var(--sys-ease-standard),
+    filter var(--sys-duration-fast) var(--sys-ease-standard);
 }
 
 /* 6. STATE MODIFIERS (Persistence) */
@@ -1704,7 +1772,7 @@ button.navbar__link--contact-trigger:not(.button) {
   /* 1. BUTTON SMASH PROTECTION (Mobile CTA Affordance) */
   .button-group {
     flex-direction: column !important; /* RESTORED: Vertical Stack */
-    gap: 1.25rem;
+    gap: var(--sys-space-4);
     align-items: center !important;
     width: 100% !important;
   }
@@ -1926,9 +1994,9 @@ button.navbar__link--contact-trigger:not(.button) {
   box-shadow: var(--shadow-modal);
   opacity: 0;
   transform: scale(0.95);
-  transition:
-    opacity 0.4s ease,
-    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Kinetic Pop */
+  /* Mapped to Pop (0.4s + Kinetic Easing) */
+  /* This creates a synchronized "spring" entrance for properties */
+  transition: var(--sys-transition-pop);
   z-index: 100;
 }
 
@@ -1957,7 +2025,7 @@ dialog.contact-modal[open] {
 .contact-modal.is-closing {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s ease;
+  transition: opacity var(--sys-transition-smooth);
 }
 
 /* 3. THE INNER FORM (Atmospheric HUD 'Dithered Ink') */
@@ -1982,7 +2050,7 @@ dialog.contact-modal[open] {
     0 0 25px rgba(var(--sys-color-accent), 0.6),
     0 0 50px rgba(var(--sys-color-accent), 0.3);
   font-family: var(--font-body); /* Force Sans-Serif */
-  transition: background-image 0.5s ease-in-out; /* Atmospheric Smoothness */
+  transition: background-image var(--sys-transition-smooth);
 }
 
 .contact-modal__form h2 {
@@ -2035,7 +2103,7 @@ dialog.contact-modal[open] {
   background-color: rgba(255, 255, 255, 0.08); /* Transparent Ink */
   color: var(--sys-color-canvas); /* White Text */
   box-sizing: border-box;
-  transition: all 0.3s ease;
+  transition: all var(--sys-transition-standard);
 }
 
 /* FOCUS: CLEAN STATE (Removed focus line) */
@@ -2082,7 +2150,7 @@ dialog.contact-modal[open] {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--sys-transition-standard);
   z-index: 100;
   color: var(--sys-color-type-talk); /* Charcoal 'X' */
 }
@@ -2252,22 +2320,18 @@ dialog.contact-modal[open] {
 }
 
 .footer__link {
-  color: var(--sys-color-canvas);
   font-family: var(--font-body);
   font-size: var(--fs-t7);
-  letter-spacing: -0.02em;
+  color: var(--sys-color-canvas);
   text-decoration: none;
-  /* MIRROR SYNC: Targeted transitions only */
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    box-shadow 0.2s ease;
-
-  /* ENGINE SYNC: Vertical Gauge 3 (19.2px) vs Horizontal Gauge 5 (32px) 
-     This creates the "Taller/Wider" footer feel you requested. */
-  padding: var(--sys-space-3) var(--sys-space-5);
-
   display: flex;
+
+  padding: var(--sys-space-2) var(--sys-space-4);
+  transition:
+    background-color var(--sys-transition-snappy),
+    color var(--sys-transition-snappy),
+    box-shadow var(--sys-transition-snappy);
+
   align-items: center;
   white-space: nowrap;
   position: relative;
@@ -2294,7 +2358,14 @@ dialog.contact-modal[open] {
   display: block;
   /* Subtle rounding on the bottom to soften the "overlap" */
   border-radius: 0 0 2px 2px;
+  opacity: 0;
+  transition: opacity var(--sys-transition-snappy);
   z-index: 11; /* Sits on top of everything */
+}
+
+.footer__link:hover::after {
+  /* Trigger the fade */
+  opacity: 1;
 }
 
 /* --- MOBILE STACKING LOGIC --- */
