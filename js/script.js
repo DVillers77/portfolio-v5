@@ -132,52 +132,69 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /**
    * COMPONENT: Modern Contact Modal (Native <dialog>)
-   * Fetches the modal from components/contact-modal.html only when needed.
-   * Leverages browser-native focus-trapping and top-layer rendering.
+   * * DX NOTE: We use [data-modal-trigger] instead of CSS classes to decouple
+   * behavior from styling. This allows the same logic to apply to a Nav Link,
+   * a Footer Link, or a primary CTA Button without CSS specificity conflicts.
    */
   async function initContactModal() {
-    const contactTriggers = document.querySelectorAll(".navbar__link--contact-trigger");
+    // 1. DATA-DRIVEN SELECTOR: Target by function, not by look.
+    const contactTriggers = document.querySelectorAll('[data-modal-trigger="contact"]');
 
     async function openModal(e) {
+      // PREVENT DEFAULT: Necessary if the trigger is an <a> tag to prevent URL jumps
+      if (e) e.preventDefault();
+
+      // 2. SINGLETON PATTERN: Only fetch and inject the modal once per session
       if (!modalInstance) {
         try {
           const response = await fetch("components/contact-modal.html");
+          if (!response.ok) throw new Error("Network response was not ok");
+
           const html = await response.text();
           document.body.insertAdjacentHTML("beforeend", html);
-          modalInstance = document.getElementById("contact-modal");
-          modalInstance.querySelector(".contact-modal__close-icon").onclick = closeModal;
 
-          // FORM VALIDATION RIG: Enables the submit button only when the form is valid
+          modalInstance = document.getElementById("contact-modal");
+
+          // UI BINDING: Close icon listener
+          const closeBtn = modalInstance.querySelector(".contact-modal__close-icon");
+          if (closeBtn) closeBtn.onclick = closeModal;
+
+          // --- FORM VALIDATION RIG ---
           const contactForm = modalInstance.querySelector(".contact-modal__form");
           const submitBtn = contactForm.querySelector(".contact-modal__button--submit");
 
-          // THE LOGIC GATE: Initial state sync
-          function toggleButtonState() {
-            // Native check: Returns true only if all 'required' and 'pattern' rules are met
-            submitBtn.disabled = !contactForm.checkValidity();
-          }
+          /**
+           * LOGIC GATE: Syncs button 'disabled' state with HTML5 validation.
+           * Modern DX: Rely on browser-native .checkValidity() for lightweight perf.
+           */
+          const toggleButtonState = () => {
+            if (submitBtn && contactForm) {
+              submitBtn.disabled = !contactForm.checkValidity();
+            }
+          };
 
-          // 1. Set initial state (prevents bypass on first open)
+          // Initialize and listen for input
           toggleButtonState();
-
-          // 2. Monitor inputs for state changes
           contactForm.addEventListener("input", toggleButtonState);
 
-          // 3. Initialize Submission Rig
-          setupFormSubmission(contactForm);
+          // Initialize Submission Handler (Assumes setupFormSubmission exists)
+          if (typeof setupFormSubmission === "function") {
+            setupFormSubmission(contactForm);
+          }
 
-          // UX GUARDRAIL: Desktop Backdrop Dismissal (Width > 809px)
+          /**
+           * UX GUARDRAIL: Backdrop Dismissal
+           * If user clicks the 'air' around the modal on desktop, close it.
+           */
           modalInstance.addEventListener("click", (event) => {
             if (window.innerWidth > 809) {
               const rect = modalInstance.getBoundingClientRect();
-              if (
-                event.clientY < rect.top ||
-                event.clientY > rect.bottom ||
-                event.clientX < rect.left ||
-                event.clientX > rect.right
-              ) {
-                closeModal();
-              }
+              const isInDialog =
+                event.clientY >= rect.top &&
+                event.clientY <= rect.bottom &&
+                event.clientX >= rect.left &&
+                event.clientX <= rect.right;
+              if (!isInDialog) closeModal();
             }
           });
         } catch (err) {
@@ -186,22 +203,28 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
+      // 3. EXECUTION: Show the modal
+      // Prevent background scrolling while modal is active
       document.documentElement.classList.add("no-scroll");
       document.body.classList.add("no-scroll");
 
-      modalInstance.showModal(); // Native Top-Layer logic
+      // Native <dialog> API: Handles top-layer rendering and focus trapping
+      modalInstance.showModal();
 
-      // KINETIC TRIGGER: Add your state class to "Power Up" the opacity and scale
-      // A 10ms delay ensures the browser registers the entry before animating
+      // KINETIC ENTRY: 10ms delay ensures entry transition plays smoothly
       setTimeout(() => {
         modalInstance.classList.add("is-visible");
       }, 10);
-      // THE FOCUS HANDSHAKE: Rely on native focus-trapping of <dialog> and set initial focus to the first input
+
+      // ACCESSIBILITY (a11y): Handshake focus to the first input field
       const nameInput = modalInstance.querySelector("#name");
       if (nameInput) nameInput.focus();
     }
 
-    contactTriggers.forEach((trigger) => trigger.addEventListener("click", openModal));
+    // 4. ATTACH LISTENERS: Apply to all triggers found on the page
+    contactTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", openModal);
+    });
   }
 
   /**
