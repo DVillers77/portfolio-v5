@@ -1,23 +1,24 @@
 # Portfolio: The V25 High-Fidelity Rig
 
 A professional interface engineered at the intersection of mathematical rigor and atmospheric depth. This project
-showcases a custom-calibrated CSS engine designed to demonstrate the "Physics of UX."
+showcases a custom-calibrated CSS engine designed to demonstrate the "Physics of UX".
 
 ---
 
 ## 🔄 The V25 Architectural Evolution
 
 Transitioned from localized styling to a **Mathematical Gauge System**. The rig now operates on a unified 1.414 harmonic
-scale.
+scale. This evolution represents a complete pivot from Material Design 3 (M3) toward a proprietary, logic-driven system
+that prioritizes structural integrity over aesthetic trends.
 
 ### Key Architectural Breakthroughs:
 
-- **Steady Flood Engine:** A Houdini-powered (`@property`) lighting system that eliminates color banding and provides a
-  living UI depth without performance regression.
-- **The Spinal Tap Gauge:** A spacing engine derived from an 80px/48px base unit, ensuring every "void" on the page is a
-  calculated product of the system.
+- **Steady Flood Engine:** A Houdini-powered (`@property`) lighting system that eliminates color banding and provides
+  living UI depth via scroll-synced focal points.
 - **The Chrome-Tab Handshake:** A structural navigation rig utilizing "Orange Wedge" corner extrusions to bridge active
   tabs into the background, functioning as a physical page label.
+- **Singleton Component Architecture:** To optimize performance, global UI elements like the Contact Modal are managed
+  as Singletons—initialized as null and populated only on-demand to reduce initial DOM weight.
 
 ## 🚀 The Build Environment
 
