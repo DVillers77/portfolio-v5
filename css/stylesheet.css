@@ -326,10 +326,6 @@
     0 0 0 var(--sys-focus-ring-gap) var(--sys-color-canvas),
     0 0 0 var(--sys-focus-ring-thickness) var(--sys-color-primary);
 
-  /* LAYER INDICATORS */
-  --layer-focus-standard: 10;
-  --layer-focus-topmost: 2002;
-
   /* ================================================= */
   /* === [F] SEMANTIC ALIASES (The Handshake)      === */
   /* ================================================= */
@@ -344,16 +340,29 @@
   --sys-spacing-section-v: var(--sys-space-8);
   --sys-spacing-hero-v: var(--sys-space-10);
 
-  /* --- B.5 LAYER STACK (The Depth Engine) --- */
-  /* DX NOTE: 1000-unit gaps allow for 'relative stacking' 
-     within components (e.g., calc(var(--layer-nav) + 1)) 
-  */
-  --layer-sink: -1; /* Background light/gradients */
-  --layer-surface: 1; /* Default content */
-  --layer-raised: 10; /* Active buttons / Hovered cards */
-  --layer-nav: 1000; /* Sticky navigation bar */
-  --layer-overlay: 2000; /* Dropdowns / Modals / Focus rings */
-  --layer-topmost: 3000; /* Skip Links / Tooltips */
+  /* --- 1. GLOBAL STACK (The Foundation) --- */
+  --layer-sink: -1;
+  --layer-surface: 1;
+  --layer-raised: 10;
+  --layer-nav: 1000;
+  --layer-overlay: 2000;
+  --layer-topmost: 3000;
+
+  /* --- 2. COMPONENT TOKENS (The Mapping) --- */
+  /* This is where the UX Engineering "magic" happens. 
+     You map specific component needs to the global stack. */
+
+  /* Navbar Group */
+  --z-nav-main: var(--layer-nav);
+  --z-nav-accent: 1001; /* Explicitly defined */
+  --z-nav-toggle: 1002; /* Explicitly defined */
+
+  /* Interaction Group */
+  --z-interaction-focus: 11; /* For your Mirror Accents */
+
+  /* Modal Group */
+  --z-modal-backdrop: var(--layer-overlay);
+  --z-modal-dialog: 2001;
 
   /* --- B.5 MOTION ENGINE (The Personality) --- */
   /* DX NOTE: We use specific cubic-beziers to define 'The Creator' archetype.
@@ -476,7 +485,7 @@ body::before {
 
   /* NOTE: Using hex #010101 instead of --sys-color-void to prevent 8-bit color banding in the radial-gradient transition. */
   background-color: #010101;
-  z-index: -1;
+  z-index: var(--layer-sink);
   pointer-events: none;
 
   /* THE LIQUID DAMPENER */
@@ -543,7 +552,7 @@ p {
   /* UX NOTE: Ensuring the focus ring hugs the specific geometry of buttons */
   border-radius: var(--sys-radius-button) !important;
   position: relative;
-  z-index: var(--layer-focus-standard);
+  z-index: var(--layer-raised);
 }
 
 .navbar__link:focus-visible {
@@ -553,7 +562,7 @@ p {
   /* UX NOTE: Sharp edges for nav items provide better alignment with the 'Shelf' */
   border-radius: 0 !important;
   position: relative;
-  z-index: var(--layer-focus-topmost);
+  z-index: var(--layer-topmost);
 }
 
 /* Global Fallback for Generic Interactive Elements (Inputs, Selects, etc.) */
@@ -585,7 +594,7 @@ button {
   font-weight: 600;
   text-decoration: none;
   border-radius: 0 0 var(--sys-radius-3) var(--sys-radius-3);
-  z-index: 3000; /* Stays above the Pinball and Nav */
+  z-index: var(--layer-topmost); /* Stays above the Pinball and Nav */
   transition: top var(--sys-transition-standard);
 }
 
@@ -608,7 +617,7 @@ button {
   justify-content: space-between;
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: var(--z-nav-main);
   border: none !important;
   overflow: visible;
 
@@ -633,7 +642,7 @@ header > .navbar::before {
     var(--sys-color-accent) 85%,
     transparent 95%
   );
-  z-index: 1001;
+  z-index: var(--z-nav-accent);
 }
 
 /* THE SAFETY SHELF (Fades Left to Blend) */
@@ -644,7 +653,7 @@ header > .navbar::after {
   left: 0;
   width: 100%;
   height: var(--navbar-shelf-height);
-  z-index: -1;
+  z-index: var(--layer-sink);
   display: none; /* Desktop Only via Media Query */
   background: linear-gradient(
     to bottom,
@@ -676,7 +685,7 @@ header > .navbar::after {
     transform var(--sys-transition-snappy),
     color var(--sys-transition-snappy);
   order: 0;
-  z-index: 1002;
+  z-index: var(--z-nav-toggle);
 }
 
 .logo__suffix {
@@ -831,14 +840,14 @@ to maintain visual rhythm without breaking the scale.
   width: 100%;
   height: var(--accent-rail-height);
   background-color: var(--sys-color-action); /* AUDIT: Synced to Action */
-  z-index: 1005;
+  z-index: var(--z-nav-toggle);
 }
 
 /* THE ACTIVE TAB: The 'Bridge' */
 .navbar__link.active {
   background-color: var(--sys-color-primary); /* AUDIT: Solid Pine */
   color: var(--sys-color-canvas);
-  z-index: 1001;
+  z-index: var(--z-nav-accent);
   margin-bottom: -3px; /* Pulls tab down to bridge the gap */
 
   /* AUDIT: Dead Link Logic (JS-Safe) */
@@ -927,7 +936,7 @@ to maintain visual rhythm without breaking the scale.
   margin-bottom: var(--sys-space-3); /* Clean 16px Gutter Splash */
   width: 100%;
   display: block;
-  z-index: 1;
+  z-index: var(--layer-surface);
   position: relative;
 
   /* PREMIUM BORDER: 2px wide to catch the Arched Drift light. 
@@ -982,7 +991,7 @@ to maintain visual rhythm without breaking the scale.
 
 /* --- HOVER DYNAMICS (The Lift & Ignite) --- */
 .feature-block:hover {
-  z-index: 10; /* Ensures the shadow doesn't get 'swallowed' by neighbors */
+  z-index: var(--layer-raised); /* Ensures the shadow doesn't get 'swallowed' by neighbors */
   transform: translateY(-4px); /* Subtle physics lift */
 
   /* BORDER IGNITION: The edge glows brighter when the user engages */
@@ -1404,7 +1413,7 @@ to maintain visual rhythm without breaking the scale.
   top: 50%;
   /* 3D Anchor: Keeps the circle and text character from vibrating */
   transform: translateY(-50%) translateZ(0) scale(1);
-  z-index: 20;
+  z-index: var(--z-interaction-focus);
 
   /* GEOMETRY: 54px Scale */
   width: 3.375rem;
@@ -1512,7 +1521,7 @@ to maintain visual rhythm without breaking the scale.
 .slideshow__pill {
   /* Shrink this to Gauge 2 to keep it close to the gallery */
   margin-bottom: var(--sys-space-2);
-  z-index: 20;
+  z-index: var(--z-interaction-focus);
 }
 
 .slideshow__pill-link {
@@ -1964,7 +1973,7 @@ to maintain visual rhythm without breaking the scale.
   align-items: center;
   justify-content: center;
   position: fixed;
-  z-index: 2000;
+  z-index: var(--z-modal-backdrop);
   left: 0;
   top: 0;
   width: 100%;
@@ -1988,7 +1997,7 @@ to maintain visual rhythm without breaking the scale.
   /* Mapped to Pop (0.4s + Kinetic Easing) */
   /* This creates a synchronized "spring" entrance for properties */
   transition: var(--sys-transition-pop);
-  z-index: 100;
+  z-index: var(--z-modal-backdrop);
 }
 
 dialog.contact-modal::backdrop {
@@ -2142,7 +2151,7 @@ dialog.contact-modal[open] {
   justify-content: center;
   cursor: pointer;
   transition: all var(--sys-transition-standard);
-  z-index: 100;
+  z-index: var(--z-modal-dialog);
   color: var(--sys-color-type-talk); /* Charcoal 'X' */
 }
 
@@ -2294,7 +2303,7 @@ dialog.contact-modal[open] {
     var(--sys-color-accent) 85%,
     transparent 95%
   );
-  z-index: 5; /* Base level for the line */
+  z-index: var(--layer-raised); /* Base level for the line */
 }
 
 .footer__nav {
@@ -2329,7 +2338,7 @@ dialog.contact-modal[open] {
   transition: all var(--sys-transition-snappy);
   position: relative;
   text-decoration: none;
-  z-index: 10;
+  z-index: var(--layer-raised);
   white-space: nowrap;
 }
 
@@ -2354,7 +2363,7 @@ dialog.contact-modal[open] {
   border-radius: 0 0 2px 2px;
   opacity: 0;
   transition: opacity var(--sys-transition-snappy);
-  z-index: 11; /* Sits on top of everything */
+  z-index: var(--z-interaction-focus); /* Sits on top of everything */
 }
 
 .footer__link:hover::after {
