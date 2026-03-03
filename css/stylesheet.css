@@ -1142,7 +1142,7 @@ to maintain visual rhythm without breaking the scale.
   font-family: var(--font-heading);
   font-size: var(--fs-t6) !important;
   font-weight: 600;
-  line-height: var(--lh-body); /* 1.4 Bridge */
+  line-height: var(--lh-body);
   letter-spacing: var(--ls-heading); /* -0.015em Squeeze */
   color: var(--sys-color-type-whisper);
 }
