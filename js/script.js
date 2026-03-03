@@ -16,23 +16,25 @@ let modalInstance = null;
 function closeModal() {
   if (!modalInstance) return;
 
-  // Trigger CSS transition (400ms) defined in stylesheet.css
+  // 1. Start the visual Power-Down
   modalInstance.classList.add("is-closing");
   modalInstance.classList.remove("is-visible");
 
-  setTimeout(() => {
-    modalInstance.close();
+  // 2. THE HANDSHAKE PROTOCOL
+  // We listen for the CSS transition to actually finish
+  const handleTransitionEnd = (event) => {
+    // Ensure we only trigger on the modal container's transition
+    if (event.target !== modalInstance) return;
 
-    // --- RIG CLEANUP: Resetting the Form & HUD ---
+    modalInstance.close(); // Natively clears the ::backdrop
+
+    // --- RIG CLEANUP ---
     const contactForm = modalInstance.querySelector(".contact-modal__form");
     if (contactForm) {
-      contactForm.reset(); // Clears all inputs (Name, Email, Message)
-
-      // Reset the Submit Button state to disabled
+      contactForm.reset();
       const submitBtn = contactForm.querySelector(".contact-modal__button--submit");
       if (submitBtn) submitBtn.disabled = true;
 
-      // Clear and hide the HUD status bar
       const statusBar = contactForm.querySelector(".contact-modal__status-bar");
       if (statusBar) {
         statusBar.style.display = "none";
@@ -40,11 +42,20 @@ function closeModal() {
       }
     }
 
-    // UI Cleanup
     modalInstance.classList.remove("is-closing");
     document.documentElement.classList.remove("no-scroll");
     document.body.classList.remove("no-scroll");
-  }, 400);
+
+    // Clean up the listener so it doesn't fire again
+    modalInstance.removeEventListener("transitionend", handleTransitionEnd);
+  };
+
+  modalInstance.addEventListener("transitionend", handleTransitionEnd);
+
+  // 3. SAFETY OVERRIDE (For older mobile browsers)
+  setTimeout(() => {
+    if (modalInstance.open) handleTransitionEnd({ target: modalInstance });
+  }, 500);
 }
 
 /**
