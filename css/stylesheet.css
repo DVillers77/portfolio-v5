@@ -1967,37 +1967,37 @@ to maintain visual rhythm without breaking the scale.
 /* === [V3] REFACTORED: CONTACT MODAL & FORM      === */
 /* ================================================= */
 
-/* 1. THE OVERLAY (Dark Shadow) */
+/* THE DIALOG (The container) */
 .contact-modal {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  z-index: var(--z-modal-backdrop);
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  overflow-y: auto;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: auto; /* Browser handles centering if this is set */
+  overflow: visible;
 }
 
-/* 2. THE CONTENT CARD (Outer Shell) */
+/* THE CONTENT CARD (Outer Shell) */
 .contact-modal__content {
   position: relative;
   background-color: var(--sys-color-canvas);
   padding: var(--sys-space-7) var(--sys-space-6);
   border-radius: var(--sys-radius-5);
   border: 1px solid var(--sys-color-void-alpha-3);
-  width: 90%;
+
+  /* MOBILITY FIX: Ensures centering on small screens */
+  width: 90vw;
   max-width: 500px;
+
   box-shadow: var(--shadow-modal);
   opacity: 0;
   transform: scale(0.95);
-  /* Mapped to Pop (0.4s + Kinetic Easing) */
-  /* This creates a synchronized "spring" entrance for properties */
   transition: var(--sys-transition-pop);
-  z-index: var(--z-modal-backdrop);
+}
+
+/* ACTIVE STATE: The trigger */
+.contact-modal.is-visible .contact-modal__content {
+  opacity: 1;
+  transform: scale(1);
 }
 
 dialog.contact-modal::backdrop {
