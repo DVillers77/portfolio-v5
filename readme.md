@@ -3,8 +3,9 @@
 **"A professional interface engineered at the intersection of mathematical rigor and atmospheric depth."**
 
 This repository represents the 5th iteration of my professional portfolio. It serves as the primary implementation of
-**The Rig (v26)**—a detached, proprietary CSS engine designed to demonstrate the "Physics of UX" through systemic logic
-rather than localized styling.
+The Rig (v26)—a detached, proprietary CSS engine designed to weave together mathematical rigor and diagnostic empathy.
+By decoupling the design system from the application, I treat the interface as a living environment governed by systemic
+logic rather than localized styling.
 
 ---
 
@@ -50,6 +51,17 @@ structural integrity and **Diagnostic Empathy**.
 - **44px Protocol:** All interactive triggers are calibrated to a 44px minimum touch-target for human motor variance.
 - **Alignment Integrity:** Desktop navigation utilizes `align-items: stretch` to preserve the structural bridge between
   the pseudo-brackets and the background rig.
+
+---
+
+## ⚠️ Development Note: Procedural Integrity
+
+This implementation represents a time-boxed deployment of my core architectural logic. To meet delivery milestones,
+certain elements of the **V26 Rig** were optimized for immediate performance, while my more advanced R&D frameworks
+(focused on automated systemic health) continue to undergo refinement in a private environment.
+
+This "Proof of Concept" demonstrates my ability to ship high-fidelity, accessible systems under real-world time
+constraints.
 
 ---
 
