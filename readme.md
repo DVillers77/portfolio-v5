@@ -10,7 +10,7 @@ rather than localized styling.
 
 ## 🏗️ Architectural Philosophy: The Rig vs. The Instance
 
-To ensure maximum scalability, I decoupled the design system from the application.
+To ensure maximum scalability, I decoupled the design system from the application logic.
 
 - **The Rig (v26):** A standalone design system refined through 26 iterations. It utilizes a **Mathematical Gauge
   System** and a 1.414 harmonic scale to automate visual hierarchy.
@@ -24,25 +24,32 @@ structural integrity and **Diagnostic Empathy**.
 
 ### Key Architectural Breakthroughs:
 
-- **Steady Flood Engine:** A Houdini-powered (`@property`) lighting system that eliminates color banding and provides
-  living UI depth via scroll-synced focal points.
-- **The Chrome-Tab Handshake:** A structural navigation rig utilizing "Orange Wedge" corner extrusions to bridge active
-  tabs into the background, functioning as a physical page label.
-- **Singleton Component Architecture:** To optimize performance, global UI elements like the Contact Modal are managed
-  as Singletons—initialized as null and populated only on-demand to reduce initial DOM weight.
-- **Token-Driven Handshake:** Every color and spacing value is a semantic token, allowing for a "system-wide audit" of
-  the interface with a single variable change.
+- **Steady Flood Engine:** A Houdini-powered (`@property`) lighting system utilizing registered focal points (`--sunX`,
+  `--sunY`) to eliminate color banding and provide living UI depth.
+- **The Chrome-Tab Handshake:** A structural navigation rig using **"Orange Wedge"** pseudo-brackets and a **"Safety
+  Shelf"** anchor (`.navbar::after`) to ensure zero light-leak during state transitions.
+- **Singleton Component Architecture:** Global interactive elements, such as the contact portal, are engineered as
+  Singletons—initialized as null and populated only on-demand to reduce initial DOM weight and redundant network
+  requests.
+- **The Clean Edge Trick:** All feature blocks utilize `background-clip: padding-box` to force canvas termination at the
+  inside edge of the 2px border, preventing sub-pixel color-bleed.
 
-## 🚀 The Build Environment
+## 📐 Build Specifications & "Physics"
 
-- **Logic:** Mobile-First, BEM Methodology, Token-driven CSS.
-- **Typography:** 1.414 Augmented Fourth Scale (Poppins/Inter).
-- **Accessibility:** WCAG 2.1 AA calibrated, APCA-aware contrast, and 44px touch-target protocols.
+- **Spacing Engine:** Uses a **Spinal Tap Gauge** (80px/48px base) and a **38.4px Atmospheric Gap** to provide "Bloom"
+  room for expanding shadows.
+- **Kinetic Logic:** Implements a **400ms Kinetic Power-Down** for modal sequences and a `-4px` kinetic lift on hover
+  interactions.
+- **Tonal Palette:** RGB Tonal Tokens (e.g., Pine `--sys-color-primary`) replaced all static hex codes to allow for
+  transparency control within the atmospheric engine.
+- **Typography:** An **Augmented Fourth Scale** utilizing "Ink Weight" (Canvas Mixing) instead of static grays to ensure
+  APCA-aware legibility.
 
-## ⚠️ Development Note: Structural Integrity
+## 🛡️ Immutable Constraints (The Rig Integrity)
 
-This project utilizes a **Rigid Constraint** approach. Complex layout logic—such as the "Chrome Tab" navigation
-brackets—is protected by fixed CSS anchors to ensure brand updates do not cause regression in the core "Wedge" geometry.
+- **44px Protocol:** All interactive triggers are calibrated to a 44px minimum touch-target for human motor variance.
+- **Alignment Integrity:** Desktop navigation utilizes `align-items: stretch` to preserve the structural bridge between
+  the pseudo-brackets and the background rig.
 
 ---
 
