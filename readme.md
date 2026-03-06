@@ -54,14 +54,52 @@ structural integrity and **Diagnostic Empathy**.
 
 ---
 
-## ⚠️ Development Note: Procedural Integrity
+## 📐 Deep Dive: The 1.414 Harmonic Physics (Augmented Fourth)
 
-This implementation represents a time-boxed deployment of my core architectural logic. To meet delivery milestones,
-certain elements of the **V26 Rig** were optimized for immediate performance, while my more advanced R&D frameworks
-(focused on automated systemic health) continue to undergo refinement in a private environment.
+To eliminate arbitrary "pixel-pushing," the Rig utilizes the **Augmented Fourth (1.414)** scale to govern all spatial
+relationships and typography. This ensures that every element on the screen exists in a mathematically derived hierarchy
+rather than a guessed one.
 
-This "Proof of Concept" demonstrates my ability to ship high-fidelity, accessible systems under real-world time
-constraints.
+### 1. The Scaling Formula
+
+Every step in the hierarchy is calculated using the base unit ($B$) multiplied by the scale factor ($S$):
+
+$$Step_{n} = B \times (1.414)^{n}$$
+
+- **Base Unit:** 16px (1rem)
+- **Step 1 (Talk):** $16 \times 1.414 = 22.62px$
+- **Step 2 (Redline):** $16 \times (1.414)^{2} = 32px$
+- **Step 3 (Header):** $16 \times (1.414)^{3} = 45.25px$
+
+### 2. Atmospheric Gap Calculation
+
+The **38.4px Atmospheric Gap** (Archive Shutter) used in `.project-archive` is derived from the **Spinal Tap Gauge**
+(48px base) multiplied by the reciprocal of the scale:
+
+$$48px \times 0.8 = 38.4px$$
+
+This creates the specific "Bloom" room required for the Pine-pigmented shadows to expand during a **-4px kinetic lift**
+without causing visual collisions.
+
+### 3. APCA-Aware "Ink Weight"
+
+The Rig uses **Canvas Mixing** to simulate physical ink density and ensure legibility.
+
+- **The Logic:** By registering RGB Tonal Tokens (e.g., `--sys-color-primary: 1, 98, 75`), we adjust the alpha channel
+  dynamically to maintain **APCA** (Advanced Perceptual Contrast Algorithm) compliance.
+- **Constraint:** The `Muted Floor` is programmatically set to a 20% mix to guarantee WCAG 2.1 AA legibility on
+  non-Retina hardware.
+
+---
+
+## ⚠️ Development Note: Procedural Integrity & Time-Boxing
+
+This implementation represents a strategic, time-boxed deployment of my core architectural logic. To meet delivery
+milestones, certain elements of the **V26 Rig** were optimized for immediate performance, while advanced R&D frameworks
+focused on automated systemic health continue to undergo refinement in a private environment.
+
+This "Proof of Concept" demonstrates my ability to ship high-fidelity, accessible systems under real-world
+constraints—prioritizing structural integrity and "Diagnostic Empathy" over localized styling.
 
 ---
 
