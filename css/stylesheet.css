@@ -927,6 +927,12 @@ to maintain visual rhythm without breaking the scale.
   transform: translateY(-1px);
 }
 
+/* Optical Adjustment for intrinsic Font Awesome 4.7 download glyph offset */
+.navbar__link .fa-download,
+.footer__link .fa-download {
+  transform: translatex(-2px);
+}
+
 .button-group {
   flex-direction: row; /* Horizontal Buttons */
 }
