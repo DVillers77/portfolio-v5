@@ -923,14 +923,9 @@ to maintain visual rhythm without breaking the scale.
 
 /* Optical Adjustment for intrinsic Font Awesome 4.7 LinkedIn glyph offset */
 .navbar__link .fa-linkedin,
-.footer__link .fa-linkedin {
+.footer__link .fa-linkedin,
+.button-group .fa-linkedin {
   transform: translateY(-1px);
-}
-
-/* Optical Adjustment for intrinsic Font Awesome 4.7 download glyph offset */
-.navbar__link .fa-download,
-.footer__link .fa-download {
-  transform: translatex(-2px);
 }
 
 .button-group {
