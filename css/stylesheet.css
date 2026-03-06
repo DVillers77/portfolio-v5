@@ -798,9 +798,10 @@ header > .navbar::after {
   background: none;
   border: none;
   cursor: pointer;
-  display: block;
+  display: flex;
+  align-items: center;
+  line-height: 1;
   width: 100%;
-  text-align: left;
   padding: var(--sys-space-2) var(--sys-space-4);
 
   /* 3. INTERACTION RIG */
@@ -918,6 +919,12 @@ to maintain visual rhythm without breaking the scale.
     /* Mapping 0.75rem (12px) to closest system token (12.8px) */
     border-radius: var(--sys-radius-5) var(--sys-radius-5) 0 0;
   }
+}
+
+/* Optical Adjustment for intrinsic Font Awesome 4.7 LinkedIn glyph offset */
+.navbar__link .fa-linkedin,
+.footer__link .fa-linkedin {
+  transform: translateY(-1px);
 }
 
 .button-group {
@@ -2346,9 +2353,11 @@ dialog.contact-modal[open] {
   background: none;
   border: none;
   cursor: pointer;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
   width: 100%;
-  text-align: center;
   padding: var(--sys-space-2) var(--sys-space-4);
 
   /* 3. INTERACTION RIG */
