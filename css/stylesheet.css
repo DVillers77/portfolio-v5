@@ -1241,9 +1241,8 @@ to maintain visual rhythm without breaking the scale.
   position: relative;
   text-align: center;
 
-  /* THE HORIZON: Clear the navbar + Gauge 10 (80px) 
-     This should move the H1 down to about 4 fingers from the top. */
-  padding-top: calc(var(--sys-spacing-hero-v) + var(--sys-space-10));
+  /* THE HORIZON: Clear navbar + ~115px of breath */
+  padding-top: calc(var(--sys-space-11) + var(--sys-space-6));
 
   /* THE STATURE: Gauge 11 * 3 (Approx 230px)
      This should give you about 8-10 fingers of space at the bottom. */
@@ -1299,6 +1298,15 @@ to maintain visual rhythm without breaking the scale.
 /* ================================================= */
 /* === [V25] REFACTORED: HERO TYPOGRAPHY         === */
 /* ================================================= */
+.hero__eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--fs-t8) !important; /* DNA: 0.875rem (14px) to 1rem (16px) */
+  font-weight: 600;
+  color: var(--sys-color-canvas-alpha-10);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-micro); /* 0.05em tracked out for that 'Meta' feel */
+  margin-bottom: var(--sys-space-2); /* Tighter lockup to the H1 */
+}
 
 .hero__title {
   font-family: var(--font-heading);
@@ -1318,8 +1326,8 @@ to maintain visual rhythm without breaking the scale.
      to ensure that if it MUST wrap on tiny screens, it does so elegantly. */
   text-wrap: balance;
   word-break: keep-all; /* Prevents "Port-folio" hyphenation breaks */
-  /* GAUGE SYNC: Standardized gap to the Pill/Slideshow below */
-  margin-bottom: var(--sys-space-10);
+  /* Tightening the 67px gap to 25px for better hierarchy */
+  margin-bottom: var(--sys-space-4);
 
   /* GLOW: Preserving your exact 'Unified Glow' */
   text-shadow:
@@ -1342,11 +1350,12 @@ to maintain visual rhythm without breaking the scale.
   line-height: var(--lh-display);
   letter-spacing: -0.01em; /* Slight tightening for the large T3 scale */
 
-  /* GAUGE SYNC: Replacing the parasitic 3rem (48px) with Gauge 6 */
-  margin-bottom: var(--sys-space-6);
+  /* Standardizing bottom exit-space */
+  margin-bottom: var(--sys-space-8);
   max-width: 35ch; /* Forces a cleaner 2 or 3 line "stack" on mobile */
   margin-inline: auto; /* Centers the stack */
 }
+
 .hero__subtitle strong {
   font-weight: 900; /* 900 to match the Hero Title's 'DNA' */
   letter-spacing: var(--ls-display); /* Tighter tracking for heavier weights */
