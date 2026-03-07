@@ -1191,6 +1191,7 @@ to maintain visual rhythm without breaking the scale.
   text-transform: uppercase; /* Engineering clarity */
   color: var(--sys-color-primary);
   margin-bottom: var(--sys-space-4);
+  margin-top: var(--sys-space-4);
 }
 
 .feature-block__note--column {
