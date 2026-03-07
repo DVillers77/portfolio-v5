@@ -977,7 +977,6 @@ to maintain visual rhythm without breaking the scale.
   margin-top: var(--sys-space-2);
   /* RATIO SYNC: Gauge 8 shoulders for balanced weight */
   border-radius: var(--sys-radius-8) var(--sys-radius-8) 0 0;
-  overflow: hidden;
 }
 
 /* --- THE ALT BLOCK (Pine Wash Integration) --- */
@@ -1068,6 +1067,19 @@ to maintain visual rhythm without breaking the scale.
   aspect-ratio: 4 / 5 !important;
   /* We use !important here because it is a specific override 
      intended to beat the global 1/1 rule. */
+}
+
+@media (min-width: 809px) {
+  /* Ensure the grid doesn't force the columns to be equal height */
+  .feature-block--first .feature-block__grid {
+    align-items: start;
+  }
+
+  .feature-block--first .feature-block__media {
+    position: sticky;
+    top: 4rem; /* Give it some breathing room from the top of the viewport */
+    z-index: 10;
+  }
 }
 
 /* --- THE VERTICAL SHIFT (Under 809px) --- */
