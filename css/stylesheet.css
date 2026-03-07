@@ -719,7 +719,7 @@ header > .navbar::after {
   font: inherit;
 
   color: var(--sys-color-action);
-  padding: var(--sys-space-2) var(--sys-space-3);
+  padding: var(--sys-space-4) var(--sys-space-6);
   cursor: pointer;
   position: relative;
 
@@ -802,7 +802,7 @@ header > .navbar::after {
   align-items: center;
   line-height: 1;
   width: 100%;
-  padding: var(--sys-space-2) var(--sys-space-4);
+  padding: var(--sys-space-4) var(--sys-space-6);
 
   /* 3. INTERACTION RIG */
   transition: all var(--sys-transition-snappy);
@@ -811,19 +811,7 @@ header > .navbar::after {
   white-space: nowrap;
 }
 
-/* --- DESKTOP RECALIBRATION --- */
-@media screen and (min-width: 810px) {
-  .navbar__link,
-  button.navbar__link {
-    width: auto;
-    /* 
-Refactored to align with System Spacing Ramp. 
-Mapped 0.875rem (14px) -> --sys-space-2 (12.8px) 
-to maintain visual rhythm without breaking the scale. 
-*/
-    padding: var(--sys-space-2) clamp(var(--sys-space-2), 1.5vw, var(--sys-space-4));
-  }
-}
+
 
 /* THE HOVER: Fixed White Text */
 .navbar__link:hover:not(.active) {
@@ -892,23 +880,27 @@ to maintain visual rhythm without breaking the scale.
     flex-flow: row nowrap;
     align-items: stretch;
   }
-
   .navbar__links {
     flex-direction: row;
+    justify-content: flex-end;
     width: auto;
+    flex: 1 1 auto;
+    min-width: 0;
     max-height: none; /* Always visible on desktop */
     overflow: visible;
   }
 
   .navbar__link {
     width: auto;
-    /* 
-Refactored to align with System Spacing Ramp. 
-Mapped 0.875rem (14px) -> --sys-space-2 (12.8px) 
-to maintain visual rhythm without breaking the scale. 
-*/
-    padding: var(--sys-space-2) clamp(var(--sys-space-2), 1.5vw, var(--sys-space-4));
-  }
+    /* Fluid padding that 'tucks in' between 810px and 1100px */
+    padding: var(--sys-space-2) clamp(var(--sys-space-2), 1vw, var(--sys-space-4));
+    
+    flex-shrink: 1;
+    min-width: 0;
+    white-space: nowrap; /* Keeps your 'Wedge Brackets' aligned */
+    display: flex;
+    align-items: center;
+}
 
   .navbar__link.active::before,
   .navbar__link.active::after {
@@ -918,6 +910,9 @@ to maintain visual rhythm without breaking the scale.
   .navbar__link.active {
     /* Mapping 0.75rem (12px) to closest system token (12.8px) */
     border-radius: var(--sys-radius-5) var(--sys-radius-5) 0 0;
+    flex-shrink: 0;
+    white-space: nowrap;        /* Ensures the text never wraps */
+  min-width: fit-content;
   }
 }
 
@@ -1069,7 +1064,7 @@ to maintain visual rhythm without breaking the scale.
      intended to beat the global 1/1 rule. */
 }
 
-@media (min-width: 809px) {
+@media (min-width: 810px) {
   /* Ensure the grid doesn't force the columns to be equal height */
   .feature-block--first .feature-block__grid {
     align-items: start;
@@ -2297,11 +2292,11 @@ dialog.contact-modal[open] {
 /* ================================================= */
 @media screen and (max-width: 1070px) and (min-width: 810px) {
   .navbar__links {
-    /* Constrain the menu and center it to pull brackets from the edge */
-    max-width: 800px;
-    margin: 0 auto;
-    justify-content: center;
-    padding-right: 0;
+    display: flex;
+    justify-content: flex-end; /* Pushes links to the right again */
+    flex: 0 1 auto;            /* Stops the container from hogging the whole bar */
+    margin-left: auto;         /* Creates the 'migration' gap from the logo */
+    gap: var(--sys-space-1);   /* Controls the 'squish' between links */
   }
 }
 
