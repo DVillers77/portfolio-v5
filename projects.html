@@ -101,7 +101,8 @@
                   <img
                     src="images/modern-tic-tac-toe-md.webp"
                     class="slideshow__image"
-                    alt="Preview: A 'Cyber-Theme' Tic-Tac-Toe game board engineered by David Villers. The view is focused on the neon-green hex-grid and custom microprocessor CPU icons, with the difficulty controls partially cropped at the top."
+                    alt="Preview: Cyber-Theme Tic-Tac-Toe game board focusing on neon-green hex-grid."
+                    aria-describedby="desc-projects-minimax"
                     data-target="#tic-tac-toe-details"
                   />
                 </div>
@@ -109,7 +110,8 @@
                   <img
                     src="images/todo-app-md.webp"
                     class="slideshow__image"
-                    alt="Preview: The 'TaskMaster' dark-mode interface engineered by David Villers. A high-contrast task list featuring active input controls and a visible theme-engine toggle."
+                    alt="Preview: TaskMaster dark-mode interface with theme-engine toggle."
+                    aria-describedby="desc-projects-inclusive-state"
                     data-target="#to-do-app-details"
                   />
                 </div>
@@ -117,7 +119,8 @@
                   <img
                     src="images/portfolio-screenshot-01-md.webp"
                     class="slideshow__image"
-                    alt="Preview: A development screenshot of the portfolio built by David Villers. The view centers on David’s professional portrait and the 'Human-Centric' introduction header, with the navigational and technical sections of the interface cropped out."
+                    alt="Preview: Development screenshot of the portfolio layout and profile portrait."
+                    aria-describedby="desc-projects-systemic-design"
                     data-target="#portfolio-details"
                   />
                 </div>
@@ -127,7 +130,8 @@
                     <img
                       src="images/api-fun-center-md.jpg"
                       class="slideshow__image"
-                      alt="Preview: The 'Ultimate API Fun Center' dashboard engineered by David Villers. This view focuses on the 'Useless Fact' and 'Cat Fact' generator cards with interactive blue and purple buttons, representing the primary asynchronous data streams."
+                      alt="Preview: API Fun Center dashboard cards for asynchronous data streams."
+                      aria-describedby="desc-projects-asynchronous-api"
                       data-target="#api-fun-center-details"
                     />
                   </picture>
@@ -198,9 +202,16 @@
               <source srcset="images/dain-miller-sadle-reigns-quote-md.webp" type="image/webp" />
               <img
                 src="images/dain-miller-sadle-reigns-quote-md.jpg"
-                alt="A transcendental silhouette of a horse and rider, where the internal forms are composed of a swirling cosmic universe and astrological energy lines. The horse’s tail subtly breaks the light-grey focal boundary into the outer white frame, symbolizing the kinetic energy and uncontained power of a perfectly calibrated 'Flow State' between Pilot and System."
+                alt="Transcendental silhouette of a horse and rider composed of cosmic energy lines."
+                aria-describedby="desc-projects-systems-engineering"
                 class="feature-block__image"
             /></picture>
+            <div id="desc-projects-systems-engineering" class="visually-hidden">
+              A transcendental silhouette of a horse and rider, where the internal forms are composed of a swirling
+              cosmic universe and astrological energy lines. The horse’s tail subtly breaks the light-grey focal
+              boundary into the outer white frame, symbolizing the kinetic energy and uncontained power of a perfectly
+              calibrated 'Flow State' between Pilot and System.
+            </div>
           </div>
 
           <div class="feature-block__content">
@@ -224,24 +235,24 @@
             <h3 class="feature-block__jump-link">Initialize Handshake:</h3>
 
             <div class="button-group">
-             <a
-                  href="https://www.linkedin.com/in/david-villers-6082963b/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="button button--tonal"
-                  aria-label="Visit my LinkedIn profile"
-                >
-                  <i class="fa fa-fw fa-linkedin"></i> LinkedIn
-                </a>
-                <button
-                  type="button"
-                  class="button button--tonal"
-                  data-modal-trigger="contact"
-                  aria-label="Open contact form to send me a message"
-                  aria-haspopup="dialog"
-                >
-                  <i class="fa fa-fw fa-hand-o-right"></i> Contact Me
-                </button>
+              <a
+                href="https://www.linkedin.com/in/david-villers-6082963b/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="button button--tonal"
+                aria-label="Visit my LinkedIn profile"
+              >
+                <i class="fa fa-fw fa-linkedin"></i> LinkedIn
+              </a>
+              <button
+                type="button"
+                class="button button--tonal"
+                data-modal-trigger="contact"
+                aria-label="Open contact form to send me a message"
+                aria-haspopup="dialog"
+              >
+                <i class="fa fa-fw fa-hand-o-right"></i> Contact Me
+              </button>
             </div>
             <h3 class="feature-block__jump-link">Credential Handshake:</h3>
 
@@ -267,9 +278,16 @@
               <source srcset="images/modern-tic-tac-toe-md.webp" type="image/webp" />
               <img
                 src="images/modern-tic-tac-toe-md.jpg"
-                alt="Full size: The high-contrast Tic-Tac-Toe interface by David Villers. This uncropped view reveals the full 'Cyber-Theme' UI, including the Easy, Medium, and Hard difficulty selectors. The board showcases custom user icons and microprocessor CPU icons, illustrating the Minimax algorithm's recursive state evaluation and HTML5 Canvas integration."
+                alt="High-contrast Cyber-Theme Tic-Tac-Toe interface with difficulty selectors and custom icons."
+                aria-describedby="desc-projects-minimax"
                 class="feature-block__image feature-block__image--portrait"
             /></picture>
+            <div id="desc-projects-minimax" class="visually-hidden">
+              The high-contrast Tic-Tac-Toe interface by David Villers. This uncropped view reveals the full
+              'Cyber-Theme' UI, including Easy, Medium, and Hard difficulty selectors. The board showcases custom user
+              and microprocessor CPU icons, illustrating the Minimax algorithm's recursive state evaluation and HTML5
+              Canvas integration.
+            </div>
           </div>
 
           <div class="feature-block__content">
@@ -321,10 +339,16 @@
               <source srcset="images/todo-app-md.webp" type="image/webp" />
               <img
                 src="images/todo-app-md.jpg"
-                alt="Full size: The high-fidelity 'TaskMaster' interface by David Villers. This view confirms the accessible dark-mode UI, featuring the red 'delete' controls and the grey 'Undo' state-history buffer. The sun-icon toggle demonstrates the CSS Variable-driven Theme Engine designed for inclusive, high-contrast usability."
+                alt="Dark-mode TaskMaster interface featuring task controls and a theme-toggle icon."
+                aria-describedby="desc-projects-inclusive-state"
                 class="feature-block__image"
               />
             </picture>
+            <div id="desc-projects-inclusive-state" class="visually-hidden">
+              The high-fidelity 'TaskMaster' interface by David Villers. This view confirms the accessible dark-mode UI,
+              featuring red 'delete' controls and a grey 'Undo' state-history buffer. The sun-icon toggle demonstrates
+              the CSS Variable-driven Theme Engine designed for inclusive, high-contrast usability.
+            </div>
           </div>
 
           <div class="feature-block__content">
@@ -375,9 +399,16 @@
               <source srcset="images/portfolio-screenshot-01-md.webp" type="image/webp" />
               <img
                 src="images/portfolio-screenshot-01-md.jpg"
-                alt="Full size: A mobile-responsive development screenshot of the portfolio by creator David Villers. This uncropped view reveals the full layout, including the top navigation bar with a magenta menu. It showcases David’s portrait against a background of 'conceptual noise,' serving as a visual metaphor for his ability to refactor complex data into the high-performance digital architecture seen here."
+                alt="Mobile-responsive screenshot of the portfolio layout featuring a navigation bar and portrait."
+                aria-describedby="desc-projects-systemic-design"
                 class="feature-block__image feature-block__image--portrait"
             /></picture>
+            <div id="desc-projects-systemic-design" class="visually-hidden">
+              A mobile-responsive development screenshot of the portfolio by creator David Villers. This uncropped view
+              reveals the full layout, including the top navigation bar with a magenta menu and a portrait set against a
+              background of 'conceptual noise.' It serves as a visual metaphor for refactoring complex data into
+              high-performance digital architecture.
+            </div>
           </div>
           <div class="feature-block__content">
             <h2 class="feature-block__title--column">The Meta-Study: Systemic Design Engineering</h2>
@@ -429,9 +460,16 @@
               <source srcset="images/api-fun-center-md.webp" type="image/webp" />
               <img
                 src="images/api-fun-center-md.jpg"
-                alt="Full size: The 'Ultimate API Fun Center' dashboard by creator David Villers. This uncropped architectural view reveals the complete modular layout, including the 'Random Dog Picture' generator header. The UI demonstrates David’s unified system for handling concurrent Fetch API requests and exception handling across multiple third-party data streams."
+                alt="Dashboard interface for the API Fun Center showcasing modular data stream integrations."
+                aria-describedby="desc-projects-asynchronous-api"
                 class="feature-block__image feature-block__image--portrait"
             /></picture>
+            <div id="desc-projects-asynchronous-api" class="visually-hidden">
+              The 'Ultimate API Fun Center' dashboard by creator David Villers. This uncropped architectural view
+              reveals the complete modular layout, including the 'Random Dog Picture' generator. The UI demonstrates
+              David’s unified system for handling concurrent Fetch API requests and exception handling across multiple
+              third-party data streams.
+            </div>
           </div>
           <div class="feature-block__content">
             <h2 class="feature-block__title--column">Interface & Integration: Asynchronous Data Streams</h2>
