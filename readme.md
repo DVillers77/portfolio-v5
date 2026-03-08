@@ -16,7 +16,8 @@ To ensure maximum scalability, I decoupled the design system from the applicatio
 - **The Rig (v26):** A standalone design system refined through 26 iterations. It utilizes a **Mathematical Gauge
   System** and a 1.414 harmonic scale to automate visual hierarchy.
 - **The Instance (v5):** This portfolio application, which consumes the Rig’s token-based architecture to deliver a
-  high-performance, accessible user experience.
+  high-performance, accessible user experience. It utilizes the **WAVE Evaluation Tool** as a mandatory structural gate
+  to ensure the proprietary Rig logic remains fully accessible.
 
 ## 🔄 Technical Evolution: From M3 to Proprietary Logic
 
@@ -25,6 +26,8 @@ structural integrity and **Diagnostic Empathy**.
 
 ### Key Architectural Breakthroughs:
 
+- **Semantic Narrative Rig:** A detached accessibility layer that utilizes `aria-describedby` to deliver deep-form
+  technical metaphors to assistive technology without compromising WAVE compliance or visual minimalism.
 - **Steady Flood Engine:** A Houdini-powered (`@property`) lighting system utilizing registered focal points (`--sunX`,
   `--sunY`) to eliminate color banding and provide living UI depth.
 - **The Chrome-Tab Handshake:** A structural navigation rig using **"Orange Wedge"** pseudo-brackets and a **"Safety

@@ -33,3 +33,21 @@ session.
 - **The 44px Protocol:** All interactive triggers are calibrated to a 44px minimum touch-target to accommodate human
   motor variance.
 - **Shutter Compression:** Gaps are reduced to `23.04px` on mobile to maintain rhythm on reduced vertical real estate.
+
+## ♿ A11y Handshake Protocols (WCAG AA)
+
+### 1. The Narrative Bypass (aria-describedby)
+
+To maintain high-fidelity visual storytelling without triggering WAVE (Web Accessibility Evaluation Tool) "Long Alt
+Text" errors, the Rig utilizes a **Linked Description Rig**:
+
+- **Constraint:** `alt` attributes are strictly functional (max 125 characters) to provide immediate context and clear
+  the WAVE character ceiling.
+- **Protocol:** Extended poetic or technical narratives are housed in a `.visually-hidden` buffer and linked via
+  `aria-describedby`.
+- **Naming Convention:** IDs follow a `desc-[page]-[context]` pattern to prevent global scope collisions.
+
+### 2. The Visually-Hidden Utility
+
+The system utilizes a non-destructive CSS clip-path to ensure diagnostic narratives remain available to screen readers
+while maintaining the "Steady Flood" visual cleanliness.

@@ -1,6 +1,6 @@
 # Antigravity Migration Instruction (Refactor Log)
 
-## 🏁 Current Milestone: V25 High-Fidelity Rig Integration
+## 🏁 Current Milestone: V26 High-Fidelity Rig Integration
 
 ### 1. Spacing & Spines
 
@@ -22,8 +22,17 @@
 
 # Refactor History (Archived)
 
-## 🏁 Milestone: V24.1 Atmospheric Pulse
+## 🏁 Milestone: V26.1 Semantic Handshake
 
+- [x] Refactored site-wide alt text into functional headlines.
+- [x] Standardized "Preview Rig" for slideshow images to eliminate description redundancy.
 - [x] Registered `@property` variables for CSS Houdini transitions.
 - [x] **Syntax Branding:** Logo `Dave's` injected and stable across all pages.
 - [x] Resolved Chrome-tab bracket bleed via `.navbar::after` safety shelf.
+
+### 4. Accessibility & Semantic Rig
+
+- [x] Implement `.visually-hidden` utility for high-fidelity narrative offloading.
+- [x] Standardize image metadata to clear **WAVE Audit** character limits (<125 chars).
+- [x] Audit and link all "Transcendental" imagery via `aria-describedby` IDs.
+- [x] Verified 100% WCAG AA compliance across Index, About, and Projects via the WAVE engine.
