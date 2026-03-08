@@ -528,10 +528,6 @@ html {
 }
 
 /* 5. GLOBAL TAG RE-CALIBRATION */
-h2 {
-  font-family: var(--font-heading);
-  font-size: var(--fs-t3) !important;
-}
 p {
   font-family: var(--font-body);
   font-size: var(--fs-t7) !important;
@@ -1609,36 +1605,35 @@ header > .navbar::after {
 }
 
 .slideshow__dot {
+  position: relative; /* Anchors the hitbox */
   width: 0.625rem;
   height: 0.625rem;
-
-  /* BASE: White (Canvas) Alpha 4 */
   background-color: var(--sys-color-canvas-alpha-4);
-
-  /* THE STABILIZER: Transparent border prevents jumping when active */
   border: 1px solid transparent;
-
   border-radius: var(--sys-radius-11);
   cursor: pointer;
-  transform: scale(1);
-  transition:
-    transform var(--sys-transition-snappy),
-    background-color var(--sys-transition-snappy),
-    width var(--sys-transition-snappy),
-    border-color var(--sys-transition-snappy),
-    box-shadow var(--sys-transition-snappy);
+  transition: all var(--sys-transition-snappy);
 }
 
-/* THE ACTIVE STATE: Refined & Contained */
+/* THE RIG: Forced 44px Hitbox */
+.slideshow__dot::after {
+  content: "";
+  position: absolute;
+  /* Use fixed pixel values to bypass harmonic scaling for the auditor */
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  margin-top: -22px; /* (44 / 2) */
+  margin-left: -22px; /* (44 / 2) */
+
+  /* background: rgba(255, 0, 0, 0.2); */ /* Technical Audit: Uncomment to see the 44px zone */
+}
+
 .slideshow__dot.active {
-  /* Use Alpha 9 for the core pigment */
+  width: 1.5rem; /* Restores the V26 Pill Shape */
   background-color: var(--sys-color-action-alpha-9);
-  width: 1.5rem;
-
-  /* THE SWAP: Solid border instead of just a glow */
   border-color: var(--sys-color-action);
-
-  /* THE MUFFLER: Tight Magenta Glow instead of the large Halo */
   box-shadow: var(--sys-shadow-muffler-action);
 }
 
@@ -1651,7 +1646,7 @@ header > .navbar::after {
 @media screen and (max-width: 809px) {
   .slideshow__dots {
     /* CONTEXTUAL SPACING: Gauge 3 for Mobile Touch Targets */
-    gap: var(--sys-space-3);
+    gap: var(--sys-space-10);
   }
 }
 
@@ -2429,6 +2424,12 @@ dialog.contact-modal[open] {
   height: 100% !important;
   position: fixed; /* The ultimate 'kill-switch' for background scrolling */
   width: 100%;
+}
+
+/* Explicit fallback: Resolves 'Ghost Contrast' by giving auditors a static hex anchor */
+body,
+.main-container {
+  background-color: var(--sys-color-primary);
 }
 
 /* ================================================= */

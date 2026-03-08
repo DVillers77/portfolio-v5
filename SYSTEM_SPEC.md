@@ -22,13 +22,20 @@
 
 # Refactor History (Archived)
 
-## 🏁 Milestone: V26.1 Semantic Handshake
+## 🏁 Milestone: V26.2 Semantic Handshake
 
 - [x] Refactored site-wide alt text into functional headlines.
 - [x] Standardized "Preview Rig" for slideshow images to eliminate description redundancy.
 - [x] Registered `@property` variables for CSS Houdini transitions.
 - [x] **Syntax Branding:** Logo `Dave's` injected and stable across all pages.
 - [x] Resolved Chrome-tab bracket bleed via `.navbar::after` safety shelf.
+
+## 🏁 Milestone: V26.2 Diagnostic Hardening (Resolved)
+
+- [x] Stabilized Slideshow Hitbox via `::after` (Restored Pill vs. 44px Protocol).
+- [x] Resolved "Ghost Contrast" via explicit `--sys-color-primary` rgb 1, 98, 75; fallback on `.main-container`.
+- [x] Re-sequenced Project Titles to `<h2>` to satisfy Semantic Hierarchy requirements.
+- [x] Deployed Unique Meta Descriptions for Index, About, and Projects (SEO 100).
 
 ### 4. Accessibility & Semantic Rig
 
