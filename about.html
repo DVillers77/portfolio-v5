@@ -12,6 +12,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
 
+    <link
+      rel="preload"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      as="style"
+    />
+
     <!-- The actual stylesheet link for the font -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@1,400;1,700&family=Poppins:wght@700;800&display=swap"
@@ -112,6 +118,9 @@
                 alt="Professional portrait of David Villers against a colorful AI-generated whiteboard background."
                 aria-describedby="desc-about-profile"
                 class="feature-block__image feature-block__image--portrait"
+                fetchpriority="high"
+                width="500"
+                height="625"
             /></picture>
             <div id="desc-about-profile" class="visually-hidden">
               A professional portrait of David Villers, positioned as the human anchor in front of a dense,
@@ -174,6 +183,10 @@
                 alt="Anatomical hand reaching upward, with glowing nerves transitioning into a 3D digital wireframe."
                 aria-describedby="desc-about-tooling-matrix"
                 class="feature-block__image"
+                loading="lazy"
+                decoding="async"
+                width="500"
+                height="500"
             /></picture>
             <div id="desc-about-tooling-matrix" class="visually-hidden">
               A transcendental visualization of a human hand reaching upward, where organic anatomy meets the digital
@@ -212,6 +225,10 @@
                 alt="Macro close-up of a translucent head in meditation with a magenta geometric energy lattice."
                 aria-describedby="desc-about-handshake"
                 class="feature-block__image"
+                loading="lazy"
+                decoding="async"
+                width="500"
+                height="500"
             /></picture>
             <div id="desc-about-handshake" class="visually-hidden">
               A technical macro close-up of a translucent human head in a meditative state, rendered in glowing
@@ -245,6 +262,10 @@
                 alt="Comic of a cowboy using a glowing energy lasso to synchronize a group of AI agents."
                 aria-describedby="desc-about-weaver-orchestration"
                 class="feature-block__image"
+                loading="lazy"
+                decoding="async"
+                width="500"
+                height="500"
             /></picture>
             <div id="desc-about-weaver-orchestration" class="visually-hidden">
               A humorous comic titled 'The daily life of a Design Technologist.' A cowboy on horseback uses a glowing
@@ -277,6 +298,10 @@
                 alt="Macro shot of a handshake between a human hand and a digital wireframe hand."
                 aria-describedby="desc-about-connect-handshake"
                 class="feature-block__image"
+                loading="lazy"
+                decoding="async"
+                width="500"
+                height="500"
             /></picture>
             <div id="desc-about-connect-handshake" class="visually-hidden">
               A cinematic macro shot of a firm handshake between a realistic human hand and a translucent digital

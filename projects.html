@@ -11,6 +11,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
 
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@1,400;1,700&family=Poppins:wght@700;800&display=swap"
+      as="style"
+    />
+
     <!-- The actual stylesheet link for the font -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@1,400;1,700&family=Poppins:wght@700;800&display=swap"
@@ -26,7 +32,8 @@
     <title>Projects | David Villers | Design Technologist</title>
   </head>
 
-  <body class="main-container" id="top"> <!--explicit color fallback-->
+  <body class="main-container" id="top">
+    <!--explicit color fallback-->
     <header>
       <nav class="navbar" id="myNavbar" aria-label="Main navigation">
         <a href="index.html" class="navbar__logo" aria-label="Home"> Dave<span class="logo__suffix">'s</span> </a>
@@ -108,6 +115,9 @@
                     alt="Preview: Cyber-Theme Tic-Tac-Toe game board focusing on neon-green hex-grid."
                     aria-describedby="desc-projects-minimax"
                     data-target="#tic-tac-toe-details"
+                    fetchpriority="high"
+                    width="500"
+                    height="625"
                   />
                 </div>
                 <div class="slideshow__slide" data-title="Inclusive Design: Persistent Architectures">
@@ -117,6 +127,10 @@
                     alt="Preview: TaskMaster dark-mode interface with theme-engine toggle."
                     aria-describedby="desc-projects-inclusive-state"
                     data-target="#to-do-app-details"
+                    loading="lazy"
+                    decoding="async"
+                    width="500"
+                    height="500"
                   />
                 </div>
                 <div class="slideshow__slide" data-title="The Meta-Study: Systemic Design Engineering">
@@ -126,6 +140,10 @@
                     alt="Preview: Development screenshot of the portfolio layout and profile portrait."
                     aria-describedby="desc-projects-systemic-design"
                     data-target="#portfolio-details"
+                    loading="lazy"
+                    decoding="async"
+                    width="500"
+                    height="625"
                   />
                 </div>
                 <div class="slideshow__slide" data-title="Interface & Integration: Asynchronous Data">
@@ -137,6 +155,10 @@
                       alt="Preview: API Fun Center dashboard cards for asynchronous data streams."
                       aria-describedby="desc-projects-asynchronous-api"
                       data-target="#api-fun-center-details"
+                      loading="lazy"
+                      decoding="async"
+                      width="500"
+                      height="625"
                     />
                   </picture>
                 </div>
@@ -159,7 +181,7 @@
             </div>
             <div class="slideshow__pill">
               <a id="slide-title-link" href="#" class="slideshow__pill-link">
-                <h2 id="slide-title">Logic & State: Recursive Engineering</h3>
+                <h2 id="slide-title">Logic & State: Recursive Engineering</h2>
               </a>
             </div>
 
@@ -209,6 +231,9 @@
                 alt="Transcendental silhouette of a horse and rider composed of cosmic energy lines."
                 aria-describedby="desc-projects-systems-engineering"
                 class="feature-block__image"
+                fetchpriority="high"
+                width="500"
+                height="500"
             /></picture>
             <div id="desc-projects-systems-engineering" class="visually-hidden">
               A transcendental silhouette of a horse and rider, where the internal forms are composed of a swirling
@@ -285,6 +310,10 @@
                 alt="High-contrast Cyber-Theme Tic-Tac-Toe interface with difficulty selectors and custom icons."
                 aria-describedby="desc-projects-minimax"
                 class="feature-block__image feature-block__image--portrait"
+                loading="lazy"
+                decoding="async"
+                width="500"
+                height="625"
             /></picture>
             <div id="desc-projects-minimax" class="visually-hidden">
               The high-contrast Tic-Tac-Toe interface by David Villers. This uncropped view reveals the full
@@ -346,6 +375,10 @@
                 alt="Dark-mode TaskMaster interface featuring task controls and a theme-toggle icon."
                 aria-describedby="desc-projects-inclusive-state"
                 class="feature-block__image"
+                loading="lazy"
+                decoding="async"
+                width="500"
+                height="500"
               />
             </picture>
             <div id="desc-projects-inclusive-state" class="visually-hidden">
@@ -406,6 +439,10 @@
                 alt="Mobile-responsive screenshot of the portfolio layout featuring a navigation bar and portrait."
                 aria-describedby="desc-projects-systemic-design"
                 class="feature-block__image feature-block__image--portrait"
+                loading="lazy"
+                decoding="async"
+                width="500"
+                height="625"
             /></picture>
             <div id="desc-projects-systemic-design" class="visually-hidden">
               A mobile-responsive development screenshot of the portfolio by creator David Villers. This uncropped view
@@ -467,6 +504,10 @@
                 alt="Dashboard interface for the API Fun Center showcasing modular data stream integrations."
                 aria-describedby="desc-projects-asynchronous-api"
                 class="feature-block__image feature-block__image--portrait"
+                loading="lazy"
+                decoding="async"
+                width="500"
+                height="625"
             /></picture>
             <div id="desc-projects-asynchronous-api" class="visually-hidden">
               The 'Ultimate API Fun Center' dashboard by creator David Villers. This uncropped architectural view

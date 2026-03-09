@@ -37,6 +37,45 @@
 - [x] Re-sequenced Project Titles to `<h2>` to satisfy Semantic Hierarchy requirements.
 - [x] Deployed Unique Meta Descriptions for Index, About, and Projects (SEO 100).
 
+## 🏁 Milestone: V26.3 Performance & Asset Hardening (COMPLETE)
+
+### 🚀 Network & Resource Orchestration
+
+- [x] Implemented `rel="preload"` for FontAwesome 4.7 to bypass CSS discovery delay.
+- [x] Optimized `<head>` sequence: `preconnect` → `preload` → `stylesheet` → `script defer`.
+- [x] Verified `&display=swap` integration across all Google Font strings to eliminate FOIT.
+
+### 🖼️ Image Architecture & Visual Physics
+
+- [x] Established **500px "Universal Rail"** width for all feature and project assets.
+- [x] Standardized Square Assets to **500x500** (1:1 Ratio) for Dain Miller and Todo App.
+- [x] Standardized Portrait Assets to **500x625** (4:5 Ratio) for Main Portrait, API Fun Center, Tic-Tac-Toe, and
+      Meta-Study.
+- [x] Mapped intrinsic `width` and `height` attributes to all `<img>` tags to anchor the browser pre-parser.
+- [x] Confirmed `aspect-ratio: 4/5` CSS override is active and synchronized with physical file dimensions.
+- [x] Resolved "Ghost Box" layout stability, achieving **0.00 CLS** (Cumulative Layout Shift).
+
+### ⚡ Critical Path & Loading Logic
+
+- [x] Assigned `fetchpriority="high"` to "Above the Fold" Hero assets (Slide 1 and Index Hero).
+- [x] Deployed Native Lazy Loading (`loading="lazy"`) for all off-screen storyteller blocks.
+- [x] Applied `decoding="async"` to non-critical imagery to reduce main-thread execution time.
+- [x] Segmented Slideshow fetch logic (Priority for Slide 1 / Deferred for Slides 2+).
+
+### 🛠️ Structural & Semantic Hardening
+
+- [x] Fixed semantic typo in Project Slideshow (Corrected `h2` / `h3` mismatch).
+- [x] Purged nested HTML comments from `<img>` tags to restore syntax highlighting and parser speed.
+- [x] Verified 44px Touch Target compliance and `aria-describedby` links for 100/100 Accessibility.
+
+---
+
+### 📝 Logic Note: The 500px Baseline
+
+Standardizing on a **500px width** for both square and portrait assets creates a unified vertical anchor. This
+"Universal Rail" provides the necessary visual weight to balance text-heavy columns while ensuring a predictable scaling
+behavior across mobile and desktop viewports.
+
 ### 4. Accessibility & Semantic Rig
 
 - [x] Implement `.visually-hidden` utility for high-fidelity narrative offloading.

@@ -12,6 +12,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
 
+    <link
+      rel="preload"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      as="style"
+    />
+
     <!-- The actual stylesheet link for the font -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@1,400;1,700&family=Poppins:wght@700;800&display=swap"
@@ -50,7 +56,6 @@
 
         <!-- Menu links container -->
         <div class="navbar__links">
-          <!-- task: consolidate three class selector ("navbar__link is-active") -->
           <a href="#" class="active active-page-name navbar__link" aria-current="page" tabindex="-1"
             ><i class="fa fa-fw fa-fort-awesome"></i> Home</a
           >
@@ -113,6 +118,9 @@
                 alt="Anatomical figure merging biological systems with a digital grid."
                 aria-describedby="desc-index-human-digital-bridge"
                 class="feature-block__image"
+                fetchpriority="high"
+                width="500"
+                height="500"
             /></picture>
             <div id="desc-index-human-digital-bridge" class="visually-hidden">
               A high-fidelity visualization depicting the synthesis of biological systems and digital architecture. A
@@ -189,6 +197,10 @@
                 alt="Winged steam engine soaring over a golden-hour cityscape."
                 aria-describedby="desc-index-zeigarnik-effect"
                 class="feature-block__image"
+                loading="lazy"
+                decoding="async"
+                width="500"
+                height="500"
             /></picture>
 
             <div id="desc-index-zeigarnik-effect" class="visually-hidden">
@@ -226,6 +238,10 @@
                 alt="Technical schematic on aged parchment showing a sidewalk curb-cut ramp design."
                 aria-describedby="desc-index-fitts-law"
                 class="feature-block__image"
+                loading="lazy"
+                decoding="async"
+                width="500"
+                height="500"
             /></picture>
             <div id="desc-index-fitts-law" class="visually-hidden">
               A technical schematic illustrating the physics of the 'Curb-Cut Effect.' The diagram maps the convergence
@@ -264,6 +280,10 @@
                 alt="Technical blueprint of a human profile with mechanical gears and circuits inside the cranium."
                 aria-describedby="desc-index-jakobs-law"
                 class="feature-block__image"
+                loading="lazy"
+                decoding="async"
+                width="500"
+                height="500"
             /></picture>
             <div id="desc-index-jakobs-law" class="visually-hidden">
               A technical anatomical profile of a human head in a minimalist blueprint style. The cranium is filled with
@@ -302,6 +322,10 @@
                 alt="Transcendental silhouette of a horse and rider composed of cosmic energy and astrological lines."
                 aria-describedby="desc-index-aesthetic-usability"
                 class="feature-block__image"
+                loading="lazy"
+                decoding="async"
+                width="500"
+                height="500"
             /></picture>
             <div id="desc-index-aesthetic-usability" class="visually-hidden">
               A transcendental silhouette of a horse and rider, where the internal forms are composed of a swirling
