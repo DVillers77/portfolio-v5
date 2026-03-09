@@ -796,6 +796,7 @@ header > .navbar::after {
   cursor: pointer;
   display: flex;
   align-items: center;
+  gap: 0.25rem;
   line-height: 1;
   width: 100%;
   padding: var(--sys-space-4) var(--sys-space-6);
@@ -2430,6 +2431,52 @@ dialog.contact-modal[open] {
 body,
 .main-container {
   background-color: var(--sys-color-primary);
+}
+
+/* --- THE ROUNDING LOOP KILL-SWITCH (810px - 1070px) --- */
+@media screen and (min-width: 810px) and (max-width: 1070px) {
+  .u-nav-text-long {
+    display: none !important;
+  }
+
+  .navbar__link {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+
+    /* FREEZE the box metrics to hard pixels to stop the jitter */
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+
+    /* FREEZE the font-size so it stops growing/shrinking */
+    font-size: 18px !important;
+    line-height: 1 !important;
+  }
+
+  .navbar__link i {
+    /* Use a fixed margin for the optical nudge */
+    margin-top: -1px !important;
+    margin-bottom: 0 !important;
+    transform: none !important; /* Clear any previous transforms */
+  }
+
+  .navbar__link .fa-linkedin {
+    /* We apply a -2px or -3px lift here to counter-act 
+       the intrinsic flaw AND the rounding loop */
+    margin-top: -3px !important;
+  }
+}
+
+/* --- THE EMERGENCY DENSITY (810px - 955px) --- */
+@media screen and (min-width: 810px) and (max-width: 955px) {
+  .navbar__link {
+    /* Tighten ONLY the horizontal space in the squeeze zone */
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    letter-spacing: -0.01em !important;
+  }
 }
 
 /* ================================================= */

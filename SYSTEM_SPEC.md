@@ -95,3 +95,23 @@ behavior across mobile and desktop viewports.
 - [x] Standardize image metadata to clear **WAVE Audit** character limits (<125 chars).
 - [x] Audit and link all "Transcendental" imagery via `aria-describedby` IDs.
 - [x] Verified 100% WCAG AA compliance across Index, About, and Projects via the WAVE engine.
+
+## 🏁 Milestone: V26.4 Geometric & Optical Hardening (COMPLETE)
+
+### 📐 Layout Engine & Sub-pixel Stabilization
+
+- [x] [cite_start]Resolved "Rounding Loop" (810px–1070px) by deploying a **Normalized Anchor** using fixed integer
+      values (12px padding/18px font)[cite: 1, 2, 4].
+- [x] [cite_start]Neutralized 1–2px vertical "Icon Lift" by locking the text-to-icon baseline in the unified
+      architectural range[cite: 23, 24].
+- [x] [cite_start]Resolved 955px horizontal collision by eliminating `1vw` padding spikes in favor of deterministic
+      boundaries[cite: 5, 8, 9].
+
+### 🛠️ Structural & Semantic Rig
+
+- [x] [cite_start]Implemented `.u-nav-text-long` utility for conditional string compression[cite: 1].
+- [x] [cite_start]Hardened `aria-label` metadata on shortened links to preserve WCAG AA context[cite: 1].
+- [x] [cite_start]Registered `gap: 0.5rem` as the universal spacing constant to replace HTML whitespace nodes[cite: 11,
+      20].
+- [x] Deployed **LinkedIn Specific Lift**: Applied specialized `-3px` optical margin to compensate for FA 4.7 intrinsic
+      offset.
