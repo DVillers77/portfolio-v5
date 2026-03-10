@@ -107,11 +107,18 @@ behavior across mobile and desktop viewports.
 - [x] [cite_start]Resolved 955px horizontal collision by eliminating `1vw` padding spikes in favor of deterministic
       boundaries[cite: 5, 8, 9].
 
+## 🏁 Milestone: V26.4 API Rig Hardening (COMPLETE)
+
+- [x] **Dependency Pivot**: Replaced unstable Yoda translator with Advice Slip API for 100% demo uptime.
+- [x] **Logic Refactor**: Implemented `response.ok` defensive checks to handle non-network HTTP errors.
+- [x] **CSS Optimization**: Unified disparate output containers into a DRY base class with thematic overrides.
+- [x] **A11y & UX**: Standardized HUD loading states to manage perceived performance during async handshakes.
+
 ### 🛠️ Structural & Semantic Rig
 
 - [x] [cite_start]Implemented `.u-nav-text-long` utility for conditional string compression[cite: 1].
 - [x] [cite_start]Hardened `aria-label` metadata on shortened links to preserve WCAG AA context[cite: 1].
-- [x] [cite_start]Registered `gap: 0.5rem` as the universal spacing constant to replace HTML whitespace nodes[cite: 11,
+- [x] [cite_start]Registered `gap: 0.25rem` as the universal spacing constant to replace HTML whitespace nodes[cite: 11,
       20].
 - [x] Deployed **LinkedIn Specific Lift**: Applied specialized `-3px` optical margin to compensate for FA 4.7 intrinsic
       offset.
