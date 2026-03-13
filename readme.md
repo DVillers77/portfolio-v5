@@ -95,14 +95,25 @@ The Rig uses **Canvas Mixing** to simulate physical ink density and ensure legib
 
 ---
 
-## ⚠️ Development Note: Procedural Integrity & Time-Boxing
+## ⚠️ Forensic Calibration Log: Phonic Token Drift
 
-This implementation represents a strategic, time-boxed deployment of my core architectural logic. To meet delivery
-milestones, certain elements of the **V26 Rig** were optimized for immediate performance, while advanced R&D frameworks
-focused on automated systemic health continue to undergo refinement in a private environment.
+**Status:** Active Recalibration (R&D Phase)  
+**System:** Phonic Typography (Tonal Color/Impact Tokens)
 
-This "Proof of Concept" demonstrates my ability to ship high-fidelity, accessible systems under real-world
-constraints—prioritizing structural integrity and "Diagnostic Empathy" over localized styling.
+**Diagnostic Finding:** The current Phonic Scale is exhibiting a "calibration drift" that impacts the legibility floor
+and visual impact range:
+
+- **The 'Whisper' Token:** Currently several scales too faded; it has dropped below the 4.5:1 contrast ratio required
+  for WCAG AA compliance on standard hardware.
+- **The 'Shout' Token:** Lacks sufficient "tonal weight." It is currently hitting a comfortable reading level rather
+  than providing the high-impact visual "Shout" required for the Creator Archetype.
+
+**Resolution Path:** I am decoupling the Phonic Tonal values from their current assignments to re-establish a functional
+range.
+
+1. **Lower Bound:** Pulling 'Whisper' tokens up to a safe APCA/WCAG legibility floor.
+2. **Upper Bound:** Hardening the 'Shout' tokens to provide a distinct, high-contrast visual anchor that complements the
+   1.414 Harmonic Scale without overlapping its structural role.
 
 ---
 

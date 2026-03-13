@@ -39,3 +39,16 @@ We employ an **Augmented Fourth Scale** with a focus on **APCA-aware contrast**.
 - **Phonic Volume Registry:** We use "Ink Weight" (Canvas Mixing) instead of static grays to ensure legibility across
   display types (OLED vs. LCD).
 - **Muted Floor:** Set to a 20% canvas mix to maintain WCAG 2.1 AA compliance on non-Retina hardware.
+
+## 🧪 Active R&D: Decoupling Scale from Tone
+
+To ensure systemic health, the Rig maintains a strict separation between **Structural Hierarchy** and **Phonic Impact**.
+
+- **Structural Hierarchy (1.414 Harmonic Scale):** Governs the mathematical sizing of elements to ensure visual
+  resonance. Current status: Stable.
+- **Phonic Impact (Ink Weight):** Governs the tonal density and perceptual contrast of the "ink" on the canvas.
+
+**Current Calibration Note:** I have identified a telemetry error in the Phonic Scale where the 'Whisper' and 'Shout'
+endpoints lack sufficient range. A refactor is underway to re-calibrate these tokens. This will ensure that while the
+1.414 scale provides the "Size," the Phonic scale provides the "Voice" without sacrificing accessibility (WCAG AA) or
+archetypal intent.
