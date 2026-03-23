@@ -1085,6 +1085,10 @@ header > .navbar::after {
        to keep that 'High-Fidelity' card look. */
     max-width: 400px;
   }
+
+  .feature-block__note--column {
+    font-size: var(--fs-t7) !important;
+  }
 }
 
 /* --- THE CLEAN 810px ZIGZAG LOGIC --- */
@@ -1211,7 +1215,7 @@ header > .navbar::after {
   font-family: var(--font-story);
   letter-spacing: var(--ls-story);
   line-height: var(--lh-story);
-  font-size: var(--fs-t6); /* Balanced Quote Scale */
+  font-size: var(--fs-t5); /* Balanced Quote Scale */
   font-style: italic;
   font-weight: 400;
   width: 100%;
